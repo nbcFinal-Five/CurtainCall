@@ -3,4 +3,13 @@
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_my_page">MyPage</string>
+
+
+    <!-- SearchFragment -->
+    <string name="search_result_not">검색 결과가 없습니다</string>
+    <string name="input_search">검색어를 입력해주세요</string>
+    <string name="filter_genre">장르</string>
+    <string name="filter_addr">지역</string>
+    <string name="filter_children">아동</string>
+    <string name="filter_date">날짜</string>
 </resources>
