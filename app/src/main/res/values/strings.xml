@@ -3,4 +3,5 @@
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_my_page">MyPage</string>
+    <string name="tv_detail_expectations"><u>기대평: 1개</u></string>
 </resources>
