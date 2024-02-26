@@ -3,6 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven ("https://devrepo.kakao.com/nexus/repository/kakaomap-releases/")
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +11,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven ("https://devrepo.kakao.com/nexus/repository/kakaomap-releases/")
     }
 }
 
