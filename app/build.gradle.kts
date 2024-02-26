@@ -1,6 +1,9 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -15,6 +18,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "KOPIS_API_KEY", getAuthKey("KOPIS_API_KEY"))
     }
 
     buildTypes {
@@ -35,17 +39,19 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
-
+fun getAuthKey(propertyKey: String): String =
+    gradleLocalProperties(rootDir).getProperty(propertyKey)
 dependencies {
 
     //coil 라이브러리
     implementation("io.coil-kt:coil:0.10.0")
 
     // navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     // by viewModels()
     implementation("androidx.fragment:fragment-ktx:1.6.2")
@@ -53,18 +59,25 @@ dependencies {
 
     // retrofit2
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // tikxml 0.8.15 -> 그래들 충돌 문제
+    implementation("com.tickaroo.tikxml:annotation:0.8.13")
+    implementation("com.tickaroo.tikxml:core:0.8.13")
+
+    kapt("com.tickaroo.tikxml:processor:0.8.13")
+    implementation("com.tickaroo.tikxml:retrofit-converter:0.8.13")
 
     // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.6.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:r2.6.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
