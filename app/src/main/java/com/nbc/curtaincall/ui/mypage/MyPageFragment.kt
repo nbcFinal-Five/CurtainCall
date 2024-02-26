@@ -1,5 +1,6 @@
 package com.nbc.curtaincall.ui.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.nbc.curtaincall.AuthActivity
 import com.nbc.curtaincall.Supabase
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
 import com.nbc.curtaincall.ui.UserViewModel
@@ -21,7 +23,7 @@ class MyPageFragment : Fragment() {
 
 	private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 		when (result.resultCode) {
-
+			// TODO 로그인 처리
 		}
 	}
 
@@ -47,7 +49,8 @@ class MyPageFragment : Fragment() {
 
 	private fun initHandle() = with(binding) {
 		btnOpenAuthActivity.setOnClickListener {
-			
+			val intent = Intent(requireActivity(), AuthActivity::class.java)
+			launcher.launch(intent)
 		}
 	}
 
