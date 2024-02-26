@@ -54,7 +54,7 @@ class DetailFragment : Fragment() {
                 when (tab.position) {
                     0 -> scrollView.scrollTo(0, binding.ivDetailIntroImage.top)
                     1 -> scrollView.scrollTo(0, binding.view2.top)
-//                    2 -> scrollView.scrollTo(0, binding.ivDetailIntroImage.top)
+//                    2 -> scrollView.scrollTo(0, binding..top)
                 }
             }
 
