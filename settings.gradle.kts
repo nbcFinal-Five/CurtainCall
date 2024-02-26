@@ -14,6 +14,7 @@ dependencyResolutionManagement {
             url = uri ("http://oss.sonatype.org/content/repositories/snapshots")
             isAllowInsecureProtocol = true
         }
+        maven ("https://devrepo.kakao.com/nexus/repository/kakaomap-releases/")
     }
 }
 

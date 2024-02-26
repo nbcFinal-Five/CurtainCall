@@ -92,6 +92,9 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    // Kakao map
+    implementation ("com.kakao.maps.open:android:2.6.0")
+
     //BottomSheet, Chip
     implementation("com.google.android.material:material:1.11.0")
 
