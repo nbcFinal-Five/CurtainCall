@@ -1,7 +1,7 @@
 package com.nbc.curtaincall.data.api
 
 import com.nbc.curtaincall.BuildConfig
-import com.nbc.curtaincall.data.model.KopisApi
+import com.nbc.curtaincall.data.model.KopisApiInterface
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.Interceptor
@@ -50,5 +50,5 @@ object RetrofitClient {
             .build()
     }
 
-    val kopisApi: KopisApi by lazy { retrofit.create(KopisApi::class.java) }
+    val kopisApi: KopisApiInterface by lazy { retrofit.create(KopisApiInterface::class.java) }
 }

@@ -5,13 +5,13 @@ import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
 
 @Xml(name = "dbs")
-data class ShowListResponse(
+data class ShowListModel(
     @Element(name = "db")
-    val showList: List<ShowList>
+    val showList: List<ShowItem>
 )
 
 @Xml(name = "db")
-data class ShowList(
+data class ShowItem(
     @PropertyElement(name = "area") val area: String?,
     @PropertyElement(name = "fcltynm") val fcltynm: String?,
     @PropertyElement(name = "genrenm") val genrenm: String?,
