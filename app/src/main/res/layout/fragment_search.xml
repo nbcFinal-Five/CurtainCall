@@ -124,7 +124,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_searchfilter_addr"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_searchfilter_addr"
+        tools:listitem="@layout/constraint_layout_search_rv"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

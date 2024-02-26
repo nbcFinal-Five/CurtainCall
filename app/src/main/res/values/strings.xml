@@ -8,8 +8,24 @@
     <!-- SearchFragment -->
     <string name="search_result_not">검색 결과가 없습니다</string>
     <string name="input_search">검색어를 입력해주세요</string>
+
     <string name="filter_genre">장르</string>
-    <string name="filter_addr">지역</string>
+    <string name="filter_genre_theater">연극</string>
+    <string name="filter_genre_futility">무용</string>
+    <string name="filter_genre_publicfutility">대중무용</string>
+    <string name="filter_genre_classic">클래식</string>
+    <string name="filter_genre_korean_classic">국악</string>
+    <string name="filter_genre_popular_music">대중음악</string>
+    <string name="filter_genre_musical">뮤지컬</string>
+    <string name="filter_genre_circus">서커스/마술</string>
+    <string name="filter_genre_mix">복합</string>
+
     <string name="filter_children">아동</string>
+    <string name="filter_children_title">어린이시청</string>
+    <string name="filter_children_possible">가능</string>
+    <string name="filter_children_impossible">불가능</string>
+
+    <string name="filter_addr">지역</string>
     <string name="filter_date">날짜</string>
+    <string name="filter_choose">선택완료</string>
 </resources>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/search_bottom_sheet_background"
+    android:clipToOutline="true">
+
+    <TextView
+        android:id="@+id/tv_bottomdialog_addr_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/filter_addr"
+        android:textColor="@color/text_color"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_bottom_genre_theater"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_theater"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_bottom_futility"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottomdialog_addr_title" />
+
+    <TextView
+        android:id="@+id/tv_bottom_futility"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_futility"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_genre_theater"
+        app:layout_constraintEnd_toStartOf="@+id/tv_bottom_publicfutility"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_genre_theater"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_genre_theater" />
+
+    <TextView
+        android:id="@+id/tv_bottom_publicfutility"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_publicfutility"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_futility"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_futility"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_futility" />
+
+    <TextView
+        android:id="@+id/tv_bottom_classic"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_classic"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tv_bottom_genre_theater"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_genre_theater" />
+
+    <TextView
+        android:id="@+id/tv_bottom_korean_classic"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_korean_classic"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_classic"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_classic"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_classic" />
+
+    <TextView
+        android:id="@+id/tv_bottom_popular_music"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_popular_music"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_korean_classic"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_korean_classic"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_korean_classic" />
+
+    <TextView
+        android:id="@+id/tv_bottom_musical"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_musical"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tv_bottom_classic"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_classic" />
+
+    <TextView
+        android:id="@+id/tv_bottom_circus"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_circus"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_musical"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_musical"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_musical" />
+
+    <TextView
+        android:id="@+id/tv_bottom_mix"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_genre_mix"
+        android:textColor="@color/component_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_circus"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_circus"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_circus" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

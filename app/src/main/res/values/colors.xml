@@ -13,4 +13,5 @@
     <color name="text_color">#FCFCFC</color>
     <color name="bottom_navi_color">#D4D4D4</color>
     <color name="input_background_color">#2E2E2E</color>
+    <color name="component_background_color">#424449</color>
 </resources>
