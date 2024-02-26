@@ -21,52 +21,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/cp_bottom_children_possible"
-        style="@style/CustomChipChoice."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cpgroup_children_choice"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="30dp"
-        android:text="@string/filter_children_possible"
-        android:textSize="16sp"
-        app:chipEndPadding="30dp"
-        app:chipMinHeight="50dp"
-        app:chipStartPadding="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/cp_bottom_children_impossible"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_bottomdialog_children_title" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/cp_bottom_children_impossible"
-        style="@style/CustomChipChoice."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/filter_children_impossible"
-        android:textSize="16sp"
-        app:chipEndPadding="30dp"
-        app:chipMinHeight="50dp"
-        app:chipStartPadding="30dp"
-        app:layout_constraintBottom_toBottomOf="@id/cp_bottom_children_possible"
+        app:chipSpacingHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cp_bottom_children_possible"
-        app:layout_constraintTop_toTopOf="@id/cp_bottom_children_possible" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottomdialog_children_title"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_children_possible"
+            style="@style/CustomChipChoice."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_children_possible"
+            android:textSize="16sp"
+            app:chipEndPadding="30dp"
+            app:chipMinHeight="50dp"
+            app:chipStartPadding="30dp"
+            app:layout_constraintEnd_toStartOf="@+id/cp_bottom_children_impossible"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_bottomdialog_children_title" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_children_impossible"
+            style="@style/CustomChipChoice."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_children_impossible"
+            android:textSize="16sp"
+            app:chipEndPadding="30dp"
+            app:chipMinHeight="50dp"
+            app:chipStartPadding="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/cp_bottom_children_possible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cp_bottom_children_possible"
+            app:layout_constraintTop_toTopOf="@id/cp_bottom_children_possible" />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <Button
         android:id="@+id/btn_children_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/component_color"
         android:text="@string/filter_choose"
         android:textColor="@color/text_color"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cp_bottom_children_impossible" />
+        app:layout_constraintTop_toBottomOf="@+id/cpgroup_children_choice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
