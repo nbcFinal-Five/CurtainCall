@@ -33,8 +33,8 @@ class LoginFragment(private val supportFragmentManager: FragmentManager) : Fragm
 		initHandle()
 	}
 
-	private fun initHandle() {
-		binding.tvRegister.setOnClickListener {
+	private fun initHandle() = with(binding) {
+		tvRegister.setOnClickListener {
 			supportFragmentManager.commit {
 				replace(R.id.fragment_auth, RegisterFragment())
 				setReorderingAllowed(true)

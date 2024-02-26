@@ -36,6 +36,15 @@
             android:text="로그인하면 보여야되는 텍스트"
     />
 
+    <TextView
+            android:id="@+id/tv_sign_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <Button

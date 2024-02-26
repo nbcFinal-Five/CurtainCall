@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cv_email"
-                android:text="error"
+                android:text="@string/email_warning"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/primary_color"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cv_password"
-                android:text="error"
+                android:text="@string/password_warning"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/primary_color"
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cv_password_confirm"
-                android:text="error"
+                android:text="@string/password_confirm_warning"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/primary_color"
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_password_confirm_warning"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/account_nickname"
+                android:text="@string/account_user"
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="4dp"
@@ -179,13 +179,13 @@
                 android:layout_marginTop="12dp"
         >
           <EditText
-                  android:id="@+id/cet_nickname"
+                  android:id="@+id/et_nickname"
                   android:layout_width="match_parent"
                   android:layout_height="56dp"
                   android:textSize="16sp"
                   app:layout_constraintTop_toBottomOf="@id/iv_logo"
                   android:background="@color/input_background_color"
-                  android:hint="@string/password_confirm"
+                  android:hint="@string/account_nickname"
                   android:textColor="@color/text_color"
                   android:textColorHint="@color/text_color"
                   android:paddingHorizontal="12dp"
@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cv_nickname"
-                android:text="error"
+                android:text="@string/name_warning"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/primary_color"
@@ -221,7 +221,7 @@
                   android:id="@+id/btn_gender_male"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="남성"
+                  android:text="@string/gender_male"
                   android:textSize="20sp"
                   android:background="@color/component_color"
           />
@@ -242,7 +242,7 @@
                   android:id="@+id/btn_gender_female"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="여성"
+                  android:text="@string/gender_female"
                   android:textSize="20sp"
                   android:background="@color/component_color"
           />
@@ -372,18 +372,24 @@
           </androidx.cardview.widget.CardView>
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_register"
-                app:layout_constraintTop_toBottomOf="@id/ll_ages"
+        <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
-                android:background="@drawable/button_gradient"
-                android:text="@string/register"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-        />
+                app:layout_constraintTop_toBottomOf="@id/ll_ages"
+                app:cardCornerRadius="10dp"
+        >
+          <androidx.appcompat.widget.AppCompatButton
+                  android:id="@+id/btn_register"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/button_gradient"
+                  android:text="@string/register"
+                  android:textColor="@color/white"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
+          />
+        </androidx.cardview.widget.CardView>
       </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
   </androidx.constraintlayout.widget.ConstraintLayout>

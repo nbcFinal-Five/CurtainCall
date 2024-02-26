@@ -23,6 +23,13 @@ class UserViewModel : ViewModel() {
 	private var _userInfo = MutableLiveData<UserInfo?>(Supabase.client.auth.currentUserOrNull())
 	val userInfo: LiveData<UserInfo?> = _userInfo
 
+
+	private val _isSignUpLoading = MutableLiveData(false)
+	val isSignUpLoading: LiveData<Boolean> get() = _isSignUpLoading
+
+	private val _signUpResult = MutableLiveData<Boolean?>(null)
+	val signUpResult: LiveData<Boolean?> get() = _signUpResult
+
 	fun signIn(inputEmail: String, inputPassword: String) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
@@ -54,10 +61,18 @@ class UserViewModel : ViewModel() {
 		}
 	}
 
-	fun signUp(inputEmail: String, inputPassword: String, name: String, gender: String, age: String) {
+	fun signUp(
+		inputEmail: String,
+		inputPassword: String,
+		name: String,
+		gender: String,
+		age: String,
+	) {
+		_isSignUpLoading.value = true
+
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				val signUpResult = Supabase.client.auth.signUpWith(Email) {
+				Supabase.client.auth.signUpWith(Email) {
 					email = inputEmail
 					password = inputPassword
 					data = buildJsonObject {
@@ -66,10 +81,26 @@ class UserViewModel : ViewModel() {
 						put("age", age)
 					}
 				}
-				//TODO
+
+				withContext(Dispatchers.Main) {
+					_userInfo.value = Supabase.client.auth.currentUserOrNull()
+					_signUpResult.value = true
+				}
 			} catch (e: Exception) {
 				Log.d("sign up", e.toString())
+
+				withContext(Dispatchers.Main) {
+					_signUpResult.value = false
+				}
+			} finally {
+				withContext(Dispatchers.Main) {
+					_isSignUpLoading.value = false
+				}
 			}
 		}
+	}
+
+	fun setUser() {
+		_userInfo.value = Supabase.client.auth.currentUserOrNull()
 	}
 }

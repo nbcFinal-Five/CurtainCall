@@ -21,9 +21,7 @@ class MyPageFragment : Fragment() {
 	private val binding get() = _binding!!
 
 	private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-		when (result.resultCode) {
-			// TODO 로그인 처리
-		}
+		userViewModel.setUser()
 	}
 
 	override fun onCreateView(
@@ -50,6 +48,10 @@ class MyPageFragment : Fragment() {
 		btnOpenAuthActivity.setOnClickListener {
 			val intent = Intent(requireActivity(), AuthActivity::class.java)
 			launcher.launch(intent)
+		}
+
+		tvSignOut.setOnClickListener {
+			userViewModel.signOut()
 		}
 	}
 

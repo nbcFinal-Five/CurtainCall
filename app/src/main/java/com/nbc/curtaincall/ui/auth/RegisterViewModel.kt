@@ -13,7 +13,7 @@ data class RegisterInput(
 	var age: String?
 )
 
-class RegisterViewMode : ViewModel() {
+class RegisterViewModel : ViewModel() {
 	private var _input = MutableLiveData(
 		RegisterInput(
 			email = null,

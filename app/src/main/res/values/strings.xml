@@ -13,6 +13,7 @@
   <string name="register">회원가입</string>
   <string name="password_confirm">비밀번호 확인</string>
   <string name="account_info">계정 정보</string>
+  <string name="account_user">유저 정보</string>
   <string name="account_nickname">닉네임</string>
 
   <string name="age_10">10대</string>
@@ -74,4 +75,13 @@
 
   <string name="filter_date">날짜</string>
   <string name="filter_choose">선택완료</string>
+  <string name="nickname">닉네임</string>
+  <string name="gender_male">남성</string>
+  <string name="gender_female">여성</string>
+  <string name="email_warning">이메일 형식으로 입력해주세요</string>
+  <string name="email_duplicate">중복된 이메일이 존재합니다</string>
+  <string name="password_warning">6자 이상 입력해주세요</string>
+  <string name="password_confirm_warning">비밀번호가 다릅니다</string>
+  <string name="name_warning">2글자 이상 입력해주세요</string>
+  <string name="logout">로그아웃</string>
 </resources>
