@@ -51,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@+id/store_fragment_tabLayout">
 
             <ImageView
-                android:id="@+id/iv_detail.posterImage"
+                android:id="@+id/iv_detail_posterImage"
                 android:layout_width="match_parent"
                 android:layout_height="420dp"
                 android:layout_marginStart="12dp"
@@ -74,11 +74,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_detail_genre"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:background="@color/primary_color"
+                android:background="@drawable/genre_rounded_background"
                 android:gravity="center"
                 android:text="장르"
                 android:textColor="@color/white"
@@ -91,16 +91,17 @@
                 android:layout_width="56dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:background="@color/black"
+                android:background="@drawable/limitedrun_rounded_background"
                 android:gravity="center"
                 android:text="리미티드런"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_genre"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_detail_age"
                 android:layout_width="52dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -131,7 +132,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cl_detail_posterImage" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_detail_expectationsNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -143,6 +144,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rb_detail_bar" />
 
         <ImageView
+            android:id="@+id/iv_detail_wishlist"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
@@ -161,7 +163,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_expectationsNum" />
 
         <TextView
             android:id="@+id/tv_detail_title"
@@ -370,7 +372,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/iv_detail_introImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
@@ -386,7 +388,7 @@
             android:background="@drawable/ic_ticket_dash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_detail_introImage" />
 
         <com.kakao.vectormap.MapView
             android:id="@+id/map_view"
@@ -429,6 +431,7 @@
             android:id="@+id/tv_detail_phoneNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="전화번호"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -462,7 +465,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_homePage" />
-
 
         <View
             android:id="@+id/view3"
