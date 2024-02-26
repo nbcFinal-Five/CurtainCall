@@ -1,6 +1,7 @@
 package com.nbc.curtaincall.data.api
 
 import com.nbc.curtaincall.BuildConfig
+import com.nbc.curtaincall.BuildConfig.KOPIS_API_KEY
 import com.nbc.curtaincall.data.model.KopisApi
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
