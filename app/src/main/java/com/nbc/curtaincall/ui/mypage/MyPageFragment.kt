@@ -66,6 +66,7 @@ class MyPageFragment : Fragment() {
 			} else {
 				binding.clUserInfo.visibility = View.VISIBLE
 				binding.btnOpenAuthActivity.visibility = View.INVISIBLE
+				binding.tvUserInfoEmail.text = currentSession.user?.userMetadata.toString()
 			}
 		}
 	}
