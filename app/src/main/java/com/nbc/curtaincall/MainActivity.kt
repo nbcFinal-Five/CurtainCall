@@ -1,12 +1,10 @@
 package com.nbc.curtaincall
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nbc.curtaincall.databinding.ActivityMainBinding
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
@@ -25,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
 		val navView: BottomNavigationView = binding.navView
 
+<<<<<<< HEAD
 		val navController = findNavController(R.id.nav_host_fragment_activity_main)
 		val appBarConfiguration = AppBarConfiguration(
 			setOf(
@@ -40,4 +39,10 @@ class MainActivity : AppCompatActivity() {
 	private fun initSupabase(): SupabaseClient {
 		return Supabase.client
 	}
+=======
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        navView.setupWithNavController(navController)
+    }
+>>>>>>> dev
 }
