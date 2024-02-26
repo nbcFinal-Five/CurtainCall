@@ -195,7 +195,7 @@
         <TextView
                 android:id="@+id/tv_nickname_warning"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cv_nickname"
                 android:text="error"
@@ -204,6 +204,185 @@
                 android:textColor="@color/primary_color"
                 android:visibility="invisible"
                 android:textSize="12sp"
+        />
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cv_gender_male"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_nickname_warning"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cv_gender_female"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="2dp"
+        >
+          <androidx.appcompat.widget.AppCompatButton
+                  android:id="@+id/btn_gender_male"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="남성"
+                  android:textSize="20sp"
+                  android:background="@color/component_color"
+          />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cv_gender_female"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_nickname_warning"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cv_gender_male"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="2dp"
+        >
+          <androidx.appcompat.widget.AppCompatButton
+                  android:id="@+id/btn_gender_female"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="여성"
+                  android:textSize="20sp"
+                  android:background="@color/component_color"
+          />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+                android:id="@+id/ll_ages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/cv_gender_male"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                app:flow_horizontalGap="4dp"
+        >
+          <!-- Button 1 -->
+          <androidx.cardview.widget.CardView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:cardCornerRadius="10dp"
+                  android:layout_marginEnd="2dp"
+                  app:cardElevation="0dp"
+                  android:layout_weight="1"
+                  app:cardBackgroundColor="@color/component_color">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/age_10"
+                    android:background="@color/component_color"
+            />
+          </androidx.cardview.widget.CardView>
+
+          <!-- Button 2 -->
+          <androidx.cardview.widget.CardView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:cardCornerRadius="10dp"
+                  android:layout_marginHorizontal="2dp"
+                  app:cardElevation="0dp"
+                  android:layout_weight="1"
+                  app:cardBackgroundColor="@color/component_color">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/age_20"
+                    android:background="@color/component_color"
+            />
+          </androidx.cardview.widget.CardView>
+
+          <!-- Button 3 -->
+          <androidx.cardview.widget.CardView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:cardCornerRadius="10dp"
+                  android:layout_marginHorizontal="2dp"
+                  app:cardElevation="0dp"
+                  android:layout_weight="1"
+                  app:cardBackgroundColor="@color/component_color">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_30"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/age_30"
+                    android:background="@color/component_color"
+            />
+          </androidx.cardview.widget.CardView>
+
+          <!-- Button 4 -->
+          <androidx.cardview.widget.CardView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:cardCornerRadius="10dp"
+                  android:layout_marginHorizontal="2dp"
+                  app:cardElevation="0dp"
+                  android:layout_weight="1"
+                  app:cardBackgroundColor="@color/component_color">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_40"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/age_40"
+                    android:background="@color/component_color"
+            />
+          </androidx.cardview.widget.CardView>
+
+          <!-- Button 5 -->
+          <androidx.cardview.widget.CardView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:cardCornerRadius="10dp"
+                  android:layout_marginHorizontal="2dp"
+                  app:cardElevation="0dp"
+                  android:layout_weight="1"
+                  app:cardBackgroundColor="@color/component_color">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_50"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/age_50"
+                    android:background="@color/component_color"
+            />
+          </androidx.cardview.widget.CardView>
+
+          <!-- Button 6 -->
+          <androidx.cardview.widget.CardView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:cardCornerRadius="10dp"
+                  android:layout_marginStart="2dp"
+                  app:cardElevation="0dp"
+                  android:layout_weight="1"
+                  app:cardBackgroundColor="@color/component_color">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_60"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/age_60"
+                    android:background="@color/component_color"
+            />
+          </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_register"
+                app:layout_constraintTop_toBottomOf="@id/ll_ages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/button_gradient"
+                android:text="@string/register"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
         />
       </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

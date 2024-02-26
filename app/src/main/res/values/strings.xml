@@ -14,6 +14,14 @@
   <string name="password_confirm">비밀번호 확인</string>
   <string name="account_info">계정 정보</string>
   <string name="account_nickname">닉네임</string>
+
+  <string name="age_10">10대</string>
+  <string name="age_20">20대</string>
+  <string name="age_30">30대</string>
+  <string name="age_40">40대</string>
+  <string name="age_50">50대</string>
+  <string name="age_60">60대</string>
+
   <string-array name="genre">
     <item>연극</item>
     <item>무용(서양/한국무용)</item>
