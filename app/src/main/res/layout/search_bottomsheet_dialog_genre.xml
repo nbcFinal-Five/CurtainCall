@@ -28,7 +28,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_theater"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_bottom_futility"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -44,7 +44,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_futility"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_genre_theater"
         app:layout_constraintEnd_toStartOf="@+id/tv_bottom_publicfutility"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,7 +60,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_publicfutility"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_futility"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -76,7 +76,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_classic"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_bottom_genre_theater"
         app:layout_constraintTop_toBottomOf="@+id/tv_bottom_genre_theater" />
 
@@ -89,7 +89,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_korean_classic"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_classic"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_classic"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_classic" />
@@ -103,7 +103,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_popular_music"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_korean_classic"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_korean_classic"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_korean_classic" />
@@ -117,7 +117,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_musical"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_bottom_classic"
         app:layout_constraintTop_toBottomOf="@+id/tv_bottom_classic" />
 
@@ -130,7 +130,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_circus"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_musical"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_musical"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_musical" />
@@ -144,7 +144,7 @@
         android:gravity="center"
         android:text="@string/filter_genre_mix"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_circus"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_circus"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_circus" />
@@ -154,7 +154,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/component_color"
         android:text="@string/filter_choose"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"

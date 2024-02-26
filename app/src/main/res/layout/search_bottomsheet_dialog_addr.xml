@@ -28,7 +28,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_nationwide"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_bottom_addr_seoul"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -44,7 +44,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_seoul"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_nationwide"
         app:layout_constraintEnd_toStartOf="@+id/tv_bottom_addr_incheon"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,7 +60,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_incheon"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_seoul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -76,7 +76,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_daejeon"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_nationwide"
         app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_nationwide" />
 
@@ -89,7 +89,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_daegu"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_daejeon"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_daejeon"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_daejeon" />
@@ -103,7 +103,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_gwangju"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_daegu"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_daegu"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_daegu" />
@@ -117,7 +117,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_pusan"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_daejeon"
         app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_daejeon" />
 
@@ -130,7 +130,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_ulsan"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_pusan"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_pusan"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_pusan" />
@@ -144,7 +144,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_sejong"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_ulsan"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_ulsan"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_ulsan" />
@@ -158,7 +158,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_gyeonggi"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_pusan"
         app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_pusan" />
 
@@ -171,7 +171,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_chungcheong"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_gyeonggi"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_gyeonggi"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_gyeonggi" />
@@ -185,7 +185,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_jeolla"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_chungcheong"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_chungcheong"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_chungcheong" />
@@ -199,7 +199,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_gyeongsang"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_gyeonggi"
         app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_gyeonggi" />
 
@@ -212,7 +212,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_gangwon"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_gyeongsang"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_gyeongsang"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_gyeongsang" />
@@ -226,7 +226,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_jeju"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_gangwon"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_gangwon"
         app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_gangwon" />
@@ -240,7 +240,7 @@
         android:gravity="center"
         android:text="@string/filter_addr_daehakro"
         android:textColor="@color/component_color"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_gyeongsang"
         app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_gyeongsang" />
 
@@ -249,7 +249,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/component_color"
         android:text="@string/filter_choose"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
