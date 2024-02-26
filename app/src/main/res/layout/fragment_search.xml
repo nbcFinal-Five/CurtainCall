@@ -16,7 +16,7 @@
         android:background="@drawable/shape_search_radius"
         android:hint="@string/input_search"
         android:paddingStart="20dp"
-        android:textColorHint="@color/bottom_navi_color"
+        android:textColorHint="@color/bottom_navi_item_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -108,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search_result_not"
-        android:textColor="@color/bottom_navi_color"
+        android:textColor="@color/bottom_navi_item_color"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
