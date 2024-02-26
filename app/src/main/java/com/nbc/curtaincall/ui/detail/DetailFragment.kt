@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayout
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.MapLifeCycleCallback
@@ -43,6 +44,23 @@ class DetailFragment : Fragment() {
             override fun onMapReady(kakaoMap: KakaoMap) {
                 // 인증 후 API 가 정상적으로 실행될 때 호출됨
             }
+        })
+
+        val scrollView = binding.svDetailScroll
+        val tabLayout = binding.storeFragmentTabLayout
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                when (tab.position) {
+                    0 -> scrollView.scrollTo(0, binding.ivDetailIntroImage.top)
+                    1 -> scrollView.scrollTo(0, binding.view2.top)
+//                    2 -> scrollView.scrollTo(0, binding.ivDetailIntroImage.top)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+
+            override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
         return root
