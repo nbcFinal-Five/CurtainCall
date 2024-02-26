@@ -1,12 +1,16 @@
 package com.nbc.curtaincall.ui.search
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentSearchBinding
 
@@ -17,6 +21,8 @@ class SearchFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val searchListAdapter by lazy { SearchListAdapter() }
+    private val searchViewModel  by activityViewModels<SearchViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +49,7 @@ class SearchFragment : Fragment() {
 
     }
 
-    private fun showBottomSheet() {
+    private fun showBottomSheet() { // 검색 필터 클릭시 bottom sheet 띄우기
         with(binding) {
             tvSearchfilterGenre.setOnClickListener {
                 val genreBottomSheet = SearchGenreBottomSheet()
@@ -63,9 +69,45 @@ class SearchFragment : Fragment() {
                 chilrenBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
         }
-
     }
 
+    private fun searchShowList() { // 검색어 입력시 결과 확인
+        with(binding) {
+            val searchData = etSearch.text.toString()
+
+            ivSearch.setOnClickListener {
+                initList()
+                hideKeyboard()
+                searchViewModel.searchResultList.observe(viewLifecycleOwner) {
+//                    searchListAdapter.submitList(it)
+                }
+            }
+
+
+        }
+    }
+
+    private fun initList() { // 검색 결과 recyclerview 만들기
+        with(binding) {
+            with(rvSearch) {
+                adapter = searchListAdapter.apply {
+                    itemClick = object : SearchListAdapter.ItemCLick{
+                        override fun onClick(position: Int) {
+
+                        }
+                    }
+                }
+                layoutManager = GridLayoutManager(requireActivity(),3)
+                setHasFixedSize(true)
+            }
+        }
+    }
+
+    private fun hideKeyboard() { // 키보드 숨기기
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

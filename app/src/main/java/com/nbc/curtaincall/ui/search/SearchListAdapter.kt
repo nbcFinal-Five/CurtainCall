@@ -6,33 +6,34 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.nbc.curtaincall.data.model.ShowList
 import com.nbc.curtaincall.data.model.ShowListResponse
 import com.nbc.curtaincall.databinding.ConstraintLayoutSearchRvBinding
 
-class SearchListAdapter : ListAdapter<ShowListResponse, SearchListAdapter.ChargerViewHolder>(searchCallback) {
+class SearchListAdapter : ListAdapter<ShowList, SearchListAdapter.SearchShowViewHolder>(searchCallback) {
     interface ItemCLick {
         fun onClick (position: Int)
     }
     var itemClick : ItemCLick? = null
 
     companion object {
-        private val searchCallback = object : DiffUtil.ItemCallback<ShowListResponse>() {
-            override fun areItemsTheSame(oldItem: ShowListResponse, newItem:ShowListResponse): Boolean {
+        private val searchCallback = object : DiffUtil.ItemCallback<ShowList>() {
+            override fun areItemsTheSame(oldItem: ShowList, newItem:ShowList): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
 
-            override fun areContentsTheSame(oldItem: ShowListResponse, newItem: ShowListResponse): Boolean {
+            override fun areContentsTheSame(oldItem: ShowList, newItem: ShowList): Boolean {
                 return oldItem == newItem
             }
 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChargerViewHolder {
-        return ChargerViewHolder(ConstraintLayoutSearchRvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchShowViewHolder {
+        return SearchShowViewHolder(ConstraintLayoutSearchRvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
-    override fun onBindViewHolder(holder: ChargerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchShowViewHolder, position: Int) {
         val showItem = getItem(position)
         holder.bind(showItem)
         holder.itemView.setOnClickListener {
@@ -40,10 +41,10 @@ class SearchListAdapter : ListAdapter<ShowListResponse, SearchListAdapter.Charge
         }
     }
 
-    inner class  ChargerViewHolder(private val binding:ConstraintLayoutSearchRvBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : ShowListResponse) {
+    inner class  SearchShowViewHolder(private val binding:ConstraintLayoutSearchRvBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item : ShowList) {
             with(binding) {
-                Glide.with(itemView).load(item.showList).into(ivSearchResult)
+                Glide.with(itemView).load(item.poster).into(ivSearchResult)
             }
         }
     }
