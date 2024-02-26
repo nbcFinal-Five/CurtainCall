@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:text="@string/tv_detail_expectations"
+            android:text="기대평= 1개"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -363,7 +363,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_showTime" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/view_intro"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_marginTop="12dp"
@@ -379,10 +379,10 @@
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view_intro" />
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/view_mapView"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_marginTop="12dp"
@@ -400,7 +400,7 @@
             android:layout_marginEnd="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+            app:layout_constraintTop_toBottomOf="@+id/view_mapView" />
 
         <TextView
             android:id="@+id/tv_detail_venueName"
@@ -468,7 +468,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_homePage" />
 
         <View
-            android:id="@+id/view3"
+            android:id="@+id/view_review"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_marginTop="12dp"
