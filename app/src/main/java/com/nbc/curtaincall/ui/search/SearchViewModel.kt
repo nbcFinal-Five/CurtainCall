@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nbc.curtaincall.data.api.RetrofitClient
-import com.nbc.curtaincall.data.model.ShowList
+import com.nbc.curtaincall.data.api.SearchRetrotifClient
+import com.nbc.curtaincall.data.model.ShowItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -18,7 +18,7 @@ class SearchViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    private val _searchResultList = MutableLiveData<ShowList>()
+    private val _searchResultList = MutableLiveData<ShowItem>()
     val searchResultList get() = _searchResultList
 
     fun fetchSearchResult(search: String) {
@@ -33,6 +33,6 @@ class SearchViewModel : ViewModel() {
     }
 
     suspend fun getSearchResult(search: String) = withContext(Dispatchers.IO) {
-        RetrofitClient.kopisApi.getSearchShowList(shprfnm=search).showList
+        SearchRetrotifClient.kopisApi.getSearchFilterShowList(shprfnm = search).showList
     }
 }
