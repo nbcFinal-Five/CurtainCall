@@ -13,4 +13,14 @@
         <item name="android:statusBarColor">@color/background_color</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="RoundCornerBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RoundCornerModalStyle</item>
+    </style>
+
+    <style name="RoundCornerModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/search_bottom_sheet_background</item>
+    </style>
+
 </resources>
