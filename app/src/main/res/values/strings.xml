@@ -10,4 +10,7 @@
   <string name="email">이메일</string>
   <string name="password">비밀번호</string>
   <string name="register">회원가입</string>
+  <string name="password_confirm">비밀번호 확인</string>
+  <string name="account_info">계정 정보</string>
+  <string name="account_nickname">닉네임</string>
 </resources>
