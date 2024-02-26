@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nbc.curtaincall.BuildConfig
+import com.nbc.curtaincall.Supabase
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.gotrue.auth
@@ -19,27 +20,19 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 class UserViewModel : ViewModel() {
-	private val supabaseClient = createSupabaseClient(
-		supabaseUrl = "https://cbwvdfwzjnbkzfmczhoo.supabase.co",
-		supabaseKey = BuildConfig.SUPABASE_KEY
-	) {
-		install(Postgrest)
-		install(Auth)
-	}
-
-	private var _userInfo = MutableLiveData<UserInfo?>(supabaseClient.auth.currentUserOrNull())
+	private var _userInfo = MutableLiveData<UserInfo?>(Supabase.client.auth.currentUserOrNull())
 	val userInfo: LiveData<UserInfo?> = _userInfo
 
 	fun signIn(inputEmail: String, inputPassword: String) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				supabaseClient.auth.signInWith(Email) {
+				Supabase.client.auth.signInWith(Email) {
 					email = inputEmail
 					password = inputPassword
 				}
 
 				withContext(Dispatchers.Main) {
-					_userInfo.value = supabaseClient.auth.currentUserOrNull()
+					_userInfo.value = Supabase.client.auth.currentUserOrNull()
 				}
 			} catch (e: Exception) {
 				Log.d("sign in", e.toString())
@@ -50,7 +43,7 @@ class UserViewModel : ViewModel() {
 	fun signOut() {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				supabaseClient.auth.signOut()
+				Supabase.client.auth.signOut()
 			} catch (e: Exception) {
 				Log.d("sign out", e.toString())
 			} finally {
@@ -64,7 +57,7 @@ class UserViewModel : ViewModel() {
 	fun signUp(inputEmail: String, inputPassword: String, name: String, gender: String, age: String) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				val signUpResult = supabaseClient.auth.signUpWith(Email) {
+				val signUpResult = Supabase.client.auth.signUpWith(Email) {
 					email = inputEmail
 					password = inputPassword
 					data = buildJsonObject {

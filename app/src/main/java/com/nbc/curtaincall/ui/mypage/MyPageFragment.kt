@@ -8,15 +8,15 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.nbc.curtaincall.Supabase
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
+import com.nbc.curtaincall.ui.UserViewModel
+import io.github.jan.supabase.gotrue.auth
 
 class MyPageFragment : Fragment() {
-
+	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 
 	private var _binding: FragmentMyPageBinding? = null
-
-	// This property is only valid between onCreateView and
-	// onDestroyView.
 	private val binding get() = _binding!!
 
 	private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -36,11 +36,33 @@ class MyPageFragment : Fragment() {
 		_binding = FragmentMyPageBinding.inflate(inflater, container, false)
 		val root: View = binding.root
 
-
-		notificationsViewModel.text.observe(viewLifecycleOwner) {
-
-		}
 		return root
+	}
+
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		initViewModel()
+		initHandle()
+	}
+
+	private fun initHandle() = with(binding) {
+		btnOpenAuthActivity.setOnClickListener {
+			
+		}
+	}
+
+	private fun initViewModel() {
+		userViewModel.userInfo.observe(viewLifecycleOwner) {
+			val currentSession = Supabase.client.auth.currentSessionOrNull()
+
+			if (currentSession == null) {
+				binding.clUserInfo.visibility = View.INVISIBLE
+				binding.btnOpenAuthActivity.visibility = View.VISIBLE
+			} else {
+				binding.clUserInfo.visibility = View.VISIBLE
+				binding.btnOpenAuthActivity.visibility = View.INVISIBLE
+			}
+		}
 	}
 
 	override fun onDestroyView() {
