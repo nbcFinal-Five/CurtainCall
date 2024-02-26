@@ -20,6 +20,7 @@ android {
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		buildConfigField("String", "KOPIS_API_KEY", getAuthKey("KOPIS_API_KEY"))
+		buildConfigField("String", "SUPABASE_KEY", getAuthKey("SUPABASE_KEY"))
 	}
 
 	buildTypes {

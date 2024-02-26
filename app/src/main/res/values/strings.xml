@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">커튼콜</string>
-    <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
-    <string name="title_my_page">MyPage</string>
+  <string name="app_name">커튼콜</string>
+  <string name="title_home">Home</string>
+  <string name="title_search">Search</string>
+  <string name="title_my_page">MyPage</string>
+  <string name="sign_in">로그인</string>
+  <string name="my_page_title">내 정보</string>
+  <string name="my_page_showcase">ShowCase</string>
 </resources>
