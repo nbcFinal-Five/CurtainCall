@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/search_bottom_sheet_background"
+    android:clipToOutline="true">
+
+    <TextView
+        android:id="@+id/tv_bottomdialog_addr_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/filter_addr"
+        android:textColor="@color/text_color"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_nationwide"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_nationwide"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_bottom_addr_seoul"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottomdialog_addr_title" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_seoul"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_seoul"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_nationwide"
+        app:layout_constraintEnd_toStartOf="@+id/tv_bottom_addr_incheon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_nationwide"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_nationwide" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_incheon"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_incheon"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_seoul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_seoul"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_seoul" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_daejeon"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_daejeon"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_nationwide"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_nationwide" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_daegu"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_daegu"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_daejeon"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_daejeon"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_daejeon" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_gwangju"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_gwangju"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_daegu"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_daegu"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_daegu" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_pusan"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_pusan"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_daejeon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_daejeon" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_ulsan"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_ulsan"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_pusan"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_pusan"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_pusan" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_sejong"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_sejong"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_ulsan"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_ulsan"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_ulsan" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_gyeonggi"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_gyeonggi"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_pusan"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_pusan" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_chungcheong"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_chungcheong"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_gyeonggi"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_gyeonggi"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_gyeonggi" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_jeolla"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_jeolla"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_chungcheong"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_chungcheong"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_chungcheong" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_gyeongsang"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_gyeongsang"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_gyeonggi"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_gyeonggi" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_gangwon"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_gangwon"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_gyeongsang"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_gyeongsang"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_gyeongsang" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_jeju"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_jeju"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_addr_gangwon"
+        app:layout_constraintStart_toEndOf="@+id/tv_bottom_addr_gangwon"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottom_addr_gangwon" />
+
+    <TextView
+        android:id="@+id/tv_bottom_addr_daehakro"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_search_component_background"
+        android:gravity="center"
+        android:text="@string/filter_addr_daehakro"
+        android:textColor="@color/component_color"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_bottom_addr_gyeongsang"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_gyeongsang" />
+
+    <Button
+        android:id="@+id/btn_addr_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/component_color"
+        android:text="@string/filter_choose"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_addr_daehakro" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
