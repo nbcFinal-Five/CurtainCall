@@ -26,7 +26,7 @@
         </activity>
         <meta-data
             android:name="com.kakao.vectormap.APP_KEY"
-            android:value="${fd8a4783e73d62e32fb03a53a608acc6}"/>
+            android:value="$fd8a4783e73d62e32fb03a53a608acc6"/>
     </application>
 
 </manifest>
