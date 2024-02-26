@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">커튼콜</string>
   <string name="title_home">Home</string>
@@ -13,10 +14,6 @@
   <string name="password_confirm">비밀번호 확인</string>
   <string name="account_info">계정 정보</string>
   <string name="account_nickname">닉네임</string>
-  <string name="app_name">쇼넥트</string>
-  <string name="title_home">Home</string>
-  <string name="title_search">Search</string>
-  <string name="title_my_page">MyPage</string>
   <string-array name="genre">
     <item>연극</item>
     <item>무용(서양/한국무용)</item>
@@ -28,7 +25,7 @@
     <item>서커스/마술</item>
     <item>뮤지컬</item>
   </string-array>
-  
+
   <!-- SearchFragment -->
   <string name="search_result_not">검색 결과가 없습니다</string>
   <string name="input_search">검색어를 입력해주세요</string>

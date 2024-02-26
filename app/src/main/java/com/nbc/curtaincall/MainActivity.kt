@@ -23,14 +23,7 @@ class MainActivity : AppCompatActivity() {
 
 		val navView: BottomNavigationView = binding.navView
 
-<<<<<<< HEAD
 		val navController = findNavController(R.id.nav_host_fragment_activity_main)
-		val appBarConfiguration = AppBarConfiguration(
-			setOf(
-				R.id.navigation_home, R.id.navigation_search, R.id.navigation_my_page
-			)
-		)
-		setupActionBarWithNavController(navController, appBarConfiguration)
 		navView.setupWithNavController(navController)
 
 		initSupabase()
@@ -39,10 +32,4 @@ class MainActivity : AppCompatActivity() {
 	private fun initSupabase(): SupabaseClient {
 		return Supabase.client
 	}
-=======
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-        navView.setupWithNavController(navController)
-    }
->>>>>>> dev
 }
