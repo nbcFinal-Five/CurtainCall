@@ -11,8 +11,9 @@
     <color name="component_color">#9E9E9E</color>
     <color name="background_color">#1B1E25</color>
     <color name="text_color">#FCFCFC</color>
-    <color name="bottom_navi_color">#D4D4D4</color>
+    <color name="bottom_navi_item_color">#D4D4D4</color>
     <color name="input_background_color">#2E2E2E</color>
+    <color name="bottom_navi_background_color">#191919</color>
     <color name="component_background_color">#424449</color>
     <color name="transparency_black">#66000000</color>
 </resources>
