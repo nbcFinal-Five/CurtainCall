@@ -7,7 +7,7 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml(name = "dbs")
 data class SearchListModel(
     @Element(name = "db")
-    val searchShowList: List<SearchItem>
+    val searchShowList: List<SearchItem>?
 )
 
 @Xml(name = "db")

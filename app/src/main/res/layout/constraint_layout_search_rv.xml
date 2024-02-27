@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/tv_searchitem_genre"
         style="@style/SearchTopBadge"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_margin="3dp"
         android:background="@drawable/shape_searchlist_radius3"
@@ -32,7 +32,7 @@
     <TextView
         android:id="@+id/tv_searchitem_prfstate"
         style="@style/SearchTopBadge"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="1dp"
         android:background="@drawable/shape_searchlist_radius3"

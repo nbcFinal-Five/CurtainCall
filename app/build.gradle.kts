@@ -98,11 +98,8 @@ dependencies {
 	implementation("io.github.jan-tennert.supabase:postgrest-kt")
 	implementation("io.ktor:ktor-client-android:2.3.8")
 
-
 	// Kakao map
 	implementation("com.kakao.maps.open:android:2.6.0")
-    // Kakao map
-    implementation ("com.kakao.maps.open:android:2.6.0")
 
     //BottomSheet, Chip
     implementation("com.google.android.material:material:1.11.0")
