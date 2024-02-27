@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
@@ -167,7 +168,7 @@ class RegisterFragment : Fragment() {
 			if (signupResult) {
 				requireActivity().finish()
 			} else {
-				binding.etEmail.requestFocus()
+				showKeyboard()
 			}
 		}
 	}
@@ -200,5 +201,11 @@ class RegisterFragment : Fragment() {
 						isValidName(input.name) &&
 						!input.gender.isNullOrEmpty() &&
 						!input.age.isNullOrEmpty()
+	}
+
+	private fun showKeyboard() {
+		binding.etEmail.requestFocus()
+		val imm = requireActivity().getSystemService(InputMethodManager::class.java)
+		imm.showSoftInput(binding.etEmail, InputMethodManager.SHOW_IMPLICIT)
 	}
 }
