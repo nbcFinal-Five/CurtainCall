@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        initViews()
+//        initViews()
 
         return binding.root
     }

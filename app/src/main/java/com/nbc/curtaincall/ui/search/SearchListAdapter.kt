@@ -44,6 +44,8 @@ class SearchListAdapter : ListAdapter<SearchItem, SearchListAdapter.SearchShowVi
         fun bind(item : SearchItem) {
             with(binding) {
                 Glide.with(itemView).load(item.poster).into(ivSearchResult)
+                tvSearchitemGenre.setText(item.genrenm)
+                tvSearchitemPrfstate.setText(item.prfstate)
             }
         }
     }

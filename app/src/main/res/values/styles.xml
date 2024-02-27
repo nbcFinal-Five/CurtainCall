@@ -4,10 +4,21 @@
     <style name="CustomChipChoice." parent="@style/Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/search_chip_bg_state_list</item>
         <item name="android:textColor">@color/search_chip_text_state_list</item>
+        <item name="chipStrokeColor">@color/input_background_color</item>
+        <item name="chipStrokeWidth">1dp</item>
         <item name="android:textSize">14sp</item>
         <item name="chipCornerRadius">5dp</item>
         <item name="chipMinHeight">45dp</item>
         <item name="android:textAlignment">center</item>
+    </style>
+
+    <!--search rv badge design-->
+    <style name="SearchTopBadge">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="background">@drawable/shape_searchlist_radius3</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <!--bottome sheet topcorner radius-->

@@ -2,6 +2,7 @@ package com.nbc.curtaincall.ui.search
 
 import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,8 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        initList()
+
         return root
     }
 
@@ -46,7 +49,6 @@ class SearchFragment : Fragment() {
 
         showBottomSheet()
         searchShowList()
-        initList()
     }
 
     private fun showBottomSheet() { // 검색 필터 클릭시 bottom sheet 띄우기
@@ -75,6 +77,13 @@ class SearchFragment : Fragment() {
         with(binding) {
             val searchData = etSearch.text.toString()
 
+            etSearch.setOnKeyListener { v, keyCode, event ->
+                when(keyCode){
+                    KeyEvent.KEYCODE_ENTER -> ivSearch.callOnClick()
+                    else -> ivSearch.callOnClick()
+                }
+            }
+
             ivSearch.setOnClickListener {
                 hideKeyboard()
                 searchViewModel.fetchSearchResult(searchData)
@@ -96,7 +105,6 @@ class SearchFragment : Fragment() {
                 adapter = searchListAdapter.apply {
                     itemClick = object : SearchListAdapter.ItemCLick{
                         override fun onClick(position: Int) {
-
                         }
                     }
                 }

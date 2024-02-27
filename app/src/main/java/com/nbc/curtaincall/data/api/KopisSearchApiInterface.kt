@@ -15,7 +15,8 @@ interface KopisSearchApiInterface {
         @Query("shcate") shcate: String? = null, // 장르코드
         @Query("shprfnm") shprfnm: String? = null, // 공연명
         @Query("signgucode") signgucode: Int? = null, // 지역 시도 코드
-        @Query("kidstate") kidstate: String? =  null // 아동 공연 여부
+        @Query("kidstate") kidstate: String? =  null, // 아동 공연 여부
+        @Query("newsql") newsql: String = "Y"
     ): SearchListModel
 }
 
