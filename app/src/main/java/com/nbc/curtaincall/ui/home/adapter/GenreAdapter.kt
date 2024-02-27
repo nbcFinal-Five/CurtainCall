@@ -15,6 +15,7 @@ class GenreAdapter :
         override fun areItemsTheSame(oldItem: Db, newItem: Db): Boolean {
             return oldItem.mt20id == newItem.mt20id
         }
+
         override fun areContentsTheSame(oldItem: Db, newItem: Db): Boolean {
             return oldItem == newItem
         }

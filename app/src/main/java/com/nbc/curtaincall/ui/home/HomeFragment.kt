@@ -22,10 +22,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(
             showListRepository = ShowListRepositoryImpl(kopisApi),
@@ -84,6 +82,7 @@ class HomeFragment : Fragment() {
             fetchGenre(0)
         }
     }
+
     //옵저브 세팅
     private fun setUpObserve() {
         with(viewModel) {

@@ -20,27 +20,23 @@
 
     <TextView
         android:id="@+id/tv_searchitem_genre"
-        android:layout_width="20dp"
-        android:layout_height="10dp"
-        android:background="@drawable/shape_searchlist_radius3"
-        android:gravity="center"
-        android:text="@string/filter_genre"
-        android:textColor="@color/text_color"
-        android:textSize="5sp"
+        style="@style/SearchTopBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
         android:layout_margin="3dp"
+        android:background="@drawable/shape_searchlist_radius3"
+        android:text="@string/filter_genre"
         app:layout_constraintStart_toStartOf="@+id/iv_search_result"
         app:layout_constraintTop_toTopOf="@+id/iv_search_result" />
 
     <TextView
         android:id="@+id/tv_searchitem_prfstate"
-        android:layout_width="20dp"
-        android:layout_height="10dp"
-        android:background="@drawable/shape_searchlist_radius3"
-        android:gravity="center"
-        android:text="@string/filter_genre"
-        android:textColor="@color/text_color"
-        android:textSize="5sp"
+        style="@style/SearchTopBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginStart="1dp"
+        android:background="@drawable/shape_searchlist_radius3"
+        android:text="@string/filter_genre"
         app:layout_constraintBottom_toBottomOf="@+id/tv_searchitem_genre"
         app:layout_constraintStart_toEndOf="@id/tv_searchitem_genre"
         app:layout_constraintTop_toTopOf="@+id/tv_searchitem_genre" />
