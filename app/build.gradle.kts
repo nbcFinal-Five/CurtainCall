@@ -81,6 +81,12 @@ dependencies {
 	implementation("androidx.lifecycle:lifecycle-common-java8:2.7.0")
 	implementation("androidx.lifecycle:lifecycle-runtime-ktx:r2.6.0")
 
+    //powerspinner
+    implementation ("com.github.skydoves:powerspinner:1.2.6")
+
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+
 	implementation("androidx.core:core-ktx:1.12.0")
 	implementation("androidx.appcompat:appcompat:1.6.1")
 	implementation("com.google.android.material:material:1.11.0")
@@ -102,6 +108,7 @@ dependencies {
 	implementation("com.kakao.maps.open:android:2.6.0")
 
     //BottomSheet, Chip
+
     implementation("com.google.android.material:material:1.11.0")
 
     //Glide

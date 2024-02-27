@@ -11,12 +11,13 @@ import com.nbc.curtaincall.databinding.ItemTopRankBinding
 class TopRankAdapter :
     RecyclerView.Adapter<TopRankAdapter.TopRankViewHolder>() {
     var items: List<Boxof> = listOf()
+
     inner class TopRankViewHolder(private val binding: ItemTopRankBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Boxof) {
             with(binding) {
                 tvHotRecommendGenre.text = item.cate
-                tvHotRecommendPeriod.text = item.prfpd?.substring(10,21)
+                tvHotRecommendPeriod.text = item.prfpd?.substring(10, 21)
                 tvHotRecommendPlaceName.text = item.prfplcnm
                 tvHotRecommendPerformanceName.text = item.prfnm
                 ivHomeHotRecommend.load("http://www.kopis.or.kr${item.poster}")
