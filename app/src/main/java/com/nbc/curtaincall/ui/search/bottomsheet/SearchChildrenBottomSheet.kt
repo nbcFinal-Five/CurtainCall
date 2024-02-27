@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogChildrenBinding
+import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
 
 class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
@@ -17,6 +18,17 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private val searchViewModel  by activityViewModels<SearchViewModel>()
+    private val searchListAdapter by lazy { SearchListAdapter() }
+    private val childrenFilterOptions by lazy {
+        listOf(
+            listOf(
+                with(binding){
+                    cpBottomChildrenPossible to "Y"
+                    cpBottomChildrenImpossible to "N"
+                }
+            )
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

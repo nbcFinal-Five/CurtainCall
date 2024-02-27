@@ -32,100 +32,67 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_bottomdialog_genre_title">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_genre_theater"
+            android:id="@+id/cp_bottom_theater"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_genre_theater"
-            app:layout_constraintEnd_toStartOf="@+id/cp_bottom_futility"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_bottomdialog_genre_title" />
+            android:text="@string/filter_genre_theater" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_futility"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_genre_futility"
-            app:layout_constraintBottom_toBottomOf="@+id/cp_bottom_genre_theater"
-            app:layout_constraintEnd_toStartOf="@+id/cp_bottom_publicfutility"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cp_bottom_genre_theater"
-            app:layout_constraintTop_toTopOf="@+id/cp_bottom_genre_theater" />
+            android:text="@string/filter_genre_futility" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_publicfutility"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_genre_publicfutility"
-            app:layout_constraintBottom_toBottomOf="@+id/cp_bottom_futility"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cp_bottom_futility"
-            app:layout_constraintTop_toTopOf="@+id/cp_bottom_futility" />
+            android:text="@string/filter_genre_publicfutility" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_classic"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/filter_genre_classic"
-            app:layout_constraintStart_toStartOf="@id/cp_bottom_genre_theater"
-            app:layout_constraintTop_toBottomOf="@+id/cp_bottom_genre_theater" />
+            android:text="@string/filter_genre_classic" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_korean_classic"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_genre_korean_classic"
-            app:layout_constraintBottom_toBottomOf="@+id/cp_bottom_classic"
-            app:layout_constraintStart_toEndOf="@+id/cp_bottom_classic"
-            app:layout_constraintTop_toTopOf="@+id/cp_bottom_classic" />
+            android:text="@string/filter_genre_korean_classic" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_popular_music"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_genre_popular_music"
-            app:layout_constraintBottom_toBottomOf="@+id/cp_bottom_korean_classic"
-            app:layout_constraintStart_toEndOf="@+id/cp_bottom_korean_classic"
-            app:layout_constraintTop_toTopOf="@+id/cp_bottom_korean_classic" />
+            android:text="@string/filter_genre_popular_music" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_musical"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/filter_genre_musical"
-            app:layout_constraintStart_toStartOf="@id/cp_bottom_classic"
-            app:layout_constraintTop_toBottomOf="@+id/cp_bottom_classic" />
+            android:text="@string/filter_genre_musical" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_circus"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_genre_circus"
-            app:layout_constraintBottom_toBottomOf="@+id/cp_bottom_musical"
-            app:layout_constraintStart_toEndOf="@+id/cp_bottom_musical"
-            app:layout_constraintTop_toTopOf="@+id/cp_bottom_musical" />
+            android:text="@string/filter_genre_circus" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_mix"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_genre_mix"
-            app:layout_constraintBottom_toBottomOf="@+id/cp_bottom_circus"
-            app:layout_constraintStart_toEndOf="@+id/cp_bottom_circus"
-            app:layout_constraintTop_toTopOf="@+id/cp_bottom_circus" />
+            android:text="@string/filter_genre_mix" />
 
     </com.google.android.material.chip.ChipGroup>
 

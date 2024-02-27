@@ -80,7 +80,7 @@ class SearchFragment : Fragment() {
             etSearch.setOnKeyListener { v, keyCode, event ->
                 when(keyCode){
                     KeyEvent.KEYCODE_ENTER -> ivSearch.callOnClick()
-                    else -> ivSearch.callOnClick()
+                    else -> ivSearch.canScrollVertically(0)
                 }
             }
 

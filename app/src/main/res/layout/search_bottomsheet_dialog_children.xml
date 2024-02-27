@@ -37,24 +37,14 @@
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_children_possible"
-            app:layout_constraintEnd_toStartOf="@+id/cp_bottom_children_impossible"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_bottomdialog_children_title" />
+            android:text="@string/filter_children_possible" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_children_impossible"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/filter_children_impossible"
-            app:layout_constraintBottom_toBottomOf="@id/cp_bottom_children_possible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cp_bottom_children_possible"
-            app:layout_constraintTop_toTopOf="@id/cp_bottom_children_possible" />
+            android:text="@string/filter_children_impossible" />
 
     </com.google.android.material.chip.ChipGroup>
 
