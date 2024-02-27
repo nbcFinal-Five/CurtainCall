@@ -18,4 +18,5 @@
   <color name="bottom_navi_background_color">#191919</color>
   <color name="component_background_color">#424449</color>
   <color name="transparency_black">#66000000</color>
+  <color name="label_color">#B3161618</color>
 </resources>

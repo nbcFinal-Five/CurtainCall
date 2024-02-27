@@ -42,7 +42,22 @@ interface KopisApiInterface {
         @Query("kidstate") kidstate: String = KID_STATE,
         @Query("prfstate") prfstate: String? = null,
         @Query("openrun") openrun: String? = null,
-        ): ShowListModel
+    ): ShowListModel
+
+
+    /**
+     * @param ststype   요청구분 필수 month week day 중하나
+     * @param date      날짜    필수 20240201
+     * @param catecode  장르구분코드
+     * @param area      지역코드
+     */
+    @GET("boxoffice")
+    suspend fun fetchTopRank(
+        @Query("ststype") ststype: String = "week",
+        @Query("date") data: String = "20240227",
+        @Query("catecode") catecode: String? = null,
+        @Query("area") area: String? = null,
+    ): BoxOfficeModel
 }
 
 
