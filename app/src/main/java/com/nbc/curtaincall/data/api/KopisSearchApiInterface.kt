@@ -10,7 +10,7 @@ interface KopisSearchApiInterface {
         @Query("stdate") stdate: String = "20240101",
         @Query("eddate") eddate: String = "20240630",
         @Query("cpage") cpage: String = "1",
-        @Query("rows") rows: String = "20",
+        @Query("rows") rows: String = "30",
         @Query("shcate") shcate: String? = null, // 장르코드
         @Query("shprfnm") shprfnm: String? = null, // 공연명
         @Query("signgucode") signgucode: Int? = null, // 지역 시도 코드

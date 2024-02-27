@@ -13,6 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentSearchBinding
+import com.nbc.curtaincall.ui.search.bottomsheet.SearchAddrBottomSheet
+import com.nbc.curtaincall.ui.search.bottomsheet.SearchChildrenBottomSheet
+import com.nbc.curtaincall.ui.search.bottomsheet.SearchGenreBottomSheet
 
 class SearchFragment : Fragment() {
 
@@ -35,10 +38,6 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textSearch
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-        }
         return root
     }
 
@@ -46,7 +45,8 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         showBottomSheet()
-
+        searchShowList()
+        initList()
     }
 
     private fun showBottomSheet() { // 검색 필터 클릭시 bottom sheet 띄우기
@@ -76,14 +76,17 @@ class SearchFragment : Fragment() {
             val searchData = etSearch.text.toString()
 
             ivSearch.setOnClickListener {
-                initList()
                 hideKeyboard()
+                searchViewModel.fetchSearchResult(searchData)
                 searchViewModel.searchResultList.observe(viewLifecycleOwner) {
-//                    searchListAdapter.submitList(it)
+                    searchListAdapter.submitList(it)
+                    if(it == null) {
+                        tvSearchNoresult.visibility = View.VISIBLE
+                    } else {
+                        tvSearchNoresult.visibility = View.GONE
+                    }
                 }
             }
-
-
         }
     }
 

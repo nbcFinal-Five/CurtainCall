@@ -1,15 +1,15 @@
-package com.nbc.curtaincall.ui.search
+package com.nbc.curtaincall.ui.search.bottomsheet
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.nbc.curtaincall.databinding.SearchBottomsheetDialogGenreBinding
+import com.nbc.curtaincall.databinding.SearchBottomsheetDialogChildrenBinding
 
-class SearchGenreBottomSheet : BottomSheetDialogFragment() {
+class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
 
-    private var _binding: SearchBottomsheetDialogGenreBinding? = null
+    private var _binding: SearchBottomsheetDialogChildrenBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -20,14 +20,14 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        _binding = SearchBottomsheetDialogGenreBinding.inflate(inflater, container, false)
+        _binding = SearchBottomsheetDialogChildrenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnGenreCheck.setOnClickListener {
+        binding.btnChildrenCheck.setOnClickListener {
             dismiss()
         }
 
@@ -35,7 +35,7 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     }
 
     companion object {
-        const val TAG = "SearchGenreBottomSheet"
+        const val TAG = "SearchChildrenBottomSheet"
     }
 
     override fun onDestroyView() {

@@ -12,20 +12,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SearchViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
-
-    private val _searchResultList = MutableLiveData<ShowItem>()
+    private val _searchResultList = MutableLiveData<List<ShowItem>>()
     val searchResultList get() = _searchResultList
 
     fun fetchSearchResult(search: String) {
         viewModelScope.launch {
             runCatching {
                 val result = getSearchResult(search)
-//                _searchResultList.value = result
+                _searchResultList.value = result
             }.onFailure {
                 Log.e("SearchViewModel", "fetchSearchResult: ${it.message}" )
             }
