@@ -92,6 +92,7 @@
               android:textColor="@color/input_text_color"
               android:textColorHint="@color/input_text_color"
               android:paddingHorizontal="12dp"
+              android:inputType="textPassword"
       />
     </androidx.cardview.widget.CardView>
 
