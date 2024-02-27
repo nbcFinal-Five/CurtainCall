@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nbc.curtaincall.Supabase
+import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.gotrue.user.UserInfo
@@ -16,106 +17,111 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 class UserViewModel : ViewModel() {
-    private var _userInfo = MutableLiveData<UserInfo?>(Supabase.client.auth.currentUserOrNull())
-    val userInfo: LiveData<UserInfo?> = _userInfo
+	private var _userInfo = MutableLiveData<UserInfo?>(Supabase.client.auth.currentUserOrNull())
+	val userInfo: LiveData<UserInfo?> = _userInfo
 
-    // sign in
-    private val _isSignInLoading = MutableLiveData(false)
-    val isSignInLoading: LiveData<Boolean> get() = _isSignInLoading
+	// sign in
+	private val _isSignInLoading = MutableLiveData(false)
+	val isSignInLoading: LiveData<Boolean> get() = _isSignInLoading
 
-    private val _signInResult = MutableLiveData<Boolean?>(null)
-    val signInResult: LiveData<Boolean?> get() = _signInResult
+	private val _signInResult = MutableLiveData<Boolean?>(null)
+	val signInResult: LiveData<Boolean?> get() = _signInResult
 
-    // sign up
-    private val _isSignUpLoading = MutableLiveData(false)
-    val isSignUpLoading: LiveData<Boolean> get() = _isSignUpLoading
+	// sign up
+	private val _isSignUpLoading = MutableLiveData(false)
+	val isSignUpLoading: LiveData<Boolean> get() = _isSignUpLoading
 
-    private val _signUpResult = MutableLiveData<Boolean?>(null)
-    val signUpResult: LiveData<Boolean?> get() = _signUpResult
+	private val _signUpResult = MutableLiveData<Boolean?>(null)
+	val signUpResult: LiveData<Boolean?> get() = _signUpResult
 
-    fun signIn(inputEmail: String, inputPassword: String) {
-        _isSignInLoading.value = true
+	private var _signUpErrorMessage = MutableLiveData<String?>(null)
+	val signUpErrorMessage: LiveData<String?> = _signUpErrorMessage
 
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                Supabase.client.auth.signInWith(Email) {
-                    email = inputEmail
-                    password = inputPassword
-                }
+	fun signIn(inputEmail: String, inputPassword: String) {
+		_isSignInLoading.value = true
 
-                withContext(Dispatchers.Main) {
-                    _userInfo.value = Supabase.client.auth.currentUserOrNull()
-                    _signInResult.value = true
-                }
-            } catch (e: Exception) {
-                Log.d("sign in", e.toString())
-                withContext(Dispatchers.Main) {
-                    _signInResult.value = false
-                }
-            } finally {
-                withContext(Dispatchers.Main) {
-                    _isSignInLoading.value = false
-                }
-            }
-        }
-    }
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				Supabase.client.auth.signInWith(Email) {
+					email = inputEmail
+					password = inputPassword
+				}
 
-    fun signOut() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                Supabase.client.auth.signOut()
-            } catch (e: Exception) {
-                Log.d("sign out", e.toString())
-            } finally {
-                withContext(Dispatchers.Main) {
-                    _userInfo.value = null
-                    _signInResult.value = null
-                    _signUpResult.value = null
-                }
-            }
-        }
-    }
+				withContext(Dispatchers.Main) {
+					_userInfo.value = Supabase.client.auth.currentUserOrNull()
+					_signInResult.value = true
+				}
+			} catch (e: RestException) {
+				Log.d("sign in", e.error)
+				withContext(Dispatchers.Main) {
+					_signInResult.value = false
+				}
+			} finally {
+				withContext(Dispatchers.Main) {
+					_isSignInLoading.value = false
+				}
+			}
+		}
+	}
 
-    fun signUp(
-        inputEmail: String,
-        inputPassword: String,
-        name: String,
-        gender: String,
-        age: String,
-    ) {
-        _isSignUpLoading.value = true
+	fun signOut() {
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				Supabase.client.auth.signOut()
+			} catch (e: RestException) {
+				Log.d("sign out", e.error)
+			} finally {
+				withContext(Dispatchers.Main) {
+					_userInfo.value = null
+					_signInResult.value = null
+					_signUpResult.value = null
+					_signUpErrorMessage.value = null
+				}
+			}
+		}
+	}
 
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                Supabase.client.auth.signUpWith(Email) {
-                    email = inputEmail
-                    password = inputPassword
-                    data = buildJsonObject {
-                        put("name", name)
-                        put("gender", gender)
-                        put("age", age)
-                    }
-                }
+	fun signUp(
+		inputEmail: String,
+		inputPassword: String,
+		name: String,
+		gender: String,
+		age: String,
+	) {
+		_isSignUpLoading.value = true
 
-                withContext(Dispatchers.Main) {
-                    _userInfo.value = Supabase.client.auth.currentUserOrNull()
-                    _signUpResult.value = true
-                }
-            } catch (e: Exception) {
-                Log.d("sign up", e.toString())
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				Supabase.client.auth.signUpWith(Email) {
+					email = inputEmail
+					password = inputPassword
+					data = buildJsonObject {
+						put("name", name)
+						put("gender", gender)
+						put("age", age)
+					}
+				}
 
-                withContext(Dispatchers.Main) {
-                    _signUpResult.value = false
-                }
-            } finally {
-                withContext(Dispatchers.Main) {
-                    _isSignUpLoading.value = false
-                }
-            }
-        }
-    }
+				withContext(Dispatchers.Main) {
+					_userInfo.value = Supabase.client.auth.currentUserOrNull()
+					_signUpResult.value = true
+					_signUpErrorMessage.value = null
+				}
+			} catch (e: RestException) {
+				Log.d("sign up", e.error)
+				withContext(Dispatchers.Main) {
+					_signUpResult.value = false
+					_signUpErrorMessage.value = e.error
+				}
+			} finally {
+				withContext(Dispatchers.Main) {
+					_isSignUpLoading.value = false
+				}
+			}
+		}
+	}
 
-    fun setUser() {
-        _userInfo.value = Supabase.client.auth.currentUserOrNull()
-    }
+	fun setUser() {
+		_userInfo.value = Supabase.client.auth.currentUserOrNull()
+	}
 }
