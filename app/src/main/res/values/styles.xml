@@ -14,7 +14,7 @@
 
     <!--search rv badge design-->
     <style name="SearchTopBadge">
-        <item name="android:textSize">9sp</item>
+        <item name="android:textSize">8sp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="background">@drawable/shape_searchlist_radius3</item>
