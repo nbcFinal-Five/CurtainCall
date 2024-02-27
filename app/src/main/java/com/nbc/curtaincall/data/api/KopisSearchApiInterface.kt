@@ -1,5 +1,6 @@
 package com.nbc.curtaincall.data.api
 
+import com.nbc.curtaincall.data.model.SearchListModel
 import com.nbc.curtaincall.data.model.ShowListModel
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,7 +16,7 @@ interface KopisSearchApiInterface {
         @Query("shprfnm") shprfnm: String? = null, // 공연명
         @Query("signgucode") signgucode: Int? = null, // 지역 시도 코드
         @Query("kidstate") kidstate: String? =  null // 아동 공연 여부
-    ): ShowListModel
+    ): SearchListModel
 }
 
 /**

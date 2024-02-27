@@ -6,22 +6,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nbc.curtaincall.data.model.ShowItem
+import com.nbc.curtaincall.data.model.SearchItem
 import com.nbc.curtaincall.databinding.ConstraintLayoutSearchRvBinding
 
-class SearchListAdapter : ListAdapter<ShowItem, SearchListAdapter.SearchShowViewHolder>(searchCallback) {
+class SearchListAdapter : ListAdapter<SearchItem, SearchListAdapter.SearchShowViewHolder>(searchCallback) {
     interface ItemCLick {
         fun onClick (position: Int)
     }
     var itemClick : ItemCLick? = null
 
     companion object {
-        private val searchCallback = object : DiffUtil.ItemCallback<ShowItem>() {
-            override fun areItemsTheSame(oldItem: ShowItem, newItem:ShowItem): Boolean {
+        private val searchCallback = object : DiffUtil.ItemCallback<SearchItem>() {
+            override fun areItemsTheSame(oldItem: SearchItem, newItem:SearchItem): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
 
-            override fun areContentsTheSame(oldItem: ShowItem, newItem: ShowItem): Boolean {
+            override fun areContentsTheSame(oldItem: SearchItem, newItem: SearchItem): Boolean {
                 return oldItem == newItem
             }
 
@@ -41,7 +41,7 @@ class SearchListAdapter : ListAdapter<ShowItem, SearchListAdapter.SearchShowView
     }
 
     inner class  SearchShowViewHolder(private val binding:ConstraintLayoutSearchRvBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : ShowItem) {
+        fun bind(item : SearchItem) {
             with(binding) {
                 Glide.with(itemView).load(item.poster).into(ivSearchResult)
             }
