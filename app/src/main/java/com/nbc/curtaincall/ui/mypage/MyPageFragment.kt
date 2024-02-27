@@ -11,6 +11,7 @@ import com.nbc.curtaincall.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
 
+
     private var _binding: FragmentMyPageBinding? = null
 
     // This property is only valid between onCreateView and
@@ -28,10 +29,6 @@ class MyPageFragment : Fragment() {
         _binding = FragmentMyPageBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textMyPage
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 
