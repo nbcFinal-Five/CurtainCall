@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
@@ -162,13 +163,20 @@ class RegisterFragment : Fragment() {
 				return@observe
 			}
 
-			binding.tvEmailWarning.visibility = if (signupResult) View.INVISIBLE else View.VISIBLE
-			binding.tvEmailWarning.text = if (signupResult) "" else getText(R.string.email_duplicate)
-
 			if (signupResult) {
 				requireActivity().finish()
-			} else {
-				showKeyboard()
+			}
+		}
+
+		userViewModel.signUpErrorMessage.observe(viewLifecycleOwner) { signUpErrorMessage ->
+			if (signUpErrorMessage == "{\"code\":\"23505\",\"message\":\"duplicate key value violates unique constraint \\\"profiles_name_key\\\"\",\"detail\":\"Key (name)=(asd) already exists.\"}") {
+				binding.tvNicknameWarning.visibility = View.VISIBLE
+				binding.tvNicknameWarning.text = getText(R.string.nickname_duplicate)
+				showKeyboard(binding.etNickname)
+			} else if (signUpErrorMessage == "User already registered") {
+				binding.tvEmailWarning.visibility = View.VISIBLE
+				binding.tvEmailWarning.text = getText(R.string.email_duplicate)
+				showKeyboard(binding.etEmail)
 			}
 		}
 	}
@@ -203,9 +211,9 @@ class RegisterFragment : Fragment() {
 						!input.age.isNullOrEmpty()
 	}
 
-	private fun showKeyboard() {
-		binding.etEmail.requestFocus()
+	private fun showKeyboard(editText: EditText) {
+		editText.requestFocus()
 		val imm = requireActivity().getSystemService(InputMethodManager::class.java)
-		imm.showSoftInput(binding.etEmail, InputMethodManager.SHOW_IMPLICIT)
+		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
 	}
 }
