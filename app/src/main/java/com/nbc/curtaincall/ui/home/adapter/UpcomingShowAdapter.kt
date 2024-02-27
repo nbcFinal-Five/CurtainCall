@@ -5,34 +5,34 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.nbc.curtaincall.data.model.ShowItem
-import com.nbc.curtaincall.databinding.ItemBeforeShowBinding
+import com.nbc.curtaincall.data.model.Db
+import com.nbc.curtaincall.databinding.ItemUpcomingShowBinding
 
-class UpcomingShowAdapter(private val showList: List<ShowItem>) :
-    RecyclerView.Adapter<UpcomingShowAdapter.BeforeShowViewHolder>() {
-    inner class BeforeShowViewHolder(private val binding: ItemBeforeShowBinding) :
+class UpcomingShowAdapter(private val items: List<Db>) :
+    RecyclerView.Adapter<UpcomingShowAdapter.UpcomingShowViewHolder>() {
+    inner class UpcomingShowViewHolder(private val binding: ItemUpcomingShowBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(showItem: ShowItem) {
+        fun bind(item: Db) {
             with(binding) {
-                ivHomeBeforeShowPoster.load(showItem.poster)
-                tvPerformanceName.text = showItem.prfnm
-                tvPeriod.text = "${showItem.prfpdfrom} ~ ${showItem.prfpdto}"
-                tvFacilityName.text = showItem.fcltynm
+                ivHomeUpcomingShowPoster.load(item.poster)
+                tvPerformanceName.text = item.prfnm
+                tvPeriod.text = "${item.prfpdfrom} ~ ${item.prfpdto}"
+                tvFacilityName.text = item.fcltynm
                 tvPageIndicator.text = "${adapterPosition + 1} / 10"
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeforeShowViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingShowViewHolder {
         val inflater =
             parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val binding = ItemBeforeShowBinding.inflate(inflater, parent, false)
-        return BeforeShowViewHolder(binding)
+        val binding = ItemUpcomingShowBinding.inflate(inflater, parent, false)
+        return UpcomingShowViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = showList.size
+    override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: BeforeShowViewHolder, position: Int) {
-        holder.bind(showList[position])
+    override fun onBindViewHolder(holder: UpcomingShowViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 }
