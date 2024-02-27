@@ -376,6 +376,19 @@
           </androidx.cardview.widget.CardView>
         </LinearLayout>
 
+        <TextView
+                android:id="@+id/tv_gender_age_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@id/ll_ages"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="성별과 연령대를 선택해주세요"
+                android:textColor="@color/primary_color"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible"
+        />
+
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

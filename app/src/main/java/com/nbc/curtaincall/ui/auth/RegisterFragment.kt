@@ -118,6 +118,9 @@ class RegisterFragment : Fragment() {
 				if (isValidPasswordConfirm(input.password, input.passwordConfirm)) View.INVISIBLE else View.VISIBLE
 			binding.tvNicknameWarning.visibility = if (isValidName(input.name)) View.INVISIBLE else View.VISIBLE
 
+			val isWarningGenderAge = input.gender == null || input.age == null
+			binding.tvGenderAgeWarning.visibility = if (!isWarningGenderAge) View.INVISIBLE else View.VISIBLE
+
 			// check total validation
 			if (isValidInput(input)) {
 				with(binding.btnRegister) {
