@@ -1,60 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">쇼넥트</string>
-    <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
-    <string name="title_my_page">MyPage</string>
+  <string name="app_name">커튼콜</string>
+  <string name="title_home">Home</string>
+  <string name="title_search">Search</string>
+  <string name="title_my_page">MyPage</string>
+  <string name="sign_in">로그인</string>
+  <string name="my_page_title">내 정보</string>
+  <string name="my_page_showcase">ShowCase</string>
+  <string name="login">로그인</string>
+  <string name="email">이메일</string>
+  <string name="password">비밀번호</string>
+  <string name="register">회원가입</string>
+  <string name="password_confirm">비밀번호 확인</string>
+  <string name="account_info">계정 정보</string>
+  <string name="account_user">유저 정보</string>
+  <string name="account_nickname">닉네임</string>
 
-    <string-array name="genre">
-        <item>연극</item>
-        <item>무용(서양/한국무용)</item>
-        <item>대중무용</item>
-        <item>클래식(서양음악)</item>
-        <item>국악(한국음악)</item>
-        <item>대중음악</item>
-        <item>복합</item>
-        <item>서커스/마술</item>
-        <item>뮤지컬</item>
-    </string-array>
+  <string name="age_10">10대</string>
+  <string name="age_20">20대</string>
+  <string name="age_30">30대</string>
+  <string name="age_40">40대</string>
+  <string name="age_50">50대</string>
+  <string name="age_60">60대</string>
 
-    <!-- SearchFragment -->
-    <string name="search_result_not">검색 결과가 없습니다</string>
-    <string name="input_search">검색어를 입력해주세요</string>
+  <string-array name="genre">
+    <item>연극</item>
+    <item>무용(서양/한국무용)</item>
+    <item>대중무용</item>
+    <item>클래식(서양음악)</item>
+    <item>국악(한국음악)</item>
+    <item>대중음악</item>
+    <item>복합</item>
+    <item>서커스/마술</item>
+    <item>뮤지컬</item>
+  </string-array>
 
-    <string name="filter_genre">장르</string>
-    <string name="filter_genre_theater">연극</string>
-    <string name="filter_genre_futility">무용</string>
-    <string name="filter_genre_publicfutility">대중무용</string>
-    <string name="filter_genre_classic">클래식</string>
-    <string name="filter_genre_korean_classic">국악</string>
-    <string name="filter_genre_popular_music">대중음악</string>
-    <string name="filter_genre_musical">뮤지컬</string>
-    <string name="filter_genre_circus">서커스/마술</string>
-    <string name="filter_genre_mix">복합</string>
+  <!-- SearchFragment -->
+  <string name="search_result_not">검색 결과가 없습니다</string>
+  <string name="input_search">검색어를 입력해주세요</string>
 
-    <string name="filter_children">아동</string>
-    <string name="filter_children_title">어린이시청</string>
-    <string name="filter_children_possible">가능</string>
-    <string name="filter_children_impossible">불가능</string>
+  <string name="filter_genre">장르</string>
+  <string name="filter_genre_theater">연극</string>
+  <string name="filter_genre_futility">무용</string>
+  <string name="filter_genre_publicfutility">대중무용</string>
+  <string name="filter_genre_classic">클래식</string>
+  <string name="filter_genre_korean_classic">국악</string>
+  <string name="filter_genre_popular_music">대중음악</string>
+  <string name="filter_genre_musical">뮤지컬</string>
+  <string name="filter_genre_circus">서커스/마술</string>
+  <string name="filter_genre_mix">복합</string>
 
-    <string name="filter_addr">지역</string>
-    <string name="filter_addr_nationwide">전국</string>
-    <string name="filter_addr_seoul">서울</string>
-    <string name="filter_addr_incheon">인천</string>
-    <string name="filter_addr_daejeon">대전</string>
-    <string name="filter_addr_daegu">대구</string>
-    <string name="filter_addr_gwangju">광주</string>
-    <string name="filter_addr_pusan">부산</string>
-    <string name="filter_addr_ulsan">울산</string>
-    <string name="filter_addr_sejong">세종</string>
-    <string name="filter_addr_gyeonggi">경기</string>
-    <string name="filter_addr_chungcheong">충북/충남</string>
-    <string name="filter_addr_jeolla">전북/전남</string>
-    <string name="filter_addr_gyeongsang">경북/경남</string>
-    <string name="filter_addr_gangwon">강원</string>
-    <string name="filter_addr_jeju">제주</string>
-    <string name="filter_addr_daehakro">대학로</string>
+  <string name="filter_children">아동</string>
+  <string name="filter_children_title">어린이시청</string>
+  <string name="filter_children_possible">가능</string>
+  <string name="filter_children_impossible">불가능</string>
 
-    <string name="filter_date">날짜</string>
-    <string name="filter_choose">선택완료</string>
-    <string name="home_top_upcoming_text">공연예정</string>
+  <string name="filter_addr">지역</string>
+  <string name="filter_addr_nationwide">전국</string>
+  <string name="filter_addr_seoul">서울</string>
+  <string name="filter_addr_incheon">인천</string>
+  <string name="filter_addr_daejeon">대전</string>
+  <string name="filter_addr_daegu">대구</string>
+  <string name="filter_addr_gwangju">광주</string>
+  <string name="filter_addr_pusan">부산</string>
+  <string name="filter_addr_ulsan">울산</string>
+  <string name="filter_addr_sejong">세종</string>
+  <string name="filter_addr_gyeonggi">경기</string>
+  <string name="filter_addr_chungcheong">충북/충남</string>
+  <string name="filter_addr_jeolla">전북/전남</string>
+  <string name="filter_addr_gyeongsang">경북/경남</string>
+  <string name="filter_addr_gangwon">강원</string>
+  <string name="filter_addr_jeju">제주</string>
+  <string name="filter_addr_daehakro">대학로</string>
+
+  <string name="filter_date">날짜</string>
+  <string name="filter_choose">선택완료</string>
+  <string name="nickname">닉네임</string>
+  <string name="gender_male">남성</string>
+  <string name="gender_female">여성</string>
+  <string name="email_warning">이메일 형식으로 입력해주세요</string>
+  <string name="email_duplicate">중복된 이메일이 존재합니다</string>
+  <string name="password_warning">6자 이상 입력해주세요</string>
+  <string name="password_confirm_warning">비밀번호가 다릅니다</string>
+  <string name="name_warning">2글자 이상 입력해주세요</string>
+  <string name="sign_in_fail">계정 정보가 틀렸습니다</string>
+  <string name="logout">로그아웃</string>
+  <string name="home_top_upcoming_text">공연예정</string>
 </resources>
