@@ -2,7 +2,6 @@ package com.nbc.curtaincall.data.api
 
 import com.nbc.curtaincall.BuildConfig
 import com.nbc.curtaincall.data.model.KopisApiInterface
-import com.nbc.curtaincall.BuildConfig.KOPIS_API_KEY
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.Interceptor
@@ -24,7 +23,7 @@ object RetrofitClient {
         val original = chain.request()
         val originalHttpUrl = original.url
         val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("service", KOPIS_API_KEY)  // Kopis api key 기본 추가
+            .addQueryParameter("service", "28a70c927fe642e094d514fe977df63e")  // Kopis api key 기본 추가
             .build()
         val requestBuilder = original.newBuilder().url(url)
         val request = requestBuilder.build()

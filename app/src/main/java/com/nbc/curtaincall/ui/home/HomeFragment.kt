@@ -10,8 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
-import com.nbc.curtaincall.data.api.RetrofitClient
+import com.nbc.curtaincall.data.api.RetrofitClient.kopisApi
+import com.nbc.curtaincall.data.repository.impl.BoxOfficeRepositoryImpl
+import com.nbc.curtaincall.data.repository.impl.ShowListRepositoryImpl
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
+import com.nbc.curtaincall.ui.home.adapter.GenreAdapter
 import com.nbc.curtaincall.ui.home.adapter.TopRankAdapter
 import com.nbc.curtaincall.ui.home.adapter.UpcomingShowAdapter
 import kotlinx.coroutines.Job
@@ -23,12 +26,18 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    val kopisApiInstance = RetrofitClient.kopisApi
-    private val viewModel: HomeViewModel by viewModels { HomeViewModelFactory(kopisApiInstance) }
+    private val viewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory(
+            showListRepository = ShowListRepositoryImpl(kopisApi),
+            boxOfficeRepository = BoxOfficeRepositoryImpl(kopisApi)
+        )
+    }
     private lateinit var beforeShowAdapter: UpcomingShowAdapter
     private lateinit var topRankAdapter: TopRankAdapter
+    private val genreAdapter: GenreAdapter by lazy { GenreAdapter() }
     private var isPaging = false
     private var pagingJob: Job? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,17 +45,21 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         initViews()
-
+        setUpObserve()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchUpcomingList()
-        viewModel.fetchTopRank()
-        viewModel.topRank.observe(viewLifecycleOwner) {
-            topRankAdapter.items = it.take(10)
-            topRankAdapter.notifyDataSetChanged()
+        with(viewModel) {
+            //공연 예정작
+            fetchUpcomingList()
+            //TOP 10 공연
+            fetchTopRank()
+            //장르 스피너 선택
+            binding.spinnerGenre.setOnSpinnerItemSelectedListener<String> { _, _, newIndex, _ ->
+                fetchGenre(newIndex)
+            }
         }
     }
 
@@ -56,24 +69,47 @@ class HomeFragment : Fragment() {
         beforeShowAdapter = UpcomingShowAdapter(listOf())
         topRankAdapter = TopRankAdapter()
         initRecyclerView()
-        viewModel.showList.observe(viewLifecycleOwner) {
-            beforeShowAdapter = UpcomingShowAdapter(it)
-            with(binding) {
-                viewPager.adapter = beforeShowAdapter
-                TabLayoutMediator(tabPosterIndicator, viewPager) { tab, position ->
-                    viewPager.currentItem = tab.position
-                }.attach()
+        with(viewModel) {
+            showList.observe(viewLifecycleOwner) {
+                beforeShowAdapter = UpcomingShowAdapter(it)
+                with(binding) {
+                    viewPager.adapter = beforeShowAdapter
+                    TabLayoutMediator(tabPosterIndicator, viewPager) { tab, position ->
+                        viewPager.currentItem = tab.position
+                    }.attach()
+                }
+                if (!isPaging) startPaging()
             }
-            if (!isPaging) startPaging()
+            //장르 연극 초기화
+            fetchGenre(0)
         }
-
     }
+    //옵저브 세팅
+    private fun setUpObserve() {
+        with(viewModel) {
+            topRank.observe(viewLifecycleOwner) {
+                topRankAdapter.items = it.take(10)
+                topRankAdapter.notifyDataSetChanged()
+            }
+            genre.observe(viewLifecycleOwner) {
+                genreAdapter.submitList(it)
+            }
+        }
+    }
+
     //리사이클러뷰 초기화
     private fun initRecyclerView() {
         with(binding) {
+            //HOT 추천 리사이클러뷰
             rvHomeTopRank.apply {
                 adapter = topRankAdapter
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            }
+            //장르별 리사이클러뷰
+            rvHomeGenre.apply {
+                adapter = genreAdapter
+                layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             }
         }
     }
@@ -96,6 +132,7 @@ class HomeFragment : Fragment() {
             Toast.makeText(context, "앱 크래시", Toast.LENGTH_SHORT).show()
         }
     }
+
     //페이징 스타트 함수
     private fun startPaging() {
         isPaging = true

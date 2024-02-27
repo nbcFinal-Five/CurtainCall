@@ -3,8 +3,8 @@ package com.nbc.curtaincall.data.model
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val START_DATE = "20240101"
-private const val END_DATE = "20240630"
+private const val START_DATE = "20240327"
+private const val END_DATE = "20240427"
 private const val CURRENT_PAGE = "1"
 private const val PAGE_INDEX = "10"
 private const val KID_STATE = "N"
@@ -23,7 +23,7 @@ private const val KID_STATE = "N"
  * @param prfstate             공연상태코드 01 공연예정 02 공연중 03 공연완료
  * @param openrun              오픈런여부
  * @param newsql               신규 API 여부
- * @return 공연목록 ShowListModel<ShowList>
+ * @return 공연목록 ShowListModel<Db>
  */
 
 
@@ -50,10 +50,11 @@ interface KopisApiInterface {
      * @param date      날짜    필수 20240201
      * @param catecode  장르구분코드
      * @param area      지역코드
+     * @return 공연 목록 BoxOfficeModel<Boxof>
      */
     @GET("boxoffice")
     suspend fun fetchTopRank(
-        @Query("ststype") ststype: String = "week",
+        @Query("ststype") ststype: String = "month",
         @Query("date") data: String = "20240227",
         @Query("catecode") catecode: String? = null,
         @Query("area") area: String? = null,
