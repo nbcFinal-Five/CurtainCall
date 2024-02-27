@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/search_bottom_sheet_background"
-    android:clipToOutline="true">
+    android:clipToOutline="true"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <TextView
         android:id="@+id/tv_bottomdialog_genre_title"
@@ -19,148 +20,97 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_bottom_genre_theater"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cp_group_genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_theater"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_bottom_futility"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bottomdialog_genre_title" />
-
-    <TextView
-        android:id="@+id/tv_bottom_futility"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_futility"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_genre_theater"
-        app:layout_constraintEnd_toStartOf="@+id/tv_bottom_publicfutility"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_bottom_genre_theater"
-        app:layout_constraintTop_toTopOf="@+id/tv_bottom_genre_theater" />
-
-    <TextView
-        android:id="@+id/tv_bottom_publicfutility"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_publicfutility"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_futility"
+        app:chipSpacingHorizontal="5dp"
+        app:chipSpacingVertical="3dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_bottom_futility"
-        app:layout_constraintTop_toTopOf="@+id/tv_bottom_futility" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottomdialog_genre_title">
 
-    <TextView
-        android:id="@+id/tv_bottom_classic"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_classic"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/tv_bottom_genre_theater"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_genre_theater" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_theater"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_theater" />
 
-    <TextView
-        android:id="@+id/tv_bottom_korean_classic"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_korean_classic"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_classic"
-        app:layout_constraintStart_toEndOf="@+id/tv_bottom_classic"
-        app:layout_constraintTop_toTopOf="@+id/tv_bottom_classic" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_futility"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_futility" />
 
-    <TextView
-        android:id="@+id/tv_bottom_popular_music"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_popular_music"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_korean_classic"
-        app:layout_constraintStart_toEndOf="@+id/tv_bottom_korean_classic"
-        app:layout_constraintTop_toTopOf="@+id/tv_bottom_korean_classic" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_publicfutility"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_publicfutility" />
 
-    <TextView
-        android:id="@+id/tv_bottom_musical"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_musical"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/tv_bottom_classic"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_classic" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_classic"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_classic" />
 
-    <TextView
-        android:id="@+id/tv_bottom_circus"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_circus"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_musical"
-        app:layout_constraintStart_toEndOf="@+id/tv_bottom_musical"
-        app:layout_constraintTop_toTopOf="@+id/tv_bottom_musical" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_korean_classic"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_korean_classic" />
 
-    <TextView
-        android:id="@+id/tv_bottom_mix"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/shape_search_component_background"
-        android:gravity="center"
-        android:text="@string/filter_genre_mix"
-        android:textColor="@color/component_color"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_circus"
-        app:layout_constraintStart_toEndOf="@+id/tv_bottom_circus"
-        app:layout_constraintTop_toTopOf="@+id/tv_bottom_circus" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_popular_music"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_popular_music" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_musical"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_musical" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_circus"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_circus" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_mix"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_genre_mix" />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <Button
         android:id="@+id/btn_genre_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/component_color"
         android:text="@string/filter_choose"
         android:textColor="@color/text_color"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_mix" />
+        app:layout_constraintTop_toBottomOf="@+id/cp_group_genre" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
