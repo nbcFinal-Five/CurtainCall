@@ -1,15 +1,14 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
-	id("com.android.application")
-	id("org.jetbrains.kotlin.android")
-	id("kotlin-kapt")
-	kotlin("plugin.serialization") version "1.9.22"
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
-	namespace = "com.nbc.curtaincall"
-	compileSdk = 34
+    namespace = "com.nbc.curtaincall"
+    compileSdk = 34
 
 	defaultConfig {
 		applicationId = "com.nbc.curtaincall"
@@ -82,6 +81,12 @@ dependencies {
 	implementation("androidx.lifecycle:lifecycle-common-java8:2.7.0")
 	implementation("androidx.lifecycle:lifecycle-runtime-ktx:r2.6.0")
 
+    //powerspinner
+    implementation ("com.github.skydoves:powerspinner:1.2.6")
+
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+
 	implementation("androidx.core:core-ktx:1.12.0")
 	implementation("androidx.appcompat:appcompat:1.6.1")
 	implementation("com.google.android.material:material:1.11.0")
@@ -99,7 +104,14 @@ dependencies {
 	implementation("io.github.jan-tennert.supabase:postgrest-kt")
 	implementation("io.ktor:ktor-client-android:2.3.8")
 
-	
 	// Kakao map
 	implementation("com.kakao.maps.open:android:2.6.0")
+
+    //BottomSheet, Chip
+
+    implementation("com.google.android.material:material:1.11.0")
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 }
