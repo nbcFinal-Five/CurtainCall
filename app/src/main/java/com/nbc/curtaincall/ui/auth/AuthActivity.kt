@@ -15,6 +15,10 @@ class AuthActivity : AppCompatActivity() {
 		binding = ActivityAuthBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
+		binding.btnAuthBack.setOnClickListener {
+			finish()
+		}
+
 		setFragment(LoginFragment(supportFragmentManager))
 	}
 
