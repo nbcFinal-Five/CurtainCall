@@ -93,7 +93,7 @@ class RegisterFragment : Fragment() {
 					button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
 				} else {
 					button.setBackgroundResource(R.color.component_color)
-					button.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+					button.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
 				}
 			}
 
@@ -103,7 +103,7 @@ class RegisterFragment : Fragment() {
 					button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
 				} else {
 					button.setBackgroundResource(R.color.component_color)
-					button.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+					button.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
 				}
 			}
 
@@ -117,14 +117,7 @@ class RegisterFragment : Fragment() {
 			binding.tvNicknameWarning.visibility = if (isValidName(inputs.name)) View.INVISIBLE else View.VISIBLE
 
 			// check total validation
-			if (
-				isValidEmail(inputs.email) &&
-				isValidPassword(inputs.password) &&
-				isValidPasswordConfirm(inputs.password, inputs.passwordConfirm) &&
-				isValidName(inputs.name) &&
-				!inputs.gender.isNullOrEmpty() &&
-				!inputs.age.isNullOrEmpty()
-			) {
+			if (isValidInputs(inputs)) {
 				with(binding.btnRegister) {
 					setBackgroundResource(R.drawable.button_gradient)
 					setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
@@ -133,7 +126,7 @@ class RegisterFragment : Fragment() {
 			} else {
 				with(binding.btnRegister) {
 					setBackgroundResource(R.color.component_color)
-					setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+					setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
 					isClickable = false
 				}
 			}
@@ -141,7 +134,21 @@ class RegisterFragment : Fragment() {
 
 		userViewModel.isSignUpLoading.observe(viewLifecycleOwner) { isSignupLoading ->
 			binding.btnRegister.isClickable = !isSignupLoading
-			binding.btnRegister.setBackgroundResource(if (isSignupLoading) R.color.component_color else R.drawable.button_gradient)
+
+			if (isValidInputs(registerViewModel.input.value!!)) {
+				binding.btnRegister.setBackgroundResource(
+					if (isSignupLoading) R.color.component_color else R.drawable.button_gradient
+				)
+				binding.btnRegister.setTextColor(
+					ContextCompat.getColor(
+						requireContext(),
+						if (isSignupLoading) R.color.component_background_color else R.color.white
+					)
+				)
+			} else {
+				binding.btnRegister.setBackgroundResource(R.color.component_color)
+				binding.btnRegister.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+			}
 		}
 
 		userViewModel.signUpResult.observe(viewLifecycleOwner) { signupResult ->
@@ -179,5 +186,14 @@ class RegisterFragment : Fragment() {
 
 	private fun isValidName(name: String?): Boolean {
 		return if (name == null) false else name.length >= 2
+	}
+
+	private fun isValidInputs(inputs: RegisterInput): Boolean {
+		return isValidEmail(inputs.email) &&
+						isValidPassword(inputs.password) &&
+						isValidPasswordConfirm(inputs.password, inputs.passwordConfirm) &&
+						isValidName(inputs.name) &&
+						!inputs.gender.isNullOrEmpty() &&
+						!inputs.age.isNullOrEmpty()
 	}
 }
