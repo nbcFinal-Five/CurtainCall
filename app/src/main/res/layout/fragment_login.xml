@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_email"
-            android:text="error"
+            android:text="@string/email_warning"
             android:layout_marginTop="4dp"
             android:layout_marginStart="12dp"
             android:textColor="@color/primary_color"
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_password"
-            android:text="error"
+            android:text="@string/password_warning"
             android:layout_marginTop="4dp"
             android:layout_marginStart="12dp"
             android:textColor="@color/primary_color"
@@ -121,19 +121,39 @@
             android:textColor="@color/white"
     />
 
-    <android.widget.Button
-            android:id="@+id/btn_sign_in"
+    <TextView
+            android:id="@+id/tv_fail_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/cv_sign_in"
+            android:layout_marginBottom="30dp"
+            android:text="@string/sign_in_fail"
+            android:textSize="12sp"
+            android:textColor="@color/primary_color"
+            android:visibility="invisible"
+    />
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/cv_sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:background="@drawable/button_gradient"
             app:layout_constraintTop_toBottomOf="@id/tv_register"
             android:layout_marginTop="120dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="0dp"
-    />
+            app:cardCornerRadius="10dp"
+    >
+      <android.widget.Button
+              android:id="@+id/btn_sign_in"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/login"
+              android:background="@color/component_color"
+              android:textColor="@color/component_background_color"
+              android:textStyle="bold"
+              android:textSize="20sp"
+      />
+    </androidx.cardview.widget.CardView>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

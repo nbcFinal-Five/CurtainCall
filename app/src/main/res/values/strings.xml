@@ -83,5 +83,6 @@
   <string name="password_warning">6자 이상 입력해주세요</string>
   <string name="password_confirm_warning">비밀번호가 다릅니다</string>
   <string name="name_warning">2글자 이상 입력해주세요</string>
+  <string name="sign_in_fail">계정 정보가 틀렸습니다</string>
   <string name="logout">로그아웃</string>
 </resources>

@@ -72,23 +72,25 @@ class RegisterFragment : Fragment() {
 		}
 
 		btnRegister.setOnClickListener {
-			val inputs = registerViewModel.input.value
+			val input = registerViewModel.input.value
 
-			userViewModel.signUp(
-				inputEmail = inputs?.email!!,
-				inputPassword = inputs.password!!,
-				name = inputs.name!!,
-				gender = inputs.gender!!,
-				age = inputs.age!!
-			)
+			if (isValidInput(input!!)) {
+				userViewModel.signUp(
+					inputEmail = input?.email!!,
+					inputPassword = input.password!!,
+					name = input.name!!,
+					gender = input.gender!!,
+					age = input.age!!
+				)
+			}
 		}
 	}
 
 	private fun initViewModel() {
-		registerViewModel.input.observe(viewLifecycleOwner) { inputs ->
+		registerViewModel.input.observe(viewLifecycleOwner) { input ->
 			// change ui when button clicked
 			btnGenders.forEach { button ->
-				if (button.text == inputs.gender) {
+				if (button.text == input.gender) {
 					button.setBackgroundResource(R.drawable.button_gradient)
 					button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
 				} else {
@@ -98,7 +100,7 @@ class RegisterFragment : Fragment() {
 			}
 
 			btnAges.forEach { button ->
-				if (button.text == inputs.age) {
+				if (button.text == input.age) {
 					button.setBackgroundResource(R.drawable.button_gradient)
 					button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
 				} else {
@@ -108,16 +110,16 @@ class RegisterFragment : Fragment() {
 			}
 
 			// check validation
-			binding.tvEmailWarning.visibility = if (isValidEmail(inputs.email)) View.INVISIBLE else View.VISIBLE
-			binding.tvEmailWarning.text = if (isValidEmail(inputs.email)) "" else getText(R.string.email_warning)
+			binding.tvEmailWarning.visibility = if (isValidEmail(input.email)) View.INVISIBLE else View.VISIBLE
+			binding.tvEmailWarning.text = if (isValidEmail(input.email)) "" else getText(R.string.email_warning)
 
-			binding.tvPasswordWarning.visibility = if (isValidPassword(inputs.password)) View.INVISIBLE else View.VISIBLE
+			binding.tvPasswordWarning.visibility = if (isValidPassword(input.password)) View.INVISIBLE else View.VISIBLE
 			binding.tvPasswordConfirmWarning.visibility =
-				if (isValidPasswordConfirm(inputs.password, inputs.passwordConfirm)) View.INVISIBLE else View.VISIBLE
-			binding.tvNicknameWarning.visibility = if (isValidName(inputs.name)) View.INVISIBLE else View.VISIBLE
+				if (isValidPasswordConfirm(input.password, input.passwordConfirm)) View.INVISIBLE else View.VISIBLE
+			binding.tvNicknameWarning.visibility = if (isValidName(input.name)) View.INVISIBLE else View.VISIBLE
 
 			// check total validation
-			if (isValidInputs(inputs)) {
+			if (isValidInput(input)) {
 				with(binding.btnRegister) {
 					setBackgroundResource(R.drawable.button_gradient)
 					setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
@@ -135,7 +137,7 @@ class RegisterFragment : Fragment() {
 		userViewModel.isSignUpLoading.observe(viewLifecycleOwner) { isSignupLoading ->
 			binding.btnRegister.isClickable = !isSignupLoading
 
-			if (isValidInputs(registerViewModel.input.value!!)) {
+			if (isValidInput(registerViewModel.input.value!!)) {
 				binding.btnRegister.setBackgroundResource(
 					if (isSignupLoading) R.color.component_color else R.drawable.button_gradient
 				)
@@ -188,12 +190,12 @@ class RegisterFragment : Fragment() {
 		return if (name == null) false else name.length >= 2
 	}
 
-	private fun isValidInputs(inputs: RegisterInput): Boolean {
-		return isValidEmail(inputs.email) &&
-						isValidPassword(inputs.password) &&
-						isValidPasswordConfirm(inputs.password, inputs.passwordConfirm) &&
-						isValidName(inputs.name) &&
-						!inputs.gender.isNullOrEmpty() &&
-						!inputs.age.isNullOrEmpty()
+	private fun isValidInput(input: RegisterInput): Boolean {
+		return isValidEmail(input.email) &&
+						isValidPassword(input.password) &&
+						isValidPasswordConfirm(input.password, input.passwordConfirm) &&
+						isValidName(input.name) &&
+						!input.gender.isNullOrEmpty() &&
+						!input.age.isNullOrEmpty()
 	}
 }
