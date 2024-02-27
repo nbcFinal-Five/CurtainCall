@@ -7,11 +7,11 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml(name = "dbs")
 data class ShowListModel(
     @Element(name = "db")
-    val showList: List<ShowItem>
+    val showList: List<Db>
 )
 
 @Xml(name = "db")
-data class ShowItem(
+data class Db(
     @PropertyElement(name = "area") val area: String?,
     @PropertyElement(name = "fcltynm") val fcltynm: String?,
     @PropertyElement(name = "genrenm") val genrenm: String?,
