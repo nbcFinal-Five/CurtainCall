@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
             //TOP 10 공연
             fetchTopRank()
             //장르 스피너 선택
-            binding.spinnerGenre.setOnSpinnerItemSelectedListener<String> { _, _, newIndex, _ ->
+            binding.spinnerHomeGenre.setOnSpinnerItemSelectedListener<String> { _, _, newIndex, _ ->
                 fetchGenre(newIndex)
             }
         }
