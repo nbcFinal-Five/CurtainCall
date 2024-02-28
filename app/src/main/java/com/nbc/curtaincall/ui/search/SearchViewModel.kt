@@ -1,6 +1,7 @@
 package com.nbc.curtaincall.ui.search
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +13,7 @@ import kotlinx.coroutines.withContext
 
 class SearchViewModel : ViewModel() {
     private val _searchResultList = MutableLiveData<List<SearchItem>>()
-    val searchResultList get() = _searchResultList
+    val searchResultList :LiveData<List<SearchItem>> get() = _searchResultList
 
     fun fetchSearchResult(search: String) {
         viewModelScope.launch {

@@ -43,14 +43,14 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_children_possible"
+            android:id="@+id/cp_children_possible"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="@string/filter_children_possible" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_children_impossible"
+            android:id="@+id/cp_children_impossible"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="wrap_content"
