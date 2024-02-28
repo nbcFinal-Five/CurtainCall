@@ -5,13 +5,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color">
+        android:background="@color/black">
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/store_fragment_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/primary_color"
+            app:tabIndicatorHeight="2dp"
+            app:tabTextColor="@color/white">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상세 정보"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="위치 정보" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기대평/리뷰" />
+
+        </com.google.android.material.tabs.TabLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_detail_posterImage"
@@ -28,7 +57,7 @@
                 android:layout_height="420dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/poster"
+                android:background="@drawable/ic_posterimage"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,28 +78,24 @@
                 android:id="@+id/tv_detail_genre"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
                 android:background="@drawable/genre_rounded_background"
                 android:gravity="center"
                 android:text="장르"
                 android:textColor="@color/white"
-                android:fontFamily="@font/font_extrabold"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="60dp"
+                android:layout_width="56dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/limitedrun_rounded_background"
                 android:gravity="center"
                 android:text="리미티드런"
                 android:textColor="@color/white"
-                android:fontFamily="@font/font_extrabold"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/tv_detail_genre"
@@ -84,7 +109,6 @@
                 android:layout_marginBottom="12dp"
                 android:gravity="center"
                 android:text="전체연령"
-                android:fontFamily="@font/font_regular"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -116,7 +140,6 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/underline"
             android:text="기대평 1개"
-            android:fontFamily="@font/font_regular"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +163,7 @@
             android:layout_marginTop="36dp"
             android:text="제목"
             android:textColor="@color/white"
-            android:fontFamily="@font/font_extrabold"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_expectationsNum" />
 
@@ -151,7 +174,6 @@
             android:layout_marginStart="43dp"
             android:text="제목"
             android:textColor="@color/white"
-            android:fontFamily="@font/font_regular"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="@+id/textView4" />
@@ -164,7 +186,7 @@
             android:layout_marginTop="8dp"
             android:text="런타임"
             android:textColor="@color/white"
-            android:fontFamily="@font/font_extrabold"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -175,7 +197,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/font_regular"
             android:text="시간"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -189,7 +210,7 @@
             android:layout_marginTop="8dp"
             android:text="위치"
             android:textColor="@color/white"
-            android:fontFamily="@font/font_extrabold"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -199,7 +220,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/font_regular"
             android:text="위치"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/textView8"
@@ -213,7 +233,7 @@
             android:layout_marginTop="8dp"
             android:text="가격"
             android:textColor="@color/white"
-            android:fontFamily="@font/font_extrabold"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -223,7 +243,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/font_regular"
             android:text="가격"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -237,7 +256,7 @@
             android:layout_marginTop="8dp"
             android:text="출연진"
             android:textColor="@color/white"
-            android:fontFamily="@font/font_extrabold"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -247,7 +266,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/font_regular"
             android:text="출연진"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/textView11"
@@ -259,7 +277,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/font_extrabold"
             android:text="제작진"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -272,13 +289,194 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/font_regular"
             android:text="제작진"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/textView13"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_cast" />
 
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="공연 기간"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
+        <TextView
+            android:id="@+id/tv_detail_showPeriod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:text="공연 기간"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_crew" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="공연 시간"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <TextView
+            android:id="@+id/tv_detail_showTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:text="공연 시간"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_showPeriod" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="공연 상태"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <TextView
+            android:id="@+id/tv_detail_showStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:text="공연 상태"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_showTime" />
+
+        <View
+            android:id="@+id/view_intro"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_ticket_dash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <ImageView
+            android:id="@+id/iv_detail_introImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_intro" />
+
+        <View
+            android:id="@+id/view_mapView"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_ticket_dash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_detail_introImage" />
+
+        <com.kakao.vectormap.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_mapView" />
+
+        <TextView
+            android:id="@+id/tv_detail_venueName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="공연장이름"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/map_view" />
+
+        <TextView
+            android:id="@+id/tv_detail_showArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="공연지역"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_venueName" />
+
+        <TextView
+            android:id="@+id/tv_detail_phoneNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="전화번호"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_showArea" />
+
+        <TextView
+            android:id="@+id/tv_detail_homePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="홈페이지"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_phoneNum" />
+
+        <TextView
+            android:id="@+id/tv_detail_parking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="주차장"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_homePage" />
+
+        <View
+            android:id="@+id/view_review"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_ticket_dash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_parking" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

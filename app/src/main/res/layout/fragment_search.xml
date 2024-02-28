@@ -4,19 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/background_color"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_search_radius"
+        android:hint="@string/input_search"
+        android:paddingStart="20dp"
+        android:textColorHint="@color/bottom_navi_item_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_search"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_search_inputbtn"
+        app:layout_constraintBottom_toBottomOf="@+id/et_search"
+        app:layout_constraintEnd_toEndOf="@+id/et_search"
+        app:layout_constraintTop_toTopOf="@+id/et_search" />
 
     <TextView
-        android:id="@+id/text_search"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_searchfilter_genre"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_searchfilter_radius"
+        android:gravity="center"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="5dp"
+        android:text="@string/filter_genre"
+        android:textColor="@color/text_color"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_searchfilter_addr"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_search" />
+
+    <TextView
+        android:id="@+id/tv_searchfilter_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_searchfilter_radius"
+        android:gravity="center"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="5dp"
+        android:text="@string/filter_addr"
+        android:textColor="@color/text_color"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_genre"
+        app:layout_constraintEnd_toStartOf="@+id/tv_searchfilter_children"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_searchfilter_genre"
+        app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_genre" />
+
+    <TextView
+        android:id="@+id/tv_searchfilter_children"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_searchfilter_radius"
+        android:gravity="center"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="5dp"
+        android:text="@string/filter_children"
+        android:textColor="@color/text_color"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_searchfilter_addr"
+        app:layout_constraintEnd_toStartOf="@+id/tv_searchfilter_date"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_searchfilter_addr"
+        app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_addr" />
+
+    <TextView
+        android:id="@+id/tv_searchfilter_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/shape_searchfilter_radius"
+        android:gravity="center"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="5dp"
+        android:text="@string/filter_date"
+        android:textColor="@color/text_color"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_children"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_searchfilter_children"
+        app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_children" />
+
+    <TextView
+        android:id="@+id/tv_search_noresult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_result_not"
+        android:textColor="@color/bottom_navi_item_color"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_searchfilter_addr"
+        tools:listitem="@layout/constraint_layout_search_rv"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
