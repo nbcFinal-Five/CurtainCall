@@ -56,10 +56,16 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnAddrCheck.setOnClickListener {
-            dismiss()
-        }
+        with(binding) {
+            ivAddrFilterClose.setOnClickListener {
+                dismiss()
+            }
 
+            btnAddrCheck.setOnClickListener {
+                dismiss()
+            }
+
+        }
 
     }
 

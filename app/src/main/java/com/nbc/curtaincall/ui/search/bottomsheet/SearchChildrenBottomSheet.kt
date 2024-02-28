@@ -42,10 +42,15 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnChildrenCheck.setOnClickListener {
-            dismiss()
-        }
+        with(binding) {
+            ivChildrenFilterClose.setOnClickListener {
+                dismiss()
+            }
 
+            btnChildrenCheck.setOnClickListener {
+                dismiss()
+            }
+        }
 
     }
 

@@ -21,6 +21,13 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <!--search filter bottom sheet close ic design-->
+    <style name="SearchFilterClose">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:tint">@color/bottom_navi_item_color</item>
+    </style>
+
     <!--bottome sheet topcorner radius-->
     <style name="RoundCornerBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/RoundCornerModalStyle</item>

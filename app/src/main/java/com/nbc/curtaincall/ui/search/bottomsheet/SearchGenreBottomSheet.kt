@@ -49,10 +49,15 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnGenreCheck.setOnClickListener {
-            dismiss()
-        }
+        with(binding) {
+            ivGenreFilterClose.setOnClickListener {
+                dismiss()
+            }
 
+            btnGenreCheck.setOnClickListener {
+                dismiss()
+            }
+        }
 
     }
 
