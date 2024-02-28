@@ -3,12 +3,15 @@ package com.nbc.curtaincall.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.nbc.curtaincall.databinding.ItemUpcomingShowBinding
+import com.nbc.curtaincall.ui.mypage.SimpleInfoBottomSheetFragment
 import com.nbc.curtaincall.fetch.model.DbResponse
+
 
 class UpcomingShowAdapter :
     ListAdapter<DbResponse, UpcomingShowAdapter.UpcomingShowViewHolder>(object :
@@ -44,4 +47,6 @@ class UpcomingShowAdapter :
     override fun onBindViewHolder(holder: UpcomingShowViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
+
+
 }
