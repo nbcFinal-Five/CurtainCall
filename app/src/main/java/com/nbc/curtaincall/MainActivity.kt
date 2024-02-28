@@ -6,10 +6,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nbc.curtaincall.databinding.ActivityMainBinding
+import com.nbc.curtaincall.supabase.Supabase
 import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.gotrue.Auth
-import io.github.jan.supabase.postgrest.Postgrest
 
 class MainActivity : AppCompatActivity() {
 
