@@ -21,6 +21,9 @@ class HomeViewModel(
     private val _genre = MutableLiveData<List<DbResponse>>()
     val genre: LiveData<List<DbResponse>> get() = _genre
 
+    private val _kidShow = MutableLiveData<List<DbResponse>>()
+    val kidShow: LiveData<List<DbResponse>> get() = _kidShow
+
     fun fetchUpcomingList() {
         viewModelScope.launch {
             runCatching {
@@ -44,8 +47,17 @@ class HomeViewModel(
     fun fetchGenre(genre: Int) {
         viewModelScope.launch {
             runCatching {
-                _genre.value = fetchRemoteRepository.fetchGenre(shcate = getGenreCode(genre)).showList
+                _genre.value =
+                    fetchRemoteRepository.fetchGenre(shcate = getGenreCode(genre)).showList
             }.onFailure {
+            }
+        }
+    }
+
+    fun fetchKidShow() {
+        viewModelScope.launch {
+            runCatching {
+                _kidShow.value = fetchRemoteRepository.fetchShowList(kidstate = "Y").showList
             }
         }
     }

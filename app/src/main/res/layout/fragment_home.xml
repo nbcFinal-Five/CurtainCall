@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/background_color"
+            android:clickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/viewPager"
@@ -32,7 +33,7 @@
             app:tabIndicator="@null" />
 
         <TextView
-            android:id="@+id/tv_hot_recommend"
+            android:id="@+id/tv_home_hot_recommend_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -50,19 +51,26 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:layout_marginTop="12dp"
-            app:layout_constraintBottom_toTopOf="@id/spinner_genre"
+            app:layout_constraintBottom_toTopOf="@id/spinner_home_genre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_hot_recommend" />
+            app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title" />
 
         <com.skydoves.powerspinner.PowerSpinnerView
-            android:id="@+id/spinner_genre"
+            android:id="@+id/spinner_home_genre"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="36dp"
             android:background="@color/component_color"
             android:gravity="center"
             android:padding="10dp"
+            android:text="연극"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_home_top_rank"
             app:spinner_arrow_gravity="end"
             app:spinner_arrow_padding="8dp"
             app:spinner_divider_color="@color/white"
@@ -72,24 +80,44 @@
             app:spinner_item_height="46dp"
             app:spinner_popup_animation="dropdown"
             app:spinner_popup_background="@color/component_background_color"
-            app:spinner_popup_elevation="14dp"
-            android:text="연극"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="36dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_home_top_rank" />
+            app:spinner_popup_elevation="14dp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="12dp"
             android:id="@+id/rv_home_genre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinner_genre" />
+            app:layout_constraintTop_toBottomOf="@id/spinner_home_genre" />
+
+        <TextView
+            android:id="@+id/tv_home_kid_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="24dp"
+            android:text="어린이 관람 가능 공연"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/rv_home_kid_show"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_home_genre" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home_kid_show"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_kid_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
