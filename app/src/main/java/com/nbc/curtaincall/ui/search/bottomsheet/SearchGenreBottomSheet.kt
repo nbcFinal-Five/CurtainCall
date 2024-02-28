@@ -1,11 +1,15 @@
 package com.nbc.curtaincall.ui.search.bottomsheet
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.chip.Chip
+import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogGenreBinding
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
@@ -55,6 +59,31 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
 
     private fun clickFilterButton() {
         with(binding) {
+            cpGroupGenre.setOnCheckedChangeListener{group, checkedId ->
+                var isAnyChipSelected = false
+
+                // 선택된 모든 칩을 확인합니다.
+                for (i in 0 until cpGroupGenre.childCount) {
+                    val chip = cpGroupGenre.getChildAt(i) as Chip
+
+                    if (chip.isChecked) {
+                        isAnyChipSelected = true
+                        break
+                    }
+                }
+
+                if (isAnyChipSelected) {
+                    btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                    btnGenreCheck.setTypeface(null, Typeface.BOLD)
+                    btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
+                } else {
+                    btnGenreCheck?.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                    btnGenreCheck?.setTypeface(null, Typeface.NORMAL)
+                    btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
+                }
+            }
+
+
             ivGenreFilterClose.setOnClickListener {
                 dismiss()
             }

@@ -73,7 +73,7 @@
   <string name="filter_addr_daehakro">대학로</string>
 
   <string name="filter_date">날짜</string>
-  <string name="filter_choose">선택완료</string>
+  <string name="filter_choose">조건 검색</string>
   <string name="nickname">닉네임</string>
   <string name="gender_male">남성</string>
   <string name="gender_female">여성</string>

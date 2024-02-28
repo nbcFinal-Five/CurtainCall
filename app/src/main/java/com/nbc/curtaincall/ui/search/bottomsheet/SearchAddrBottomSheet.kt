@@ -1,11 +1,15 @@
 package com.nbc.curtaincall.ui.search.bottomsheet
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.chip.Chip
+import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogAddrBinding
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
@@ -61,6 +65,30 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     }
     private fun clickFilterButton() {
         with(binding) {
+            cpGroupAddr.setOnCheckedChangeListener{group, checkedId ->
+                var isAnyChipSelected = false
+
+                // 선택된 모든 칩을 확인합니다.
+                for (i in 0 until cpGroupAddr.childCount) {
+                    val chip = cpGroupAddr.getChildAt(i) as Chip
+
+                    if (chip.isChecked) {
+                        isAnyChipSelected = true
+                        break
+                    }
+                }
+
+                if (isAnyChipSelected) {
+                    btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                    btnAddrCheck.setTypeface(null, Typeface.BOLD)
+                    btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
+                } else {
+                    btnAddrCheck?.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                    btnAddrCheck?.setTypeface(null, Typeface.NORMAL)
+                    btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
+                }
+            }
+
             ivAddrFilterClose.setOnClickListener {
                 dismiss()
             }
