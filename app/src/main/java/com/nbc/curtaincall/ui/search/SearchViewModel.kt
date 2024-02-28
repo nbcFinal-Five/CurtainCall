@@ -13,39 +13,41 @@ import kotlinx.coroutines.withContext
 
 class SearchViewModel : ViewModel() {
     private val _searchResultList = MutableLiveData<List<SearchItem>?>()
-    val searchResultList :LiveData<List<SearchItem>?> get() = _searchResultList
+    val searchResultList :LiveData<List<SearchItem>?>
+        get() = _searchResultList
 
    private val _filterResultList = MutableLiveData<List<SearchItem>?>()
-    val filterResultList : LiveData<List<SearchItem>?> get() = _filterResultList
+    val filterResultList : LiveData<List<SearchItem>?>
+        get() = _filterResultList
 
+    // 로딩
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
 
-    fun fetchSearchChildrenFilterResult(childChoice: String) {
-        viewModelScope.launch {
-            runCatching {
-                val result = getSearchChildrenFilterResult(childChoice)
-                _filterResultList.value = result
-            }.onFailure {
-                Log.e("SearchViewModel", "fetchSearchChildrenFilterResult: ${it.message}" )
-            }
-        }
-    }
-
-    suspend fun getSearchChildrenFilterResult(childChoice: String) = withContext(Dispatchers.IO) {
-        RetrofitClient.search.getSearchFilterShowList(kidstate = childChoice).searchShowList
-    }
+    private val _failureMessage = MutableLiveData<String>()
+    val failureMessage: LiveData<String>
+        get() = _failureMessage
 
     fun fetchSearchResult(search: String) {
         viewModelScope.launch {
+            _isLoading.value = true
             runCatching {
                 val result = getSearchResult(search)
                 _searchResultList.value = result
-            }.onFailure {
-                Log.e("SearchViewModel", "fetchSearchResult: ${it.message}" )
+            }.onFailure {exception ->
+                handleFailure(exception as Exception)
+                Log.e("SearchViewModel", "fetchSearchResult: ${exception.message}" )
             }
+            _isLoading.value = false
         }
     }
 
     suspend fun getSearchResult(search: String) = withContext(Dispatchers.IO) {
         RetrofitClient.search.getSearchFilterShowList(shprfnm = search).searchShowList
+    }
+
+    private fun handleFailure(exception: Exception) {
+        _failureMessage.value = "서버 오류가 발생하였습니다."
     }
 }

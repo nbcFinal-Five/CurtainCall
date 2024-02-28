@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -87,9 +88,31 @@ class SearchFragment : Fragment() {
                 hideKeyboard()
                 App.prefs.saveSearchWord(etSearch.text?.toString()?.trim() ?:"")
                 searchViewModel.fetchSearchResult(etSearch.text?.toString()?.trim() ?:"")
-                searchViewModel.searchResultList.observe(viewLifecycleOwner) {
-                    searchListAdapter.submitList(it)
-                    if(it == null) {
+
+                // 검색 시 로딩바 보여주기
+                searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                    if (isLoading) {
+                        pbSearchLoading.visibility = View.VISIBLE
+                        tvSearchNoresult.visibility = View.GONE
+                        rvSearch.visibility = View.GONE
+                    } else {
+                        pbSearchLoading.visibility = View.GONE
+                        rvSearch.visibility = View.VISIBLE
+                    }
+                }
+
+                // 통신 장애시 안내 문구
+                searchViewModel.failureMessage.observe(viewLifecycleOwner) {
+                    if (!it.isNullOrEmpty()) {
+                        Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+                // 검색결과 안내 text
+                searchViewModel.searchResultList.observe(viewLifecycleOwner) { result ->
+                    searchListAdapter.submitList(result)
+                    if(result == null) {
                         tvSearchNoresult.visibility = View.VISIBLE
                     } else {
                         tvSearchNoresult.visibility = View.GONE
@@ -97,16 +120,6 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun showFilterList() {
-        with(binding) {
-            searchViewModel.fetchSearchChildrenFilterResult("")
-            searchViewModel.filterResultList.observe(viewLifecycleOwner){
-//                searchListAdapter.submitList()
-            }
-        }
-
     }
 
     private fun initList() { // 검색 결과 recyclerview 만들기
