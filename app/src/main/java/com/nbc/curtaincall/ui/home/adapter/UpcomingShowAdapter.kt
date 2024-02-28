@@ -3,13 +3,24 @@ package com.nbc.curtaincall.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.nbc.curtaincall.fetch.model.DbResponse
 import com.nbc.curtaincall.databinding.ItemUpcomingShowBinding
+import com.nbc.curtaincall.fetch.model.DbResponse
 
-class UpcomingShowAdapter(private val items: List<DbResponse>) :
-    RecyclerView.Adapter<UpcomingShowAdapter.UpcomingShowViewHolder>() {
+class UpcomingShowAdapter :
+    ListAdapter<DbResponse, UpcomingShowAdapter.UpcomingShowViewHolder>(object :
+        DiffUtil.ItemCallback<DbResponse>() {
+        override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
+            return oldItem.mt20id == newItem.mt20id
+        }
+
+        override fun areContentsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
+            return oldItem == newItem
+        }
+    }) {
     inner class UpcomingShowViewHolder(private val binding: ItemUpcomingShowBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
@@ -30,9 +41,7 @@ class UpcomingShowAdapter(private val items: List<DbResponse>) :
         return UpcomingShowViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = items.size
-
     override fun onBindViewHolder(holder: UpcomingShowViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(currentList[position])
     }
 }
