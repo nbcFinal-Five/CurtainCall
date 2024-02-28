@@ -20,6 +20,6 @@
     <fragment
         android:id="@+id/navigation_my_page"
         android:name="com.nbc.curtaincall.ui.mypage.MyPageFragment"
-        android:label="@string/title_my_page"
+        android:label="내 정보"
         tools:layout="@layout/fragment_my_page" />
 </navigation>

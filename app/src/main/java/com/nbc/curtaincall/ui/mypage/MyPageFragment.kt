@@ -64,6 +64,7 @@ class MyPageFragment : Fragment() {
 				binding.btnOpenAuthActivity.visibility = View.INVISIBLE
 				binding.tvUserInfoEmail.text = it.userMetadata.toString()
 			}
+
 		}
 	}
 
