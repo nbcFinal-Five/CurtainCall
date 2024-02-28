@@ -7,22 +7,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.nbc.curtaincall.data.model.Db
+import com.nbc.curtaincall.fetch.model.DbResponse
 import com.nbc.curtaincall.databinding.ItemGenreBinding
 
 class GenreAdapter :
-    ListAdapter<Db, GenreAdapter.GenreViewHolder>(object : DiffUtil.ItemCallback<Db>() {
-        override fun areItemsTheSame(oldItem: Db, newItem: Db): Boolean {
+    ListAdapter<DbResponse, GenreAdapter.GenreViewHolder>(object : DiffUtil.ItemCallback<DbResponse>() {
+        override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
             return oldItem.mt20id == newItem.mt20id
         }
 
-        override fun areContentsTheSame(oldItem: Db, newItem: Db): Boolean {
+        override fun areContentsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
             return oldItem == newItem
         }
     }) {
     inner class GenreViewHolder(private val binding: ItemGenreBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Db) {
+        fun bind(item: DbResponse) {
             with(binding) {
                 tvGenre.text = item.genrenm
                 tvShowingState.text = item.prfstate

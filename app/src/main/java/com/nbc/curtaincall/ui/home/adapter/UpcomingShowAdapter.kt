@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.nbc.curtaincall.data.model.Db
+import com.nbc.curtaincall.fetch.model.DbResponse
 import com.nbc.curtaincall.databinding.ItemUpcomingShowBinding
 
-class UpcomingShowAdapter(private val items: List<Db>) :
+class UpcomingShowAdapter(private val items: List<DbResponse>) :
     RecyclerView.Adapter<UpcomingShowAdapter.UpcomingShowViewHolder>() {
     inner class UpcomingShowViewHolder(private val binding: ItemUpcomingShowBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Db) {
+        fun bind(item: DbResponse) {
             with(binding) {
                 ivHomeUpcomingShowPoster.load(item.poster)
                 tvPerformanceName.text = item.prfnm

@@ -2,14 +2,12 @@ package com.nbc.curtaincall.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.nbc.curtaincall.data.repository.BoxOfficeRepository
-import com.nbc.curtaincall.data.repository.ShowListRepository
+import com.nbc.curtaincall.fetch.remote.FetchRemoteDatasource
 
 class HomeViewModelFactory(
-    private val showListRepository: ShowListRepository,
-    private val boxOfficeRepository: BoxOfficeRepository
+    private val fetchRemoteRepository: FetchRemoteDatasource,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return HomeViewModel(showListRepository, boxOfficeRepository) as T
+        return HomeViewModel(fetchRemoteRepository) as T
     }
 }

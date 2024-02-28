@@ -1,4 +1,4 @@
-package com.nbc.curtaincall.data.repository.sharedpreferences
+package com.nbc.curtaincall.util.sharedpreferences
 
 import android.app.Application
 

@@ -1,7 +1,9 @@
-package com.nbc.curtaincall.data.repository
+package com.nbc.curtaincall.fetch.remote
 
-import com.nbc.curtaincall.data.model.ShowListModel
+import com.nbc.curtaincall.fetch.model.BoxOfsResponse
+import com.nbc.curtaincall.fetch.model.DbsResponse
 import com.nbc.curtaincall.util.Constants
+import com.nbc.curtaincall.util.Converter
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -23,10 +25,7 @@ import retrofit2.http.Query
  * @return 공연 목록 ShowListModel<Db>
  */
 
-
-
-
-interface ShowListRepository {
+interface FetchRemoteDatasource {
     //공연 목록 가져오기
     @GET("pblprfr")
     suspend fun fetchShowList(
@@ -34,16 +33,12 @@ interface ShowListRepository {
         @Query("eddate") eddate: String = Constants.END_DATE,
         @Query("cpage") cpage: String = Constants.CURRENT_PAGE,
         @Query("rows") rows: String = Constants.PAGE_INDEX,
-        @Query("openrun") openrun: String? = "Y",
-        @Query("newsql") newsql: String? = "Y"
-//        @Query("shcate") shcate: String? = null,
-//        @Query("kidstate") kidstate: String = KID_STATE,
-//        @Query("shprfnm") shprfnm: String? = null,
-//        @Query("shprfnmfct") shprfnmfct: String? = null,
-//        @Query("signgucode") signgucode: String? = null,
-//        @Query("signgucodesub") signgucodesub: String? = null,
-//        @Query("prfstate") prfstate: String? = null,
-    ): ShowListModel
+        @Query("openrun") openrun: String? = null,
+        @Query("newsql") newsql: String? = "Y",
+        @Query("shcate") shcate: String? = null,
+        @Query("kidstate") kidstate: String? = null,
+        @Query("prfstate") prfstate: String? = null,
+    ): DbsResponse
 
     //장르별 공연 가져오기
     @GET("pblprfr")
@@ -54,7 +49,16 @@ interface ShowListRepository {
         @Query("rows") rows: String = Constants.PAGE_INDEX,
         @Query("openrun") openrun: String? = null,
         @Query("shcate") shcate: String? = null
-    ): ShowListModel
+    ): DbsResponse
+
+    //박스오피스 랭킹순 목록 가져오기
+    @GET("boxoffice")
+    suspend fun fetchTopRank(
+        @Query("ststype") ststype: String = "month",
+        @Query("date") data: String = Converter.nowDateFormat(), //현재 날짜를 yyyyMMdd 형식 으로 변환
+        @Query("catecode") catecode: String? = null,
+        @Query("area") area: String? = null,
+    ): BoxOfsResponse
 }
 
 
