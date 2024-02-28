@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GetExpectationModel(
+data class GetBookmarkModel(
 	@SerialName("id")
 	val id: Int,
 
@@ -14,32 +14,17 @@ data class GetExpectationModel(
 	@SerialName("created_at")
 	val createdAt: String,
 
-	@SerialName("is_expect")
-	val isExpect: Boolean,
-
-	@SerialName("comment")
-	val comment: String,
-
 	@SerialName("poster")
 	val poster: String,
 
 	@SerialName("mt20id")
 	val mt20id: String,
-
-	@SerialName("profile")
-	val profile: ProfileModel
 )
 
 @Serializable
-data class PostExpectationModel(
+data class PostBookmarkModel(
 	@SerialName("user_id")
 	val userId: String,
-
-	@SerialName("is_expect")
-	val isExpect: Boolean,
-
-	@SerialName("comment")
-	val comment: String,
 
 	@SerialName("poster")
 	val poster: String,

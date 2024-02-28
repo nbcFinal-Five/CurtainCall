@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GetExpectationModel(
+data class GetReviewModel(
 	@SerialName("id")
 	val id: Int,
 
@@ -14,8 +14,8 @@ data class GetExpectationModel(
 	@SerialName("created_at")
 	val createdAt: String,
 
-	@SerialName("is_expect")
-	val isExpect: Boolean,
+	@SerialName("point")
+	val point: Int,
 
 	@SerialName("comment")
 	val comment: String,
@@ -31,12 +31,12 @@ data class GetExpectationModel(
 )
 
 @Serializable
-data class PostExpectationModel(
+data class PostReviewModel(
 	@SerialName("user_id")
 	val userId: String,
 
-	@SerialName("is_expect")
-	val isExpect: Boolean,
+	@SerialName("point")
+	val point: Int,
 
 	@SerialName("comment")
 	val comment: String,
