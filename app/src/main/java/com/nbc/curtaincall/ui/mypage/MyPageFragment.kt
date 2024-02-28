@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.ui.auth.AuthActivity
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
@@ -25,6 +26,8 @@ class MyPageFragment : Fragment() {
 		userViewModel.setUser()
 	}
 
+	private val reviewAdapter by lazy { ReviewListAdapter() }
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -38,8 +41,24 @@ class MyPageFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
 		initViewModel()
 		initHandle()
+		initList()
+	}
+
+	private fun initList() {
+		val rvReview = binding.rvShowcase
+
+		val density = resources.displayMetrics.density
+		rvReview.layoutManager = GridLayoutManager(requireContext(), 3)
+		rvReview.adapter = reviewAdapter
+		rvReview.addItemDecoration(
+			GridItemDecoration(
+				horizontalSpacing = (24 * density).toInt(),
+				verticalSpacing = (12 * density).toInt()
+			)
+		)
 	}
 
 	private fun initHandle() = with(binding) {
@@ -76,13 +95,33 @@ class MyPageFragment : Fragment() {
 
 		// reviews
 		myPageViewModel.reviews.observe(viewLifecycleOwner) {
-			if (it != null) {
+			if (it == null) {
+				binding.rvShowcase.visibility = View.INVISIBLE
+				binding.tvShowcaseDetail.visibility = View.VISIBLE
+			} else {
 				binding.tvReviewCount.text = it.size.toString() + getString(R.string.count)
+
+				if (it.isEmpty()) {
+					binding.rvShowcase.visibility = View.INVISIBLE
+					binding.tvShowcaseDetail.visibility = View.VISIBLE
+				} else {
+					binding.rvShowcase.visibility = View.VISIBLE
+					binding.tvShowcaseDetail.visibility = View.INVISIBLE
+
+					reviewAdapter.submitList(it.take(6))
+				}
 			}
 		}
 
 		myPageViewModel.isReviewLoading.observe(viewLifecycleOwner) {
-			if (it) binding.tvReviewCount.text = "불러오는 중"
+			if (it) {
+				binding.clReviewSkeleton.visibility = View.VISIBLE
+				binding.tvReviewCount.text = "불러오는 중"
+				binding.rvShowcase.visibility = View.INVISIBLE
+				binding.tvShowcaseDetail.visibility = View.INVISIBLE
+			} else {
+				binding.clReviewSkeleton.visibility = View.INVISIBLE
+			}
 		}
 
 		// bookmarks
