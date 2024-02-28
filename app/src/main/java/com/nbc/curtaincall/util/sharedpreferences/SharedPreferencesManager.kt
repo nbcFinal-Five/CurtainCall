@@ -10,8 +10,13 @@ class SharedPreferencesManager(context: Context) {
     private val gson = Gson()
     private val tikXml = TikXml.Builder().exceptionOnUnreadXml(false).build()
 
-    fun saveString(string : String) {
-        prefs.edit().putString(Constants.KEY_FAVORITE,string).apply()
+    // 검색창 단어 저장
+    fun saveSearchWord(word : String) {
+        prefs.edit().putString(Constants.SEARCH_WORD,word).apply()
+    }
+    // 저장된 검색어 불러오기
+    fun loadSearchWord() :String {
+        return prefs.getString(Constants.SEARCH_WORD, Constants.DEFAULT_STRING) ?:""
     }
 
 }
