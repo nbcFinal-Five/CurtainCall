@@ -27,6 +27,7 @@ class MyPageFragment : Fragment() {
 	}
 
 	private val reviewAdapter by lazy { ReviewListAdapter() }
+	private val bookmarkAdapter by lazy { BookmarkListAdapter() }
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -49,11 +50,21 @@ class MyPageFragment : Fragment() {
 
 	private fun initList() {
 		val rvReview = binding.rvShowcase
+		val rvBookmark = binding.rvBookmarks
 
 		val density = resources.displayMetrics.density
 		rvReview.layoutManager = GridLayoutManager(requireContext(), 3)
 		rvReview.adapter = reviewAdapter
 		rvReview.addItemDecoration(
+			GridItemDecoration(
+				horizontalSpacing = (24 * density).toInt(),
+				verticalSpacing = (12 * density).toInt()
+			)
+		)
+
+		rvBookmark.layoutManager = GridLayoutManager(requireContext(), 3)
+		rvBookmark.adapter = bookmarkAdapter
+		rvBookmark.addItemDecoration(
 			GridItemDecoration(
 				horizontalSpacing = (24 * density).toInt(),
 				verticalSpacing = (12 * density).toInt()
@@ -81,7 +92,7 @@ class MyPageFragment : Fragment() {
 				binding.tvEmail.text = ""
 				binding.tvSignOut.visibility = View.INVISIBLE
 
-				myPageViewModel.clearReviews()
+				myPageViewModel.clear()
 			} else {
 				binding.clUserInfo.visibility = View.VISIBLE
 				binding.cvOpenAuthActivity.visibility = View.INVISIBLE
@@ -90,6 +101,7 @@ class MyPageFragment : Fragment() {
 				binding.tvSignOut.visibility = View.VISIBLE
 
 				myPageViewModel.setReview(it.id)
+				myPageViewModel.setBookmarks(it.id)
 			}
 		}
 
@@ -115,16 +127,49 @@ class MyPageFragment : Fragment() {
 
 		myPageViewModel.isReviewLoading.observe(viewLifecycleOwner) {
 			if (it) {
+				binding.clCountSkeleton.visibility = View.VISIBLE
 				binding.clReviewSkeleton.visibility = View.VISIBLE
-				binding.tvReviewCount.text = "불러오는 중"
+
+				binding.tvReviewCount.visibility = View.INVISIBLE
 				binding.rvShowcase.visibility = View.INVISIBLE
 				binding.tvShowcaseDetail.visibility = View.INVISIBLE
 			} else {
 				binding.clReviewSkeleton.visibility = View.INVISIBLE
+				binding.clCountSkeleton.visibility = View.INVISIBLE
+
+				binding.tvReviewCount.visibility = View.VISIBLE
 			}
 		}
 
 		// bookmarks
+		myPageViewModel.bookmarks.observe(viewLifecycleOwner) {
+			if (it == null) {
+				binding.rvBookmarks.visibility = View.INVISIBLE
+				binding.tvLikeDetail.visibility = View.VISIBLE
+			} else {
+				if (it.isEmpty()) {
+					binding.rvBookmarks.visibility = View.INVISIBLE
+					binding.tvLikeDetail.visibility = View.VISIBLE
+				} else {
+					binding.rvBookmarks.visibility = View.VISIBLE
+					binding.tvLikeDetail.visibility = View.INVISIBLE
+
+					bookmarkAdapter.submitList(it.take(6))
+				}
+			}
+		}
+
+		myPageViewModel.isBookmarkLoading.observe(viewLifecycleOwner) {
+			if (it) {
+				binding.clBookmarkSkeleton.visibility = View.VISIBLE
+				binding.rvBookmarks.visibility = View.INVISIBLE
+				binding.tvLikeDetail.visibility = View.INVISIBLE
+			} else {
+				binding.clBookmarkSkeleton.visibility = View.INVISIBLE
+
+				binding.tvReviewCount.visibility = View.VISIBLE
+			}
+		}
 	}
 
 	override fun onDestroyView() {
