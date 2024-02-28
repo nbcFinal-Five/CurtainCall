@@ -99,6 +99,16 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private fun showFilterList() {
+        with(binding) {
+            searchViewModel.fetchSearchChildrenFilterResult("")
+            searchViewModel.filterResultList.observe(viewLifecycleOwner){
+//                searchListAdapter.submitList()
+            }
+        }
+
+    }
+
     private fun initList() { // 검색 결과 recyclerview 만들기
         with(binding) {
             with(rvSearch) {

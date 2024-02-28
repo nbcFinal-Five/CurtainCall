@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogAddrBinding
-import com.nbc.curtaincall.ui.search.SearchFilterViewModel
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
 
@@ -18,7 +17,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val searchFilterViewModel  by activityViewModels<SearchFilterViewModel>()
+    private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
     private val searchListAdapter by lazy { SearchListAdapter() }
     private val addrFilterOptions by lazy {
         listOf(
@@ -57,6 +56,10 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       clickFilterButton()
+
+    }
+    private fun clickFilterButton() {
         with(binding) {
             ivAddrFilterClose.setOnClickListener {
                 dismiss()
@@ -67,7 +70,6 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
             }
 
         }
-
     }
 
     companion object {

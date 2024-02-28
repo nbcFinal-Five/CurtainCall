@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogGenreBinding
-import com.nbc.curtaincall.ui.search.SearchFilterViewModel
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
 
@@ -18,7 +17,7 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val searchFilterViewModel  by activityViewModels<SearchFilterViewModel>()
+    private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
     private val searchListAdapter by lazy { SearchListAdapter() }
     private val genreFilterOptions by lazy {
         listOf(
@@ -50,6 +49,11 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       clickFilterButton()
+
+    }
+
+    private fun clickFilterButton() {
         with(binding) {
             ivGenreFilterClose.setOnClickListener {
                 dismiss()
@@ -59,7 +63,6 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
                 dismiss()
             }
         }
-
     }
 
     companion object {

@@ -1,15 +1,13 @@
 package com.nbc.curtaincall.ui.search.bottomsheet
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogChildrenBinding
-import com.nbc.curtaincall.ui.search.SearchFilterViewModel
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
 
@@ -20,7 +18,7 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val searchFilterViewModel  by activityViewModels<SearchFilterViewModel>()
+    private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
     private val searchListAdapter by lazy { SearchListAdapter() }
     private val childrenFilterOptions by lazy {
         listOf(
@@ -54,24 +52,6 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnChildrenCheck.setOnClickListener {
-            cpgroupChildrenChoice.setOnCheckedStateChangeListener { group, checkedIds ->
-                // 뷰모델이나? 칩이 선택되었을 때 담길 리스트 변수 필요      selectedOptions[index].clear()
-//                for(id in childrenFilterOptions.indices) {
-//                    if(checkedIds == cpgroupChildrenChoice.get(id).first)
-//                    val selectedOption = childrenFilterOptions[index].first{it.first == id}
-
-                cpChildrenPossible?.let {
-                    val chipText = cpChildrenPossible.text.toString()
-                    if(cpChildrenPossible.isChecked) {
-                        if(!selectedChips.contains(chipText)) {
-                            selectedChips.add(chipText)
-                        } else {
-                            selectedChips.remove(chipText)
-                        }
-                }
-
-                }
-            }
                 dismiss()
             }
         }
