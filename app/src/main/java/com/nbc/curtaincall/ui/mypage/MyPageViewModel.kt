@@ -9,6 +9,7 @@ import com.nbc.curtaincall.supabase.model.GetReviewModel
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.postgrest.query.Order
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,8 +39,9 @@ class MyPageViewModel : ViewModel() {
 					.from("reviews")
 					.select(columns) {
 						filter {
-							eq("user_id", userId)
+							eq(column = "user_id", value = userId)
 						}
+						order(column = "created_at", order = Order.DESCENDING)
 					}
 					.decodeList<GetReviewModel>()
 
