@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentRegisterBinding
 import com.nbc.curtaincall.ui.UserViewModel
+import org.json.JSONException
+import org.json.JSONObject
 import java.util.regex.Pattern
 
 class RegisterFragment : Fragment() {
@@ -169,14 +171,22 @@ class RegisterFragment : Fragment() {
 		}
 
 		userViewModel.signUpErrorMessage.observe(viewLifecycleOwner) { signUpErrorMessage ->
-			if (signUpErrorMessage == "{\"code\":\"23505\",\"message\":\"duplicate key value violates unique constraint \\\"profiles_name_key\\\"\",\"detail\":\"Key (name)=(asd) already exists.\"}") {
-				binding.tvNicknameWarning.visibility = View.VISIBLE
-				binding.tvNicknameWarning.text = getText(R.string.nickname_duplicate)
-				showKeyboard(binding.etNickname)
-			} else if (signUpErrorMessage == "User already registered") {
-				binding.tvEmailWarning.visibility = View.VISIBLE
-				binding.tvEmailWarning.text = getText(R.string.email_duplicate)
-				showKeyboard(binding.etEmail)
+			val errorCode = getCodeFromSupabaseError(signUpErrorMessage)
+
+			when (errorCode) {
+				23505 -> {
+					binding.tvNicknameWarning.visibility = View.VISIBLE
+					binding.tvNicknameWarning.text = getText(R.string.nickname_duplicate)
+					showKeyboard(binding.etNickname)
+				}
+
+				null -> {
+					if (signUpErrorMessage == "User already registered") {
+						binding.tvEmailWarning.visibility = View.VISIBLE
+						binding.tvEmailWarning.text = getText(R.string.email_duplicate)
+						showKeyboard(binding.etEmail)
+					}
+				}
 			}
 		}
 	}
@@ -215,5 +225,16 @@ class RegisterFragment : Fragment() {
 		editText.requestFocus()
 		val imm = requireActivity().getSystemService(InputMethodManager::class.java)
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+	}
+
+	private fun getCodeFromSupabaseError(string: String?): Int? {
+		if (string == null) return null
+
+		try {
+			val code = JSONObject(string).getInt("code")
+			return code
+		} catch (e: JSONException) {
+			return null
+		}
 	}
 }
