@@ -72,7 +72,6 @@ class MyPageFragment : Fragment() {
 
 				myPageViewModel.setReview(it.id)
 			}
-
 		}
 
 		// reviews
