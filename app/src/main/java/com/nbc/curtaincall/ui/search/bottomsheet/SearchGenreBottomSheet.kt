@@ -17,7 +17,7 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val searchViewModel  by activityViewModels<SearchViewModel>()
+    private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
     private val searchListAdapter by lazy { SearchListAdapter() }
     private val genreFilterOptions by lazy {
         listOf(
@@ -49,11 +49,20 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnGenreCheck.setOnClickListener {
-            dismiss()
+       clickFilterButton()
+
+    }
+
+    private fun clickFilterButton() {
+        with(binding) {
+            ivGenreFilterClose.setOnClickListener {
+                dismiss()
+            }
+
+            btnGenreCheck.setOnClickListener {
+                dismiss()
+            }
         }
-
-
     }
 
     companion object {

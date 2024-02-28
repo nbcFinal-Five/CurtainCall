@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -85,11 +86,33 @@ class SearchFragment : Fragment() {
 
             ivSearch.setOnClickListener {
                 hideKeyboard()
-                App.prefs.saveString(etSearch.text?.toString()?.trim() ?:"")
+                App.prefs.saveSearchWord(etSearch.text?.toString()?.trim() ?:"")
                 searchViewModel.fetchSearchResult(etSearch.text?.toString()?.trim() ?:"")
-                searchViewModel.searchResultList.observe(viewLifecycleOwner) {
-                    searchListAdapter.submitList(it)
-                    if(it == null) {
+
+                // 검색 시 로딩바 보여주기
+                searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                    if (isLoading) {
+                        pbSearchLoading.visibility = View.VISIBLE
+                        tvSearchNoresult.visibility = View.GONE
+                        rvSearch.visibility = View.GONE
+                    } else {
+                        pbSearchLoading.visibility = View.GONE
+                        rvSearch.visibility = View.VISIBLE
+                    }
+                }
+
+                // 통신 장애시 안내 문구
+                searchViewModel.failureMessage.observe(viewLifecycleOwner) {
+                    if (!it.isNullOrEmpty()) {
+                        Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+                // 검색결과 안내 text
+                searchViewModel.searchResultList.observe(viewLifecycleOwner) { result ->
+                    searchListAdapter.submitList(result)
+                    if(result == null) {
                         tvSearchNoresult.visibility = View.VISIBLE
                     } else {
                         tvSearchNoresult.visibility = View.GONE
@@ -118,6 +141,12 @@ class SearchFragment : Fragment() {
         val inputMethodManager =
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // 검색했던 검색어 검색창에 불러오기
+        binding.etSearch.setText(App.prefs.loadSearchWord())
     }
 
     override fun onDestroyView() {

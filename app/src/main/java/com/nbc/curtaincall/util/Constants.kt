@@ -20,5 +20,5 @@ object Constants {
     //SheardPreferences
     const val PREFS_FILENAME = "prefs"
     const val DEFAULT_STRING = ""
-    const val KEY_FAVORITE = "favorite"
+    const val SEARCH_WORD = "searchword"
 }
