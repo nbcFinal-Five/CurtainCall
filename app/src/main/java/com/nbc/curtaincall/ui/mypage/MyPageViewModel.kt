@@ -42,7 +42,7 @@ class MyPageViewModel : ViewModel() {
 						}
 					}
 					.decodeList<GetReviewModel>()
-				
+
 				withContext(Dispatchers.Main) {
 					_reviews.value = reviews
 				}
