@@ -10,10 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
-import com.nbc.curtaincall.data.api.RetrofitClient.kopisApi
-import com.nbc.curtaincall.data.repository.impl.BoxOfficeRepositoryImpl
-import com.nbc.curtaincall.data.repository.impl.ShowListRepositoryImpl
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
+import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
+import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.ui.home.adapter.GenreAdapter
 import com.nbc.curtaincall.ui.home.adapter.TopRankAdapter
 import com.nbc.curtaincall.ui.home.adapter.UpcomingShowAdapter
@@ -26,8 +25,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(
-            showListRepository = ShowListRepositoryImpl(kopisApi),
-            boxOfficeRepository = BoxOfficeRepositoryImpl(kopisApi)
+            fetchRemoteRepository = FetchRepositoryImpl(fetch),
         )
     }
     private lateinit var beforeShowAdapter: UpcomingShowAdapter

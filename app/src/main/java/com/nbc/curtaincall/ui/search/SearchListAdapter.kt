@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nbc.curtaincall.data.model.SearchItem
+import com.nbc.curtaincall.search.model.SearchItem
 import com.nbc.curtaincall.databinding.ConstraintLayoutSearchRvBinding
 
 class SearchListAdapter : ListAdapter<SearchItem, SearchListAdapter.SearchShowViewHolder>(searchCallback) {
@@ -17,7 +17,7 @@ class SearchListAdapter : ListAdapter<SearchItem, SearchListAdapter.SearchShowVi
 
     companion object {
         private val searchCallback = object : DiffUtil.ItemCallback<SearchItem>() {
-            override fun areItemsTheSame(oldItem: SearchItem, newItem:SearchItem): Boolean {
+            override fun areItemsTheSame(oldItem: SearchItem, newItem: SearchItem): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
 

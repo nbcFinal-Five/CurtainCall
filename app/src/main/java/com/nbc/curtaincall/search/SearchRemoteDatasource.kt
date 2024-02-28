@@ -1,12 +1,10 @@
-package com.nbc.curtaincall.data.api
+package com.nbc.curtaincall.search
 
-import com.nbc.curtaincall.data.model.SearchListModel
-import com.nbc.curtaincall.data.model.ShowListModel
-import io.ktor.http.Url
+import com.nbc.curtaincall.search.model.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface KopisSearchApiInterface {
+interface SearchRemoteDatasource {
     @GET("pblprfr")
     suspend fun getSearchFilterShowList(
         @Query("stdate") stdate: String = "20240101",
@@ -18,7 +16,7 @@ interface KopisSearchApiInterface {
         @Query("signgucode") signgucode: Int? = null, // 지역 시도 코드
         @Query("kidstate") kidstate: String? =  null, // 아동 공연 여부
         @Query("newsql") newsql: String = "Y"
-    ): SearchListModel
+    ): SearchResponse
 }
 
 /**
