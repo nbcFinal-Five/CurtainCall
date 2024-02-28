@@ -14,6 +14,7 @@ import com.nbc.curtaincall.databinding.FragmentHomeBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.ui.home.adapter.GenreAdapter
+import com.nbc.curtaincall.ui.home.adapter.KidShowAdapter
 import com.nbc.curtaincall.ui.home.adapter.TopRankAdapter
 import com.nbc.curtaincall.ui.home.adapter.UpcomingShowAdapter
 import kotlinx.coroutines.Job
@@ -28,9 +29,10 @@ class HomeFragment : Fragment() {
             fetchRemoteRepository = FetchRepositoryImpl(fetch),
         )
     }
-    private lateinit var beforeShowAdapter: UpcomingShowAdapter
-    private lateinit var topRankAdapter: TopRankAdapter
+    private val upComingShowAdapter: UpcomingShowAdapter by lazy {UpcomingShowAdapter()}
+    private val topRankAdapter: TopRankAdapter by lazy { TopRankAdapter() }
     private val genreAdapter: GenreAdapter by lazy { GenreAdapter() }
+    private val kidShowAdapter: KidShowAdapter by lazy { KidShowAdapter() }
     private var isPaging = false
     private var pagingJob: Job? = null
 
@@ -56,20 +58,23 @@ class HomeFragment : Fragment() {
             binding.spinnerHomeGenre.setOnSpinnerItemSelectedListener<String> { _, _, newIndex, _ ->
                 fetchGenre(newIndex)
             }
+            //어린이 관람 가능 공연 목록
+            fetchKidShow()
         }
     }
 
     //화면 초기 설정
     private fun initViews() {
         //어뎁터 초기화
-        beforeShowAdapter = UpcomingShowAdapter(listOf())
-        topRankAdapter = TopRankAdapter()
+        upComingShowAdapter
+        topRankAdapter
+        kidShowAdapter
         initRecyclerView()
         with(viewModel) {
             showList.observe(viewLifecycleOwner) {
-                beforeShowAdapter = UpcomingShowAdapter(it)
+                upComingShowAdapter.submitList(it)
                 with(binding) {
-                    viewPager.adapter = beforeShowAdapter
+                    viewPager.adapter = upComingShowAdapter
                     TabLayoutMediator(tabPosterIndicator, viewPager) { tab, position ->
                         viewPager.currentItem = tab.position
                     }.attach()
@@ -85,11 +90,13 @@ class HomeFragment : Fragment() {
     private fun setUpObserve() {
         with(viewModel) {
             topRank.observe(viewLifecycleOwner) {
-                topRankAdapter.items = it.take(10)
-                topRankAdapter.notifyDataSetChanged()
+                topRankAdapter.submitList(it.take(10))
             }
             genre.observe(viewLifecycleOwner) {
                 genreAdapter.submitList(it)
+            }
+            kidShow.observe(viewLifecycleOwner) {
+                kidShowAdapter.submitList(it)
             }
         }
     }
@@ -107,6 +114,11 @@ class HomeFragment : Fragment() {
                 adapter = genreAdapter
                 layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            }
+            //어린이 공연 리사이클러뷰
+            rvHomeKidShow.apply {
+                adapter = kidShowAdapter
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             }
         }
     }
