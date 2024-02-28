@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogChildrenBinding
 import com.nbc.curtaincall.ui.search.SearchListAdapter
@@ -17,18 +18,17 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val searchViewModel  by activityViewModels<SearchViewModel>()
+    private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
     private val searchListAdapter by lazy { SearchListAdapter() }
     private val childrenFilterOptions by lazy {
         listOf(
-            listOf(
-                with(binding){
-                    cpBottomChildrenPossible to "Y"
-                    cpBottomChildrenImpossible to "N"
-                }
-            )
+            with(binding){
+                cpChildrenPossible to "Y"
+                cpChildrenImpossible to "N"
+            }
         )
     }
+    private val selectedChips: MutableList<String> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,11 +42,19 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnChildrenCheck.setOnClickListener {
-            dismiss()
+        clickFilterButton()
+    }
+
+    private fun clickFilterButton() {
+        with(binding) {
+            ivChildrenFilterClose.setOnClickListener {
+                dismiss()
+            }
+
+            btnChildrenCheck.setOnClickListener {
+                dismiss()
+            }
         }
-
-
     }
 
     companion object {

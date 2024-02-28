@@ -17,7 +17,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val searchViewModel  by activityViewModels<SearchViewModel>()
+    private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
     private val searchListAdapter by lazy { SearchListAdapter() }
     private val addrFilterOptions by lazy {
         listOf(
@@ -56,11 +56,20 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnAddrCheck.setOnClickListener {
-            dismiss()
+       clickFilterButton()
+
+    }
+    private fun clickFilterButton() {
+        with(binding) {
+            ivAddrFilterClose.setOnClickListener {
+                dismiss()
+            }
+
+            btnAddrCheck.setOnClickListener {
+                dismiss()
+            }
+
         }
-
-
     }
 
     companion object {
