@@ -3,20 +3,31 @@ package com.nbc.curtaincall.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.nbc.curtaincall.data.model.Boxof
 import com.nbc.curtaincall.databinding.ItemTopRankBinding
+import com.nbc.curtaincall.fetch.model.BoxofResponse
 
 class TopRankAdapter :
-    RecyclerView.Adapter<TopRankAdapter.TopRankViewHolder>() {
-    var items: List<Boxof> = listOf()
+    ListAdapter<BoxofResponse, TopRankAdapter.TopRankViewHolder>(object :
+        DiffUtil.ItemCallback<BoxofResponse>() {
+        override fun areItemsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
+            return oldItem.mt20id == newItem.mt20id
+        }
+
+        override fun areContentsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
+            return oldItem == newItem
+        }
+    }) {
+
     inner class TopRankViewHolder(private val binding: ItemTopRankBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Boxof) {
+        fun bind(item: BoxofResponse) {
             with(binding) {
                 tvHotRecommendGenre.text = item.cate
-                tvHotRecommendPeriod.text = item.prfpd?.substring(10,21)
+                tvHotRecommendPeriod.text = item.prfpd?.substring(10, 21)
                 tvHotRecommendPlaceName.text = item.prfplcnm
                 tvHotRecommendPerformanceName.text = item.prfnm
                 ivHomeHotRecommend.load("http://www.kopis.or.kr${item.poster}")
@@ -31,9 +42,7 @@ class TopRankAdapter :
         return TopRankViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = items.size
-
     override fun onBindViewHolder(holder: TopRankViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(currentList[position])
     }
 }

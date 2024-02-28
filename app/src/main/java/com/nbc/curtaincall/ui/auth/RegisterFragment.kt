@@ -1,19 +1,21 @@
 package com.nbc.curtaincall.ui.auth
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentRegisterBinding
 import com.nbc.curtaincall.ui.UserViewModel
+import org.json.JSONException
+import org.json.JSONObject
 import java.util.regex.Pattern
 
 class RegisterFragment : Fragment() {
@@ -162,13 +164,28 @@ class RegisterFragment : Fragment() {
 				return@observe
 			}
 
-			binding.tvEmailWarning.visibility = if (signupResult) View.INVISIBLE else View.VISIBLE
-			binding.tvEmailWarning.text = if (signupResult) "" else getText(R.string.email_duplicate)
-
 			if (signupResult) {
 				requireActivity().finish()
-			} else {
-				showKeyboard()
+			}
+		}
+
+		userViewModel.signUpErrorMessage.observe(viewLifecycleOwner) { signUpErrorMessage ->
+			val errorCode = getCodeFromSupabaseError(signUpErrorMessage)
+
+			when (errorCode) {
+				23505 -> {
+					binding.tvNicknameWarning.visibility = View.VISIBLE
+					binding.tvNicknameWarning.text = getText(R.string.nickname_duplicate)
+					showKeyboard(binding.etNickname)
+				}
+
+				null -> {
+					if (signUpErrorMessage == "User already registered") {
+						binding.tvEmailWarning.visibility = View.VISIBLE
+						binding.tvEmailWarning.text = getText(R.string.email_duplicate)
+						showKeyboard(binding.etEmail)
+					}
+				}
 			}
 		}
 	}
@@ -203,9 +220,20 @@ class RegisterFragment : Fragment() {
 						!input.age.isNullOrEmpty()
 	}
 
-	private fun showKeyboard() {
-		binding.etEmail.requestFocus()
+	private fun showKeyboard(editText: EditText) {
+		editText.requestFocus()
 		val imm = requireActivity().getSystemService(InputMethodManager::class.java)
-		imm.showSoftInput(binding.etEmail, InputMethodManager.SHOW_IMPLICIT)
+		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+	}
+
+	private fun getCodeFromSupabaseError(string: String?): Int? {
+		if (string == null) return null
+
+		try {
+			val code = JSONObject(string).getInt("code")
+			return code
+		} catch (e: JSONException) {
+			return null
+		}
 	}
 }

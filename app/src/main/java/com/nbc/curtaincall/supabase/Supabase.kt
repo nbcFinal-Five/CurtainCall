@@ -1,5 +1,6 @@
-package com.nbc.curtaincall
+package com.nbc.curtaincall.supabase
 
+import com.nbc.curtaincall.BuildConfig
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest

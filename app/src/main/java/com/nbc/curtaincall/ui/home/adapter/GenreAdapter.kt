@@ -3,19 +3,15 @@ package com.nbc.curtaincall.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.nbc.curtaincall.databinding.ItemUpcomingShowBinding
-import com.nbc.curtaincall.ui.mypage.SimpleInfoBottomSheetFragment
 import com.nbc.curtaincall.fetch.model.DbResponse
+import com.nbc.curtaincall.databinding.ItemGenreBinding
 
-
-class UpcomingShowAdapter :
-    ListAdapter<DbResponse, UpcomingShowAdapter.UpcomingShowViewHolder>(object :
-        DiffUtil.ItemCallback<DbResponse>() {
+class GenreAdapter :
+    ListAdapter<DbResponse, GenreAdapter.GenreViewHolder>(object : DiffUtil.ItemCallback<DbResponse>() {
         override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
             return oldItem.mt20id == newItem.mt20id
         }
@@ -24,29 +20,29 @@ class UpcomingShowAdapter :
             return oldItem == newItem
         }
     }) {
-    inner class UpcomingShowViewHolder(private val binding: ItemUpcomingShowBinding) :
+    inner class GenreViewHolder(private val binding: ItemGenreBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
             with(binding) {
-                ivHomeUpcomingShowPoster.load(item.poster)
+                tvGenre.text = item.genrenm
+                tvShowingState.text = item.prfstate
+                tvGenre.text = item.genrenm
+                tvGenrePeriod.text = "~ ${item.prfpdto}"
+                tvPlaceName.text = item.fcltynm
                 tvPerformanceName.text = item.prfnm
-                tvPeriod.text = "${item.prfpdfrom} ~ ${item.prfpdto}"
-                tvFacilityName.text = item.fcltynm
-                tvPageIndicator.text = "${adapterPosition + 1} / 10"
+                ivHomeGenrePoster.load(item.poster)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingShowViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
         val inflater =
             parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val binding = ItemUpcomingShowBinding.inflate(inflater, parent, false)
-        return UpcomingShowViewHolder(binding)
+        val binding = ItemGenreBinding.inflate(inflater, parent, false)
+        return GenreViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: UpcomingShowViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
-
-
 }

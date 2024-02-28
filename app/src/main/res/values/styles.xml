@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--bottome sheet chip design-->
+    <style name="CustomChipChoice." parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/search_chip_bg_state_list</item>
+        <item name="android:textColor">@color/search_chip_text_state_list</item>
+        <item name="chipStrokeColor">@color/input_background_color</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="chipCornerRadius">5dp</item>
+        <item name="chipMinHeight">45dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!--search rv badge design-->
+    <style name="SearchTopBadge">
+        <item name="android:textSize">8sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="background">@drawable/shape_searchlist_radius3</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--search filter bottom sheet close ic design-->
+    <style name="SearchFilterClose">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:tint">@color/bottom_navi_item_color</item>
+    </style>
+
+    <!--bottome sheet topcorner radius-->
+    <style name="RoundCornerBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RoundCornerModalStyle</item>
+    </style>
+    <!--bottome sheet topcorner radius-->
+    <style name="RoundCornerModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/search_bottom_sheet_background</item>
+    </style>
+
+</resources>
+

@@ -10,10 +10,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.nbc.curtaincall.ui.auth.AuthActivity
-import com.nbc.curtaincall.Supabase
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
 import com.nbc.curtaincall.ui.UserViewModel
-import io.github.jan.supabase.gotrue.auth
 
 class MyPageFragment : Fragment() {
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
@@ -58,24 +56,15 @@ class MyPageFragment : Fragment() {
 
 	private fun initViewModel() {
 		userViewModel.userInfo.observe(viewLifecycleOwner) {
-			val currentSession = Supabase.client.auth.currentSessionOrNull()
-
-			if (currentSession == null) {
+			if (it == null) {
 				binding.clUserInfo.visibility = View.INVISIBLE
 				binding.btnOpenAuthActivity.visibility = View.VISIBLE
 			} else {
 				binding.clUserInfo.visibility = View.VISIBLE
 				binding.btnOpenAuthActivity.visibility = View.INVISIBLE
-				binding.tvUserInfoEmail.text = currentSession.user?.userMetadata.toString()
+				binding.tvUserInfoEmail.text = it.userMetadata.toString()
 			}
 
-			val userMetadata = currentSession?.user?.userMetadata
-			val userEmail = currentSession?.user?.email
-			val name = userMetadata?.get("name")?.toString() ?: ""
-			val email = userEmail?: ""
-
-			binding.tvUserInfoEmail.text = "$email"
-			binding.tvUserInfoNickname.text = name
 		}
 	}
 
