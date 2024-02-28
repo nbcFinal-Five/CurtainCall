@@ -2,14 +2,11 @@ package com.nbc.curtaincall.ui.search
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,7 +17,6 @@ import com.nbc.curtaincall.databinding.FragmentSearchBinding
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchAddrBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchChildrenBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchGenreBottomSheet
-import java.net.URLEncoder
 
 class SearchFragment : Fragment() {
 
