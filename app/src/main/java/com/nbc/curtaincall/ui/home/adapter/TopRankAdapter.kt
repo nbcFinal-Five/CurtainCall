@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.nbc.curtaincall.data.model.Boxof
+import com.nbc.curtaincall.fetch.model.BoxofResponse
 import com.nbc.curtaincall.databinding.ItemTopRankBinding
 
 class TopRankAdapter :
     RecyclerView.Adapter<TopRankAdapter.TopRankViewHolder>() {
-    var items: List<Boxof> = listOf()
+    var items: List<BoxofResponse> = listOf()
 
     inner class TopRankViewHolder(private val binding: ItemTopRankBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Boxof) {
+        fun bind(item: BoxofResponse) {
             with(binding) {
                 tvHotRecommendGenre.text = item.cate
                 tvHotRecommendPeriod.text = item.prfpd?.substring(10, 21)

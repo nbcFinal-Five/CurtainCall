@@ -17,6 +17,7 @@ import com.nbc.curtaincall.databinding.FragmentSearchBinding
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchAddrBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchChildrenBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchGenreBottomSheet
+import com.nbc.curtaincall.util.sharedpreferences.App
 
 class SearchFragment : Fragment() {
 
@@ -84,6 +85,7 @@ class SearchFragment : Fragment() {
 
             ivSearch.setOnClickListener {
                 hideKeyboard()
+                App.prefs.saveString(etSearch.text?.toString()?.trim() ?:"")
                 searchViewModel.fetchSearchResult(etSearch.text?.toString()?.trim() ?:"")
                 searchViewModel.searchResultList.observe(viewLifecycleOwner) {
                     searchListAdapter.submitList(it)

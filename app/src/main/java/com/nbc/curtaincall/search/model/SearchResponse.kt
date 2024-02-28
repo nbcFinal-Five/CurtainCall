@@ -1,17 +1,17 @@
-package com.nbc.curtaincall.data.model
+package com.nbc.curtaincall.search.model
 
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
 
 @Xml(name = "dbs")
-data class ShowListModel(
+data class SearchResponse(
     @Element(name = "db")
-    val showList: List<Db>
+    val searchShowList: List<SearchItem>?
 )
 
 @Xml(name = "db")
-data class Db(
+data class SearchItem(
     @PropertyElement(name = "area") val area: String?,
     @PropertyElement(name = "fcltynm") val fcltynm: String?,
     @PropertyElement(name = "genrenm") val genrenm: String?,
