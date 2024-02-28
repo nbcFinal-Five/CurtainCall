@@ -1,4 +1,4 @@
-package com.nbc.curtaincall.data.model
+package com.nbc.curtaincall.supabase.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
