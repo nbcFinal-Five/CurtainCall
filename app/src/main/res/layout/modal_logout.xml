@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/background_color"
+        android:padding="44dp"
+>
+
+  <TextView
+          android:id="@+id/tv_logout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/modal_logout_title"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:textSize="20sp"
+          android:textColor="@color/white"
+          android:fontFamily="@font/font_regular"
+  />
+
+  <androidx.cardview.widget.CardView
+          android:id="@+id/cv_cancel"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:cardBackgroundColor="@color/component_background_color"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_logout"
+          app:cardCornerRadius="10dp"
+          android:layout_marginTop="40dp"
+  >
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:background="@color/component_background_color"
+            android:fontFamily="@font/font_regular"
+            android:textColor="@color/component_color"
+    />
+  </androidx.cardview.widget.CardView>
+
+  <androidx.cardview.widget.CardView
+          android:id="@+id/cv_ok"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:cardBackgroundColor="@color/component_color"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_logout"
+          app:cardCornerRadius="10dp"
+          android:layout_marginTop="40dp"
+  >
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:background="@color/component_color"
+            android:fontFamily="@font/font_regular"
+            android:textColor="@color/black"
+    />
+  </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
