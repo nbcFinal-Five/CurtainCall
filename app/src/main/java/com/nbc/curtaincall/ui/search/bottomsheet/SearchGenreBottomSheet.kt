@@ -24,21 +24,20 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
     private val searchListAdapter by lazy { SearchListAdapter() }
     private val genreFilterOptions by lazy {
-        listOf(
+        with(binding){
             listOf(
-                with(binding){
-                    cpBottomCircus to "EEEB"
-                    cpBottomClassic to "CCCA"
-                    cpBottomFutility to "BBBC"
-                    cpBottomMix to "EEEA"
-                    cpBottomMusical to "GGGA"
-                    cpBottomKoreanClassic to "CCCC"
-                    cpBottomPopularMusic to "CCCD"
-                    cpBottomPublicfutility to "BBBE"
-                    cpBottomTheater to "AAAA"
-                }
+                cpBottomCircus to "EEEB",
+                cpBottomClassic to "CCCA",
+                cpBottomFutility to "BBBC",
+                cpBottomMix to "EEEA",
+                cpBottomMusical to "GGGA",
+                cpBottomKoreanClassic to "CCCC",
+                cpBottomPopularMusic to "CCCD",
+                cpBottomPublicfutility to "BBBE",
+                cpBottomTheater to "AAAA",
             )
-        )
+        }
+
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,26 +58,14 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
 
     private fun clickFilterButton() {
         with(binding) {
-            cpGroupGenre.setOnCheckedChangeListener{group, checkedId ->
-                var isAnyChipSelected = false
-
-                // 선택된 모든 칩을 확인합니다.
-                for (i in 0 until cpGroupGenre.childCount) {
-                    val chip = cpGroupGenre.getChildAt(i) as Chip
-
-                    if (chip.isChecked) {
-                        isAnyChipSelected = true
-                        break
-                    }
-                }
-
-                if (isAnyChipSelected) {
+            cpGroupGenre.setOnCheckedStateChangeListener { group, checkedIds ->
+                if(checkedIds.size > 0) {
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnGenreCheck.setTypeface(null, Typeface.BOLD)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
                 } else {
-                    btnGenreCheck?.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
-                    btnGenreCheck?.setTypeface(null, Typeface.NORMAL)
+                    btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                    btnGenreCheck.setTypeface(null, Typeface.NORMAL)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
             }

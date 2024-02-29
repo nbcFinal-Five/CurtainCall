@@ -51,11 +51,8 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
 
     private fun clickFilterButton() {
         with(binding) {
-            cpGroupChildren.setOnCheckedChangeListener{group, checkedId ->
-                val selectedChipId = checkedId
-                val selectedChip: Chip? = cpGroupChildren.findViewById(selectedChipId)
-
-                if (selectedChip?.isChecked == true) {
+            cpGroupChildren.setOnCheckedStateChangeListener { group, checkedIds ->
+                if(checkedIds.size>0) {
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.BOLD)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
