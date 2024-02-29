@@ -10,8 +10,21 @@
         <item name="chipCornerRadius">5dp</item>
         <item name="chipMinHeight">45dp</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/font_regular</item>
     </style>
 
+    <!--bottome sheet filter button design-->
+    <style name="SearchFilterButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:layout_marginBottom">30dp</item>
+        <item name="android:backgroundTint">@color/filter_btn_color</item>
+        <item name="android:textColor">@color/filter_btn_text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/font_regular</item>
+    </style>
+    
     <!--search rv badge design-->
     <style name="SearchTopBadge">
         <item name="android:textSize">8sp</item>
@@ -19,6 +32,7 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="background">@drawable/shape_searchlist_radius3</item>
         <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/font_regular</item>
     </style>
 
     <!--search filter bottom sheet close ic design-->
