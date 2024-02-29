@@ -88,7 +88,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
 
                val selectedResult =  selectedChips?.map { chip -> addrFilterOptions.find { chip == it.first } }
                 searchFilterViewModel.getAddrFilteredList(selectedResult)// 선택된 filter 뷰모델에 전달
-//                searchFilterViewModel.fetchSearchFilterResult() // 뷰모델에서 넘겨받은 리스트를 통해 api 요청함수 실행
+                searchFilterViewModel.fetchSearchFilterResult() // 뷰모델에서 넘겨받은 리스트를 통해 api 요청함수 실행
                 dismiss()
             }
         }

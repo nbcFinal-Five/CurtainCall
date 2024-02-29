@@ -69,6 +69,7 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
             btnChildrenCheck.setOnClickListener {
                 val selectedResult = selectedChips?.map { chip ->  childrenFilterOptions.find { chip == it.first }}
                 searchFilterViewModel.getChildFilteredList(selectedResult)
+//                searchFilterViewModel.fetchSearchFilterResult()
                 dismiss()
             }
         }

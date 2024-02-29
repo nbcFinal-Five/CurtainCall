@@ -58,9 +58,9 @@ class SearchViewModel : ViewModel() {
         val childFilteredList = _childFilterResultList.value
 
         if(genreFilteredList != null || addrFilteredList != null || childFilteredList != null) {
-            val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString { "|" } ?: ""
-            val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString { "|" } ?: ""
-            val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString { "|" } ?: ""
+            val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
+            val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString ("|") ?: ""
+            val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
 
             Log.d(TAG, "fetchSearchFilterResult genre: $genre")
             Log.d(TAG, "fetchSearchFilterResult addr: $addr")
@@ -73,7 +73,7 @@ class SearchViewModel : ViewModel() {
                     _searchResultList.value = result
                 }.onFailure { exception ->
                     handleFailure(exception as Exception)
-                    Log.e("SearchViewModel", "fetchSearchResult: ${exception.message}")
+                    Log.e("SearchViewModel", "fetchSearchFilterResult: ${exception.message}")
                 }
                 _isLoading.value = false
             }
