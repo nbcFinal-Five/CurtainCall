@@ -17,7 +17,7 @@ class BookmarkListAdapter : ListAdapter<GetBookmarkModel, BookmarkListAdapter.Vi
 
 			binding.root.setOnClickListener {
 				// TODO 상세 넘어가게
-				Log.d("debig", item.toString())
+				
 			}
 		}
 	}
