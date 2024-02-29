@@ -91,8 +91,6 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 
 	private fun initViewModel() {
 		userViewModel.userInfo.observe(viewLifecycleOwner) {
-			Log.d("user debug", it.toString())
-
 			if (it == null) {
 				binding.clUserInfo.visibility = View.INVISIBLE
 				binding.cvOpenAuthActivity.visibility = View.VISIBLE
