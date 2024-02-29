@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
             fetchRemoteRepository = FetchRepositoryImpl(fetch),
         )
     }
-    private val upComingShowAdapter: UpcomingShowAdapter by lazy {UpcomingShowAdapter()}
+    private val upComingShowAdapter: UpcomingShowAdapter by lazy { UpcomingShowAdapter() }
     private val topRankAdapter: TopRankAdapter by lazy { TopRankAdapter() }
     private val genreAdapter: GenreAdapter by lazy { GenreAdapter() }
     private val kidShowAdapter: KidShowAdapter by lazy { KidShowAdapter() }
@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(viewModel) {
             //공연 예정작
-            fetchUpcomingList()
+            fetchUpcoming()
             //TOP 10 공연
             fetchTopRank()
             //장르 스피너 선택
@@ -74,7 +74,9 @@ class HomeFragment : Fragment() {
             showList.observe(viewLifecycleOwner) {
                 upComingShowAdapter.submitList(it)
                 with(binding) {
+                    //viewpager 연결
                     viewPager.adapter = upComingShowAdapter
+                    //tab 연결
                     TabLayoutMediator(tabPosterIndicator, viewPager) { tab, position ->
                         viewPager.currentItem = tab.position
                     }.attach()
@@ -137,8 +139,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }.onFailure {
-            //예외 처리 알림용 나중에 처리
-            Toast.makeText(context, "앱 크래시", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Exception nextPage()", Toast.LENGTH_SHORT).show()
         }
     }
 

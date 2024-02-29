@@ -22,7 +22,7 @@ import retrofit2.http.Query
  * @param prfstate             공연상태코드 01 공연예정 02 공연중 03 공연완료
  * @param openrun              오픈런여부
  * @param newsql               신규 API 여부
- * @return 공연 목록 ShowListModel<Db>
+ * @return 공연 목록 DbsResponse
  */
 
 interface FetchRemoteDatasource {

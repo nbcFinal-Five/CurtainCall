@@ -30,5 +30,21 @@
         <item name="android:background">@drawable/search_bottom_sheet_background</item>
     </style>
 
+    <style name="HomePosterTitleStyle">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HomePosterPlaceNameStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textColor">#E2E2E2</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
 </resources>
 
