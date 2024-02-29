@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="12dp"
+        android:fontFamily="@font/font_regular"
         android:text="@string/home_top_upcoming_text"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
@@ -38,15 +39,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:maxLines="3"
-        android:ellipsize="end"
         android:id="@+id/tv_performance_name"
-        android:layout_width="350dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/font_extrabold"
+        android:maxLines="3"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tv_period"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="현대음악앙상블 소리의 동방신곡 프로젝트 7, 작곡가 지성민: 들을 수 없는 소리" />
@@ -56,6 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:fontFamily="@font/font_regular"
         android:textColor="#A9A9A9"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/tv_facility_name"
@@ -68,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="12dp"
+        android:fontFamily="@font/font_regular"
         android:textColor="#E2E2E2"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -82,9 +85,10 @@
         android:layout_height="20dp"
         android:layout_margin="36dp"
         android:background="@drawable/bg_page_indicator_container"
+        android:fontFamily="@font/font_regular"
         android:gravity="center"
-        tools:text="1/10"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="1/10" />
 </androidx.constraintlayout.widget.ConstraintLayout>
