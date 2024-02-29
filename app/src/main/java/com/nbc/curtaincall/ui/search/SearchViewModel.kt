@@ -47,6 +47,8 @@ class SearchViewModel : ViewModel() {
         RetrofitClient.search.getSearchFilterShowList(shprfnm = search).searchShowList
     }
 
+//    suspend fun getSearchResultByFilter// 확장해서 빈값 널
+
     private fun handleFailure(exception: Exception) {
         _failureMessage.value = "서버 오류가 발생하였습니다."
     }

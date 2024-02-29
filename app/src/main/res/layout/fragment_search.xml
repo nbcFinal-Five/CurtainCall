@@ -112,6 +112,7 @@
         android:text="@string/search_result_not"
         android:textColor="@color/bottom_navi_item_color"
         android:textSize="16sp"
+        android:fontFamily="@font/font_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

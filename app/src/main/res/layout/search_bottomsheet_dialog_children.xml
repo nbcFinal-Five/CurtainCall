@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/font_regular"
         android:text="@string/filter_children_title"
         android:textColor="@color/text_color"
         android:textSize="24sp"
@@ -25,14 +26,14 @@
         android:id="@+id/iv_children_filter_close"
         style="@style/SearchFilterClose"
         android:src="@drawable/ic_searchfilter_close"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_bottomdialog_children_title"
         app:layout_constraintBottom_toBottomOf="@id/tv_bottomdialog_children_title"
-        app:layout_constraintHorizontal_bias="0.85"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_bottomdialog_children_title" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/cpgroup_children_choice"
+        android:id="@+id/cp_group_children"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
@@ -60,18 +61,13 @@
 
     <Button
         android:id="@+id/btn_children_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        android:backgroundTint="@color/component_color"
+        style="@style/SearchFilterButton"
+        android:layout_marginHorizontal="90dp"
         android:text="@string/filter_choose"
-        android:textColor="@color/text_color"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cpgroup_children_choice" />
+        app:layout_constraintTop_toBottomOf="@+id/cp_group_children" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
