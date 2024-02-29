@@ -52,13 +52,13 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupChildren.setOnCheckedStateChangeListener { group, checkedIds ->
-                if(checkedIds.size>0) {
+                if(checkedIds.size>0 ) {
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.BOLD)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
                 } else {
-                    btnChildrenCheck?.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
-                    btnChildrenCheck?.setTypeface(null, Typeface.NORMAL)
+                    btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                    btnChildrenCheck.setTypeface(null, Typeface.NORMAL)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
             }
