@@ -22,7 +22,6 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
-    private val searchListAdapter by lazy { SearchListAdapter() }
     private val genreFilterOptions by lazy {
         with(binding){
             listOf(
@@ -34,11 +33,12 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
                 cpBottomKoreanClassic to "CCCC",
                 cpBottomPopularMusic to "CCCD",
                 cpBottomPublicfutility to "BBBE",
-                cpBottomTheater to "AAAA",
+                cpBottomTheater to "AAAA"
             )
         }
 
     }
+    private var selectedChips : List<Chip>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -76,6 +76,9 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnGenreCheck.setOnClickListener {
+                val selectedResult = selectedChips?.map { chip -> genreFilterOptions.find { chip == it.first } }
+                searchFilterViewModel.getGenreFilteredList(selectedResult)
+//                searchFilterViewModel.fetchSearchFilterResult()
                 dismiss()
             }
         }

@@ -23,16 +23,15 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
-    private val searchListAdapter by lazy { SearchListAdapter() }
     private val childrenFilterOptions by lazy {
-        listOf(
-            with(binding){
-                cpChildrenPossible to "Y"
+        with(binding){
+            listOf(
+                cpChildrenPossible to "Y",
                 cpChildrenImpossible to "N"
-            }
-        )
+            )
+        }
     }
-    private val selectedChips: MutableList<String> = mutableListOf()
+    private var selectedChips : List<Chip>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,6 +67,8 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnChildrenCheck.setOnClickListener {
+                val selectedResult = selectedChips?.map { chip ->  childrenFilterOptions.find { chip == it.first }}
+                searchFilterViewModel.getChildFilteredList(selectedResult)
                 dismiss()
             }
         }
