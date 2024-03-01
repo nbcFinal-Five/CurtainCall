@@ -73,7 +73,7 @@
   <string name="filter_addr_daehakro">대학로</string>
 
   <string name="filter_date">날짜</string>
-  <string name="filter_choose">선택완료</string>
+  <string name="filter_choose">조건 검색</string>
   <string name="nickname">닉네임</string>
   <string name="gender_male">남성</string>
   <string name="gender_female">여성</string>
@@ -89,4 +89,7 @@
 
   <string name="count_key">리뷰수</string>
   <string name="count">회</string>
+  <string name="cancel">취소</string>
+  <string name="ok">확인</string>
+  <string name="modal_logout_title">로그아웃 하시겠습니까?</string>
 </resources>
