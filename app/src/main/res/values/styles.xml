@@ -55,5 +55,13 @@
         <item name="android:layout_marginTop">4dp</item>
         <item name="fontFamily">@font/font_regular</item>
     </style>
+
+    <style name="RoundTicketStyle" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RoundCorner</item>
+    </style>
+    <style name="RoundCorner" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/ticket_shape</item>
+    </style>
+
 </resources>
 

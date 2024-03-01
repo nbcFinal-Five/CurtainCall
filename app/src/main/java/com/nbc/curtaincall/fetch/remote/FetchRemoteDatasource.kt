@@ -5,6 +5,7 @@ import com.nbc.curtaincall.fetch.model.DbsResponse
 import com.nbc.curtaincall.util.Constants
 import com.nbc.curtaincall.util.Converter
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -26,7 +27,7 @@ import retrofit2.http.Query
  */
 
 interface FetchRemoteDatasource {
-    //공연 목록 가져오기
+    //공연 목록
     @GET("pblprfr")
     suspend fun fetchShowList(
         @Query("stdate") stdate: String = Constants.START_DATE,
@@ -40,7 +41,7 @@ interface FetchRemoteDatasource {
         @Query("prfstate") prfstate: String? = null,
     ): DbsResponse
 
-    //장르별 공연 가져오기
+    //장르별 공연
     @GET("pblprfr")
     suspend fun fetchGenre(
         @Query("stdate") stdate: String = Constants.START_DATE,
@@ -51,7 +52,7 @@ interface FetchRemoteDatasource {
         @Query("shcate") shcate: String? = null
     ): DbsResponse
 
-    //박스오피스 랭킹순 목록 가져오기
+    //박스오피스 랭킹순 목록
     @GET("boxoffice")
     suspend fun fetchTopRank(
         @Query("ststype") ststype: String = "month",
@@ -59,6 +60,12 @@ interface FetchRemoteDatasource {
         @Query("catecode") catecode: String? = null,
         @Query("area") area: String? = null,
     ): BoxOfsResponse
+
+    //공연 상세 정보
+    @GET("pblprfr/{id}")
+    suspend fun fetchShowDetail(
+        @Path("id") path: String,
+    ): DbsResponse
 }
 
 

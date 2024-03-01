@@ -3,6 +3,7 @@ package com.nbc.curtaincall.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.nbc.curtaincall.fetch.model.BoxofResponse
 import com.nbc.curtaincall.fetch.model.DbResponse
@@ -23,6 +24,7 @@ class HomeViewModel(
 
     private val _kidShow = MutableLiveData<List<DbResponse>>()
     val kidShow: LiveData<List<DbResponse>> get() = _kidShow
+
 
     fun fetchUpcoming() {
         viewModelScope.launch {
@@ -57,10 +59,15 @@ class HomeViewModel(
     fun fetchKidShow() {
         viewModelScope.launch {
             runCatching {
-                _kidShow.value = fetchRemoteRepository.fetchShowList(stdate = "20240101", eddate = "20240328", kidstate = "Y").showList
+                _kidShow.value = fetchRemoteRepository.fetchShowList(
+                    stdate = "20240101",
+                    eddate = "20240328",
+                    kidstate = "Y"
+                ).showList
             }
         }
     }
+
 
     private fun getGenreCode(genre: Int): String {
         return when (genre) {
@@ -77,6 +84,12 @@ class HomeViewModel(
         }
     }
 }
-
+class HomeViewModelFactory(
+    private val fetchRemoteRepository: FetchRepositoryImpl,
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return HomeViewModel(fetchRemoteRepository) as T
+    }
+}
 
 

@@ -10,7 +10,7 @@ import coil.load
 import com.nbc.curtaincall.databinding.ItemTopRankBinding
 import com.nbc.curtaincall.fetch.model.BoxofResponse
 
-class TopRankAdapter :
+class TopRankAdapter(private val listener: PosterClickListener? = null) :
     ListAdapter<BoxofResponse, TopRankAdapter.TopRankViewHolder>(object :
         DiffUtil.ItemCallback<BoxofResponse>() {
         override fun areItemsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
@@ -31,6 +31,13 @@ class TopRankAdapter :
                 tvHotRecommendPlaceName.text = item.prfplcnm
                 tvHotRecommendPerformanceName.text = item.prfnm
                 ivHomeHotRecommend.load("http://www.kopis.or.kr${item.poster}")
+                ivHomeHotRecommend.setOnClickListener {
+                    item.mt20id?.let { id ->
+                        listener?.posterClicked(
+                            id
+                        )
+                    }
+                }
             }
         }
     }

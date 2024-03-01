@@ -16,10 +16,9 @@
         <ImageView
             android:id="@+id/iv_detail_posterImage"
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/ic_posterimage"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -181,14 +180,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/font_extrabold"
-        android:text="위치"
+        android:text="공연장"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/tv_detail_location"
+        android:id="@+id/tv_detail_facility_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"
@@ -222,7 +221,7 @@
         android:text="가격"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_location" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_facility_name" />
 
     <TextView
         android:id="@+id/textView11"

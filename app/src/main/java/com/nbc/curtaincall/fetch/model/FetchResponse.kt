@@ -21,8 +21,13 @@ data class DbResponse(
     @PropertyElement(name = "prfnm") val prfnm: String?,
     @PropertyElement(name = "prfpdfrom") val prfpdfrom: String?,
     @PropertyElement(name = "prfpdto") val prfpdto: String?,
-    @PropertyElement(name = "prfstate") val prfstate: String?
-)
+    @PropertyElement(name = "prfstate") val prfstate: String?,
+    @PropertyElement(name = "prfcast") val prfcast: String?,
+    @PropertyElement(name = "prfruntime") val prfruntime: String?,
+    @PropertyElement(name = "pcseguidance") val pcseguidance: String?,
+    @PropertyElement(name = "dtguidance") val dtguidance: String?,
+    @PropertyElement(name = "prfage") val prfage:String?,
+    )
 
 @Xml(name = "boxofs")
 data class BoxOfsResponse(
@@ -42,4 +47,35 @@ data class BoxofResponse(
     @PropertyElement(name = "prfplcnm") val prfplcnm: String?,
     @PropertyElement(name = "rnum") val rnum: Int?,
     @PropertyElement(name = "seatcnt") val seatcnt: Int?
+)
+
+//data class ShowDetailDbsResponse(
+//    @Element(name = "db")
+//    val showDetail: List<ShowDetailDbResponse>
+//)
+
+//data class ShowDetailDbResponse(
+//    @PropertyElement(name = "mt20id") val mt20id: String?,
+//    @PropertyElement(name = "prfn") val prfnm: String?,
+//    @PropertyElement(name = "prfpdfrom") val prfpdfrom: String?,
+//    @PropertyElement(name = "prfpdto") val prfpdto: String?,
+//    @PropertyElement(name = "fcltynm") val fcltynm: String?,
+//    @PropertyElement(name = "prfcast") val prfcast: String?, //
+//    @PropertyElement(name = "prfruntime") val prfruntime: String?, //
+//    @PropertyElement(name = "pcseguidance") val pcseguidance: String?,//
+//    @PropertyElement(name = "dtguidance") val dtguidance: String?,//
+//    @PropertyElement(name = "prfcrew") val prfcrew: String?,
+//    @PropertyElement(name = "entrpsnm") val entrpsnm: String?,
+//    @PropertyElement(name = "poster") val poster: String?,
+//    @PropertyElement(name = "sty") val sty: String?,
+//    @PropertyElement(name = "genrenm") val genrenm: String?,
+//    @PropertyElement(name = "openrun") val openrun: String?,
+//    @PropertyElement(name = "prfstate") val prfstate: String?,
+//    @Element(name = "styurls") val styurls: String?,
+//    @PropertyElement(name = "mt10id") val mt10id: String?,
+//)
+
+@Xml(name = "styurls")
+data class Styurls(
+    @PropertyElement(name = "styurl") val styurl: String?
 )

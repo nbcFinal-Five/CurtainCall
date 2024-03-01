@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.nbc.curtaincall.fetch.model.DbResponse
 import com.nbc.curtaincall.databinding.ItemGenreBinding
+import com.nbc.curtaincall.fetch.model.DbResponse
 
-class GenreAdapter :
-    ListAdapter<DbResponse, GenreAdapter.GenreViewHolder>(object : DiffUtil.ItemCallback<DbResponse>() {
+class GenreAdapter(private val listener: PosterClickListener? = null) :
+    ListAdapter<DbResponse, GenreAdapter.GenreViewHolder>(object :
+        DiffUtil.ItemCallback<DbResponse>() {
         override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
             return oldItem.mt20id == newItem.mt20id
         }
@@ -31,6 +32,9 @@ class GenreAdapter :
                 tvPlaceName.text = item.fcltynm
                 tvPerformanceName.text = item.prfnm
                 ivHomeGenrePoster.load(item.poster)
+                ivHomeGenrePoster.setOnClickListener {
+                    item.mt20id?.let { id -> listener?.posterClicked(id) }
+                }
             }
         }
     }

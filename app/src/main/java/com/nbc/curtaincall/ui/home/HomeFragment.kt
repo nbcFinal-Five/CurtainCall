@@ -5,23 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
+import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.ui.home.adapter.GenreAdapter
 import com.nbc.curtaincall.ui.home.adapter.KidShowAdapter
+import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 import com.nbc.curtaincall.ui.home.adapter.TopRankAdapter
 import com.nbc.curtaincall.ui.home.adapter.UpcomingShowAdapter
+import com.nbc.curtaincall.ui.main.MainViewModel
+import com.nbc.curtaincall.ui.main.MainViewModelFactory
+import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), PosterClickListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels {
@@ -29,10 +36,17 @@ class HomeFragment : Fragment() {
             fetchRemoteRepository = FetchRepositoryImpl(fetch),
         )
     }
+    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel> {
+        MainViewModelFactory(
+            fetchRemoteRepository = FetchRepositoryImpl(
+                fetch
+            )
+        )
+    }
     private val upComingShowAdapter: UpcomingShowAdapter by lazy { UpcomingShowAdapter() }
-    private val topRankAdapter: TopRankAdapter by lazy { TopRankAdapter() }
-    private val genreAdapter: GenreAdapter by lazy { GenreAdapter() }
-    private val kidShowAdapter: KidShowAdapter by lazy { KidShowAdapter() }
+    private val topRankAdapter: TopRankAdapter by lazy { TopRankAdapter(this) }
+    private val genreAdapter: GenreAdapter by lazy { GenreAdapter(this) }
+    private val kidShowAdapter: KidShowAdapter by lazy { KidShowAdapter(this) }
     private var isPaging = false
     private var pagingJob: Job? = null
 
@@ -159,5 +173,16 @@ class HomeFragment : Fragment() {
         _binding = null
         isPaging = false
         pagingJob?.cancel()
+    }
+
+    //포스터 클릭 시 티켓
+    override fun posterClicked(id: String) {
+        val ticketDialog = TicketDialogFragment()
+        sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
+        ticketDialog.setStyle(
+            DialogFragment.STYLE_NORMAL,
+            R.style.RoundCornerBottomSheetDialogTheme
+        )
+        ticketDialog.show(childFragmentManager, TicketDialogFragment().tag)
     }
 }

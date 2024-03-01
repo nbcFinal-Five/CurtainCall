@@ -6,7 +6,8 @@ import com.nbc.curtaincall.fetch.remote.FetchRemoteDatasource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemoteDatasource {//이 부분 나중에 FetchRepository 로 바꿔야함
+class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemoteDatasource {
+    //이 부분 나중에 FetchRepository 로 바꿔야함
     override suspend fun fetchShowList(
         stdate: String,
         eddate: String,
@@ -16,7 +17,7 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
         newsql: String?,
         shcate: String?,
         kidstate: String?,
-        prfstate: String?
+        prfstate: String?,
     ): DbsResponse =
         withContext(Dispatchers.IO) {
             fetch.fetchShowList(stdate = stdate, eddate = eddate, kidstate = kidstate)
@@ -42,5 +43,10 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
     ): BoxOfsResponse =
         withContext(Dispatchers.IO) {
             fetch.fetchTopRank()
+        }
+
+    override suspend fun fetchShowDetail(path: String): DbsResponse =
+        withContext(Dispatchers.IO) {
+            fetch.fetchShowDetail(path = path)
         }
 }
