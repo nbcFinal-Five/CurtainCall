@@ -15,7 +15,7 @@ import com.nbc.curtaincall.ui.auth.AuthActivity
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
 import com.nbc.curtaincall.ui.UserViewModel
 
-class MyPageFragment : Fragment() {
+class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 	private val myPageViewModel by lazy { ViewModelProvider(this)[MyPageViewModel::class.java] }
 
@@ -28,6 +28,10 @@ class MyPageFragment : Fragment() {
 
 	private val reviewAdapter by lazy { ReviewListAdapter() }
 	private val bookmarkAdapter by lazy { BookmarkListAdapter() }
+
+	override fun onLogoutConfirmed() {
+		userViewModel.setUser()
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -79,7 +83,9 @@ class MyPageFragment : Fragment() {
 		}
 
 		tvSignOut.setOnClickListener {
-			userViewModel.signOut()
+			val dialog = LogoutDialogFragment()
+			dialog.setListener(this@MyPageFragment)
+			dialog.show(childFragmentManager, "Logout Dialog")
 		}
 	}
 

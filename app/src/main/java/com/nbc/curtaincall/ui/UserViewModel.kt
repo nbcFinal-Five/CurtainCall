@@ -27,6 +27,10 @@ class UserViewModel : ViewModel() {
 	private val _signInResult = MutableLiveData<Boolean?>(null)
 	val signInResult: LiveData<Boolean?> get() = _signInResult
 
+	// sign out
+	private val _isSignOutLoading = MutableLiveData(false)
+	val isSignOutLoading: LiveData<Boolean> get() = _isSignOutLoading
+
 	// sign up
 	private val _isSignUpLoading = MutableLiveData(false)
 	val isSignUpLoading: LiveData<Boolean> get() = _isSignUpLoading
@@ -64,18 +68,23 @@ class UserViewModel : ViewModel() {
 		}
 	}
 
-	fun signOut() {
+	fun signOut(onSuccess: () -> Unit) {
+		_isSignOutLoading.value = true
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				Supabase.client.auth.signOut()
 			} catch (e: RestException) {
 				Log.d("sign out", e.error)
+				Supabase.client.auth.clearSession()
 			} finally {
 				withContext(Dispatchers.Main) {
 					_userInfo.value = null
 					_signInResult.value = null
 					_signUpResult.value = null
 					_signUpErrorMessage.value = null
+					_isSignOutLoading.value = false
+
+					onSuccess()
 				}
 			}
 		}
