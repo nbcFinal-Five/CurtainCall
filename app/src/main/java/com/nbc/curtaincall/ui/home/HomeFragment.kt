@@ -29,7 +29,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), PosterClickListener {
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: com.nbc.curtaincall.databinding.FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(
@@ -179,10 +179,7 @@ class HomeFragment : Fragment(), PosterClickListener {
     override fun posterClicked(id: String) {
         val ticketDialog = TicketDialogFragment()
         sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
-        ticketDialog.setStyle(
-            DialogFragment.STYLE_NORMAL,
-            R.style.RoundCornerBottomSheetDialogTheme
-        )
-        ticketDialog.show(childFragmentManager, TicketDialogFragment().tag)
+        ticketDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
+        ticketDialog.show(childFragmentManager, ticketDialog.tag)
     }
 }
