@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="제목"
+        android:text="@string/ticket_show_name_title"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_show_name_sub"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_detail_show_name_sub" />
@@ -138,7 +138,7 @@
         style="@style/TicketTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="런타임"
+        android:text="@string/ticket_runtime_title"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_runtime_sub"
         app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
         app:layout_constraintTop_toTopOf="@id/tv_detail_runtime_sub" />
@@ -160,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="가격"
+        android:text="@string/ticket_price_title"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_price_sub"
         app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
         app:layout_constraintTop_toTopOf="@+id/tv_detail_price_sub" />
@@ -182,7 +182,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="공연장"
+        android:text="@string/ticket_place_title"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_place_sub"
         app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
         app:layout_constraintTop_toTopOf="@+id/tv_detail_place_sub" />
@@ -212,7 +212,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="출연진"
+        android:text="@string/ticket_cast_title"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_cast_sub"
         app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
         app:layout_constraintTop_toTopOf="@id/tv_detail_cast_sub" />
@@ -234,7 +234,7 @@
         style="@style/TicketTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="제작"
+        android:text="@string/ticket_product_title"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_product_sub"
         app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
         app:layout_constraintTop_toTopOf="@id/tv_detail_product_sub" />

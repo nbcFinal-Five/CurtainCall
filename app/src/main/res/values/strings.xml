@@ -92,4 +92,10 @@
   <string name="cancel">취소</string>
   <string name="ok">확인</string>
   <string name="modal_logout_title">로그아웃 하시겠습니까?</string>
+  <string name="ticket_show_name_title">제목</string>
+  <string name="ticket_runtime_title">런타임</string>
+  <string name="ticket_price_title">가격</string>
+  <string name="ticket_place_title">공연장</string>
+  <string name="ticket_cast_title">출연진</string>
+  <string name="ticket_product_title">제작</string>
 </resources>
