@@ -2,6 +2,7 @@ package com.nbc.curtaincall.ui.search.bottomsheet
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,7 +70,8 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
             btnChildrenCheck.setOnClickListener {
                 val selectedResult = selectedChips?.map { chip ->  childrenFilterOptions.find { chip == it.first }}
                 searchFilterViewModel.getChildFilteredList(selectedResult)
-//                searchFilterViewModel.fetchSearchFilterResult()
+                Log.d(TAG, "clickFilterButton: $selectedResult")
+                searchFilterViewModel.fetchSearchFilterResult()
                 dismiss()
             }
         }
