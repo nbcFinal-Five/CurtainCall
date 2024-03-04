@@ -58,9 +58,9 @@ class SearchViewModel : ViewModel() {
         val childFilteredList = childFilterResultList.value
 
         if(genreFilteredList != null || addrFilteredList != null || childFilteredList != null) {
-            val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString (",")  ?: ""
-            val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString (",") ?: ""
-            val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString (",")  ?: ""
+            val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
+            val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString ("|") ?: ""
+            val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
 
             Log.d(TAG, "fetchSearchFilterResult genre: $genre")
             Log.d(TAG, "fetchSearchFilterResult addr: $addr")
