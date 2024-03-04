@@ -17,7 +17,8 @@ import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
 import com.nbc.curtaincall.util.sharedpreferences.App
 
-class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
+class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<Int>?,
+                                private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
 
     private var _binding: SearchBottomsheetDialogChildrenBinding? = null
 
@@ -41,6 +42,7 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = SearchBottomsheetDialogChildrenBinding.inflate(inflater, container, false)
+        restorePreviouslySelectedChildChips()
         return binding.root
     }
 
@@ -53,6 +55,8 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupChildren.setOnCheckedStateChangeListener { group, checkedIds ->
+                val selectedChips = checkedIds.toList()
+                chipClickListener(selectedChips)
                 selectedChildChips = checkedIds.map { group.findViewById<Chip>(it)}
                 if(checkedIds.size>0 ) {
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
@@ -85,5 +89,12 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun restorePreviouslySelectedChildChips() {
+        previouslySelectedChildChips?.forEach { chipId ->
+            val chip = binding.cpGroupChildren.findViewById<Chip>(chipId)
+            chip.isChecked = true
+        }
     }
 }

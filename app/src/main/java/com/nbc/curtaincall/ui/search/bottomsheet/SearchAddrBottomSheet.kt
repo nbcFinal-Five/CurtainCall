@@ -16,7 +16,8 @@ import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
 import com.nbc.curtaincall.util.sharedpreferences.App
 
-class SearchAddrBottomSheet : BottomSheetDialogFragment() {
+class SearchAddrBottomSheet(private val previouslySelectedAddrChips: List<Int>?,
+                            private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
 
     private var _binding: SearchBottomsheetDialogAddrBinding? = null
 
@@ -55,6 +56,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = SearchBottomsheetDialogAddrBinding.inflate(inflater, container, false)
+        restorePreviouslySelectedAddrChips()
         return binding.root
     }
 
@@ -67,6 +69,8 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupAddr.setOnCheckedStateChangeListener { group, checkedIds ->
+                val selectedChips = checkedIds.toList()
+                chipClickListener(selectedChips)
                 selectedAddrChips  = checkedIds.map { group.findViewById<Chip>(it)}
                     if(checkedIds.size > 0) {
                     btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
@@ -99,5 +103,12 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun restorePreviouslySelectedAddrChips() {
+        previouslySelectedAddrChips?.forEach { chipId ->
+            val chip = binding.cpGroupAddr.findViewById<Chip>(chipId)
+            chip.isChecked = true
+        }
     }
 }
