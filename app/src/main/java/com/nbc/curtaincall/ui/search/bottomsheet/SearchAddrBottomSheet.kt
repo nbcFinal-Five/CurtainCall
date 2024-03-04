@@ -36,9 +36,9 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
                 cpBottomAddrUlsan to "31",
                 cpBottomAddrSejong to "36",
                 cpBottomAddrGyeonggi to "41",
-                cpBottomAddrChungcheong to "43|44",
-                cpBottomAddrGyeongsang to "47|48",
-                cpBottomAddrJeolla to "45|46",
+                cpBottomAddrChungcheong to "43,44",
+                cpBottomAddrGyeongsang to "47,48",
+                cpBottomAddrJeolla to "45,46",
                 cpBottomAddrGangwon to "51",
                 cpBottomAddrJeju to "50",
                 cpBottomAddrDaehakro to "UNI"
