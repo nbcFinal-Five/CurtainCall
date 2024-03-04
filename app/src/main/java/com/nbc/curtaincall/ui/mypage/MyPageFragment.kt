@@ -14,6 +14,7 @@ import com.nbc.curtaincall.R
 import com.nbc.curtaincall.ui.auth.AuthActivity
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
 import com.nbc.curtaincall.ui.UserViewModel
+import com.nbc.curtaincall.ui.more.MoreActivity
 
 class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
@@ -87,6 +88,20 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 			dialog.setListener(this@MyPageFragment)
 			dialog.show(childFragmentManager, "Logout Dialog")
 		}
+
+		llReviewsMore.setOnClickListener {
+			val intent = Intent(requireActivity(), MoreActivity::class.java)
+			intent.putExtra("mode", "reviews")
+
+			startActivity(intent)
+		}
+
+		llLikesMore.setOnClickListener {
+			val intent = Intent(requireActivity(), MoreActivity::class.java)
+			intent.putExtra("mode", "likes")
+
+			startActivity(intent)
+		}
 	}
 
 	private fun initViewModel() {
@@ -98,6 +113,9 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 				binding.tvEmail.text = ""
 				binding.tvSignOut.visibility = View.INVISIBLE
 
+				binding.llReviewsMore.visibility = View.INVISIBLE
+				binding.llLikesMore.visibility = View.INVISIBLE
+
 				myPageViewModel.clear()
 			} else {
 				binding.clUserInfo.visibility = View.VISIBLE
@@ -105,6 +123,9 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 				binding.tvNickname.text = it.userMetadata!!["name"].toString().removeSurrounding("\"")
 				binding.tvEmail.text = it.email
 				binding.tvSignOut.visibility = View.VISIBLE
+
+				binding.llReviewsMore.visibility = View.VISIBLE
+				binding.llLikesMore.visibility = View.VISIBLE
 
 				myPageViewModel.setReview(it.id)
 				myPageViewModel.setBookmarks(it.id)

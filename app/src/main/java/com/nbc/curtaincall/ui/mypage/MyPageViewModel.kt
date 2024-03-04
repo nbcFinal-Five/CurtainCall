@@ -87,6 +87,7 @@ class MyPageViewModel : ViewModel() {
 							eq(column = "user_id", value = userId)
 						}
 						order(column = "created_at", order = Order.DESCENDING)
+						limit(count = 6)
 					}
 					.decodeList<GetBookmarkModel>()
 
