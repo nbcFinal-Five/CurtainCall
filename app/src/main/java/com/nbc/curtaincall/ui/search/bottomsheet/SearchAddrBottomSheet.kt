@@ -23,7 +23,6 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
-    private val searchListAdapter by lazy { SearchListAdapter() }
     private val addrFilterOptions by lazy {
         with(binding) {
             listOf(
@@ -37,16 +36,16 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
                 cpBottomAddrUlsan to "31",
                 cpBottomAddrSejong to "36",
                 cpBottomAddrGyeonggi to "41",
-                cpBottomAddrChungcheong to "4344",
-                cpBottomAddrGyeongsang to "4748",
-                cpBottomAddrJeolla to "4546",
+                cpBottomAddrChungcheong to "43|44",
+                cpBottomAddrGyeongsang to "47|48",
+                cpBottomAddrJeolla to "45|46",
                 cpBottomAddrGangwon to "51",
                 cpBottomAddrJeju to "50",
                 cpBottomAddrDaehakro to "UNI"
             )
         }
     }
-    private var selectedChips : List<Chip>? = null
+    private var selectedAddrChips : List<Chip>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,10 +65,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupAddr.setOnCheckedStateChangeListener { group, checkedIds ->
-                // 칩 그룹에서 칩 찾는법
-                selectedChips  = checkedIds.map { group.findViewById<Chip>(it)}
-                // 필터, 인덱스
-                // 각각 똑같은것을 찾아서 아이디를 받기
+                selectedAddrChips  = checkedIds.map { group.findViewById<Chip>(it)}
                     if(checkedIds.size > 0) {
                     btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnAddrCheck.setTypeface(null, Typeface.BOLD)
@@ -86,13 +82,15 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnAddrCheck.setOnClickListener {
-               val result =  selectedChips?.map { chip -> addrFilterOptions.find { chip == it.first } }
-                Log.d(TAG, "clickFilterButton: $result")
-                //addrFilterOptions.filter { it == selectedChips} //set 또는 filter 고민
-//                searchFilterViewModel.selectedChips
+                // 칩 그룹에서 칩 찾는법
+                // 필터, 인덱스
+                // 각각 똑같은것을 찾아서 아이디를 받기
+
+               val selectedResult =  selectedAddrChips?.map { chip -> addrFilterOptions.find { chip == it.first } }
+                searchFilterViewModel.getAddrFilteredList(selectedResult)// 선택된 filter 뷰모델에 전달
+                searchFilterViewModel.fetchSearchFilterResult() // 뷰모델에서 넘겨받은 리스트를 통해 api 요청함수 실행
                 dismiss()
             }
-
         }
     }
 

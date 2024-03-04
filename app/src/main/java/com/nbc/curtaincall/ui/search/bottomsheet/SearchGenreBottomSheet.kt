@@ -2,6 +2,7 @@ package com.nbc.curtaincall.ui.search.bottomsheet
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,6 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
-    private val searchListAdapter by lazy { SearchListAdapter() }
     private val genreFilterOptions by lazy {
         with(binding){
             listOf(
@@ -34,11 +34,11 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
                 cpBottomKoreanClassic to "CCCC",
                 cpBottomPopularMusic to "CCCD",
                 cpBottomPublicfutility to "BBBE",
-                cpBottomTheater to "AAAA",
+                cpBottomTheater to "AAAA"
             )
         }
-
     }
+    private var selectedGenreChips : List<Chip>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,6 +59,7 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupGenre.setOnCheckedStateChangeListener { group, checkedIds ->
+                selectedGenreChips = checkedIds.map { group.findViewById<Chip>(it)}
                 if(checkedIds.size > 0) {
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnGenreCheck.setTypeface(null, Typeface.BOLD)
@@ -76,6 +77,10 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnGenreCheck.setOnClickListener {
+                val selectedResult = selectedGenreChips?.map { chip -> genreFilterOptions.find { chip == it.first } }
+                searchFilterViewModel.getGenreFilteredList(selectedResult)
+                Log.d(TAG, "clickFilterButton: $selectedResult")
+                searchFilterViewModel.fetchSearchFilterResult()
                 dismiss()
             }
         }
