@@ -217,7 +217,7 @@
             android:layout_marginTop="388dp"
             android:fontFamily="@font/font_extrabold"
             android:textColor="@color/white"
-            android:text="관심목록"
+            android:text="@string/bookmark_title"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
