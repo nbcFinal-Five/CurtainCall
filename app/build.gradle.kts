@@ -102,12 +102,7 @@ dependencies {
 	implementation("com.kakao.maps.open:android:2.6.0")
 
 	//BottomSheet, Chip
-
 	implementation("com.google.android.material:material:1.11.0")
-
-	//Glide
-	implementation("com.github.bumptech.glide:glide:4.16.0")
-	annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
 	// shimmer
 	implementation("com.facebook.shimmer:shimmer:0.5.0")
