@@ -2,6 +2,7 @@ package com.nbc.curtaincall.ui.search.bottomsheet
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,16 +24,15 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private val searchFilterViewModel  by activityViewModels<SearchViewModel>()
-    private val searchListAdapter by lazy { SearchListAdapter() }
     private val childrenFilterOptions by lazy {
-        listOf(
-            with(binding){
-                cpChildrenPossible to "Y"
+        with(binding){
+            listOf(
+                cpChildrenPossible to "Y",
                 cpChildrenImpossible to "N"
-            }
-        )
+            )
+        }
     }
-    private val selectedChips: MutableList<String> = mutableListOf()
+    private var selectedChildChips : List<Chip>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +52,7 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupChildren.setOnCheckedStateChangeListener { group, checkedIds ->
+                selectedChildChips = checkedIds.map { group.findViewById<Chip>(it)}
                 if(checkedIds.size>0 ) {
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.BOLD)
@@ -68,6 +69,10 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnChildrenCheck.setOnClickListener {
+                val selectedResult = selectedChildChips?.map { chip ->  childrenFilterOptions.find { chip == it.first }}
+                searchFilterViewModel.getChildFilteredList(selectedResult)
+                Log.d(TAG, "clickFilterButton: $selectedResult")
+                searchFilterViewModel.fetchSearchFilterResult()
                 dismiss()
             }
         }

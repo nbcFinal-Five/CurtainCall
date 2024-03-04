@@ -15,7 +15,6 @@ object Constants {
     const val END_DATE = "20241231"
     const val CURRENT_PAGE = "1"
     const val PAGE_INDEX = "10"
-    const val KID_STATE = "N"
 
     //SheardPreferences
     const val PREFS_FILENAME = "prefs"
