@@ -14,6 +14,7 @@ import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogGenreBinding
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
+import com.nbc.curtaincall.util.sharedpreferences.App
 
 class SearchGenreBottomSheet : BottomSheetDialogFragment() {
 
@@ -79,7 +80,6 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
             btnGenreCheck.setOnClickListener {
                 val selectedResult = selectedGenreChips?.map { chip -> genreFilterOptions.find { chip == it.first } }
                 searchFilterViewModel.getGenreFilteredList(selectedResult)
-                Log.d(TAG, "clickFilterButton: $selectedResult")
                 searchFilterViewModel.fetchSearchFilterResult()
                 dismiss()
             }

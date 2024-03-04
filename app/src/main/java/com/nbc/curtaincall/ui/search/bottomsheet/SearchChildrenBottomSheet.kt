@@ -15,6 +15,7 @@ import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogChildrenBinding
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
+import com.nbc.curtaincall.util.sharedpreferences.App
 
 class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
 
@@ -71,7 +72,6 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
             btnChildrenCheck.setOnClickListener {
                 val selectedResult = selectedChildChips?.map { chip ->  childrenFilterOptions.find { chip == it.first }}
                 searchFilterViewModel.getChildFilteredList(selectedResult)
-                Log.d(TAG, "clickFilterButton: $selectedResult")
                 searchFilterViewModel.fetchSearchFilterResult()
                 dismiss()
             }

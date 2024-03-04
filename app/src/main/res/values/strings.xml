@@ -55,7 +55,6 @@
   <string name="filter_children_impossible">불가능</string>
 
   <string name="filter_addr">지역</string>
-  <string name="filter_addr_nationwide">전국</string>
   <string name="filter_addr_seoul">서울</string>
   <string name="filter_addr_incheon">인천</string>
   <string name="filter_addr_daejeon">대전</string>
@@ -65,12 +64,14 @@
   <string name="filter_addr_ulsan">울산</string>
   <string name="filter_addr_sejong">세종</string>
   <string name="filter_addr_gyeonggi">경기</string>
-  <string name="filter_addr_chungcheong">충북/충남</string>
-  <string name="filter_addr_jeolla">전북/전남</string>
-  <string name="filter_addr_gyeongsang">경북/경남</string>
+  <string name="filter_addr_chungcheongbookdo">충북</string>
+  <string name="filter_addr_chungcheongnamdo">충남</string>
+  <string name="filter_addr_jeollabookdo">전북</string>
+  <string name="filter_addr_jeollanamdo">전남</string>
+  <string name="filter_addr_gyeongsangbookdo">경북</string>
+  <string name="filter_addr_gyeongsangnamdo">경남</string>
   <string name="filter_addr_gangwon">강원</string>
   <string name="filter_addr_jeju">제주</string>
-  <string name="filter_addr_daehakro">대학로</string>
 
   <string name="filter_date">날짜</string>
   <string name="filter_choose">조건 검색</string>
