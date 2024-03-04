@@ -45,7 +45,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
             )
         }
     }
-    private var selectedChips : List<Chip>? = null
+    private var selectedAddrChips : List<Chip>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,7 +65,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupAddr.setOnCheckedStateChangeListener { group, checkedIds ->
-                selectedChips  = checkedIds.map { group.findViewById<Chip>(it)}
+                selectedAddrChips  = checkedIds.map { group.findViewById<Chip>(it)}
                     if(checkedIds.size > 0) {
                     btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnAddrCheck.setTypeface(null, Typeface.BOLD)
@@ -86,7 +86,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
                 // 필터, 인덱스
                 // 각각 똑같은것을 찾아서 아이디를 받기
 
-               val selectedResult =  selectedChips?.map { chip -> addrFilterOptions.find { chip == it.first } }
+               val selectedResult =  selectedAddrChips?.map { chip -> addrFilterOptions.find { chip == it.first } }
                 searchFilterViewModel.getAddrFilteredList(selectedResult)// 선택된 filter 뷰모델에 전달
                 searchFilterViewModel.fetchSearchFilterResult() // 뷰모델에서 넘겨받은 리스트를 통해 api 요청함수 실행
                 dismiss()

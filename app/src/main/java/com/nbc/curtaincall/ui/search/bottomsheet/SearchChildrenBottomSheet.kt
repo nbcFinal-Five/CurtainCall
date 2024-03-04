@@ -32,7 +32,7 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
             )
         }
     }
-    private var selectedChips : List<Chip>? = null
+    private var selectedChildChips : List<Chip>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +52,7 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupChildren.setOnCheckedStateChangeListener { group, checkedIds ->
+                selectedChildChips = checkedIds.map { group.findViewById<Chip>(it)}
                 if(checkedIds.size>0 ) {
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.BOLD)
@@ -68,7 +69,7 @@ class SearchChildrenBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnChildrenCheck.setOnClickListener {
-                val selectedResult = selectedChips?.map { chip ->  childrenFilterOptions.find { chip == it.first }}
+                val selectedResult = selectedChildChips?.map { chip ->  childrenFilterOptions.find { chip == it.first }}
                 searchFilterViewModel.getChildFilteredList(selectedResult)
                 Log.d(TAG, "clickFilterButton: $selectedResult")
                 searchFilterViewModel.fetchSearchFilterResult()

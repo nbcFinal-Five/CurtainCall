@@ -37,9 +37,8 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
                 cpBottomTheater to "AAAA"
             )
         }
-
     }
-    private var selectedChips : List<Chip>? = null
+    private var selectedGenreChips : List<Chip>? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,6 +59,7 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupGenre.setOnCheckedStateChangeListener { group, checkedIds ->
+                selectedGenreChips = checkedIds.map { group.findViewById<Chip>(it)}
                 if(checkedIds.size > 0) {
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnGenreCheck.setTypeface(null, Typeface.BOLD)
@@ -77,7 +77,7 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnGenreCheck.setOnClickListener {
-                val selectedResult = selectedChips?.map { chip -> genreFilterOptions.find { chip == it.first } }
+                val selectedResult = selectedGenreChips?.map { chip -> genreFilterOptions.find { chip == it.first } }
                 searchFilterViewModel.getGenreFilteredList(selectedResult)
                 Log.d(TAG, "clickFilterButton: $selectedResult")
                 searchFilterViewModel.fetchSearchFilterResult()
