@@ -1,10 +1,10 @@
 package com.nbc.curtaincall.ui.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.kakao.vectormap.KakaoMap
@@ -14,7 +14,7 @@ import com.kakao.vectormap.MapView
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentDetailBinding
 
-class DetailFragment : Fragment() {
+class dsDetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
