@@ -94,6 +94,7 @@
               android:textSize="16sp"
               android:layout_marginStart="8dp"
               android:fontFamily="@font/font_regular"
+              android:visibility="invisible"
       />
 
       <androidx.constraintlayout.widget.ConstraintLayout
