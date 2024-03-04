@@ -15,20 +15,33 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentSearchBinding
+import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
+import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
+import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
+import com.nbc.curtaincall.ui.main.MainViewModel
+import com.nbc.curtaincall.ui.main.MainViewModelFactory
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchAddrBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchChildrenBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchGenreBottomSheet
+import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
 import com.nbc.curtaincall.util.sharedpreferences.App
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), PosterClickListener {
 
     private var _binding: FragmentSearchBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val searchListAdapter by lazy { SearchListAdapter() }
+    private val searchListAdapter by lazy { SearchListAdapter(this) }
     private val searchViewModel  by activityViewModels<SearchViewModel>()
+    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel> {
+        MainViewModelFactory(
+            fetchRemoteRepository = FetchRepositoryImpl(
+                RetrofitClient.fetch
+            )
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,57 +97,60 @@ class SearchFragment : Fragment() {
                 }
             }
 
-            ivSearch.setOnClickListener {
+            ivSearch.setOnClickListener {// 제목 기준으로 검색하기
                 hideKeyboard()
                 App.prefs.saveSearchWord(etSearch.text?.toString()?.trim() ?:"")
                 searchViewModel.fetchSearchResult(etSearch.text?.toString()?.trim() ?:"")
+            }
 
-                // 검색 시 로딩바 보여주기
-                searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-                    if (isLoading) {
-                        pbSearchLoading.visibility = View.VISIBLE
-                        tvSearchNoresult.visibility = View.GONE
-                        rvSearch.visibility = View.GONE
-                    } else {
-                        pbSearchLoading.visibility = View.GONE
-                        rvSearch.visibility = View.VISIBLE
-                    }
-                }
-
-                // 통신 장애시 안내 문구
-                searchViewModel.failureMessage.observe(viewLifecycleOwner) {
-                    if (!it.isNullOrEmpty()) {
-                        Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
-                    }
-
-                }
-
-                // 검색결과 안내 text
-                searchViewModel.searchResultList.observe(viewLifecycleOwner) { result ->
-                    searchListAdapter.submitList(result)
-                    if(result == null) {
-                        tvSearchNoresult.visibility = View.VISIBLE
-                    } else {
-                        tvSearchNoresult.visibility = View.GONE
-                    }
+            // 검색 시 로딩바 보여주기
+            searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                if (isLoading) {
+                    pbSearchLoading.visibility = View.VISIBLE
+                    tvSearchNoresult.visibility = View.GONE
+                    rvSearch.visibility = View.GONE
+                } else {
+                    pbSearchLoading.visibility = View.GONE
+                    rvSearch.visibility = View.VISIBLE
                 }
             }
+
+            // 통신 장애시 안내 문구
+            searchViewModel.failureMessage.observe(viewLifecycleOwner) {
+                if (!it.isNullOrEmpty()) {
+                    Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            // 검색 리스트 구독하여 변경점 생기면, listadapter가 확인하여 리사이클러뷰 업데이트 , 검색결과 안내 text visible 유무
+            searchViewModel.searchResultList.observe(viewLifecycleOwner) { result ->
+                searchListAdapter.submitList(result)
+                if(result == null) {
+                    tvSearchNoresult.visibility = View.VISIBLE
+                } else {
+                    tvSearchNoresult.visibility = View.GONE
+                }
+            }
+
         }
     }
 
     private fun initList() { // 검색 결과 recyclerview 만들기
         with(binding) {
             with(rvSearch) {
-                adapter = searchListAdapter.apply {
-                    itemClick = object : SearchListAdapter.ItemCLick{
-                        override fun onClick(position: Int) {
-                        }
-                    }
-                }
+                adapter = searchListAdapter
                 layoutManager = GridLayoutManager(requireActivity(),3)
                 setHasFixedSize(true)
             }
         }
+    }
+
+    override fun posterClicked(id: String) { // 해당 아이템 클릭시 간단화면 띄우기
+        val ticketDialog = TicketDialogFragment()
+        sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
+        ticketDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
+        ticketDialog.show(childFragmentManager, ticketDialog.tag)
     }
 
     private fun hideKeyboard() { // 키보드 숨기기

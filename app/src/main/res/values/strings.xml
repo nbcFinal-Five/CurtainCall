@@ -86,6 +86,7 @@
   <string name="sign_in_fail">계정 정보가 틀렸습니다</string>
   <string name="logout">로그아웃</string>
   <string name="home_top_upcoming_text">공연예정</string>
+  <string name="server_error">서버 오류가 발생하였습니다</string>
 
   <string name="count_key">리뷰수</string>
   <string name="count">회</string>
