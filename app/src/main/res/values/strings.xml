@@ -92,4 +92,5 @@
   <string name="cancel">취소</string>
   <string name="ok">확인</string>
   <string name="modal_logout_title">로그아웃 하시겠습니까?</string>
+  <string name="show_more">더보기</string>
 </resources>
