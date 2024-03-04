@@ -83,7 +83,6 @@ class MoreActivity : AppCompatActivity() {
 		}
 
 		moreViewModel.isEnd.observe(this) {
-			Log.d("debug", it.toString())
 			binding.clSkeleton.visibility = if (it) View.GONE else View.VISIBLE
 		}
 	}
