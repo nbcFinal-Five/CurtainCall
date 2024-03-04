@@ -53,18 +53,14 @@ class SearchViewModel : ViewModel() {
     }
 
     fun fetchSearchFilterResult() {
-        val genreFilteredList = _genreFilterResultList.value
-        val addrFilteredList = _addrFilterResultList.value
-        val childFilteredList = _childFilterResultList.value
+        val genreFilteredList = genreFilterResultList.value
+        val addrFilteredList = addrFilterResultList.value
+        val childFilteredList = childFilterResultList.value
 
         if(genreFilteredList != null || addrFilteredList != null || childFilteredList != null) {
             val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString (",")  ?: ""
             val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString (",") ?: ""
             val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString (",")  ?: ""
-
-            Log.d(TAG, "fetchSearchFilterResult genre: $genre")
-            Log.d(TAG, "fetchSearchFilterResult addr: $addr")
-            Log.d(TAG, "fetchSearchFilterResult child: $child")
 
             viewModelScope.launch {
                 _isLoading.value = true
