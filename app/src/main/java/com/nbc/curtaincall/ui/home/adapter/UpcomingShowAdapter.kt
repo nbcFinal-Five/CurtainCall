@@ -30,7 +30,6 @@ class UpcomingShowAdapter :
                 tvPerformanceName.text = item.prfnm
                 tvPeriod.text = "${item.prfpdfrom} ~ ${item.prfpdto}"
                 tvFacilityName.text = item.fcltynm
-                tvPageIndicator.text = "${adapterPosition + 1} / 10"
             }
         }
     }

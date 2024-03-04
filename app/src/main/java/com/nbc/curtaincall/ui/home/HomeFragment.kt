@@ -1,16 +1,21 @@
 package com.nbc.curtaincall.ui.home
 
+import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.DimenRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
@@ -49,6 +54,13 @@ class HomeFragment : Fragment(), PosterClickListener {
     private val kidShowAdapter: KidShowAdapter by lazy { KidShowAdapter(this) }
     private var isPaging = false
     private var pagingJob: Job? = null
+
+    private val onPageChangeCallback: OnPageChangeCallback = object : OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            binding.tvPageIndicator.text = "${position + 1} / 10"
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,10 +102,21 @@ class HomeFragment : Fragment(), PosterClickListener {
                 with(binding) {
                     //viewpager 연결
                     viewPager.adapter = upComingShowAdapter
+                    viewPager.offscreenPageLimit = 1
+                    viewPager.setPageTransformer(SliderTransformer(requireContext()))
+
+                    val itemDecoration = HorizontalMarginItemDecoration(
+                        requireContext(),
+                        R.dimen.viewpager_current_item_horizontal_margin
+                    )
+                    viewPager.addItemDecoration(itemDecoration)
+                    viewPager.registerOnPageChangeCallback(onPageChangeCallback)
+
                     //tab 연결
                     TabLayoutMediator(tabPosterIndicator, viewPager) { tab, position ->
                         viewPager.currentItem = tab.position
                     }.attach()
+
                 }
                 if (!isPaging) startPaging()
             }
@@ -179,7 +202,26 @@ class HomeFragment : Fragment(), PosterClickListener {
     override fun posterClicked(id: String) {
         val ticketDialog = TicketDialogFragment()
         sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
-        ticketDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
+        ticketDialog.setStyle(
+            DialogFragment.STYLE_NORMAL,
+            R.style.RoundCornerBottomSheetDialogTheme
+        )
         ticketDialog.show(childFragmentManager, ticketDialog.tag)
     }
 }
+
+class HorizontalMarginItemDecoration(context: Context, @DimenRes horizontalMarginInDp: Int) :
+    RecyclerView.ItemDecoration() {
+    private val horizontalMarginInPx: Int =
+        context.resources.getDimension(horizontalMarginInDp).toInt()
+
+    override fun getItemOffsets(
+        outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
+    ) {
+        outRect.right = horizontalMarginInPx
+        outRect.left = horizontalMarginInPx
+    }
+}
+
+
+
