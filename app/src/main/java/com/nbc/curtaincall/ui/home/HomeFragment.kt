@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
@@ -27,6 +29,7 @@ import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 class HomeFragment : Fragment(), PosterClickListener {
     private var _binding: com.nbc.curtaincall.databinding.FragmentHomeBinding? = null
@@ -90,6 +93,8 @@ class HomeFragment : Fragment(), PosterClickListener {
                 with(binding) {
                     //viewpager 연결
                     viewPager.adapter = upComingShowAdapter
+                    viewPager.setPageTransformer(SliderTransformer(3))
+
                     //tab 연결
                     TabLayoutMediator(tabPosterIndicator, viewPager) { tab, position ->
                         viewPager.currentItem = tab.position
@@ -181,5 +186,52 @@ class HomeFragment : Fragment(), PosterClickListener {
         sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
         ticketDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
         ticketDialog.show(childFragmentManager, ticketDialog.tag)
+    }
+}
+class SliderTransformer(private val offscreenPageLimit: Int) : ViewPager2.PageTransformer {
+
+    companion object {
+
+        private const val DEFAULT_TRANSLATION_X = .0f
+        private const val DEFAULT_TRANSLATION_FACTOR = 1.2f
+
+        private const val SCALE_FACTOR = .14f
+        private const val DEFAULT_SCALE = 1f
+
+        private const val ALPHA_FACTOR = .3f
+        private const val DEFAULT_ALPHA = 1f
+
+    }
+
+    override fun transformPage(page: View, position: Float) {
+
+        page.apply {
+
+            ViewCompat.setElevation(page, -abs(position))
+
+            val scaleFactor = -SCALE_FACTOR * position + DEFAULT_SCALE
+            val alphaFactor = -ALPHA_FACTOR * position + DEFAULT_ALPHA
+
+            when {
+                position <= 0f -> {
+                    translationX = DEFAULT_TRANSLATION_X
+                    scaleX = DEFAULT_SCALE
+                    scaleY = DEFAULT_SCALE
+                    alpha = DEFAULT_ALPHA + position
+                }
+                position <= offscreenPageLimit - 1 -> {
+                    scaleX = scaleFactor
+                    scaleY = scaleFactor
+                    translationX = -(width / DEFAULT_TRANSLATION_FACTOR) * position
+                    alpha = alphaFactor
+                }
+                else -> {
+                    translationX = DEFAULT_TRANSLATION_X
+                    scaleX = DEFAULT_SCALE
+                    scaleY = DEFAULT_SCALE
+                    alpha = DEFAULT_ALPHA
+                }
+            }
+        }
     }
 }

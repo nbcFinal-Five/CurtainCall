@@ -2,7 +2,6 @@ package com.nbc.curtaincall.ui.ticket
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +63,6 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                 sharedViewModel.fetchShowDetail(id)
             }
             showDetailInfo.observe(viewLifecycleOwner) { showDetailInfoList ->
-                Log.i("TAG", "onViewCreated: showList $showDetailInfoList")
                 with(binding) {
                     tvDetailShowNameSub.text = showDetailInfoList[0].prfnm
                     ivDetailPosterImage.load(showDetailInfoList[0].poster)
