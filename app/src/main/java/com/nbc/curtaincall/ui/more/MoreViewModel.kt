@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nbc.curtaincall.supabase.Supabase
+import com.nbc.curtaincall.supabase.model.GetBookmarkModel
 import com.nbc.curtaincall.supabase.model.GetReviewModel
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
@@ -14,12 +15,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.internal.checkOffsetAndCount
 
 class MoreViewModel : ViewModel() {
 	companion object {
-		const val LIMIT: Long = 4
+		const val LIMIT: Long = 18
 	}
 
+	//	reviews
 	private val _reviewPage = MutableLiveData<Int>(0)
 	val reviewPage: LiveData<Int>
 		get() = _reviewPage
@@ -28,9 +31,9 @@ class MoreViewModel : ViewModel() {
 	val reviewLoading: LiveData<Boolean>
 		get() = _reviewLoading
 
-	private val _reviewIsEnd = MutableLiveData<Boolean>(false)
-	val reviewIsEnd: LiveData<Boolean>
-		get() = _reviewIsEnd
+	private val _isEnd = MutableLiveData<Boolean>(false)
+	val isEnd: LiveData<Boolean>
+		get() = _isEnd
 
 
 	private val _reviewList = MutableLiveData<List<GetReviewModel>>(emptyList())
@@ -38,12 +41,10 @@ class MoreViewModel : ViewModel() {
 		get() = _reviewList
 
 	fun loadMoreReviews(userId: String) {
-		if (reviewLoading.value != true && _reviewIsEnd.value == false) {
+		if (_reviewLoading.value != true && _isEnd.value == false) {
 			_reviewLoading.value = true
 
 			CoroutineScope(Dispatchers.IO).launch {
-				val skip = LIMIT * (_reviewPage.value ?: 0)
-
 				try {
 					val columns = Columns.raw(
 						"""
@@ -59,6 +60,7 @@ class MoreViewModel : ViewModel() {
 							}
 							order(column = "created_at", order = Order.DESCENDING)
 							limit(count = LIMIT)
+							range((_reviewPage.value!!) * LIMIT, (_reviewPage.value!! + 1) * LIMIT - 1)
 						}
 						.decodeList<GetReviewModel>()
 
@@ -66,7 +68,7 @@ class MoreViewModel : ViewModel() {
 						_reviewList.value = _reviewList.value?.plus(reviews)
 
 						if (reviews.size < LIMIT) {
-							_reviewIsEnd.value = true
+							_isEnd.value = true
 						}
 					}
 				} catch (e: RestException) {
@@ -74,11 +76,72 @@ class MoreViewModel : ViewModel() {
 
 				} finally {
 					withContext(Dispatchers.Main) {
-						if (_reviewIsEnd.value != true) {
+						if (_isEnd.value != true) {
 							_reviewPage.value = (_reviewPage.value ?: 0) + 1
 						}
 
 						_reviewLoading.value = false
+					}
+				}
+			}
+		}
+	}
+
+
+	// bookmarks
+	private val _bookmarksPage = MutableLiveData<Int>(0)
+	val bookmarksPage: LiveData<Int>
+		get() = _bookmarksPage
+
+	private val _bookmarksLoading = MutableLiveData<Boolean>(false)
+	val bookmarksLoading: LiveData<Boolean>
+		get() = _bookmarksLoading
+
+	private val _bookmarksList = MutableLiveData<List<GetBookmarkModel>>(emptyList())
+	val bookmarksList: LiveData<List<GetBookmarkModel>>
+		get() = _bookmarksList
+
+	fun loadMoreBookmarks(userId: String) {
+		if (_bookmarksLoading.value != true && _isEnd.value == false) {
+			_bookmarksLoading.value = true
+
+			CoroutineScope(Dispatchers.IO).launch {
+				try {
+					val columns = Columns.raw(
+						"""
+					*
+				""".trimIndent()
+					)
+
+					val bookmarks = Supabase.client
+						.from("bookmarks")
+						.select(columns) {
+							filter {
+								eq(column = "user_id", value = userId)
+							}
+							order(column = "created_at", order = Order.DESCENDING)
+							limit(count = LIMIT)
+							range((_bookmarksPage.value!!) * LIMIT, (_bookmarksPage.value!! + 1) * LIMIT - 1)
+						}
+						.decodeList<GetBookmarkModel>()
+
+					withContext(Dispatchers.Main) {
+						_bookmarksList.value = _bookmarksList.value?.plus(bookmarks)
+
+						if (bookmarks.size < LIMIT) {
+							_isEnd.value = true
+						}
+					}
+				} catch (e: RestException) {
+					Log.d("more", e.error)
+
+				} finally {
+					withContext(Dispatchers.Main) {
+						if (_isEnd.value != true) {
+							_bookmarksPage.value = (_bookmarksPage.value ?: 0) + 1
+						}
+
+						_bookmarksLoading.value = false
 					}
 				}
 			}

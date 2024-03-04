@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.ActivityMoreBinding
 import com.nbc.curtaincall.ui.UserViewModel
 import com.nbc.curtaincall.ui.mypage.BookmarkListAdapter
@@ -21,6 +22,8 @@ class MoreActivity : AppCompatActivity() {
 	private val reviewAdapter by lazy { ReviewListAdapter() }
 	private val bookmarkAdapter by lazy { BookmarkListAdapter() }
 
+	private val layoutManager by lazy { GridLayoutManager(this@MoreActivity, 3) }
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		binding = ActivityMoreBinding.inflate(layoutInflater)
@@ -28,10 +31,23 @@ class MoreActivity : AppCompatActivity() {
 
 		val mode = intent.getStringExtra("mode") ?: return finish()
 
-		initViewModel()
+		initTitle(mode)
+		initViewModel(mode)
 		initHandle(mode)
 		initScroll(mode)
-		moreViewModel.loadMoreReviews(userViewModel.userInfo.value?.id ?: "")
+		initData(mode)
+	}
+
+	private fun initTitle(mode: String) = with(binding) {
+		tvLoginTitle.text = getString(if (mode == "reviews") R.string.my_page_showcase else R.string.bookmark_title)
+	}
+
+	private fun initData(mode: String) {
+		if (mode == "reviews") {
+			moreViewModel.loadMoreReviews(userViewModel.userInfo.value?.id ?: "")
+		} else {
+			moreViewModel.loadMoreBookmarks(userViewModel.userInfo.value?.id ?: "")
+		}
 	}
 
 	private fun initScroll(mode: String) = with(binding) {
@@ -39,7 +55,7 @@ class MoreActivity : AppCompatActivity() {
 		val adapter = if (mode == "reviews") reviewAdapter else bookmarkAdapter
 
 		val density = resources.displayMetrics.density
-		rv.layoutManager = GridLayoutManager(this@MoreActivity, 3)
+		rv.layoutManager = layoutManager
 		rv.adapter = adapter
 		rv.addItemDecoration(
 			GridItemDecoration(
@@ -47,15 +63,27 @@ class MoreActivity : AppCompatActivity() {
 				verticalSpacing = (12 * density).toInt()
 			)
 		)
+
+		rv.addOnScrollListener(InfiniteScrollListener(layoutManager = layoutManager) {
+			moreViewModel.loadMoreReviews(userViewModel.userInfo.value!!.id)
+		})
 	}
 
-	private fun initViewModel() {
-		moreViewModel.reviewList.observe(this) {
-			reviewAdapter.submitList(it)
+	private fun initViewModel(mode: String) {
+		if (mode == "reviews") {
+			moreViewModel.reviewList.observe(this) {
+				reviewAdapter.submitList(it)
+			}
+
+
+		} else {
+			moreViewModel.bookmarksList.observe(this) {
+				bookmarkAdapter.submitList(it)
+			}
 		}
 
-		moreViewModel.reviewIsEnd.observe(this) {
-			// TODO Skeleton
+		moreViewModel.isEnd.observe(this) {
+			binding.clSkeleton.visibility = if (it) View.GONE else View.VISIBLE
 		}
 	}
 
@@ -65,14 +93,8 @@ class MoreActivity : AppCompatActivity() {
 		}
 
 		when (mode) {
-			"reviews" -> {
-				rvShowcase.visibility = View.VISIBLE
-
-			}
-
-			"likes" -> {
-				rvBookmarks.visibility = View.VISIBLE
-			}
+			"reviews" -> rvShowcase.visibility = View.VISIBLE
+			"likes" -> rvBookmarks.visibility = View.VISIBLE
 		}
 	}
 }

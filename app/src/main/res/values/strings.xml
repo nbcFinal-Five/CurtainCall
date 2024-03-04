@@ -101,4 +101,5 @@
   <string name="ticket_place_title">공연장</string>
   <string name="ticket_cast_title">출연진</string>
   <string name="ticket_product_title">제작</string>
+  <string name="bookmark_title">관심목록</string>
 </resources>

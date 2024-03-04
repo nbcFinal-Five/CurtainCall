@@ -129,6 +129,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 
 				myPageViewModel.setReview(it.id)
 				myPageViewModel.setBookmarks(it.id)
+				myPageViewModel.setReviewCount(it.id)
 			}
 		}
 
@@ -138,8 +139,6 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 				binding.rvShowcase.visibility = View.INVISIBLE
 				binding.tvShowcaseDetail.visibility = View.VISIBLE
 			} else {
-				binding.tvReviewCount.text = it.size.toString() + getString(R.string.count)
-
 				if (it.isEmpty()) {
 					binding.rvShowcase.visibility = View.INVISIBLE
 					binding.tvShowcaseDetail.visibility = View.VISIBLE
@@ -154,17 +153,26 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 
 		myPageViewModel.isReviewLoading.observe(viewLifecycleOwner) {
 			if (it) {
-				binding.clCountSkeleton.visibility = View.VISIBLE
 				binding.clReviewSkeleton.visibility = View.VISIBLE
-
-				binding.tvReviewCount.visibility = View.INVISIBLE
 				binding.rvShowcase.visibility = View.INVISIBLE
 				binding.tvShowcaseDetail.visibility = View.INVISIBLE
 			} else {
 				binding.clReviewSkeleton.visibility = View.INVISIBLE
-				binding.clCountSkeleton.visibility = View.INVISIBLE
+			}
+		}
 
+		// reviews count
+		myPageViewModel.reviewCount.observe(viewLifecycleOwner) {
+			if (it != null) binding.tvReviewCount.text = it.toString() + getString(R.string.count)
+		}
+
+		myPageViewModel.isReviewCountLoading.observe(viewLifecycleOwner) {
+			if (it) {
+				binding.clCountSkeleton.visibility = View.VISIBLE
+				binding.tvReviewCount.visibility = View.INVISIBLE
+			} else {
 				binding.tvReviewCount.visibility = View.VISIBLE
+				binding.clCountSkeleton.visibility = View.INVISIBLE
 			}
 		}
 
