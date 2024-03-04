@@ -143,7 +143,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_my_page_title"
             android:layout_marginTop="120dp"
-            android:fontFamily="@font/font_regular"
+            android:fontFamily="@font/font_extrabold"
     />
 
     <LinearLayout
