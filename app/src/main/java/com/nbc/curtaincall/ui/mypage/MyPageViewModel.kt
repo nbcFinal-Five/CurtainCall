@@ -10,6 +10,7 @@ import com.nbc.curtaincall.supabase.model.GetReviewModel
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.postgrest.query.Count
 import io.github.jan.supabase.postgrest.query.Order
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +26,17 @@ class MyPageViewModel : ViewModel() {
 	private val _reviews = MutableLiveData<List<GetReviewModel>?>(null)
 	val reviews: LiveData<List<GetReviewModel>?>
 		get() = _reviews
+
+
+	// review count
+	private val _reviewCount = MutableLiveData<Long?>(null)
+	val reviewCount: LiveData<Long?>
+		get() = _reviewCount
+
+	private val _isReviewCountLoading = MutableLiveData(false)
+	val isReviewCountLoading: LiveData<Boolean>
+		get() = _isReviewCountLoading
+
 
 	// bookmarks
 	private val _isBookmarkLoading = MutableLiveData(false)
@@ -53,6 +65,7 @@ class MyPageViewModel : ViewModel() {
 							eq(column = "user_id", value = userId)
 						}
 						order(column = "created_at", order = Order.DESCENDING)
+						range(0, 5)
 					}
 					.decodeList<GetReviewModel>()
 
@@ -64,6 +77,33 @@ class MyPageViewModel : ViewModel() {
 			} finally {
 				withContext(Dispatchers.Main) {
 					_isReviewLoading.value = false
+				}
+			}
+		}
+	}
+
+	fun setReviewCount(userId: String) {
+		_isReviewCountLoading.value = true
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				val count = Supabase.client
+					.from("reviews")
+					.select(head = true) {
+						filter {
+							eq(column = "user_id", value = userId)
+						}
+						count(Count.EXACT)
+					}.countOrNull()!!
+
+				withContext(Dispatchers.Main) {
+					_reviewCount.value = count
+				}
+			} catch (e: RestException) {
+				Log.d("my reviews count", e.error)
+			} finally {
+				withContext(Dispatchers.Main) {
+					_isReviewCountLoading.value = false
 				}
 			}
 		}
@@ -87,7 +127,7 @@ class MyPageViewModel : ViewModel() {
 							eq(column = "user_id", value = userId)
 						}
 						order(column = "created_at", order = Order.DESCENDING)
-						limit(count = 6)
+						range(0, 5)
 					}
 					.decodeList<GetBookmarkModel>()
 
@@ -108,5 +148,6 @@ class MyPageViewModel : ViewModel() {
 	fun clear() {
 		_reviews.value = null
 		_bookmarks.value = null
+		_reviewCount.value = null
 	}
 }
