@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
@@ -21,7 +20,6 @@ class dsDetailFragment : Fragment() {
 
     private lateinit var mapView: MapView
 
-    private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
