@@ -286,5 +286,18 @@
               layout="@layout/skeleton_my_page"
       />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dattai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dattai"
+            app:layout_constraintTop_toBottomOf="@id/rv_bookmarks"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_gradient"
+            android:fontFamily="@font/font_extrabold"
+            android:textColor="@color/white"
+    />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

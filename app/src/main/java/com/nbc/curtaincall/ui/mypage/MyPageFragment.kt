@@ -102,30 +102,37 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 
 			startActivity(intent)
 		}
+
+		btnDattai.setOnClickListener {
+			userViewModel.quitUser()
+		}
 	}
 
-	private fun initViewModel() {
+	private fun initViewModel() = with(binding) {
 		userViewModel.userInfo.observe(viewLifecycleOwner) {
 			if (it == null) {
-				binding.clUserInfo.visibility = View.INVISIBLE
-				binding.cvOpenAuthActivity.visibility = View.VISIBLE
-				binding.tvNickname.text = ""
-				binding.tvEmail.text = ""
-				binding.tvSignOut.visibility = View.INVISIBLE
+				clUserInfo.visibility = View.INVISIBLE
+				cvOpenAuthActivity.visibility = View.VISIBLE
+				tvNickname.text = ""
+				tvEmail.text = ""
+				tvSignOut.visibility = View.INVISIBLE
 
-				binding.llReviewsMore.visibility = View.INVISIBLE
-				binding.llLikesMore.visibility = View.INVISIBLE
+				llReviewsMore.visibility = View.INVISIBLE
+				llLikesMore.visibility = View.INVISIBLE
 
+				btnDattai.visibility = View.INVISIBLE
 				myPageViewModel.clear()
 			} else {
-				binding.clUserInfo.visibility = View.VISIBLE
-				binding.cvOpenAuthActivity.visibility = View.INVISIBLE
-				binding.tvNickname.text = it.userMetadata!!["name"].toString().removeSurrounding("\"")
-				binding.tvEmail.text = it.email
-				binding.tvSignOut.visibility = View.VISIBLE
+				clUserInfo.visibility = View.VISIBLE
+				cvOpenAuthActivity.visibility = View.INVISIBLE
+				tvNickname.text = it.userMetadata!!["name"].toString().removeSurrounding("\"")
+				tvEmail.text = it.email
+				tvSignOut.visibility = View.VISIBLE
 
-				binding.llReviewsMore.visibility = View.VISIBLE
-				binding.llLikesMore.visibility = View.VISIBLE
+				llReviewsMore.visibility = View.VISIBLE
+				llLikesMore.visibility = View.VISIBLE
+
+				btnDattai.visibility = View.VISIBLE
 
 				myPageViewModel.setReview(it.id)
 				myPageViewModel.setBookmarks(it.id)
@@ -136,15 +143,15 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 		// reviews
 		myPageViewModel.reviews.observe(viewLifecycleOwner) {
 			if (it == null) {
-				binding.rvShowcase.visibility = View.INVISIBLE
-				binding.tvShowcaseDetail.visibility = View.VISIBLE
+				rvShowcase.visibility = View.INVISIBLE
+				tvShowcaseDetail.visibility = View.VISIBLE
 			} else {
 				if (it.isEmpty()) {
-					binding.rvShowcase.visibility = View.INVISIBLE
-					binding.tvShowcaseDetail.visibility = View.VISIBLE
+					rvShowcase.visibility = View.INVISIBLE
+					tvShowcaseDetail.visibility = View.VISIBLE
 				} else {
-					binding.rvShowcase.visibility = View.VISIBLE
-					binding.tvShowcaseDetail.visibility = View.INVISIBLE
+					rvShowcase.visibility = View.VISIBLE
+					tvShowcaseDetail.visibility = View.INVISIBLE
 
 					reviewAdapter.submitList(it.take(6))
 				}
@@ -153,41 +160,41 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 
 		myPageViewModel.isReviewLoading.observe(viewLifecycleOwner) {
 			if (it) {
-				binding.clReviewSkeleton.visibility = View.VISIBLE
-				binding.rvShowcase.visibility = View.INVISIBLE
-				binding.tvShowcaseDetail.visibility = View.INVISIBLE
+				clReviewSkeleton.visibility = View.VISIBLE
+				rvShowcase.visibility = View.INVISIBLE
+				tvShowcaseDetail.visibility = View.INVISIBLE
 			} else {
-				binding.clReviewSkeleton.visibility = View.INVISIBLE
+				clReviewSkeleton.visibility = View.INVISIBLE
 			}
 		}
 
 		// reviews count
 		myPageViewModel.reviewCount.observe(viewLifecycleOwner) {
-			if (it != null) binding.tvReviewCount.text = it.toString() + getString(R.string.count)
+			if (it != null) tvReviewCount.text = it.toString() + getString(R.string.count)
 		}
 
 		myPageViewModel.isReviewCountLoading.observe(viewLifecycleOwner) {
 			if (it) {
-				binding.clCountSkeleton.visibility = View.VISIBLE
-				binding.tvReviewCount.visibility = View.INVISIBLE
+				clCountSkeleton.visibility = View.VISIBLE
+				tvReviewCount.visibility = View.INVISIBLE
 			} else {
-				binding.tvReviewCount.visibility = View.VISIBLE
-				binding.clCountSkeleton.visibility = View.INVISIBLE
+				tvReviewCount.visibility = View.VISIBLE
+				clCountSkeleton.visibility = View.INVISIBLE
 			}
 		}
 
 		// bookmarks
 		myPageViewModel.bookmarks.observe(viewLifecycleOwner) {
 			if (it == null) {
-				binding.rvBookmarks.visibility = View.INVISIBLE
-				binding.tvLikeDetail.visibility = View.VISIBLE
+				rvBookmarks.visibility = View.INVISIBLE
+				tvLikeDetail.visibility = View.VISIBLE
 			} else {
 				if (it.isEmpty()) {
-					binding.rvBookmarks.visibility = View.INVISIBLE
-					binding.tvLikeDetail.visibility = View.VISIBLE
+					rvBookmarks.visibility = View.INVISIBLE
+					tvLikeDetail.visibility = View.VISIBLE
 				} else {
-					binding.rvBookmarks.visibility = View.VISIBLE
-					binding.tvLikeDetail.visibility = View.INVISIBLE
+					rvBookmarks.visibility = View.VISIBLE
+					tvLikeDetail.visibility = View.INVISIBLE
 
 					bookmarkAdapter.submitList(it.take(6))
 				}
@@ -196,13 +203,13 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 
 		myPageViewModel.isBookmarkLoading.observe(viewLifecycleOwner) {
 			if (it) {
-				binding.clBookmarkSkeleton.visibility = View.VISIBLE
-				binding.rvBookmarks.visibility = View.INVISIBLE
-				binding.tvLikeDetail.visibility = View.INVISIBLE
+				clBookmarkSkeleton.visibility = View.VISIBLE
+				rvBookmarks.visibility = View.INVISIBLE
+				tvLikeDetail.visibility = View.INVISIBLE
 			} else {
-				binding.clBookmarkSkeleton.visibility = View.INVISIBLE
+				clBookmarkSkeleton.visibility = View.INVISIBLE
 
-				binding.tvReviewCount.visibility = View.VISIBLE
+				tvReviewCount.visibility = View.VISIBLE
 			}
 		}
 	}

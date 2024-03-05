@@ -44,13 +44,6 @@
 
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_addr_nationwide"
-            style="@style/CustomChipChoice."
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:text="@string/filter_addr_nationwide" />
-
-        <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_addr_seoul"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
@@ -58,18 +51,11 @@
             android:text="@string/filter_addr_seoul" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_addr_incheon"
+            android:id="@+id/cp_bottom_addr_pusan"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:text="@string/filter_addr_incheon" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_addr_daejeon"
-            style="@style/CustomChipChoice."
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:text="@string/filter_addr_daejeon" />
+            android:text="@string/filter_addr_pusan" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_addr_daegu"
@@ -79,6 +65,13 @@
             android:text="@string/filter_addr_daegu" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_addr_incheon"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/filter_addr_incheon" />
+
+        <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_addr_gwangju"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
@@ -86,11 +79,11 @@
             android:text="@string/filter_addr_gwangju" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_addr_pusan"
+            android:id="@+id/cp_bottom_addr_daejeon"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:text="@string/filter_addr_pusan" />
+            android:text="@string/filter_addr_daejeon" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_addr_ulsan"
@@ -114,27 +107,6 @@
             android:text="@string/filter_addr_gyeonggi" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_addr_chungcheong"
-            style="@style/CustomChipChoice."
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:text="@string/filter_addr_chungcheong" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_addr_jeolla"
-            style="@style/CustomChipChoice."
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:text="@string/filter_addr_jeolla" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_addr_gyeongsang"
-            style="@style/CustomChipChoice."
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:text="@string/filter_addr_gyeongsang" />
-
-        <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_addr_gangwon"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
@@ -142,18 +114,55 @@
             android:text="@string/filter_addr_gangwon" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_addr_chungcheongbookdo"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/filter_addr_chungcheongbookdo" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_addr_chungcheongnamdo"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/filter_addr_chungcheongnamdo" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_addr_jeollabookdo"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/filter_addr_jeollabookdo" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_addr_jeollanamdo"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/filter_addr_jeollanamdo" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_addr_gyeongsangbookdo"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/filter_addr_gyeongsangbookdo" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cp_bottom_addr_gyeongsangnamdo"
+            style="@style/CustomChipChoice."
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="@string/filter_addr_gyeongsangnamdo" />
+
+
+
+        <com.google.android.material.chip.Chip
             android:id="@+id/cp_bottom_addr_jeju"
             style="@style/CustomChipChoice."
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:text="@string/filter_addr_jeju" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/cp_bottom_addr_daehakro"
-            style="@style/CustomChipChoice."
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:text="@string/filter_addr_daehakro" />
 
     </com.google.android.material.chip.ChipGroup>
 

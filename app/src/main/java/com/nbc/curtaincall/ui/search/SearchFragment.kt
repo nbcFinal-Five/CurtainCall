@@ -42,6 +42,9 @@ class SearchFragment : Fragment(), PosterClickListener {
             )
         )
     }
+    private var previouslySelectedGenreChips: List<Int>? = null
+    private var previouslySelectedAddrChips: List<Int>? = null
+    private var previouslySelectedChildChips: List<Int>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,19 +72,26 @@ class SearchFragment : Fragment(), PosterClickListener {
     private fun showBottomSheet() { // 검색 필터 클릭시 bottom sheet 띄우기
         with(binding) {
             tvSearchfilterGenre.setOnClickListener {
-                val genreBottomSheet = SearchGenreBottomSheet()
+                val genreBottomSheet = SearchGenreBottomSheet(previouslySelectedGenreChips) { selectedChips ->
+                    // 클릭한 칩을 저장합니다. 콜백함수
+                    previouslySelectedGenreChips = selectedChips
+                }
                 genreBottomSheet.show(childFragmentManager, genreBottomSheet.tag)
                 genreBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
 
             tvSearchfilterAddr.setOnClickListener {
-                val addrBottomSheet = SearchAddrBottomSheet()
+                val addrBottomSheet = SearchAddrBottomSheet(previouslySelectedAddrChips) { selectedChips ->
+                    previouslySelectedAddrChips = selectedChips
+                }
                 addrBottomSheet.show(childFragmentManager, addrBottomSheet.tag)
                 addrBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
 
             tvSearchfilterChildren.setOnClickListener {
-                val chilrenBottomSheet = SearchChildrenBottomSheet()
+                val chilrenBottomSheet = SearchChildrenBottomSheet(previouslySelectedChildChips) { selectedChips ->
+                    previouslySelectedChildChips = selectedChips
+                }
                 chilrenBottomSheet.show(childFragmentManager, chilrenBottomSheet.tag)
                 chilrenBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
@@ -100,7 +110,8 @@ class SearchFragment : Fragment(), PosterClickListener {
             ivSearch.setOnClickListener {// 제목 기준으로 검색하기
                 hideKeyboard()
                 App.prefs.saveSearchWord(etSearch.text?.toString()?.trim() ?:"")
-                searchViewModel.fetchSearchResult(etSearch.text?.toString()?.trim() ?:"")
+                searchViewModel.getSearchWord(etSearch.text?.toString()?.trim() ?:"")
+                searchViewModel.fetchSearchFilterResult()
             }
 
             // 검색 시 로딩바 보여주기
