@@ -2,16 +2,15 @@
 <ScrollView
     android:id="@+id/sv_detail.scroll"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailFragment">
+   >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black">
+        android:layout_height="wrap_content"
+        android:background="@color/background_color">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/store_fragment_tabLayout"
@@ -52,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@+id/store_fragment_tabLayout">
 
             <ImageView
-                android:id="@+id/iv_detail_posterImage"
+                android:id="@+id/iv_simple_posterImage"
                 android:layout_width="match_parent"
                 android:layout_height="420dp"
                 android:layout_marginStart="16dp"
@@ -75,7 +74,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_detail_genre"
+                android:id="@+id/tv_simple_genre"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -98,11 +97,11 @@
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tv_detail_genre"
+                app:layout_constraintStart_toEndOf="@+id/tv_simple_genre"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_detail_age"
+                android:id="@+id/tv_simple_age"
                 android:layout_width="52dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -118,7 +117,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RatingBar
-            android:id="@+id/rb_detail_bar"
+            android:id="@+id/rb_simple_bar"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +132,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cl_detail_posterImage" />
 
         <TextView
-            android:id="@+id/tv_detail_expectationsNum"
+            android:id="@+id/tv_simple_expectationsNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -143,10 +142,10 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rb_detail_bar" />
+            app:layout_constraintTop_toBottomOf="@+id/rb_simple_bar" />
 
         <ImageView
-            android:id="@+id/iv_detail_wishlist"
+            android:id="@+id/iv_simple_wishlist"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
@@ -165,7 +164,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detail_expectationsNum" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_simple_expectationsNum" />
 
         <TextView
             android:id="@+id/tv_detail_title"

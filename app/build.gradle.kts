@@ -68,6 +68,7 @@ dependencies {
 	// tikxml 0.8.15 -> 그래들 충돌 문제
 	implementation("com.tickaroo.tikxml:annotation:0.8.13")
 	implementation("com.tickaroo.tikxml:core:0.8.13")
+	implementation("androidx.activity:activity:1.8.0")
 
 	kapt("com.tickaroo.tikxml:processor:0.8.13")
 	implementation("com.tickaroo.tikxml:retrofit-converter:0.8.13")
