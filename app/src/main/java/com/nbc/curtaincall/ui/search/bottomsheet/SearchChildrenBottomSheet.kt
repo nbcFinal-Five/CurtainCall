@@ -59,14 +59,29 @@ class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<I
                 chipClickListener(selectedChips)
                 selectedChildChips = checkedIds.map { group.findViewById<Chip>(it)}
                 if(checkedIds.isNotEmpty()) {
+                    btnChildrenCheck.isEnabled = true
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.BOLD)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
                 } else {
+                    btnChildrenCheck.isEnabled = false
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.NORMAL)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
+            }
+
+            // 필터 다시 선택했을 때 기존 필터 선택데이터가 있다면 버튼 색상 변경
+            if(previouslySelectedChildChips?.isNotEmpty() == true) {
+                btnChildrenCheck.isEnabled = true
+                btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                btnChildrenCheck.setTypeface(null, Typeface.BOLD)
+                btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
+            } else {
+                btnChildrenCheck.isEnabled = false
+                btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                btnChildrenCheck.setTypeface(null, Typeface.NORMAL)
+                btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
             }
 
             ivChildrenFilterClose.setOnClickListener {

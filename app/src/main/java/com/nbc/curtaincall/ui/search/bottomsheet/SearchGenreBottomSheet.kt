@@ -65,15 +65,30 @@ class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>
                 val selectedChips = checkedIds.toList()
                 chipClickListener(selectedChips)
                 selectedGenreChips = checkedIds.map { group.findViewById<Chip>(it)}
-                if(checkedIds.isNotEmpty() || previouslySelectedGenreChips?.isNotEmpty() == true) {
+                // 칩 선택유무에 따라 조건검색 버튼 색상 변경
+                if(checkedIds.isNotEmpty()) {
+                    btnGenreCheck.isEnabled = true
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnGenreCheck.setTypeface(null, Typeface.BOLD)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
                 } else {
+                    btnGenreCheck.isEnabled = false
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
                     btnGenreCheck.setTypeface(null, Typeface.NORMAL)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
+            }
+            // 필터 다시 선택했을 때 기존 필터 선택데이터가 있다면 버튼 색상 변경
+            if(previouslySelectedGenreChips?.isNotEmpty() == true) {
+                btnGenreCheck.isEnabled = true
+                btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                btnGenreCheck.setTypeface(null, Typeface.BOLD)
+                btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
+            } else {
+                btnGenreCheck.isEnabled = false
+                btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                btnGenreCheck.setTypeface(null, Typeface.NORMAL)
+                btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
             }
 
             ivGenreFilterClose.setOnClickListener {

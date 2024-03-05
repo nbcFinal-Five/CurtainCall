@@ -1,13 +1,10 @@
 package com.nbc.curtaincall.search
 
-import co.touchlab.kermit.SimpleFormatter
 import com.nbc.curtaincall.search.model.SearchResponse
-import java.time.LocalDate
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Date
 
 
 // stdate
@@ -15,7 +12,7 @@ val currentDate = LocalDate.now()
 val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
 val currentDateString = currentDate.format(formatter)
 // eddate
-val monthsToAdd = 3
+val monthsToAdd = 6
 val futureDate = currentDate.plusMonths(monthsToAdd.toLong())
 val futureDateSting = futureDate.format(formatter)
 

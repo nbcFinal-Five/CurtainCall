@@ -73,14 +73,29 @@ class SearchAddrBottomSheet(private val previouslySelectedAddrChips: List<Int>?,
                 chipClickListener(selectedChips)
                 selectedAddrChips  = checkedIds.map { group.findViewById<Chip>(it)}
                     if(checkedIds.isNotEmpty()) {
-                    btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
-                    btnAddrCheck.setTypeface(null, Typeface.BOLD)
-                    btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
+                        btnAddrCheck.isEnabled = true
+                        btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                        btnAddrCheck.setTypeface(null, Typeface.BOLD)
+                        btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
                     } else {
-                    btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
-                    btnAddrCheck.setTypeface(null, Typeface.NORMAL)
-                    btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
+                        btnAddrCheck.isEnabled = false
+                        btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                        btnAddrCheck.setTypeface(null, Typeface.NORMAL)
+                        btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
+            }
+
+            // 필터 다시 선택했을 때 기존 필터 선택데이터가 있다면 버튼 색상 변경
+            if(previouslySelectedAddrChips?.isNotEmpty() == true) {
+                btnAddrCheck.isEnabled = true
+                btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                btnAddrCheck.setTypeface(null, Typeface.BOLD)
+                btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
+            } else {
+                btnAddrCheck.isEnabled = false
+                btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                btnAddrCheck.setTypeface(null, Typeface.NORMAL)
+                btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
             }
 
             ivAddrFilterClose.setOnClickListener {
