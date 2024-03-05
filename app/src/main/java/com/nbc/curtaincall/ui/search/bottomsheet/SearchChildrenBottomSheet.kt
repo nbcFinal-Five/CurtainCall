@@ -2,20 +2,16 @@ package com.nbc.curtaincall.ui.search.bottomsheet
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogChildrenBinding
-import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
-import com.nbc.curtaincall.util.sharedpreferences.App
 
 class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<Int>?,
                                 private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
@@ -59,14 +55,29 @@ class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<I
                 chipClickListener(selectedChips)
                 selectedChildChips = checkedIds.map { group.findViewById<Chip>(it)}
                 if(checkedIds.isNotEmpty()) {
+                    btnChildrenCheck.isEnabled = true
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.BOLD)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
                 } else {
+                    btnChildrenCheck.isEnabled = false
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.NORMAL)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
+            }
+
+            // 필터 다시 선택했을 때 기존 필터 선택데이터가 있다면 버튼 색상 변경
+            if(previouslySelectedChildChips?.isNotEmpty() == true) {
+                btnChildrenCheck.isEnabled = true
+                btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                btnChildrenCheck.setTypeface(null, Typeface.BOLD)
+                btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
+            } else {
+                btnChildrenCheck.isEnabled = false
+                btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                btnChildrenCheck.setTypeface(null, Typeface.NORMAL)
+                btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
             }
 
             ivChildrenFilterClose.setOnClickListener {

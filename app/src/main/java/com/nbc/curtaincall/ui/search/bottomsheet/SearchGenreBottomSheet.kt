@@ -2,7 +2,6 @@ package com.nbc.curtaincall.ui.search.bottomsheet
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogGenreBinding
-import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
-import com.nbc.curtaincall.util.sharedpreferences.App
 
 class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>?,
                              private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
@@ -65,15 +62,30 @@ class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>
                 val selectedChips = checkedIds.toList()
                 chipClickListener(selectedChips)
                 selectedGenreChips = checkedIds.map { group.findViewById<Chip>(it)}
+                // 칩 선택유무에 따라 조건검색 버튼 색상 변경
                 if(checkedIds.isNotEmpty()) {
+                    btnGenreCheck.isEnabled = true
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnGenreCheck.setTypeface(null, Typeface.BOLD)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
                 } else {
+                    btnGenreCheck.isEnabled = false
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
                     btnGenreCheck.setTypeface(null, Typeface.NORMAL)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
+            }
+            // 필터 다시 선택했을 때 기존 필터 선택데이터가 있다면 버튼 색상 변경
+            if(previouslySelectedGenreChips?.isNotEmpty() == true) {
+                btnGenreCheck.isEnabled = true
+                btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                btnGenreCheck.setTypeface(null, Typeface.BOLD)
+                btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
+            } else {
+                btnGenreCheck.isEnabled = false
+                btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
+                btnGenreCheck.setTypeface(null, Typeface.NORMAL)
+                btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
             }
 
             ivGenreFilterClose.setOnClickListener {
