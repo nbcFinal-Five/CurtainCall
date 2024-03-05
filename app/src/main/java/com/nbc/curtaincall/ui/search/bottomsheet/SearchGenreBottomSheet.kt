@@ -14,8 +14,10 @@ import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogGenreBinding
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
+import com.nbc.curtaincall.util.sharedpreferences.App
 
-class SearchGenreBottomSheet : BottomSheetDialogFragment() {
+class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>?,
+                             private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
 
     private var _binding: SearchBottomsheetDialogGenreBinding? = null
 
@@ -46,6 +48,7 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = SearchBottomsheetDialogGenreBinding.inflate(inflater, container, false)
+        restorePreviouslySelectedGenreChips()
         return binding.root
     }
 
@@ -59,8 +62,10 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupGenre.setOnCheckedStateChangeListener { group, checkedIds ->
+                val selectedChips = checkedIds.toList()
+                chipClickListener(selectedChips)
                 selectedGenreChips = checkedIds.map { group.findViewById<Chip>(it)}
-                if(checkedIds.size > 0) {
+                if(checkedIds.isNotEmpty()) {
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnGenreCheck.setTypeface(null, Typeface.BOLD)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
@@ -71,7 +76,6 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
                 }
             }
 
-
             ivGenreFilterClose.setOnClickListener {
                 dismiss()
             }
@@ -79,7 +83,6 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
             btnGenreCheck.setOnClickListener {
                 val selectedResult = selectedGenreChips?.map { chip -> genreFilterOptions.find { chip == it.first } }
                 searchFilterViewModel.getGenreFilteredList(selectedResult)
-                Log.d(TAG, "clickFilterButton: $selectedResult")
                 searchFilterViewModel.fetchSearchFilterResult()
                 dismiss()
             }
@@ -93,5 +96,12 @@ class SearchGenreBottomSheet : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun restorePreviouslySelectedGenreChips() {
+        previouslySelectedGenreChips?.forEach { chipId ->
+            val chip = binding.cpGroupGenre.findViewById<Chip>(chipId)
+            chip.isChecked = true
+        }
     }
 }

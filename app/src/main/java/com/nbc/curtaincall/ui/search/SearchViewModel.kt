@@ -53,14 +53,14 @@ class SearchViewModel : ViewModel() {
     }
 
     fun fetchSearchFilterResult() {
-        val genreFilteredList = _genreFilterResultList.value
-        val addrFilteredList = _addrFilterResultList.value
-        val childFilteredList = _childFilterResultList.value
+        val genreFilteredList = genreFilterResultList.value
+        val addrFilteredList = addrFilterResultList.value
+        val childFilteredList = childFilterResultList.value
 
         if(genreFilteredList != null || addrFilteredList != null || childFilteredList != null) {
-            val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString (",")  ?: ""
-            val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString (",") ?: ""
-            val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString (",")  ?: ""
+            val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
+            val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString ("|") ?: ""
+            val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
 
             Log.d(TAG, "fetchSearchFilterResult genre: $genre")
             Log.d(TAG, "fetchSearchFilterResult addr: $addr")
@@ -87,7 +87,8 @@ class SearchViewModel : ViewModel() {
 
     // 필터 조건 기준 , null 가능하게 해야
     suspend fun getSearchResultByFilter(genre: String?, addr: String?,  child: String?) = withContext(Dispatchers.IO) {
-        RetrofitClient.search.getSearchFilterShowList(shcate = genre, signgucode = addr?.toInt(), kidstate = child).searchShowList
+        val addrInt = addr?.toIntOrNull()
+        RetrofitClient.search.getSearchFilterShowList(shcate = genre, signgucode = addrInt, kidstate = child).searchShowList
     }
 
     // 필터 창에서 선택한 값들을 filterResultList에 담기

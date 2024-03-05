@@ -1,7 +1,9 @@
 package com.nbc.curtaincall.util.sharedpreferences
 
 import android.content.Context
+import com.google.android.material.chip.Chip
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.nbc.curtaincall.util.Constants
 import com.tickaroo.tikxml.TikXml
 
@@ -18,5 +20,4 @@ class SharedPreferencesManager(context: Context) {
     fun loadSearchWord() :String {
         return prefs.getString(Constants.SEARCH_WORD, Constants.DEFAULT_STRING) ?:""
     }
-
 }

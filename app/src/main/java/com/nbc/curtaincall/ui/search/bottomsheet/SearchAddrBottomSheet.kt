@@ -14,8 +14,10 @@ import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogAddrBinding
 import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
+import com.nbc.curtaincall.util.sharedpreferences.App
 
-class SearchAddrBottomSheet : BottomSheetDialogFragment() {
+class SearchAddrBottomSheet(private val previouslySelectedAddrChips: List<Int>?,
+                            private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
 
     private var _binding: SearchBottomsheetDialogAddrBinding? = null
 
@@ -26,7 +28,6 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     private val addrFilterOptions by lazy {
         with(binding) {
             listOf(
-                cpBottomAddrNationwide to "",
                 cpBottomAddrSeoul to "11",
                 cpBottomAddrIncheon to "28",
                 cpBottomAddrDaejeon to "30",
@@ -36,12 +37,14 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
                 cpBottomAddrUlsan to "31",
                 cpBottomAddrSejong to "36",
                 cpBottomAddrGyeonggi to "41",
-                cpBottomAddrChungcheong to "43|44",
-                cpBottomAddrGyeongsang to "47|48",
-                cpBottomAddrJeolla to "45|46",
+                cpBottomAddrChungcheongbookdo to "43",
+                cpBottomAddrChungcheongnamdo to "44",
+                cpBottomAddrJeollabookdo to "45",
+                cpBottomAddrJeollanamdo to "46",
+                cpBottomAddrGyeongsangbookdo to "47",
+                cpBottomAddrGyeongsangnamdo to "48",
                 cpBottomAddrGangwon to "51",
                 cpBottomAddrJeju to "50",
-                cpBottomAddrDaehakro to "UNI"
             )
         }
     }
@@ -53,6 +56,7 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = SearchBottomsheetDialogAddrBinding.inflate(inflater, container, false)
+        restorePreviouslySelectedAddrChips()
         return binding.root
     }
 
@@ -65,8 +69,10 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     private fun clickFilterButton() {
         with(binding) {
             cpGroupAddr.setOnCheckedStateChangeListener { group, checkedIds ->
+                val selectedChips = checkedIds.toList()
+                chipClickListener(selectedChips)
                 selectedAddrChips  = checkedIds.map { group.findViewById<Chip>(it)}
-                    if(checkedIds.size > 0) {
+                    if(checkedIds.isNotEmpty()) {
                     btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnAddrCheck.setTypeface(null, Typeface.BOLD)
                     btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
@@ -82,10 +88,6 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
             }
 
             btnAddrCheck.setOnClickListener {
-                // 칩 그룹에서 칩 찾는법
-                // 필터, 인덱스
-                // 각각 똑같은것을 찾아서 아이디를 받기
-
                val selectedResult =  selectedAddrChips?.map { chip -> addrFilterOptions.find { chip == it.first } }
                 searchFilterViewModel.getAddrFilteredList(selectedResult)// 선택된 filter 뷰모델에 전달
                 searchFilterViewModel.fetchSearchFilterResult() // 뷰모델에서 넘겨받은 리스트를 통해 api 요청함수 실행
@@ -101,5 +103,12 @@ class SearchAddrBottomSheet : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun restorePreviouslySelectedAddrChips() {
+        previouslySelectedAddrChips?.forEach { chipId ->
+            val chip = binding.cpGroupAddr.findViewById<Chip>(chipId)
+            chip.isChecked = true
+        }
     }
 }
