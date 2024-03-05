@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentRegisterBinding
+import com.nbc.curtaincall.supabase.Supabase
 import com.nbc.curtaincall.ui.UserViewModel
 import org.json.JSONException
 import org.json.JSONObject
@@ -170,7 +171,7 @@ class RegisterFragment : Fragment() {
 		}
 
 		userViewModel.signUpErrorMessage.observe(viewLifecycleOwner) { signUpErrorMessage ->
-			val errorCode = getCodeFromSupabaseError(signUpErrorMessage)
+			val errorCode = Supabase.getCodeFromSupabaseError(signUpErrorMessage)
 
 			when (errorCode) {
 				23505 -> {
@@ -224,16 +225,5 @@ class RegisterFragment : Fragment() {
 		editText.requestFocus()
 		val imm = requireActivity().getSystemService(InputMethodManager::class.java)
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
-	}
-
-	private fun getCodeFromSupabaseError(string: String?): Int? {
-		if (string == null) return null
-
-		try {
-			val code = JSONObject(string).getInt("code")
-			return code
-		} catch (e: JSONException) {
-			return null
-		}
 	}
 }

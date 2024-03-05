@@ -102,6 +102,10 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 
 			startActivity(intent)
 		}
+
+		btnDattai.setOnClickListener {
+			userViewModel.quitUser()
+		}
 	}
 
 	private fun initViewModel() {
