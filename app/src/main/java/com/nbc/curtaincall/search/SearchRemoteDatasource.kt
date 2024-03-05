@@ -1,16 +1,32 @@
 package com.nbc.curtaincall.search
 
+import co.touchlab.kermit.SimpleFormatter
 import com.nbc.curtaincall.search.model.SearchResponse
+import java.time.LocalDate
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.Date
+
+
+// stdate
+val currentDate = LocalDate.now()
+val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+val currentDateString = currentDate.format(formatter)
+// eddate
+val monthsToAdd = 3
+val futureDate = currentDate.plusMonths(monthsToAdd.toLong())
+val futureDateSting = futureDate.format(formatter)
+
 
 interface SearchRemoteDatasource {
     @GET("pblprfr")
     suspend fun getSearchFilterShowList(
-        @Query("stdate") stdate: String = "20240101",
-        @Query("eddate") eddate: String = "20240630",
+        @Query("stdate") stdate: String = currentDateString,
+        @Query("eddate") eddate: String = futureDateSting,
         @Query("cpage") cpage: String = "1",
-        @Query("rows") rows: String = "10",
+        @Query("rows") rows: String = "20",
         @Query("shcate") shcate: String? = null, // 장르코드
         @Query("shprfnm") shprfnm: String? = null, // 공연명
         @Query("signgucode") signgucode: Int? = null, // 지역 시도 코드
