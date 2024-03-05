@@ -20,7 +20,4 @@ object Constants {
     const val PREFS_FILENAME = "prefs"
     const val DEFAULT_STRING = ""
     const val SEARCH_WORD = "searchword"
-    const val SEARCH_GENRE_FILTER = "searchgenre"
-    const val SEARCH_ADDR_FILTER = "searchaddr"
-    const val SEARCH_CHILD_FILTER = "searchchild"
 }
