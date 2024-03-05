@@ -86,8 +86,8 @@ class UserViewModel : ViewModel() {
 				Supabase.client.auth.signOut()
 			} catch (e: RestException) {
 				Log.d("sign out", e.error)
-				Supabase.client.auth.clearSession()
 			} finally {
+				Supabase.client.auth.clearSession()
 				withContext(Dispatchers.Main) {
 					_userInfo.value = null
 					_signInResult.value = null
@@ -172,6 +172,7 @@ class UserViewModel : ViewModel() {
 
 				supabaseAdmin.auth.admin.deleteUser(user.id)
 
+				Supabase.client.auth.clearSession()
 				withContext(Dispatchers.Main) {
 					_userInfo.value = null
 					_signInResult.value = null
