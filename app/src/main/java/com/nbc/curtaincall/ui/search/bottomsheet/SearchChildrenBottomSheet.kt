@@ -2,20 +2,16 @@ package com.nbc.curtaincall.ui.search.bottomsheet
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SearchBottomsheetDialogChildrenBinding
-import com.nbc.curtaincall.ui.search.SearchListAdapter
 import com.nbc.curtaincall.ui.search.SearchViewModel
-import com.nbc.curtaincall.util.sharedpreferences.App
 
 class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<Int>?,
                                 private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {

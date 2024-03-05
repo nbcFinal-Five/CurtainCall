@@ -62,10 +62,6 @@ class SearchViewModel : ViewModel() {
             val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString ("|") ?: ""
             val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
 
-            Log.d(TAG, "fetchSearchFilterResult genre: $genre")
-            Log.d(TAG, "fetchSearchFilterResult addr: $addr")
-            Log.d(TAG, "fetchSearchFilterResult child: $child")
-
             viewModelScope.launch {
                 _isLoading.value = true
                 runCatching {
