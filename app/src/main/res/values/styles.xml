@@ -10,7 +10,7 @@
         <item name="chipCornerRadius">5dp</item>
         <item name="chipMinHeight">45dp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:fontFamily">@font/font_regular</item>
+        <item name="android:fontFamily">@font/font_extrabold</item>
     </style>
 
     <!--bottome sheet filter button design-->
