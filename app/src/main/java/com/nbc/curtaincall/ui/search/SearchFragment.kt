@@ -110,7 +110,8 @@ class SearchFragment : Fragment(), PosterClickListener {
             ivSearch.setOnClickListener {// 제목 기준으로 검색하기
                 hideKeyboard()
                 App.prefs.saveSearchWord(etSearch.text?.toString()?.trim() ?:"")
-                searchViewModel.fetchSearchResult(etSearch.text?.toString()?.trim() ?:"")
+                searchViewModel.getSearchWord(etSearch.text?.toString()?.trim() ?:"")
+                searchViewModel.fetchSearchFilterResult()
             }
 
             // 검색 시 로딩바 보여주기
