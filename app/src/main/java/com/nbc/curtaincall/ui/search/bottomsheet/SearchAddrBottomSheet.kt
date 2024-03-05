@@ -72,7 +72,7 @@ class SearchAddrBottomSheet(private val previouslySelectedAddrChips: List<Int>?,
                 val selectedChips = checkedIds.toList()
                 chipClickListener(selectedChips)
                 selectedAddrChips  = checkedIds.map { group.findViewById<Chip>(it)}
-                    if(checkedIds.size > 0) {
+                    if(checkedIds.isNotEmpty()) {
                     btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnAddrCheck.setTypeface(null, Typeface.BOLD)
                     btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))

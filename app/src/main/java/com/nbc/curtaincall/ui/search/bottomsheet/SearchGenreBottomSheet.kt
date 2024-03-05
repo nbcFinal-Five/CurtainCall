@@ -65,7 +65,7 @@ class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>
                 val selectedChips = checkedIds.toList()
                 chipClickListener(selectedChips)
                 selectedGenreChips = checkedIds.map { group.findViewById<Chip>(it)}
-                if(checkedIds.size > 0) {
+                if(checkedIds.isNotEmpty()) {
                     btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnGenreCheck.setTypeface(null, Typeface.BOLD)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))

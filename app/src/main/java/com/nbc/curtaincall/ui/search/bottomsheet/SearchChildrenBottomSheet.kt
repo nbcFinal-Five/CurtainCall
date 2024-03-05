@@ -58,7 +58,7 @@ class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<I
                 val selectedChips = checkedIds.toList()
                 chipClickListener(selectedChips)
                 selectedChildChips = checkedIds.map { group.findViewById<Chip>(it)}
-                if(checkedIds.size>0 ) {
+                if(checkedIds.isNotEmpty()) {
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
                     btnChildrenCheck.setTypeface(null, Typeface.BOLD)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
