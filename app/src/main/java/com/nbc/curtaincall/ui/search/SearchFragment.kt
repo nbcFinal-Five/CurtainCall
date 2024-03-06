@@ -67,6 +67,7 @@ class SearchFragment : Fragment(), PosterClickListener {
 
         showBottomSheet()
         searchShowList()
+        changeFilterUiDesign()
     }
 
     private fun showBottomSheet() { // 검색 필터 클릭시 bottom sheet 띄우기
@@ -148,7 +149,25 @@ class SearchFragment : Fragment(), PosterClickListener {
     }
 
 private fun changeFilterUiDesign() {
+    searchViewModel.genreFilterResultList.observe(viewLifecycleOwner) {genreList ->
+        if(genreList != null) {
 
+        }
+    }
+
+    searchViewModel.addrFilterResultList.observe(viewLifecycleOwner) {addrList ->
+        if(addrList != null) {
+
+        }
+
+    }
+
+    searchViewModel.childFilterResultList.observe(viewLifecycleOwner) {childList ->
+        if(childList != null) {
+
+        }
+
+    }
 }
 
     private fun initList() { // 검색 결과 recyclerview 만들기
