@@ -8,11 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_search_result"
-        android:layout_width="120dp"
-        android:layout_height="160dp"
-        android:background="@drawable/shape_searchlist_radius3"
+        style="@style/posterStyle"
         android:clipToOutline="true"
-        android:scaleType="fitXY"
         android:src="@drawable/img_example_poster"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,8 +19,7 @@
     <TextView
         android:id="@+id/tv_searchitem_genre"
         style="@style/posterTopLabel"
-        android:layout_height="20dp"
-        android:layout_margin="3dp"
+        android:layout_height="25dp"
         android:text="@string/filter_genre"
         app:layout_constraintStart_toStartOf="@+id/iv_search_result"
         app:layout_constraintTop_toTopOf="@+id/iv_search_result" />
@@ -31,7 +27,7 @@
     <TextView
         android:id="@+id/tv_searchitem_prfstate"
         style="@style/posterTopLabel"
-        android:layout_height="20dp"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:text="@string/filter_genre"
         app:layout_constraintBottom_toBottomOf="@+id/tv_searchitem_genre"
