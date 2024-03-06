@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
     android:layout_marginBottom="15dp">
 
     <ImageView
         android:id="@+id/iv_search_result"
-        android:layout_width="110dp"
-        android:layout_height="170dp"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
         android:background="@drawable/shape_searchlist_radius3"
         android:clipToOutline="true"
         android:scaleType="fitXY"
@@ -24,7 +25,6 @@
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_margin="3dp"
-        android:background="@drawable/shape_searchlist_radius3"
         android:text="@string/filter_genre"
         app:layout_constraintStart_toStartOf="@+id/iv_search_result"
         app:layout_constraintTop_toTopOf="@+id/iv_search_result" />
@@ -35,7 +35,6 @@
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_marginStart="1dp"
-        android:background="@drawable/shape_searchlist_radius3"
         android:text="@string/filter_genre"
         app:layout_constraintBottom_toBottomOf="@+id/tv_searchitem_genre"
         app:layout_constraintStart_toEndOf="@id/tv_searchitem_genre"

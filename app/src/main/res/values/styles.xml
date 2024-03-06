@@ -30,7 +30,7 @@
         <item name="android:textSize">8sp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/text_color</item>
-        <item name="background">@drawable/shape_searchlist_radius3</item>
+        <item name="android:background">@drawable/shape_searchlist_radius3</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/font_regular</item>
     </style>

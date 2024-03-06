@@ -147,6 +147,10 @@ class SearchFragment : Fragment(), PosterClickListener {
         }
     }
 
+private fun changeFilterUiDesign() {
+
+}
+
     private fun initList() { // 검색 결과 recyclerview 만들기
         with(binding) {
             with(rvSearch) {
