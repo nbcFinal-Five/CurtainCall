@@ -25,6 +25,19 @@
             android:fontFamily="@font/font_regular"
     />
 
+    <TextView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shownect_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_title"
+            app:layout_constraintBottom_toTopOf="@id/cv_email"
+            android:textColor="@color/primary_color"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+    />
+
     <androidx.cardview.widget.CardView
             android:id="@+id/cv_email"
             android:layout_width="match_parent"

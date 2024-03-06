@@ -68,7 +68,7 @@
                   android:background="@color/input_background_color"
                   android:hint="@string/email"
                   android:textColor="@color/text_color"
-                  android:textColorHint="@color/text_color"
+                  android:textColorHint="@color/input_text_color"
                   android:paddingHorizontal="12dp"
           />
         </androidx.cardview.widget.CardView>
@@ -105,7 +105,7 @@
                   android:background="@color/input_background_color"
                   android:hint="@string/password"
                   android:textColor="@color/text_color"
-                  android:textColorHint="@color/text_color"
+                  android:textColorHint="@color/input_text_color"
                   android:paddingHorizontal="12dp"
                   android:inputType="textPassword"
           />
@@ -143,7 +143,7 @@
                   android:background="@color/input_background_color"
                   android:hint="@string/password_confirm"
                   android:textColor="@color/text_color"
-                  android:textColorHint="@color/text_color"
+                  android:textColorHint="@color/input_text_color"
                   android:paddingHorizontal="12dp"
                   android:inputType="textPassword"
           />
@@ -194,7 +194,7 @@
                   android:background="@color/input_background_color"
                   android:hint="@string/account_nickname"
                   android:textColor="@color/text_color"
-                  android:textColorHint="@color/text_color"
+                  android:textColorHint="@color/input_text_color"
                   android:paddingHorizontal="12dp"
           />
         </androidx.cardview.widget.CardView>
