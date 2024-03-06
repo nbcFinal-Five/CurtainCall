@@ -126,7 +126,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 				llReviewsMore.visibility = View.INVISIBLE
 				llLikesMore.visibility = View.INVISIBLE
 
-				btnDattai.visibility = View.INVISIBLE
+				llAuth.visibility = View.VISIBLE
 				myPageViewModel.clear()
 			} else {
 				clUserInfo.visibility = View.VISIBLE
@@ -138,7 +138,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 				llReviewsMore.visibility = View.VISIBLE
 				llLikesMore.visibility = View.VISIBLE
 
-				btnDattai.visibility = View.VISIBLE
+				llAuth.visibility = View.INVISIBLE
 
 				myPageViewModel.setReview(it.id)
 				myPageViewModel.setBookmarks(it.id)

@@ -86,8 +86,8 @@ class RegisterFragment : Fragment() {
 			registerViewModel.updatePassword(input?.password ?: "")
 			registerViewModel.updatePasswordConfirm(input?.passwordConfirm ?: "")
 			registerViewModel.updateName(input?.name ?: "")
-			registerViewModel.updateGender(input?.gender ?: "")
-			registerViewModel.updateAge(input?.age ?: "")
+			registerViewModel.updateGender(input?.gender)
+			registerViewModel.updateAge(input?.age)
 
 			if (isValidInput(input!!)) {
 				userViewModel.signUp(
