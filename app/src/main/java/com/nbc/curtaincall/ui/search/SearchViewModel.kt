@@ -66,8 +66,7 @@ class SearchViewModel : ViewModel() {
 
     // 필터 조건 기준 , null 가능하게 해야
     suspend fun getSearchResultByFilter(search: String?, genre: String?, addr: String?,  child: String?) = withContext(Dispatchers.IO) {
-        val addrInt = addr?.toIntOrNull()
-        RetrofitClient.search.getSearchFilterShowList(shprfnm = search, shcate = genre, signgucode = addrInt, kidstate = child).searchShowList
+        RetrofitClient.search.getSearchFilterShowList(shprfnm = search, shcate = genre, signgucode = addr, kidstate = child).searchShowList
     }
 
     // 필터 창에서 선택한 값들을 filterResultList에 담기
