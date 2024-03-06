@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -120,12 +121,13 @@ class SearchFragment : Fragment(), PosterClickListener {
 
             // 검색 시 로딩바 보여주기
             searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                Log.d("TAG", "showSearchList: $isLoading")
                 if (isLoading) {
-                    pbSearchLoading.visibility = View.VISIBLE
+                    clSearchSkeleton.visibility = View.VISIBLE
                     tvSearchNoresult.visibility = View.GONE
                     rvSearch.visibility = View.GONE
                 } else {
-                    pbSearchLoading.visibility = View.GONE
+                    clSearchSkeleton.visibility = View.GONE
                     rvSearch.visibility = View.VISIBLE
                 }
             }

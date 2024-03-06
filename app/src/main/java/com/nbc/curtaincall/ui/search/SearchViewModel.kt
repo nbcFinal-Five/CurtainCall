@@ -33,7 +33,7 @@ class SearchViewModel : ViewModel() {
     val searchWord : LiveData<String?> get() = _searchWord
 
     // 로딩
-    private val _isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
