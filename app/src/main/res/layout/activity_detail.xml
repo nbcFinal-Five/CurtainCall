@@ -53,7 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <ImageView
                 android:id="@+id/iv_detail_poster"
                 android:layout_width="0dp"
@@ -66,7 +65,7 @@
 
             <RatingBar
                 android:id="@+id/rb_detail_bar"
-                style="?android:attr/ratingBarStyleIndicator"
+                style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -102,10 +101,9 @@
 
             <ImageView
                 android:layout_width="10dp"
-                android:layout_height="20dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="3dp"
-                android:scaleX="-1"
-                android:src="@drawable/ic_auth_back"
+                android:src="@drawable/right_arrow"
                 app:layout_constraintBottom_toBottomOf="@id/tv_detail_expectationsNum"
                 app:layout_constraintStart_toEndOf="@id/tv_detail_expectationsNum"
                 app:layout_constraintTop_toTopOf="@id/tv_detail_expectationsNum" />
@@ -185,7 +183,6 @@
                 app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_runtime_sub"
                 app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
                 app:layout_constraintTop_toTopOf="@id/tv_detail_runtime_sub" />
-
 
             <TextView
                 android:id="@+id/tv_detail_runtime_sub"
@@ -381,29 +378,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_product_sub" />
 
             <ImageView
-                android:id="@+id/iv_detail_intro_poster1"
+                android:id="@+id/iv_detail_intro_poster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
+                android:src="@drawable/ic_posterimage"
                 app:layout_constraintTop_toBottomOf="@id/line" />
 
-            <ImageView
-                android:id="@+id/iv_detail_intro_poster2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_detail_intro_poster1" />
-
-            <ImageView
-                android:id="@+id/iv_detail_intro_poster3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_detail_intro_poster2" />
-
-            <ImageView
-                android:id="@+id/iv_detail_intro_poster4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_detail_intro_poster3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -20,4 +20,6 @@ object Constants {
     const val PREFS_FILENAME = "prefs"
     const val DEFAULT_STRING = ""
     const val SEARCH_WORD = "searchword"
+
+    const val SHOW_ID = "fromTicketId"
 }

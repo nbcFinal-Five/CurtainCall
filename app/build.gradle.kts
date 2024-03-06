@@ -66,13 +66,17 @@ dependencies {
 	implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 	implementation("com.google.code.gson:gson:2.10.1")
 
-	// tikxml 0.8.15 -> 그래들 충돌 문제
-	implementation("com.tickaroo.tikxml:annotation:0.8.13")
-	implementation("com.tickaroo.tikxml:core:0.8.13")
-	implementation("androidx.activity:activity:1.8.0")
+	// simpleXml
+	implementation ("org.simpleframework:simple-xml:2.7.1")
+	implementation ("com.squareup.retrofit2:converter-simplexml:2.9.0")
 
-	kapt("com.tickaroo.tikxml:processor:0.8.13")
-	implementation("com.tickaroo.tikxml:retrofit-converter:0.8.13")
+	// tikxml 0.8.15 -> 그래들 충돌 문제
+//	implementation("com.tickaroo.tikxml:annotation:0.8.13")
+//	implementation("com.tickaroo.tikxml:core:0.8.13")
+//	implementation("androidx.activity:activity:1.8.0")
+//
+//	kapt("com.tickaroo.tikxml:processor:0.8.13")
+//	implementation("com.tickaroo.tikxml:retrofit-converter:0.8.13")
 
 	// Coroutine
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")

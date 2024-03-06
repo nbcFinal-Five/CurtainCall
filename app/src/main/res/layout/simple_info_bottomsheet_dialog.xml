@@ -111,10 +111,9 @@
 
         <ImageView
             android:layout_width="10dp"
-            android:layout_height="20dp"
+            android:layout_height="0dp"
             android:layout_marginStart="3dp"
-            android:background="@drawable/ic_auth_back"
-            android:scaleX="-1"
+            android:background="@drawable/right_arrow"
             app:layout_constraintBottom_toBottomOf="@id/tv_simple_expectationsNum"
             app:layout_constraintStart_toEndOf="@id/tv_simple_expectationsNum"
             app:layout_constraintTop_toTopOf="@id/tv_simple_expectationsNum" />

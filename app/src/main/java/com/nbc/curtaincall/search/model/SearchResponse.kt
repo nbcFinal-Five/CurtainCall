@@ -1,25 +1,36 @@
 package com.nbc.curtaincall.search.model
 
-import com.tickaroo.tikxml.annotation.Element
-import com.tickaroo.tikxml.annotation.PropertyElement
-import com.tickaroo.tikxml.annotation.Xml
 
-@Xml(name = "dbs")
-data class SearchResponse(
-    @Element(name = "db")
-    val searchShowList: List<SearchItem>?
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.ElementList
+import org.simpleframework.xml.Root
+
+@Root(name = "dbs")
+data class SearchResponse @JvmOverloads constructor(
+    @field:ElementList(name = "db", inline = true, required = false)
+    var searchShowList: List<SearchItem>? = null
 )
 
-@Xml(name = "db")
-data class SearchItem(
-    @PropertyElement(name = "area") val area: String?,
-    @PropertyElement(name = "fcltynm") val fcltynm: String?,
-    @PropertyElement(name = "genrenm") val genrenm: String?,
-    @PropertyElement(name = "mt20id") val mt20id: String?,
-    @PropertyElement(name = "openrun") val openrun: String?,
-    @PropertyElement(name = "poster") val poster: String?,
-    @PropertyElement(name = "prfnm") val prfnm: String?,
-    @PropertyElement(name = "prfpdfrom") val prfpdfrom: String?,
-    @PropertyElement(name = "prfpdto") val prfpdto: String?,
-    @PropertyElement(name = "prfstate") val prfstate: String?
+@Root(name = "db")
+data class SearchItem @JvmOverloads constructor(
+    @field:Element(name = "area", required = false)
+    var area: String? = null,
+    @field:Element(name = "fcltynm", required = false)
+    var fcltynm: String? = null,
+    @field:Element(name = "genrenm", required = false)
+    var genrenm: String? = null,
+    @field:Element(name = "mt20id", required = false)
+    var mt20id: String? = null,
+    @field:Element(name = "openrun", required = false)
+    var openrun: String? = null,
+    @field:Element(name = "poster", required = false)
+    var poster: String? = null,
+    @field:Element(name = "prfnm", required = false)
+    var prfnm: String? = null,
+    @field:Element(name = "prfpdfrom", required = false)
+    var prfpdfrom: String? = null,
+    @field:Element(name = "prfpdto", required = false)
+    var prfpdto: String? = null,
+    @field:Element(name = "prfstate", required = false)
+    var prfstate: String? = null
 )

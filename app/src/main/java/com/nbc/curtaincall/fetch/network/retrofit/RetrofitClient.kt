@@ -1,15 +1,13 @@
 package com.nbc.curtaincall.fetch.network.retrofit
 
 import com.nbc.curtaincall.BuildConfig
-import com.nbc.curtaincall.BuildConfig.KOPIS_API_KEY
 import com.nbc.curtaincall.fetch.remote.FetchRemoteDatasource
 import com.nbc.curtaincall.search.SearchRemoteDatasource
-import com.tickaroo.tikxml.TikXml
-import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val BASE_URL = "http://kopis.or.kr/openApi/restful/"
@@ -25,7 +23,7 @@ object RetrofitClient {
         val original = chain.request()
         val originalHttpUrl = original.url
         val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("service", KOPIS_API_KEY)  // Kopis api key 기본 추가
+            .addQueryParameter("service", KOPIS_API_KEY)  // Kopis API key 기본 추가
             .build()
         val requestBuilder = original.newBuilder().url(url)
         val request = requestBuilder.build()
@@ -42,14 +40,14 @@ object RetrofitClient {
         .build()
 
     // Retrofit 설정
-    private val retrofit by lazy {
-        val parser = TikXml.Builder().exceptionOnUnreadXml(false).build()
+    private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(TikXmlConverterFactory.create(parser))
+            .addConverterFactory(SimpleXmlConverterFactory.create())
             .build()
     }
+
     val fetch: FetchRemoteDatasource by lazy { retrofit.create(FetchRemoteDatasource::class.java) }
     val search: SearchRemoteDatasource by lazy { retrofit.create(SearchRemoteDatasource::class.java) }
 }

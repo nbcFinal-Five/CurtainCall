@@ -1,5 +1,6 @@
 package com.nbc.curtaincall.ui.ticket
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
@@ -18,6 +19,7 @@ import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.ui.detail.DetailActivity
 import com.nbc.curtaincall.ui.main.MainViewModel
 import com.nbc.curtaincall.ui.main.MainViewModelFactory
+import com.nbc.curtaincall.util.Constants
 
 class TicketDialogFragment : BottomSheetDialogFragment() {
     private var _binding: com.nbc.curtaincall.databinding.SimpleInfoBottomsheetDialogBinding? = null
@@ -58,6 +60,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(sharedViewModel) {
@@ -78,25 +81,20 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                     tvSimpleGenre.text = showDetailInfoList[0].genrenm
                     tvSimpleShowState.text = showDetailInfoList[0].prfstate
                     tvSimpleCastSub.text =
-                        if (showDetailInfoList[0].prfcast.isNullOrEmpty()) "미상" else showDetailInfoList[0].prfcast
+                        if (showDetailInfoList[0].prfcast.isNullOrBlank()) "미상" else showDetailInfoList[0].prfcast
                     tvSimpleProductSub.text =
-                        if (showDetailInfoList[0].entrpsnm.isNullOrEmpty()) "미상" else showDetailInfoList[0].entrpsnm
-
+                        if (showDetailInfoList[0].entrpsnm.isNullOrBlank()) "미상" else showDetailInfoList[0].entrpsnm
                 }
 
             }
         }
-//        binding.btnToDetailActivity.setOnClickListener {
-//            val intent = Intent(context, DetailActivity::class.java)
-//            intent.putExtra("fromTicketId", ticketId)
-//            startActivity(intent)
-//        }
+        //Swipe Gesture
         binding.layoutSimpleScrollview.setOnTouchListener(object :
             OnSwipeTouchListener(requireContext()) {
             override fun onSwipeTop() {
                 super.onSwipeTop()
                 val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra("fromTicketId", ticketId)
+                intent.putExtra(Constants.SHOW_ID, ticketId)
                 startActivity(intent)
                 activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
             }

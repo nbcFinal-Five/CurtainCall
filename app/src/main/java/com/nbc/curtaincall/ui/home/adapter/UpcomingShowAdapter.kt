@@ -11,7 +11,7 @@ import com.nbc.curtaincall.databinding.ItemUpcomingShowBinding
 import com.nbc.curtaincall.fetch.model.DbResponse
 
 
-class UpcomingShowAdapter :
+class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
     ListAdapter<DbResponse, UpcomingShowAdapter.UpcomingShowViewHolder>(object :
         DiffUtil.ItemCallback<DbResponse>() {
         override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
@@ -30,6 +30,9 @@ class UpcomingShowAdapter :
                 tvPerformanceName.text = item.prfnm
                 tvPeriod.text = "${item.prfpdfrom} ~ ${item.prfpdto}"
                 tvFacilityName.text = item.fcltynm
+                ivHomeUpcomingShowPoster.setOnClickListener {
+                    item.mt20id?.let { it1 -> listener?.posterClicked(it1) }
+                }
             }
         }
     }
