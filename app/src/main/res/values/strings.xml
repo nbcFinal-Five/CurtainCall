@@ -115,4 +115,6 @@
   <string name="showcase_empty">리뷰를 남겨주시면\n당신의 리뷰 목록이 담깁니다</string>
   <string name="bookmarks_empty">당신의 관심을 담아주세요!</string>
   <string name="shownect_title">SHOWNECT</string>
+  <string name="need_login">로그인하시고\n더 다양한 정보를 보세요!</string>
+  <string name="warning_age_gender">성별과 연령대를 선택해주세요</string>
 </resources>
