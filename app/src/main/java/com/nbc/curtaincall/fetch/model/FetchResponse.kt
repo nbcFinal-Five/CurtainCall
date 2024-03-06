@@ -28,7 +28,7 @@ data class DbResponse(
     @PropertyElement(name = "dtguidance") val dtguidance: String?,
     @PropertyElement(name = "prfage") val prfage: String?,
     @PropertyElement(name = "entrpsnm") val entrpsnm: String?,
-    //@Element(name = "styurls") val styurls: Styurls?,
+//    @Element(name = "styurls") val styurls: Styurls?,
 )
 
 @Xml(name = "boxofs")
