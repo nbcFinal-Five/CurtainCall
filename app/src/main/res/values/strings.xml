@@ -117,4 +117,6 @@
   <string name="shownect_title">SHOWNECT</string>
   <string name="need_login">로그인하시고\n더 다양한 정보를 보세요!</string>
   <string name="warning_age_gender">성별과 연령대를 선택해주세요</string>
+  <string name="reviews">리뷰</string>
+  <string name="expectations">기대평</string>
 </resources>
