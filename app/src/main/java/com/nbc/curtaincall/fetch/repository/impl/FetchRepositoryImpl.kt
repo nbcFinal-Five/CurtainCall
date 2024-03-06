@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemoteDatasource {
-    //이 부분 나중에 FetchRepository 로 바꿔야함
     override suspend fun fetchShowList(
         stdate: String,
         eddate: String,
