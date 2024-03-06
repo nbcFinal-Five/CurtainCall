@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.ActivityDetailBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
 import com.nbc.curtaincall.util.Constants
@@ -17,6 +22,8 @@ import kotlinx.coroutines.withContext
 
 class DetailActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityDetailBinding
+
+	private val detailViewModel by lazy { ViewModelProvider(this)[DetailViewModel::class.java] }
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -33,6 +40,10 @@ class DetailActivity : AppCompatActivity() {
 		if (id != null) {
 			fetchShowDetail(id)
 		}
+
+		setFragment(ExpectationFragment())
+		initHandler()
+		initViewModel()
 	}
 
 	private fun fetchShowDetail(id: String) {
@@ -67,6 +78,45 @@ class DetailActivity : AppCompatActivity() {
 				Toast.makeText(applicationContext, "통신 에러: ${it.message}", Toast.LENGTH_SHORT)
 					.show()
 			}
+		}
+	}
+
+	private fun initHandler() = with(binding) {
+		btnExpectations.setOnClickListener { detailViewModel.setMode(DetailViewModel.EXPECTATION) }
+		btnReviews.setOnClickListener { detailViewModel.setMode(DetailViewModel.REVIEW) }
+	}
+
+	private fun initViewModel() {
+		detailViewModel.mode.observe(this) {
+			with(binding) {
+				when (it) {
+					DetailViewModel.REVIEW -> {
+						setFragment(ReviewFragment())
+						btnReviews.setBackgroundResource(R.color.primary_color)
+						btnReviews.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.white))
+
+						btnExpectations.setBackgroundResource(R.color.component_background_color)
+						btnExpectations.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.component_color))
+					}
+
+					DetailViewModel.EXPECTATION -> {
+						setFragment(ExpectationFragment())
+						btnReviews.setBackgroundResource(R.color.component_background_color)
+						btnReviews.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.component_color))
+
+						btnExpectations.setBackgroundResource(R.color.primary_color)
+						btnExpectations.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.white))
+					}
+				}
+			}
+
+		}
+	}
+
+	private fun setFragment(frag: Fragment) {  //2번
+		supportFragmentManager.commit {
+			replace(R.id.fl_comment, frag)
+			setReorderingAllowed(true)
 		}
 	}
 }

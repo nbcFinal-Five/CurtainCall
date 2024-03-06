@@ -119,4 +119,6 @@
   <string name="warning_age_gender">성별과 연령대를 선택해주세요</string>
   <string name="reviews">리뷰</string>
   <string name="expectations">기대평</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
