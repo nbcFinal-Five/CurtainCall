@@ -13,7 +13,6 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/shape_search_radius"
-        android:fontFamily="@font/font_regular"
         android:hint="@string/input_search"
         android:inputType="text|textAutoCorrect"
         android:paddingStart="20dp"
@@ -36,17 +35,9 @@
 
     <TextView
         android:id="@+id/tv_searchfilter_genre"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        style="@style/SearchFilterStyle"
         android:layout_marginTop="20dp"
-        android:background="@drawable/shape_searchfilter_radius"
-        android:fontFamily="@font/font_regular"
-        android:gravity="left"
-        android:paddingVertical="5dp"
-        android:paddingStart="25dp"
         android:text="@string/filter_genre"
-        android:textColor="@color/text_color"
-        android:textSize="12dp"
         app:layout_constraintEnd_toStartOf="@+id/tv_searchfilter_addr"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -65,19 +56,11 @@
 
     <TextView
         android:id="@+id/tv_searchfilter_addr"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        style="@style/SearchFilterStyle"
         android:layout_marginHorizontal="20dp"
-        android:background="@drawable/shape_searchfilter_radius"
-        android:fontFamily="@font/font_regular"
-        android:gravity="left"
-        android:paddingVertical="5dp"
-        android:paddingStart="25dp"
         android:text="@string/filter_addr"
-        android:textColor="@color/text_color"
-        android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@id/tv_searchfilter_genre"
-        app:layout_constraintEnd_toStartOf="@+id/tv_searchfilter_children"
+        app:layout_constraintEnd_toStartOf="@+id/tv_searchfilter_child"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_searchfilter_genre"
         app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_genre" />
@@ -93,17 +76,9 @@
         app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_addr" />
 
     <TextView
-        android:id="@+id/tv_searchfilter_children"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_searchfilter_radius"
-        android:fontFamily="@font/font_regular"
-        android:gravity="left"
-        android:paddingVertical="5dp"
-        android:paddingStart="25dp"
+        android:id="@+id/tv_searchfilter_child"
+        style="@style/SearchFilterStyle"
         android:text="@string/filter_children"
-        android:textColor="@color/text_color"
-        android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_addr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -116,15 +91,14 @@
         android:layout_height="12dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/ic_search_bottomarrow"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_children"
-        app:layout_constraintEnd_toEndOf="@+id/tv_searchfilter_children"
-        app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_children" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_child"
+        app:layout_constraintEnd_toEndOf="@+id/tv_searchfilter_child"
+        app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_child" />
 
     <TextView
         android:id="@+id/tv_search_noresult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font_regular"
         android:text="@string/search_result_not"
         android:textColor="@color/bottom_navi_item_color"
         android:textSize="16sp"

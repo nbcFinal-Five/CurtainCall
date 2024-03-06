@@ -1,6 +1,8 @@
 package com.nbc.curtaincall.ui.search
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -66,7 +69,8 @@ class SearchFragment : Fragment(), PosterClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         showBottomSheet()
-        searchShowList()
+        showSearchList()
+        changeFilterUiDesign()
     }
 
     private fun showBottomSheet() { // 검색 필터 클릭시 bottom sheet 띄우기
@@ -88,7 +92,7 @@ class SearchFragment : Fragment(), PosterClickListener {
                 addrBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
 
-            tvSearchfilterChildren.setOnClickListener {
+            tvSearchfilterChild.setOnClickListener {
                 val chilrenBottomSheet = SearchChildrenBottomSheet(previouslySelectedChildChips) { selectedChips ->
                     previouslySelectedChildChips = selectedChips
                 }
@@ -98,7 +102,7 @@ class SearchFragment : Fragment(), PosterClickListener {
         }
     }
 
-    private fun searchShowList() { // 검색어 입력시 결과 확인
+    private fun showSearchList() { // 검색어 입력시 결과 확인
         with(binding) {
             etSearch.setOnKeyListener { v, keyCode, event ->
                 when(keyCode){
@@ -146,6 +150,69 @@ class SearchFragment : Fragment(), PosterClickListener {
 
         }
     }
+
+@SuppressLint("SetTextI18n")
+private fun changeFilterUiDesign() {
+    searchViewModel.genreFilterResultList.observe(viewLifecycleOwner) { genreList ->
+        if (genreList != null && genreList.isNotEmpty()) {
+            val selectedGenreCount = genreList.size
+            with(binding) {
+                tvSearchfilterGenre.setText(getString(R.string.filter_genre) + " : ${selectedGenreCount}")
+                tvSearchfilterGenre.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
+                tvSearchfilterGenre.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                tvSearchfilterGenre.setTypeface(null, Typeface.BOLD)
+                ivGenreArrow.visibility = View.GONE
+            }
+        } else {
+            with(binding) {
+                tvSearchfilterGenre.setText(R.string.filter_genre)
+                tvSearchfilterGenre.setBackgroundResource(R.drawable.shape_searchfilter_radius)
+                tvSearchfilterGenre.setTypeface(null, Typeface.NORMAL)
+                ivGenreArrow.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    searchViewModel.addrFilterResultList.observe(viewLifecycleOwner) { addrList ->
+        if (addrList != null && addrList.isNotEmpty()) {
+            val selectedAddrCount = addrList.size
+            with(binding) {
+                tvSearchfilterAddr.setText(getString(R.string.filter_addr) + " : ${selectedAddrCount}")
+                tvSearchfilterAddr.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
+                tvSearchfilterAddr.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                tvSearchfilterAddr.setTypeface(null, Typeface.BOLD)
+                ivAddrArrow.visibility = View.GONE
+            }
+        } else {
+            with(binding) {
+                tvSearchfilterAddr.setText(R.string.filter_addr)
+                tvSearchfilterAddr.setBackgroundResource(R.drawable.shape_searchfilter_radius)
+                tvSearchfilterAddr.setTypeface(null, Typeface.NORMAL)
+                ivAddrArrow.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    searchViewModel.childFilterResultList.observe(viewLifecycleOwner) { childList ->
+        if (childList != null && childList.isNotEmpty()) {
+            val selectedChildCount = childList.size
+            with(binding) {
+                tvSearchfilterChild.setText(getString(R.string.filter_children) + " : ${selectedChildCount}")
+                tvSearchfilterChild.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
+                tvSearchfilterChild.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                tvSearchfilterChild.setTypeface(null, Typeface.BOLD)
+                ivAddrArrow.visibility = View.GONE
+            }
+        } else {
+            with(binding) {
+                tvSearchfilterChild.setText(R.string.filter_children)
+                tvSearchfilterChild.setBackgroundResource(R.drawable.shape_searchfilter_radius)
+                tvSearchfilterChild.setTypeface(null, Typeface.NORMAL)
+                ivAddrArrow.visibility = View.VISIBLE
+            }
+        }
+    }
+}
 
     private fun initList() { // 검색 결과 recyclerview 만들기
         with(binding) {

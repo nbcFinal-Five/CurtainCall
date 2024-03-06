@@ -24,7 +24,7 @@
 
     <ImageView
         android:id="@+id/iv_children_filter_close"
-        style="@style/SearchFilterClose"
+        style="@style/SearchFilterCloseImageStyle"
         android:src="@drawable/ic_searchfilter_close"
         app:layout_constraintBottom_toBottomOf="@id/tv_bottomdialog_children_title"
         app:layout_constraintEnd_toEndOf="parent"
