@@ -73,12 +73,26 @@ class MoreActivity : AppCompatActivity() {
 		if (mode == "reviews") {
 			moreViewModel.reviewList.observe(this) {
 				reviewAdapter.submitList(it)
+
+				if (it.isEmpty()) {
+					binding.tvMoreEmpty.visibility = View.VISIBLE
+					binding.tvMoreEmpty.text = getText(R.string.showcase_empty)
+				} else {
+					binding.tvMoreEmpty.visibility = View.INVISIBLE
+				}
 			}
 
 
 		} else {
 			moreViewModel.bookmarksList.observe(this) {
 				bookmarkAdapter.submitList(it)
+
+				if (it.isEmpty()) {
+					binding.tvMoreEmpty.visibility = View.VISIBLE
+					binding.tvMoreEmpty.text = getText(R.string.bookmarks_empty)
+				} else {
+					binding.tvMoreEmpty.visibility = View.INVISIBLE
+				}
 			}
 		}
 

@@ -21,7 +21,6 @@
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/font_regular"
     />
 
     <TextView
@@ -33,7 +32,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_my_page_title"
             app:layout_constraintBottom_toBottomOf="@id/tv_my_page_title"
-            android:fontFamily="@font/font_regular"
     />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +52,6 @@
               android:text="@string/nickname"
               android:textSize="16sp"
               android:textStyle="bold"
-              android:fontFamily="@font/font_regular"
       />
 
       <TextView
@@ -67,7 +64,6 @@
               android:text="@string/email"
               android:textSize="16sp"
               android:layout_marginTop="4dp"
-              android:fontFamily="@font/font_regular"
       />
 
       <TextView
@@ -79,7 +75,6 @@
               android:text="@string/count_key"
               android:textColor="@color/white"
               android:textSize="20sp"
-              android:fontFamily="@font/font_regular"
       />
 
       <TextView
@@ -93,7 +88,6 @@
               android:textColor="@color/white"
               android:textSize="16sp"
               android:layout_marginStart="8dp"
-              android:fontFamily="@font/font_regular"
               android:visibility="invisible"
       />
 
@@ -130,7 +124,6 @@
               android:background="@color/component_background_color"
               android:textColor="@color/white"
               android:textSize="20sp"
-              android:fontFamily="@font/font_regular"
       />
     </androidx.cardview.widget.CardView>
 
@@ -144,7 +137,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_my_page_title"
             android:layout_marginTop="120dp"
-            android:fontFamily="@font/font_extrabold"
     />
 
     <LinearLayout
@@ -201,22 +193,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="아직 당신의 쇼케이스가 \n 채워지지 않았어요!"
+            android:text="@string/showcase_empty"
             android:textSize="20sp"
-            android:fontFamily="@font/font_regular"
-            android:textColor="@color/white"
+            android:textColor="@color/bottom_navi_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_my_page_showcase"
             app:layout_constraintBottom_toTopOf="@id/tv_like"
+            android:lineHeight="30dp"
     />
     <TextView
             android:id="@+id/tv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="388dp"
-            android:fontFamily="@font/font_extrabold"
             android:textColor="@color/white"
             android:text="@string/bookmark_title"
             android:textSize="20sp"
@@ -256,9 +247,8 @@
             android:id="@+id/tv_like_Detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/font_regular"
-            android:textColor="@color/white"
-            android:text="당신의 관심을 담아주세요!"
+            android:textColor="@color/bottom_navi_color"
+            android:text="@string/bookmarks_empty"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
@@ -296,7 +286,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_gradient"
-            android:fontFamily="@font/font_extrabold"
             android:textColor="@color/white"
     />
   </androidx.constraintlayout.widget.ConstraintLayout>
