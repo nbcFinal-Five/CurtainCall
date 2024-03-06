@@ -3,7 +3,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
-            tools:context=".ui.detail.ExpectationFragment"
+            tools:context=".ui.detail.expectation.ExpectationFragment"
             android:background="@color/background_color"
 >
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginHorizontal="30dp"
     >
-      <Button
+      <androidx.appcompat.widget.AppCompatButton
               android:id="@+id/btn_expect_true"
               android:layout_width="120dp"
               android:layout_height="120dp"
@@ -31,7 +31,7 @@
               android:layout_weight="1"
       />
 
-      <Button
+      <androidx.appcompat.widget.AppCompatButton
               android:id="@+id/btn_expect_false"
               android:layout_width="120dp"
               android:layout_height="120dp"
@@ -62,6 +62,7 @@
             android:layout_marginTop="24dp"
             app:cardBackgroundColor="@color/input_background_color"
             app:cardCornerRadius="10dp"
+            android:layout_marginEnd="12dp"
     >
       <EditText
               android:id="@+id/et_expectation"
@@ -69,6 +70,7 @@
               android:layout_height="wrap_content"
               android:textSize="20sp"
               android:hint="30자 이내로 작성해주세요"
+              android:textColor="@color/white"
               android:textColorHint="@color/input_text_color"
               android:background="@color/input_background_color"
               android:padding="8dp"

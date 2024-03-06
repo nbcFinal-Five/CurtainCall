@@ -2,6 +2,7 @@ package com.nbc.curtaincall.ui.detail
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -15,6 +16,9 @@ import coil.load
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.ActivityDetailBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
+import com.nbc.curtaincall.ui.UserViewModel
+import com.nbc.curtaincall.ui.detail.expectation.ExpectationFragment
+import com.nbc.curtaincall.ui.detail.review.ReviewFragment
 import com.nbc.curtaincall.util.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +28,10 @@ class DetailActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityDetailBinding
 
 	private val detailViewModel by lazy { ViewModelProvider(this)[DetailViewModel::class.java] }
+	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
+
+	private var mt20id: String? = null
+	private var poster: String? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -41,7 +49,6 @@ class DetailActivity : AppCompatActivity() {
 			fetchShowDetail(id)
 		}
 
-		setFragment(ExpectationFragment())
 		initHandler()
 		initViewModel()
 	}
@@ -54,6 +61,16 @@ class DetailActivity : AppCompatActivity() {
 				}
 			}.onSuccess { showDetail ->
 				showDetail.showList?.firstOrNull()?.let { firstShowDetail ->
+					mt20id = firstShowDetail.mt20id!!
+					poster = firstShowDetail.poster!!
+
+					setFragment(
+						ExpectationFragment(
+							mt20id = firstShowDetail.mt20id!!,
+							poster = firstShowDetail.poster!!
+						)
+					)
+
 					with(binding) {
 						ivDetailPoster.load(firstShowDetail.poster)
 						tvDetailShowNameSub.text = firstShowDetail.prfnm
@@ -88,28 +105,46 @@ class DetailActivity : AppCompatActivity() {
 
 	private fun initViewModel() {
 		detailViewModel.mode.observe(this) {
-			with(binding) {
-				when (it) {
-					DetailViewModel.REVIEW -> {
-						setFragment(ReviewFragment())
-						btnReviews.setBackgroundResource(R.color.primary_color)
-						btnReviews.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.white))
+			if (mt20id != null && poster != null) {
+				with(binding) {
+					when (it) {
+						DetailViewModel.REVIEW -> {
+							setFragment(
+								ReviewFragment(
+									mt20id = mt20id!!,
+									poster = poster!!
+								)
+							)
+							btnReviews.setBackgroundResource(R.color.primary_color)
+							btnReviews.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.white))
 
-						btnExpectations.setBackgroundResource(R.color.component_background_color)
-						btnExpectations.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.component_color))
-					}
+							btnExpectations.setBackgroundResource(R.color.component_background_color)
+							btnExpectations.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.component_color))
+						}
 
-					DetailViewModel.EXPECTATION -> {
-						setFragment(ExpectationFragment())
-						btnReviews.setBackgroundResource(R.color.component_background_color)
-						btnReviews.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.component_color))
+						DetailViewModel.EXPECTATION -> {
+							setFragment(
+								ExpectationFragment(
+									mt20id = mt20id!!,
+									poster = poster!!
+								)
+							)
+							btnReviews.setBackgroundResource(R.color.component_background_color)
+							btnReviews.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.component_color))
 
-						btnExpectations.setBackgroundResource(R.color.primary_color)
-						btnExpectations.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.white))
+							btnExpectations.setBackgroundResource(R.color.primary_color)
+							btnExpectations.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.white))
+						}
 					}
 				}
 			}
+		}
 
+		userViewModel.userInfo.observe(this) {
+			if (it == null) {
+				binding.llCommentButtons.visibility = View.GONE
+				binding.flComment.visibility = View.GONE
+			}
 		}
 	}
 

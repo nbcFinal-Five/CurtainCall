@@ -413,10 +413,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="10dp"
-                android:layout_marginEnd="2dp"
+                android:layout_marginEnd="4dp"
                 app:cardElevation="0dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/primary_color">
+                app:cardBackgroundColor="@color/primary_color"
+        >
           <androidx.appcompat.widget.AppCompatButton
                   android:id="@+id/btn_expectations"
                   android:layout_width="80dp"
