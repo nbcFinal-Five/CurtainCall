@@ -1,11 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.detail.ExpectationFragment"
-             android:background="@color/background_color"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+            tools:context=".ui.detail.ExpectationFragment"
+            android:background="@color/background_color"
 >
+  <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="12dp"
+  >
+    <LinearLayout
+            android:id="@+id/ll_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginHorizontal="30dp"
+    >
+      <Button
+              android:id="@+id/btn_expect_true"
+              android:layout_width="120dp"
+              android:layout_height="120dp"
+              android:text="기대돼요"
+      />
 
+      <View
+              android:layout_width="0dp"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+      />
 
-</FrameLayout>
+      <Button
+              android:id="@+id/btn_expect_false"
+              android:layout_width="120dp"
+              android:layout_height="120dp"
+              android:text="글쎄요"
+      />
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/tv_expectation_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="한 줄 기대평 쓰기"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_buttons"
+            app:layout_constraintStart_toStartOf="parent"
+    />
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/cv_expectation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_expectation_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cv_submit"
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="@color/input_background_color"
+            app:cardCornerRadius="10dp"
+    >
+      <EditText
+              android:id="@+id/et_expectation"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textSize="20sp"
+              android:hint="30자 이내로 작성해주세요"
+              android:textColorHint="@color/input_text_color"
+              android:background="@color/input_background_color"
+              android:padding="8dp"
+      />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/cv_submit"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/cv_expectation"
+            app:layout_constraintBottom_toBottomOf="@id/cv_expectation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="10dp"
+    >
+      <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_submit"
+              android:layout_width="80dp"
+              android:layout_height="match_parent"
+              android:text="작성"
+              android:textSize="20sp"
+              android:background="@color/component_color"
+              android:gravity="center"
+      />
+    </androidx.cardview.widget.CardView>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
