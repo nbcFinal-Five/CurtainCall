@@ -16,7 +16,7 @@ import com.nbc.curtaincall.databinding.FragmentMyPageBinding
 import com.nbc.curtaincall.ui.UserViewModel
 import com.nbc.curtaincall.ui.more.MoreActivity
 
-class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
+class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, QuitDialogFragment.QuitDialogListener {
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 	private val myPageViewModel by lazy { ViewModelProvider(this)[MyPageViewModel::class.java] }
 
@@ -31,6 +31,10 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 	private val bookmarkAdapter by lazy { BookmarkListAdapter() }
 
 	override fun onLogoutConfirmed() {
+		userViewModel.setUser()
+	}
+
+	override fun onQuitConfirmed() {
 		userViewModel.setUser()
 	}
 
@@ -104,7 +108,9 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener {
 		}
 
 		btnDattai.setOnClickListener {
-			userViewModel.quitUser()
+			val dialog = QuitDialogFragment()
+			dialog.setListener(this@MyPageFragment)
+			dialog.show(childFragmentManager, "Logout Dialog")
 		}
 	}
 
