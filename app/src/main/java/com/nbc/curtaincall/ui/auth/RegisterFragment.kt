@@ -27,6 +27,8 @@ class RegisterFragment : Fragment() {
 	private lateinit var btnGenders: List<AppCompatButton>
 	private lateinit var btnAges: List<AppCompatButton>
 
+	private var isError = false
+
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
@@ -76,7 +78,16 @@ class RegisterFragment : Fragment() {
 		}
 
 		btnRegister.setOnClickListener {
+			isError = true
+
 			val input = registerViewModel.input.value
+
+			registerViewModel.updateEmail(input?.email ?: "")
+			registerViewModel.updatePassword(input?.password ?: "")
+			registerViewModel.updatePasswordConfirm(input?.passwordConfirm ?: "")
+			registerViewModel.updateName(input?.name ?: "")
+			registerViewModel.updateGender(input?.gender ?: "")
+			registerViewModel.updateAge(input?.age ?: "")
 
 			if (isValidInput(input!!)) {
 				userViewModel.signUp(
@@ -113,50 +124,54 @@ class RegisterFragment : Fragment() {
 				}
 			}
 
-			// check validation
-			binding.tvEmailWarning.visibility = if (isValidEmail(input.email)) View.INVISIBLE else View.VISIBLE
-			binding.tvEmailWarning.text = if (isValidEmail(input.email)) "" else getText(R.string.email_warning)
+			if (isError) {
+				// check validation
+				binding.tvEmailWarning.visibility = if (isValidEmail(input.email)) View.INVISIBLE else View.VISIBLE
+				binding.tvEmailWarning.text = if (isValidEmail(input.email)) "" else getText(R.string.email_warning)
 
-			binding.tvPasswordWarning.visibility = if (isValidPassword(input.password)) View.INVISIBLE else View.VISIBLE
-			binding.tvPasswordConfirmWarning.visibility =
-				if (isValidPasswordConfirm(input.password, input.passwordConfirm)) View.INVISIBLE else View.VISIBLE
-			binding.tvNicknameWarning.visibility = if (isValidName(input.name)) View.INVISIBLE else View.VISIBLE
+				binding.tvPasswordWarning.visibility = if (isValidPassword(input.password)) View.INVISIBLE else View.VISIBLE
+				binding.tvPasswordConfirmWarning.visibility =
+					if (isValidPasswordConfirm(input.password, input.passwordConfirm)) View.INVISIBLE else View.VISIBLE
+				binding.tvNicknameWarning.visibility = if (isValidName(input.name)) View.INVISIBLE else View.VISIBLE
 
-			val isWarningGenderAge = input.gender == null || input.age == null
-			binding.tvGenderAgeWarning.visibility = if (!isWarningGenderAge) View.INVISIBLE else View.VISIBLE
+				val isWarningGenderAge = input.gender == null || input.age == null
+				binding.tvGenderAgeWarning.visibility = if (!isWarningGenderAge) View.INVISIBLE else View.VISIBLE
 
-			// check total validation
-			if (isValidInput(input)) {
-				with(binding.btnRegister) {
-					setBackgroundResource(R.drawable.button_gradient)
-					setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-					isClickable = true
-				}
-			} else {
-				with(binding.btnRegister) {
-					setBackgroundResource(R.color.component_color)
-					setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
-					isClickable = false
+				// check total validation
+				if (isValidInput(input)) {
+					with(binding.btnRegister) {
+						setBackgroundResource(R.drawable.button_gradient)
+						setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+						isClickable = true
+					}
+				} else {
+					with(binding.btnRegister) {
+						setBackgroundResource(R.color.component_color)
+						setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+						isClickable = false
+					}
 				}
 			}
 		}
 
 		userViewModel.isSignUpLoading.observe(viewLifecycleOwner) { isSignupLoading ->
-			binding.btnRegister.isClickable = !isSignupLoading
+			if (isError) {
+				binding.btnRegister.isClickable = !isSignupLoading
 
-			if (isValidInput(registerViewModel.input.value!!)) {
-				binding.btnRegister.setBackgroundResource(
-					if (isSignupLoading) R.color.component_color else R.drawable.button_gradient
-				)
-				binding.btnRegister.setTextColor(
-					ContextCompat.getColor(
-						requireContext(),
-						if (isSignupLoading) R.color.component_background_color else R.color.white
+				if (isValidInput(registerViewModel.input.value!!)) {
+					binding.btnRegister.setBackgroundResource(
+						if (isSignupLoading) R.color.component_color else R.drawable.button_gradient
 					)
-				)
-			} else {
-				binding.btnRegister.setBackgroundResource(R.color.component_color)
-				binding.btnRegister.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+					binding.btnRegister.setTextColor(
+						ContextCompat.getColor(
+							requireContext(),
+							if (isSignupLoading) R.color.component_background_color else R.color.white
+						)
+					)
+				} else {
+					binding.btnRegister.setBackgroundResource(R.color.component_color)
+					binding.btnRegister.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+				}
 			}
 		}
 

@@ -106,9 +106,10 @@
   <string name="detail_show_state_title">공연 상태</string>
   <string name="detail_period_title">공연 기간</string>
   <string name="detail_time_title">공연 시간</string>
-    <string name="detail_age_title">관람 연령</string>
+  <string name="detail_age_title">관람 연령</string>
   <string name="detail_genre_title">장르</string>
   <string name="dattai">회원탈퇴</string>
-  
+
   <string name="app_end_check">한 번 더 누르면 종료됩니다</string>
+  <string name="question_quit">정말로 탈퇴하시겠습니까?</string>
 </resources>

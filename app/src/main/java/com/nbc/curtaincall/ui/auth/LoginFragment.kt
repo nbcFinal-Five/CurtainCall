@@ -23,6 +23,8 @@ class LoginFragment(private val supportFragmentManager: FragmentManager) : Fragm
 
 	private lateinit var binding: FragmentLoginBinding
 
+	private var isError = false
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 	}
@@ -51,6 +53,11 @@ class LoginFragment(private val supportFragmentManager: FragmentManager) : Fragm
 		}
 
 		btnSignIn.setOnClickListener {
+			isError = true
+
+			loginViewModel.updateEmail(etInputEmail.text.toString())
+			loginViewModel.updatePassword(etInputPassword.text.toString())
+
 			val input = loginViewModel.input.value
 
 			if (isValidInput(input!!)) {
@@ -72,40 +79,42 @@ class LoginFragment(private val supportFragmentManager: FragmentManager) : Fragm
 
 	private fun initViewModel() {
 		loginViewModel.input.observe(viewLifecycleOwner) { input ->
-			binding.tvEmailWarning.visibility = if (isValidEmail(input.email)) View.INVISIBLE else View.VISIBLE
-			binding.tvPasswordWarning.visibility = if (isValidPassword(input.password)) View.INVISIBLE else View.VISIBLE
+			if (isError) {
+				binding.tvEmailWarning.visibility = if (isValidEmail(input.email)) View.INVISIBLE else View.VISIBLE
+				binding.tvPasswordWarning.visibility = if (isValidPassword(input.password)) View.INVISIBLE else View.VISIBLE
 
-			if (isValidInput(input)) {
 				with(binding.btnSignIn) {
-					setBackgroundResource(R.drawable.button_gradient)
-					setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-					isClickable = true
-				}
-			} else {
-				with(binding.btnSignIn) {
-					setBackgroundResource(R.color.component_color)
-					setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
-					isClickable = false
+					if (isValidInput(input)) {
+						setBackgroundResource(R.drawable.button_gradient)
+						setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+						isClickable = true
+					} else {
+						setBackgroundResource(R.color.component_color)
+						setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+						isClickable = false
+					}
 				}
 			}
 		}
 
 		userViewModel.isSignInLoading.observe(viewLifecycleOwner) { isSignInLoading ->
-			binding.btnSignIn.isClickable = !isSignInLoading
+			if (isError) {
+				binding.btnSignIn.isClickable = !isSignInLoading
 
-			if (isValidInput(loginViewModel.input.value!!)) {
-				binding.btnSignIn.setBackgroundResource(
-					if (isSignInLoading) R.color.component_color else R.drawable.button_gradient
-				)
-				binding.btnSignIn.setTextColor(
-					ContextCompat.getColor(
-						requireContext(),
-						if (isSignInLoading) R.color.component_background_color else R.color.white
+				if (isValidInput(loginViewModel.input.value!!)) {
+					binding.btnSignIn.setBackgroundResource(
+						if (isSignInLoading) R.color.component_color else R.drawable.button_gradient
 					)
-				)
-			} else {
-				binding.btnSignIn.setBackgroundResource(R.color.component_color)
-				binding.btnSignIn.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+					binding.btnSignIn.setTextColor(
+						ContextCompat.getColor(
+							requireContext(),
+							if (isSignInLoading) R.color.component_background_color else R.color.white
+						)
+					)
+				} else {
+					binding.btnSignIn.setBackgroundResource(R.color.component_color)
+					binding.btnSignIn.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+				}
 			}
 		}
 

@@ -145,7 +145,7 @@ class UserViewModel : ViewModel() {
 		_userInfo.value = Supabase.client.auth.currentUserOrNull()
 	}
 
-	fun quitUser() {
+	fun quitUser(onSuccess: () -> Unit) {
 		val user = Supabase.client.auth.currentUserOrNull() ?: return
 
 		_isQuitLoading.value = true
@@ -178,6 +178,7 @@ class UserViewModel : ViewModel() {
 					_signInResult.value = null
 					_signUpResult.value = null
 					_signUpErrorMessage.value = null
+					onSuccess()
 				}
 			} catch (e: RestException) {
 				Log.d("quit", e.error)

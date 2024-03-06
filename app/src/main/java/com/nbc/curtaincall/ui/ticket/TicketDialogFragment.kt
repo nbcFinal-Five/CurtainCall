@@ -11,6 +11,7 @@ import coil.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SimpleInfoBottomsheetDialogBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
@@ -85,11 +86,21 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
 
             }
         }
-        binding.btnToDetailActivity.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("fromTicketId",ticketId)
-            startActivity(intent)
-        }
+//        binding.btnToDetailActivity.setOnClickListener {
+//            val intent = Intent(context, DetailActivity::class.java)
+//            intent.putExtra("fromTicketId", ticketId)
+//            startActivity(intent)
+//        }
+        binding.layoutSimpleScrollview.setOnTouchListener(object :
+            OnSwipeTouchListener(requireContext()) {
+            override fun onSwipeTop() {
+                super.onSwipeTop()
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("fromTicketId", ticketId)
+                startActivity(intent)
+                activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
+            }
+        })
     }
 
     override fun onDestroy() {
@@ -97,3 +108,4 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
         _binding = null
     }
 }
+

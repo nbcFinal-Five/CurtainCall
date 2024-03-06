@@ -26,13 +26,13 @@
     </style>
 
     <!--search rv badge design-->
-    <style name="SearchTopBadge">
-        <item name="android:textSize">8sp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/text_color</item>
-        <item name="android:background">@drawable/shape_searchlist_radius3</item>
+    <style name="posterTopLabel">
+        <item name="android:background">@drawable/bg_label_container</item>
         <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@font/font_regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">40dp</item>
     </style>
 
     <!--search filter bottom sheet close ic design-->
@@ -53,37 +53,40 @@
 
     <style name="HomePosterTitleStyle">
         <item name="android:layout_marginTop">8dp</item>
-        <item name="maxLines">3</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="fontFamily">@font/font_extrabold</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="HomePosterPlaceNameStyle">
         <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">3</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">#E2E2E2</item>
         <item name="android:textSize">10sp</item>
         <item name="android:layout_marginTop">4dp</item>
-        <item name="fontFamily">@font/font_regular</item>
     </style>
 
     <style name="TicketTitleTextStyle">
-        <item name="fontFamily">@font/font_extrabold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_marginTop">12dp</item>
     </style>
 
     <style name="TicketSubTextStyle">
-        <item name="fontFamily">@font/font_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/bottom_navi_color</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:layout_marginEnd">12dp</item>
-
     </style>
+
+    <style name="posterStyle">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">160dp</item>
+        <item name="android:background">@drawable/shape_searchlist_radius3</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
 </resources>
 
