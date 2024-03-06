@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_simple_scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ticket_shape"
@@ -18,11 +19,13 @@
 
         <ImageView
             android:id="@+id/iv_simple_posterImage"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_width="270dp"
+            android:layout_height="360dp"
+            android:layout_marginTop="12dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +36,7 @@
             android:background="@drawable/gradient_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_simple_posterImage" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_simple_genre"
@@ -71,15 +74,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
             android:textSize="12sp"
-            android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="@id/iv_simple_posterImage"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="전체연령" />
 
         <RatingBar
             android:id="@+id/rb_simple_bar"
-            style="?android:attr/ratingBarStyleIndicator"
+            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -239,8 +242,9 @@
             android:id="@+id/ticket_line"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginVertical="24dp"
             android:background="@drawable/ic_ticket_dash"
+            app:layout_constraintBottom_toTopOf="@id/tv_simple_cast_sub"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_simple_place_title" />
 
@@ -288,22 +292,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_simple_cast_sub"
             tools:text="제작사" />
 
-        <TextView
-            android:id="@+id/btn_toDetailActivity"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/bg_detail_button"
-            android:fontFamily="@font/font_extrabold"
-            android:gravity="center"
-            android:text="상세보기"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_simple_product_sub" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
