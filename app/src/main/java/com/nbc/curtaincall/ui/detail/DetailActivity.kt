@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.nbc.curtaincall.databinding.ActivityDetailBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
+import com.nbc.curtaincall.util.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,7 +29,7 @@ class DetailActivity : AppCompatActivity() {
             insets
         }
 
-        val id = intent.getStringExtra("fromTicketId")
+        val id = intent.getStringExtra(Constants.SHOW_ID)
         if (id != null) {
             fetchShowDetail(id)
         }
@@ -51,15 +52,20 @@ class DetailActivity : AppCompatActivity() {
                         tvDetailPriceSub.text = firstShowDetail.pcseguidance
                         tvDetailShowStateSub.text = firstShowDetail.prfstate
                         tvDetailPlaceSub.text = firstShowDetail.fcltynm
-                        tvDetailPeriodSub.text = "${firstShowDetail.prfpdfrom} ~ ${firstShowDetail.prfpdto}"
-                        tvDetailTimeSub.text = firstShowDetail.prfruntime
-                        tvDetailCastSub.text = firstShowDetail.prfcast ?: "미상"
-                        tvDetailProductSub.text = firstShowDetail.entrpsnm ?: "미상"
-                        Log.d("Tag","onCreate ${firstShowDetail.styurls?.styurlList?.get(0).toString()}")
+                        tvDetailPeriodSub.text =
+                            "${firstShowDetail.prfpdfrom} ~ ${firstShowDetail.prfpdto}"
+                        tvDetailTimeSub.text = firstShowDetail.dtguidance
+                        tvDetailCastSub.text =
+                            if (firstShowDetail.prfcast.isNullOrBlank()) "미상" else firstShowDetail.prfcast
+                        tvDetailProductSub.text =
+                            if (firstShowDetail.entrpsnm.isNullOrBlank()) "미상" else firstShowDetail.entrpsnm
+                        ivDetailIntroPoster.load(firstShowDetail.styurls?.styurlList?.get(0))
+                        Log.d("TAG", "fetchShowDetail: ${firstShowDetail}")
                     }
                 }
             }.onFailure {
-                Toast.makeText(applicationContext, "통신 에러: ${it.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "통신 에러: ${it.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

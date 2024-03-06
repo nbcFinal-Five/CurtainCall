@@ -48,13 +48,12 @@ class HomeFragment : Fragment(), PosterClickListener {
             )
         )
     }
-    private val upComingShowAdapter: UpcomingShowAdapter by lazy { UpcomingShowAdapter() }
+    private val upComingShowAdapter: UpcomingShowAdapter by lazy { UpcomingShowAdapter(this) }
     private val topRankAdapter: TopRankAdapter by lazy { TopRankAdapter(this) }
     private val genreAdapter: GenreAdapter by lazy { GenreAdapter(this) }
     private val kidShowAdapter: KidShowAdapter by lazy { KidShowAdapter(this) }
     private var isPaging = false
     private var pagingJob: Job? = null
-
     private val onPageChangeCallback: OnPageChangeCallback = object : OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
