@@ -9,6 +9,7 @@ import com.nbc.shownect.fetch.model.DbResponse
 import com.nbc.shownect.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.shownect.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.shownect.supabase.Supabase
+import com.nbc.shownect.supabase.model.GetBookmarkModel
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
@@ -35,6 +36,11 @@ class DetailViewModel : ViewModel() {
 	private var _point: MutableLiveData<Double> = MutableLiveData(0.0)
 	val point: LiveData<Double>
 		get() = _point
+
+	private var _isBookmark: MutableLiveData<Boolean> = MutableLiveData(false)
+	val isBookmark: LiveData<Boolean>
+		get() = _isBookmark
+
 
 	fun sharedId(mt20Id: String, mt10Id: String) {
 		showId = mt20Id
@@ -79,5 +85,20 @@ class DetailViewModel : ViewModel() {
 				_detailInfoList.value = fetch.fetchShowDetail(path = showId).showList
 			}
 		}
+	}
+
+	fun setIsLike(mt20id: String, userId: String) {
+		CoroutineScope(Dispatchers.IO).launch {
+			val result = Supabase.client.postgrest.rpc(
+				function = "check_bookmark_exists",
+				parameters = buildJsonObject {
+					put("mt20id_arg", mt20id)
+					put("user_id_arg", userId)
+				}
+			).data.toBoolean()
+
+			withContext(Dispatchers.Main) { _isBookmark.value = result }
+		}
+
 	}
 }
