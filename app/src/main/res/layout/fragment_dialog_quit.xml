@@ -21,7 +21,6 @@
           app:layout_constraintEnd_toEndOf="parent"
           android:textSize="20sp"
           android:textColor="@color/white"
-          android:fontFamily="@font/font_regular"
           android:gravity="center"
   />
 
@@ -42,7 +41,6 @@
             android:layout_height="wrap_content"
             android:text="@string/cancel"
             android:background="@color/component_background_color"
-            android:fontFamily="@font/font_regular"
             android:textColor="@color/component_color"
     />
   </androidx.cardview.widget.CardView>
@@ -64,7 +62,6 @@
             android:layout_height="wrap_content"
             android:text="@string/ok"
             android:background="@color/component_color"
-            android:fontFamily="@font/font_regular"
             android:textColor="@color/black"
     />
   </androidx.cardview.widget.CardView>
