@@ -22,6 +22,7 @@ android {
 		buildConfigField("String", "KOPIS_API_KEY", getAuthKey("KOPIS_API_KEY"))
 		buildConfigField("String", "SUPABASE_KEY", getAuthKey("SUPABASE_KEY"))
 		buildConfigField("String", "SUPABASE_SERVICE_ROLE", getAuthKey("SUPABASE_SERVICE_ROLE"))
+		buildConfigField("String","MAP_CLIENT_ID",getAuthKey("MAP_CLIENT_ID"))
 	}
 
 	buildTypes {
@@ -95,8 +96,8 @@ dependencies {
 	implementation("io.github.jan-tennert.supabase:postgrest-kt")
 	implementation("io.ktor:ktor-client-android:2.3.8")
 
-	// Kakao map
-	implementation("com.kakao.maps.open:android:2.6.0")
+	// Naver Map
+	implementation("com.naver.maps:map-sdk:3.17.0")
 
 	//BottomSheet, Chip
 	implementation("com.google.android.material:material:1.11.0")

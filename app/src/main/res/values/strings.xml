@@ -139,4 +139,13 @@
   <string name="empty_reviews">아직 리뷰가 없습니다\n리뷰를 작성해주세요</string>
   <string name="empty_star_warning">점수를 선택해주세요</string>
   <string name="start_point_title">별점</string>
+
+  <!-- 상세화면 지도 맵 -->
+  <string name="map">지도</string>
+  <string name="consert_hall">공연장</string>
+  <string name="consert_hall_location">주소</string>
+  <string name="hall_call_number">전화번호</string>
+  <string name="hall_homepage">홈페이지</string>
+  <string name="parking_area">주차시설</string>
+
 </resources>

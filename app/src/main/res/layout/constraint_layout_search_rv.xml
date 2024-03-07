@@ -28,7 +28,7 @@
         android:id="@+id/tv_searchitem_prfstate"
         style="@style/posterTopLabel"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="4dp"
         android:text="@string/filter_genre"
         app:layout_constraintBottom_toBottomOf="@+id/tv_searchitem_genre"
         app:layout_constraintStart_toEndOf="@id/tv_searchitem_genre"

@@ -40,6 +40,10 @@ class DetailViewModel : ViewModel() {
     val isBookmark: LiveData<Boolean>
         get() = _isBookmark
 
+    private val _locationList = MutableLiveData<List<DbResponse>>()
+    val locationList: LiveData<List<DbResponse>>
+        get() = _locationList
+
     fun sharedId(mt20Id: String, mt10Id: String) {
         showId = mt20Id
         facilityId = mt10Id
@@ -114,5 +118,16 @@ class DetailViewModel : ViewModel() {
             withContext(Dispatchers.Main) { _isBookmark.value = result }
         }
 
+    }
+
+    fun fetchDetailLocation() {
+        viewModelScope.launch {
+            runCatching {
+                _locationList.value = fetch.getLocationList(path = facilityId).showList!!
+                Log.d("ViewModel", "fetchDetailLocation: ${locationList}")
+            }.onFailure {
+                Log.e("DetailViewModel", "fetchDetailLocation: ${it.message}")
+            }
+        }
     }
 }

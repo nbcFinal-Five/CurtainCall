@@ -70,7 +70,38 @@ data class DbResponse @JvmOverloads constructor(
     var mt10id: String? = null,
 
     @field:Element(name = "styurls", required = false)
-    var styurls: Styurls? = null
+    var styurls: Styurls? = null,
+
+    //공연장 정보
+    @field:Element(name = "telno", required = false)
+    var telno: String? = null,
+
+    @field:Element(name = "relateurl", required = false)
+    var relateurl: String? = null,
+
+    @field:Element(name = "adres", required = false)
+    var adres: String? = null,
+
+    @field:Element(name = "la", required = false)
+    var la: String? = null,
+
+    @field:Element(name = "lo", required = false)
+    var lo: String? = null,
+
+    @field:Element(name = "parkinglot", required = false)
+    var parkinglot: String? = null,
+
+    @field:Element(name = "seatscale", required = false)
+    var seatscale: String? = null,
+
+    @field:Element(name = "mt13cnt", required = false)
+    var mt13cnt: String? = null,
+
+    @field:Element(name = "fcltychartr", required = false)
+    var fcltychartr: String? = null,
+
+    @field:Element(name = "opende", required = false)
+    var opende: String? = null,
 )
 
 @Root(name = "boxofs")
