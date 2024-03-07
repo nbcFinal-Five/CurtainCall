@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.nbc.curtaincall.R
+import coil.size.Size
+import coil.size.SizeResolver
 import com.nbc.curtaincall.databinding.ActivityDetailBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
 import com.nbc.curtaincall.ui.UserViewModel
@@ -157,4 +159,5 @@ class DetailActivity : AppCompatActivity() {
 			setReorderingAllowed(true)
 		}
 	}
+
 }
