@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.nbc.shownect.R
 import com.nbc.shownect.databinding.ReviewItemBinding
 import com.nbc.shownect.supabase.model.GetReviewModel
 import java.time.LocalDateTime
@@ -26,8 +27,16 @@ class ReviewListAdapter :
 			val outputDateString = dateTime.format(outputFormatter)
 
 			tvCreatedAt.text = outputDateString
-
-			// TODO Point
+			
+			listOf(
+				ivPoint1,
+				ivPoint2,
+				ivPoint3,
+				ivPoint4,
+				ivPoint5
+			).forEachIndexed { index, pointView ->
+				pointView.setImageResource(if (index <= item.point - 1) R.drawable.full_star else R.drawable.empty_star)
+			}
 		}
 	}
 
