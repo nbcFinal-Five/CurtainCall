@@ -132,4 +132,13 @@
   <string name="sakusei">작성</string>
   <string name="already_sakusei">이미 기대평을 작성하였습니다</string>
   <string name="empty_expectations">아직 기대평이 없습니다\n작성해주세요</string>
+  
+  <!-- 상세화면 지도 맵 -->
+  <string name="map">지도</string>
+  <string name="consert_hall">공연장</string>
+  <string name="consert_hall_location">주소</string>
+  <string name="hall_call_number">전화번호</string>
+  <string name="hall_homepage">홈페이지</string>
+  <string name="parking_area">주차시설</string>
+
 </resources>
