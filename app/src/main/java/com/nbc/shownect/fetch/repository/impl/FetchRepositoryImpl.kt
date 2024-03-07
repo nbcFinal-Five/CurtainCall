@@ -48,4 +48,9 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
         withContext(Dispatchers.IO) {
             fetch.fetchShowDetail(path = path)
         }
+
+    override suspend fun getLocationList(path: String): DbsResponse =
+        withContext(Dispatchers.IO) {
+            fetch.getLocationList(path = path)
+        }
 }

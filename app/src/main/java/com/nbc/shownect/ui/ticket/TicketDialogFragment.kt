@@ -87,7 +87,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                     tvSimpleProductSub.text =
                         if (showDetail.entrpsnm.isNullOrBlank()) "미상" else showDetail.entrpsnm
                 }
-                facilityId = showDetail.mt20id.toString()
+                facilityId = showDetail.mt10id.toString()
             }
         }
         //Swipe Gesture

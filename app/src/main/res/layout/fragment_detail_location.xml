@@ -20,7 +20,7 @@
         android:id="@+id/fv_hall_naver_map"
         android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="280dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_location_map"
@@ -30,76 +30,66 @@
         android:id="@+id/tv_concert_hall"
         style="@style/detailLocationTextTitleStyle"
         android:text="@string/consert_hall"
-        app:layout_constraintStart_toStartOf="@+id/tv_location_map"
-        app:layout_constraintTop_toBottomOf="@+id/fv_hall_naver_map" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_concert_hall_contents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_concert_hall_contents" />
 
     <TextView
         android:id="@+id/tv_concert_hall_contents"
         style="@style/detailLocationTextContents"
-        android:layout_marginStart="50dp"
-        android:text="어디어딩"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_concert_hall"
+        android:layout_marginStart="40dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_concert_hall"
-        app:layout_constraintTop_toTopOf="@+id/tv_concert_hall" />
+        app:layout_constraintTop_toBottomOf="@+id/fv_hall_naver_map" />
 
     <TextView
         android:id="@+id/tv_consert_hall_location"
         style="@style/detailLocationTextTitleStyle"
         android:text="@string/consert_hall_location"
-        app:layout_constraintStart_toStartOf="@+id/tv_location_map"
-        app:layout_constraintTop_toBottomOf="@+id/tv_concert_hall" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_concert_hall_location_contents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_concert_hall_location_contents" />
 
     <TextView
         android:id="@+id/tv_concert_hall_location_contents"
         style="@style/detailLocationTextContents"
-        android:text="어디어딩"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_consert_hall_location"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_concert_hall_contents"
-        app:layout_constraintTop_toTopOf="@+id/tv_consert_hall_location" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_concert_hall_contents" />
 
     <TextView
         android:id="@+id/tv_hall_call_number"
         style="@style/detailLocationTextTitleStyle"
         android:text="@string/hall_call_number"
-        app:layout_constraintStart_toStartOf="@+id/tv_location_map"
-        app:layout_constraintTop_toBottomOf="@+id/tv_consert_hall_location" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_hall_call_number_contents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_hall_call_number_contents" />
 
     <TextView
         android:id="@+id/tv_hall_call_number_contents"
         style="@style/detailLocationTextContents"
-        android:text="어디어딩"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_hall_call_number"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_concert_hall_contents"
-        app:layout_constraintTop_toTopOf="@+id/tv_hall_call_number" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_concert_hall_location_contents" />
 
     <TextView
         android:id="@+id/tv_hall_homepage"
         style="@style/detailLocationTextTitleStyle"
         android:text="@string/hall_homepage"
-        app:layout_constraintStart_toStartOf="@+id/tv_location_map"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hall_call_number" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_hall_homepage_contents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_hall_homepage_contents" />
 
     <TextView
         android:id="@+id/tv_hall_homepage_contents"
         style="@style/detailLocationTextContents"
-        android:text="어디어딩"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_hall_homepage"
+        android:autoLink="web"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_concert_hall_contents"
-        app:layout_constraintTop_toTopOf="@+id/tv_hall_homepage" />
-
-    <TextView
-        android:id="@+id/tv_parking_area"
-        style="@style/detailLocationTextTitleStyle"
-        android:text="@string/parking_area"
-        app:layout_constraintStart_toStartOf="@+id/tv_location_map"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hall_homepage" />
-
-    <TextView
-        android:id="@+id/tv_parking_area_contents"
-        style="@style/detailLocationTextContents"
-        android:text="어디어딩"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_parking_area"
-        app:layout_constraintStart_toStartOf="@+id/tv_concert_hall_contents"
-        app:layout_constraintTop_toTopOf="@+id/tv_parking_area" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_hall_call_number_contents" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

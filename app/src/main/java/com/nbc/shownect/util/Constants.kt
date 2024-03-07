@@ -28,5 +28,4 @@ object Constants {
 
     // Map auth
     const val MAP_CLIENT_ID = BuildConfig.MAP_CLIENT_ID
-    const val MAP_CLIENT_SECRET_KEY = BuildConfig.MAP_CLIENT_SECRET_KEY
 }

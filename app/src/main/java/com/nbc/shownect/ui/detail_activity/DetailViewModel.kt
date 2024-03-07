@@ -1,5 +1,6 @@
 package com.nbc.shownect.ui.detail_activity
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,6 +36,10 @@ class DetailViewModel : ViewModel() {
     val mode: LiveData<String>
         get() = _mode
 
+    private val _locationList = MutableLiveData<List<DbResponse>> ()
+    val locationList: LiveData<List<DbResponse>>
+        get() = _locationList
+
     fun setMode(mode: String) {
         _mode.value = mode
     }
@@ -66,4 +71,16 @@ class DetailViewModel : ViewModel() {
             }
         }
     }
+
+    fun fetchDetailLocation() {
+        viewModelScope.launch {
+            runCatching {
+                _locationList.value = fetch.getLocationList(path = facilityId).showList
+                Log.d("ViewModel", "fetchDetailLocation: ${locationList}")
+            }.onFailure {
+                Log.e("DetailViewModel", "fetchDetailLocation: ${it.message}")
+            }
+        }
+    }
+
 }

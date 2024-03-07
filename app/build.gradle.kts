@@ -23,7 +23,6 @@ android {
 		buildConfigField("String", "SUPABASE_KEY", getAuthKey("SUPABASE_KEY"))
 		buildConfigField("String", "SUPABASE_SERVICE_ROLE", getAuthKey("SUPABASE_SERVICE_ROLE"))
 		buildConfigField("String","MAP_CLIENT_ID",getAuthKey("MAP_CLIENT_ID"))
-		buildConfigField("String","MAP_CLIENT_SECRET_KEY",getAuthKey("MAP_CLIENT_SECRET_KEY"))
 	}
 
 	buildTypes {
