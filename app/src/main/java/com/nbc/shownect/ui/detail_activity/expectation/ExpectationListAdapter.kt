@@ -24,19 +24,14 @@ class ExpectationListAdapter :
 			tvName.text = item.profile.name
 			tvComment.text = item.comment
 
-			try {
-				// 입력 형식 지정
-				val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX")
-				val dateTime = LocalDateTime.parse(item.createdAt, inputFormatter)
+			val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX")
+			val dateTime = LocalDateTime.parse(item.createdAt, inputFormatter)
 
-				// 출력 형식 지정
-				val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
-				val outputDateString = dateTime.format(outputFormatter)
+			// 출력 형식 지정
+			val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
+			val outputDateString = dateTime.format(outputFormatter)
 
-				tvCreatedAt.text = outputDateString
-			} catch (e: Exception) {
-				Log.d("debug", e.message.toString())
-			}
+			tvCreatedAt.text = outputDateString
 		}
 	}
 
