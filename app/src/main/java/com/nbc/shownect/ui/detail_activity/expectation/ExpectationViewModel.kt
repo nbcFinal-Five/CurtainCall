@@ -13,6 +13,7 @@ import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.postgrest.query.Count
+import io.github.jan.supabase.postgrest.query.Order
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -152,6 +153,7 @@ class ExpectationViewModel : ViewModel() {
 							eq(column = "mt20id", value = mt20id)
 						}
 
+						order(column = "created_at", order = Order.DESCENDING)
 						range(0, 3)
 					}
 					.decodeList<GetExpectationModel>()

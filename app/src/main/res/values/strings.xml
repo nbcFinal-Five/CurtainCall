@@ -132,4 +132,5 @@
   <string name="sakusei">작성</string>
   <string name="already_sakusei">이미 기대평을 작성하였습니다</string>
   <string name="empty_expectations">아직 기대평이 없습니다\n작성해주세요</string>
+  <string name="more_expectation_text">기대평 더 보기</string>
 </resources>
