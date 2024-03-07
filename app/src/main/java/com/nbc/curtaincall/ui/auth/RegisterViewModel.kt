@@ -47,12 +47,12 @@ class RegisterViewModel : ViewModel() {
 		_input.value = _input.value
 	}
 
-	fun updateGender(newGender: String) {
+	fun updateGender(newGender: String?) {
 		_input.value?.gender = newGender
 		_input.value = _input.value
 	}
 
-	fun updateAge(newAge: String) {
+	fun updateAge(newAge: String?) {
 		_input.value?.age = newAge
 		_input.value = _input.value
 	}

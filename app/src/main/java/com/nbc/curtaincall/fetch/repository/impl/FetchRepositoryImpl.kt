@@ -19,7 +19,7 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
         prfstate: String?,
     ): DbsResponse =
         withContext(Dispatchers.IO) {
-            fetch.fetchShowList(stdate = stdate, eddate = eddate, kidstate = kidstate)
+            fetch.fetchShowList(stdate = stdate, eddate = eddate, kidstate = kidstate, openrun = "Y")
         }
 
     override suspend fun fetchGenre(

@@ -13,7 +13,6 @@
           android:layout_height="match_parent"
   >
     <TextView
-            android:fontFamily="@font/font_regular"
             android:id="@+id/tv_register_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +38,6 @@
               android:paddingBottom="44dp"
       >
         <TextView
-                android:fontFamily="@font/font_regular"
                 android:id="@+id/tv_account_information"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,13 +66,12 @@
                   android:background="@color/input_background_color"
                   android:hint="@string/email"
                   android:textColor="@color/text_color"
-                  android:textColorHint="@color/text_color"
+                  android:textColorHint="@color/input_text_color"
                   android:paddingHorizontal="12dp"
           />
         </androidx.cardview.widget.CardView>
 
         <TextView
-                android:fontFamily="@font/font_regular"
                 android:id="@+id/tv_email_warning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,14 +102,13 @@
                   android:background="@color/input_background_color"
                   android:hint="@string/password"
                   android:textColor="@color/text_color"
-                  android:textColorHint="@color/text_color"
+                  android:textColorHint="@color/input_text_color"
                   android:paddingHorizontal="12dp"
                   android:inputType="textPassword"
           />
         </androidx.cardview.widget.CardView>
 
         <TextView
-                android:fontFamily="@font/font_regular"
                 android:id="@+id/tv_password_warning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -143,14 +139,13 @@
                   android:background="@color/input_background_color"
                   android:hint="@string/password_confirm"
                   android:textColor="@color/text_color"
-                  android:textColorHint="@color/text_color"
+                  android:textColorHint="@color/input_text_color"
                   android:paddingHorizontal="12dp"
                   android:inputType="textPassword"
           />
         </androidx.cardview.widget.CardView>
 
         <TextView
-                android:fontFamily="@font/font_regular"
                 android:id="@+id/tv_password_confirm_warning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,7 +160,6 @@
         />
 
         <TextView
-                android:fontFamily="@font/font_regular"
                 android:id="@+id/tv_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -194,13 +188,12 @@
                   android:background="@color/input_background_color"
                   android:hint="@string/account_nickname"
                   android:textColor="@color/text_color"
-                  android:textColorHint="@color/text_color"
+                  android:textColorHint="@color/input_text_color"
                   android:paddingHorizontal="12dp"
           />
         </androidx.cardview.widget.CardView>
 
         <TextView
-                android:fontFamily="@font/font_regular"
                 android:id="@+id/tv_nickname_warning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -226,7 +219,6 @@
                 android:layout_marginEnd="2dp"
         >
           <androidx.appcompat.widget.AppCompatButton
-                  android:fontFamily="@font/font_regular"
                   android:id="@+id/btn_gender_male"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -248,7 +240,6 @@
                 android:layout_marginStart="2dp"
         >
           <androidx.appcompat.widget.AppCompatButton
-                  android:fontFamily="@font/font_regular"
                   android:id="@+id/btn_gender_female"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -278,7 +269,6 @@
                   app:cardBackgroundColor="@color/component_color">
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:fontFamily="@font/font_regular"
                     android:id="@+id/btn_age_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -298,7 +288,6 @@
                   app:cardBackgroundColor="@color/component_color">
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:fontFamily="@font/font_regular"
                     android:id="@+id/btn_age_20"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -318,7 +307,6 @@
                   app:cardBackgroundColor="@color/component_color">
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:fontFamily="@font/font_regular"
                     android:id="@+id/btn_age_30"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -338,7 +326,6 @@
                   app:cardBackgroundColor="@color/component_color">
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:fontFamily="@font/font_regular"
                     android:id="@+id/btn_age_40"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -358,7 +345,6 @@
                   app:cardBackgroundColor="@color/component_color">
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:fontFamily="@font/font_regular"
                     android:id="@+id/btn_age_50"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -378,7 +364,6 @@
                   app:cardBackgroundColor="@color/component_color">
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:fontFamily="@font/font_regular"
                     android:id="@+id/btn_age_60"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -389,17 +374,17 @@
         </LinearLayout>
 
         <TextView
-                android:fontFamily="@font/font_regular"
                 android:id="@+id/tv_gender_age_warning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/ll_ages"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="성별과 연령대를 선택해주세요"
+                android:text="@string/warning_age_gender"
                 android:textColor="@color/primary_color"
                 android:layout_marginTop="4dp"
                 android:visibility="invisible"
+                android:layout_marginStart="12dp"
         />
 
         <androidx.cardview.widget.CardView
@@ -410,7 +395,6 @@
                 app:cardCornerRadius="10dp"
         >
           <androidx.appcompat.widget.AppCompatButton
-                  android:fontFamily="@font/font_regular"
                   android:id="@+id/btn_register"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
