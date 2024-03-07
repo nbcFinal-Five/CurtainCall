@@ -63,6 +63,8 @@ class DetailInfoFragment : Fragment() {
 				}
 			}
 
+			
+
 			with(binding) {
 				ivDetailPoster.load(firstShowDetail.poster)
 				tvDetailShowNameSub.text = firstShowDetail.prfnm
