@@ -58,7 +58,7 @@ class MoreActivity : AppCompatActivity() {
 		rv.adapter = adapter
 		rv.addItemDecoration(
 			GridItemDecoration(
-				horizontalSpacing = (24 * density).toInt(),
+				horizontalSpacing = (12 * density).toInt(),
 				verticalSpacing = (12 * density).toInt()
 			)
 		)
