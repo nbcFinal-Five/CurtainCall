@@ -1,5 +1,6 @@
 package com.nbc.curtaincall.ui.detail.expectation
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nbc.curtaincall.databinding.ExpectationItemBinding
 import com.nbc.curtaincall.supabase.model.GetExpectationModel
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import java.util.TimeZone
 
 class ExpectationListAdapter :
 	ListAdapter<GetExpectationModel, ExpectationListAdapter.ViewHolder>(ExpectationDiffCallback()) {
@@ -14,7 +23,20 @@ class ExpectationListAdapter :
 		fun bind(item: GetExpectationModel) = with(binding) {
 			tvName.text = item.profile.name
 			tvComment.text = item.comment
-			tvCreatedAt.text = item.createdAt
+
+			try {
+				// 입력 형식 지정
+				val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX")
+				val dateTime = LocalDateTime.parse(item.createdAt, inputFormatter)
+
+				// 출력 형식 지정
+				val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
+				val outputDateString = dateTime.format(outputFormatter)
+
+				tvCreatedAt.text = outputDateString
+			} catch (e: Exception) {
+				Log.d("debug", e.message.toString())
+			}
 		}
 	}
 
