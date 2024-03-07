@@ -380,10 +380,11 @@
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@id/ll_ages"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="성별과 연령대를 선택해주세요"
+                android:text="@string/warning_age_gender"
                 android:textColor="@color/primary_color"
                 android:layout_marginTop="4dp"
                 android:visibility="invisible"
+                android:layout_marginStart="12dp"
         />
 
         <androidx.cardview.widget.CardView

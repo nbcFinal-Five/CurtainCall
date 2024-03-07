@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.DimenRes
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -135,6 +136,15 @@ class HomeFragment : Fragment(), PosterClickListener {
             }
             kidShow.observe(viewLifecycleOwner) {
                 kidShowAdapter.submitList(it)
+            }
+            isLoadingGenre.observe(viewLifecycleOwner) {
+                binding.skeletonGenreLoading.isVisible = !it
+            }
+            isLoadingRecommend.observe(viewLifecycleOwner) {
+                binding.skeletonTopRankLoading.isVisible = !it
+            }
+            isLoadingKid.observe(viewLifecycleOwner) {
+                binding.skeletonKidLoading.isVisible = !it
             }
         }
     }
