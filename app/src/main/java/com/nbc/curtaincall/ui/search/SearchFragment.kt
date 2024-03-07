@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentSearchBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
@@ -121,7 +122,6 @@ class SearchFragment : Fragment(), PosterClickListener {
 
             // 검색 시 로딩바 보여주기
             searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-                Log.d("TAG", "showSearchList: $isLoading")
                 if (isLoading) {
                     clSearchSkeleton.visibility = View.VISIBLE
                     tvSearchNoresult.visibility = View.GONE
@@ -222,6 +222,27 @@ private fun changeFilterUiDesign() {
                 adapter = searchListAdapter
                 layoutManager = GridLayoutManager(requireActivity(),3)
                 setHasFixedSize(true)
+
+                // 무한 스크롤을 위한 리사이클러뷰 위치 감지
+                addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+                        val layoutManager = layoutManager as GridLayoutManager
+                        val visibleItemCount = layoutManager.childCount
+                        val totalItemCount = layoutManager.itemCount
+                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                        // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
+//                        if (!isLoading && !isLastPage) {
+//                            if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
+//                                && firstVisibleItemPosition >= 0
+//                                && totalItemCount >= PAGE_SIZE) {
+//                                searchviewmodl.추가 데이터 요청 함수()
+//                            }
+//                        }
+
+                    }
+                })
             }
         }
     }

@@ -41,15 +41,23 @@ class SearchViewModel : ViewModel() {
     val failureMessage: LiveData<String>
         get() = _failureMessage
 
+//    private val _currentPage = MutableLiveData<Int>(1)
+//    val currentPage:LiveData<Int>
+//        get() = _currentPage
+
+    private var currentPage = 1
+
+
+
     fun fetchSearchFilterResult() {
         val genreFilteredList = genreFilterResultList.value
         val addrFilteredList = addrFilterResultList.value
         val childFilteredList = childFilterResultList.value
 
-            val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
-            val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString ("|") ?: ""
-            val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
-            val searchWord = searchWord.value
+        val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
+        val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString ("|") ?: ""
+        val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
+        val searchWord = searchWord.value
 
             viewModelScope.launch {
                 _isLoading.value = true
@@ -66,7 +74,31 @@ class SearchViewModel : ViewModel() {
 
     // 필터 조건 기준 , null 가능하게 해야
     suspend fun getSearchResultByFilter(search: String?, genre: String?, addr: String?,  child: String?) = withContext(Dispatchers.IO) {
-        RetrofitClient.search.getSearchFilterShowList(shprfnm = search, shcate = genre, signgucode = addr, kidstate = child).searchShowList
+        RetrofitClient.search.getSearchFilterShowList(cpage = "1", shprfnm = search, shcate = genre, signgucode = addr, kidstate = child).searchShowList
+    }
+
+    fun loadMoreSearchResult() {
+        val genreFilteredList = genreFilterResultList.value
+        val addrFilteredList = addrFilterResultList.value
+        val childFilteredList = childFilterResultList.value
+
+        val genre: String = genreFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
+        val addr: String = addrFilteredList?.mapNotNull { it?.second }?.joinToString ("|") ?: ""
+        val child: String = childFilteredList?.mapNotNull { it?.second }?.joinToString ("|")  ?: ""
+        val searchWord = searchWord.value
+
+        viewModelScope.launch {
+            runCatching {
+
+            }.onFailure {
+                Log.e("SearchViewModel", "loadMoreSearchResult: ${it.message}", )
+
+            }
+        }
+    }
+
+    private suspend fun getSearchResultNextPage(nextPage: Int,search: String?, genre: String?, addr: String?,  child: String?) = withContext(Dispatchers.IO) {
+        RetrofitClient.search.getSearchFilterShowList(cpage = nextPage.toString(), shprfnm = search, shcate = genre, signgucode = addr, kidstate = child).searchShowList
     }
 
     // 필터 창에서 선택한 값들을 filterResultList에 담기
