@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-	namespace = "com.nbc.curtaincall"
+	namespace = "com.nbc.shownect"
 	compileSdk = 34
 
 	defaultConfig {
-		applicationId = "com.nbc.curtaincall"
+		applicationId = "com.nbc.shownect"
 		minSdk = 26
 		targetSdk = 34
 		versionCode = 1
@@ -69,15 +69,6 @@ dependencies {
 	// simpleXml
 	implementation ("org.simpleframework:simple-xml:2.7.1")
 	implementation ("com.squareup.retrofit2:converter-simplexml:2.9.0")
-
-	// tikxml 0.8.15 -> 그래들 충돌 문제
-//	implementation("com.tickaroo.tikxml:annotation:0.8.13")
-//	implementation("com.tickaroo.tikxml:core:0.8.13")
-//	implementation("androidx.activity:activity:1.8.0")
-//
-//	kapt("com.tickaroo.tikxml:processor:0.8.13")
-//	implementation("com.tickaroo.tikxml:retrofit-converter:0.8.13")
-
 	// Coroutine
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
