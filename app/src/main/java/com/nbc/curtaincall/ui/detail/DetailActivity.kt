@@ -139,16 +139,9 @@ class DetailActivity : AppCompatActivity() {
 				}
 			}
 		}
-
-		userViewModel.userInfo.observe(this) {
-			if (it == null) {
-				binding.llCommentButtons.visibility = View.GONE
-				binding.flComment.visibility = View.GONE
-			}
-		}
 	}
 
-	private fun setFragment(frag: Fragment) {  //2번
+	private fun setFragment(frag: Fragment) {
 		supportFragmentManager.commit {
 			replace(R.id.fl_comment, frag)
 			setReorderingAllowed(true)

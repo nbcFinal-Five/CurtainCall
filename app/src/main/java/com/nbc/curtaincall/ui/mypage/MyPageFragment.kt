@@ -46,6 +46,8 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		_binding = FragmentMyPageBinding.inflate(inflater, container, false)
 		val root: View = binding.root
 
+		userViewModel.setUser()
+
 		return root
 	}
 

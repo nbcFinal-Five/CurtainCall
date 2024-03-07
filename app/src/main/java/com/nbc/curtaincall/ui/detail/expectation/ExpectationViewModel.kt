@@ -9,15 +9,15 @@ class ExpectationViewModel : ViewModel() {
 	val isExpect: LiveData<Boolean?>
 		get() = _isExpect
 
-	private var _comment: MutableLiveData<String> = MutableLiveData("")
-	val comment: LiveData<String>
+	private var _comment: MutableLiveData<String?> = MutableLiveData("")
+	val comment: LiveData<String?>
 		get() = _comment
 
-	fun setIsExpect(expect: Boolean) {
+	fun setIsExpect(expect: Boolean?) {
 		_isExpect.value = expect
 	}
 
-	fun setComment(inputComment: String) {
+	fun setComment(inputComment: String?) {
 		_comment.value = inputComment
 	}
 }
