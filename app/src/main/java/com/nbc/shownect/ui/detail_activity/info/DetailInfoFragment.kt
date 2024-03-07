@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
+import coil.size.Size
+import coil.size.SizeResolver
 import com.nbc.shownect.databinding.FragmentDetailDetailInfoBinding
 import com.nbc.shownect.ui.detail_activity.DetailViewModel
 
@@ -35,7 +37,9 @@ class DetailInfoFragment : Fragment() {
             val firstShowDetail = it?.first()
             if (firstShowDetail != null) {
                 with(binding) {
-                    ivDetailPoster.load(firstShowDetail.poster)
+                    ivDetailPoster.load(firstShowDetail.poster){
+                        size(resolver = SizeResolver(Size.ORIGINAL))
+                    }
                     tvDetailShowNameSub.text = firstShowDetail.prfnm
                     tvDetailGenreSub.text = firstShowDetail.genrenm
                     tvDetailAgeSub.text = firstShowDetail.prfage

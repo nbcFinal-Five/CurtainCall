@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import coil.load
+import coil.size.Size
+import coil.size.SizeResolver
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -73,21 +75,22 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
             showDetailInfo.observe(viewLifecycleOwner) {
                 val showDetail = it.first()
                 with(binding) {
-                    tvSimpleShowNameSub.text = showDetail.prfnm
-                    ivSimplePosterImage.load(showDetail.poster)
+                    tvSimpleShowTitle.text = showDetail.prfnm
                     tvSimpleAge.text = showDetail.prfage
-                    tvSimpleRuntimeSub.text = showDetail.prfruntime
-                    tvSimplePlaceSub.text = showDetail.dtguidance
-                    tvSimplePriceSub.text = showDetail.pcseguidance
-                    tvSimplePlaceSub.text = showDetail.fcltynm
+                    //tvSimpleRuntime.text = showDetail.prfruntime
+                    tvSimplePrice.text = showDetail.pcseguidance
+                    tvSimplePlace.text = showDetail.fcltynm
                     tvSimpleGenre.text = showDetail.genrenm
                     tvSimpleShowState.text = showDetail.prfstate
                     tvSimpleCastSub.text =
                         if (showDetail.prfcast.isNullOrBlank()) "미상" else showDetail.prfcast
                     tvSimpleProductSub.text =
                         if (showDetail.entrpsnm.isNullOrBlank()) "미상" else showDetail.entrpsnm
+                    ivSimplePosterImage.load(showDetail.poster) {
+                        size(resolver = SizeResolver(Size.ORIGINAL))
+                    }
                 }
-                facilityId = showDetail.mt20id.toString()
+                facilityId = showDetail.mt10id.toString()
             }
         }
         //Swipe Gesture
@@ -97,7 +100,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                 super.onSwipeTop()
                 val intent = Intent(context, DetailActivity::class.java).apply {
                     putExtra(Constants.SHOW_ID, ticketId)
-                    putExtra(Constants.FACILITY_ID,facilityId)
+                    putExtra(Constants.FACILITY_ID, facilityId)
                 }
                 startActivity(intent)
                 activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
