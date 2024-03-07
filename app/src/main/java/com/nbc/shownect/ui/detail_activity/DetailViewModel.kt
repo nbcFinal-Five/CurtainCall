@@ -9,7 +9,6 @@ import com.nbc.shownect.fetch.model.DbResponse
 import com.nbc.shownect.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.shownect.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.shownect.supabase.Supabase
-import com.nbc.shownect.supabase.model.GetBookmarkModel
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
@@ -23,88 +22,103 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 class DetailViewModel : ViewModel() {
-	private val fetchRemoteRepository: FetchRepositoryImpl = FetchRepositoryImpl(fetch = fetch)
-	private lateinit var showId: String //공연 id
-	private lateinit var facilityId: String //공연장 id
-	private val _detailInfoList = MutableLiveData<List<DbResponse>?>()
-	val detailInfoList: MutableLiveData<List<DbResponse>?> get() = _detailInfoList
+    private val fetchRemoteRepository: FetchRepositoryImpl = FetchRepositoryImpl(fetch = fetch)
+    private lateinit var showId: String //공연 id
+    private lateinit var facilityId: String //공연장 id
+    private val _detailInfoList = MutableLiveData<List<DbResponse>?>()
+    val detailInfoList: LiveData<List<DbResponse>?> get() = _detailInfoList
 
-	private var _totalExpectationCount: MutableLiveData<Int> = MutableLiveData(0)
-	val totalExpectationCount: LiveData<Int>
-		get() = _totalExpectationCount
+    private var _totalExpectationCount: MutableLiveData<Int> = MutableLiveData(0)
+    val totalExpectationCount: LiveData<Int>
+        get() = _totalExpectationCount
 
-	private var _point: MutableLiveData<Double> = MutableLiveData(0.0)
-	val point: LiveData<Double>
-		get() = _point
+    private var _point: MutableLiveData<Double> = MutableLiveData(0.0)
+    val point: LiveData<Double>
+        get() = _point
 
-	private var _isBookmark: MutableLiveData<Boolean> = MutableLiveData(false)
-	val isBookmark: LiveData<Boolean>
-		get() = _isBookmark
+    private var _isBookmark: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isBookmark: LiveData<Boolean>
+        get() = _isBookmark
 
-    private val _locationList = MutableLiveData<List<DbResponse>> ()
+    private val _locationList = MutableLiveData<List<DbResponse>>()
     val locationList: LiveData<List<DbResponse>>
         get() = _locationList
 
+    fun sharedId(mt20Id: String, mt10Id: String) {
+        showId = mt20Id
+        facilityId = mt10Id
+    }
 
-	fun sharedId(mt20Id: String, mt10Id: String) {
-		showId = mt20Id
-		facilityId = mt10Id
-	}
+    fun setExpectationCount(mt20id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val count = Supabase.client
+                .from("expectations")
+                .select {
+                    filter {
+                        eq(column = "mt20id", value = mt20id)
+                    }
+                    count(Count.EXACT)
+                }.countOrNull()!!
 
-	fun setInfo(mt20id: String) {
-		CoroutineScope(Dispatchers.IO).launch {
-			val count = Supabase.client
-				.from("expectations")
-				.select {
-					filter {
-						eq(column = "mt20id", value = mt20id)
-					}
-					count(Count.EXACT)
-				}.countOrNull()!!
+            withContext(Dispatchers.Main) { _totalExpectationCount.value = count.toInt() }
+        }
+    }
 
-			withContext(Dispatchers.Main) { _totalExpectationCount.value = count.toInt() }
-		}
+    fun fetchDetailInfo() {
+        viewModelScope.launch {
+            runCatching {
+                _detailInfoList.value =
+                    fetchRemoteRepository.fetchShowDetail(path = showId).showList
+            }
+        }
+    }
 
-		CoroutineScope(Dispatchers.IO).launch {
-			try {
-				val point = Supabase.client.postgrest.rpc(
-					function = "get_average_point",
-					parameters = buildJsonObject {
-						put("mt20id_arg", mt20id)
-					}
-				).data.toDouble()
+    fun setInfo(mt20id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val count = Supabase.client
+                .from("expectations")
+                .select {
+                    filter {
+                        eq(column = "mt20id", value = mt20id)
+                    }
+                    count(Count.EXACT)
+                }.countOrNull()!!
 
-				withContext(Dispatchers.Main) {
-					_point.value = point
-				}
-			} catch (e: RestException) {
-				Log.d("set point", e.error)
-			}
-		}
-	}
+            withContext(Dispatchers.Main) { _totalExpectationCount.value = count.toInt() }
+        }
 
-	fun fetchDetailInfo() {
-		viewModelScope.launch {
-			runCatching {
-				_detailInfoList.value = fetch.fetchShowDetail(path = showId).showList
-			}
-		}
-	}
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val point = Supabase.client.postgrest.rpc(
+                    function = "get_average_point",
+                    parameters = buildJsonObject {
+                        put("mt20id_arg", mt20id)
+                    }
+                ).data.toDouble()
 
-	fun setIsLike(mt20id: String, userId: String) {
-		CoroutineScope(Dispatchers.IO).launch {
-			val result = Supabase.client.postgrest.rpc(
-				function = "check_bookmark_exists",
-				parameters = buildJsonObject {
-					put("mt20id_arg", mt20id)
-					put("user_id_arg", userId)
-				}
-			).data.toBoolean()
+                withContext(Dispatchers.Main) {
+                    _point.value = point
+                }
+            } catch (e: RestException) {
+                Log.d("set point", e.error)
+            }
+        }
+    }
 
-			withContext(Dispatchers.Main) { _isBookmark.value = result }
-		}
+    fun setIsLike(mt20id: String, userId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = Supabase.client.postgrest.rpc(
+                function = "check_bookmark_exists",
+                parameters = buildJsonObject {
+                    put("mt20id_arg", mt20id)
+                    put("user_id_arg", userId)
+                }
+            ).data.toBoolean()
 
-	}
+            withContext(Dispatchers.Main) { _isBookmark.value = result }
+        }
+
+    }
 
     fun fetchDetailLocation() {
         viewModelScope.launch {
@@ -116,5 +130,4 @@ class DetailViewModel : ViewModel() {
             }
         }
     }
-
 }
