@@ -1,13 +1,14 @@
 package com.nbc.curtaincall.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import coil.size.Size
+import coil.size.SizeResolver
 import com.nbc.curtaincall.databinding.ActivityDetailBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
 import com.nbc.curtaincall.util.Constants
@@ -59,8 +60,9 @@ class DetailActivity : AppCompatActivity() {
                             if (firstShowDetail.prfcast.isNullOrBlank()) "미상" else firstShowDetail.prfcast
                         tvDetailProductSub.text =
                             if (firstShowDetail.entrpsnm.isNullOrBlank()) "미상" else firstShowDetail.entrpsnm
-                        ivDetailIntroPoster.load(firstShowDetail.styurls?.styurlList?.get(0))
-                        Log.d("TAG", "fetchShowDetail: ${firstShowDetail}")
+                        ivDetailIntroPoster.load(firstShowDetail.styurls?.styurlList?.get(0)) {
+                            size(SizeResolver(Size.ORIGINAL))
+                        }
                     }
                 }
             }.onFailure {

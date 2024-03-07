@@ -55,10 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:layout_marginTop="24dp"
-            android:fontFamily="@font/font_extrabold"
-            android:text="HOT 추천"
+            android:text="@string/home_recommend"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tab_poster_indicator" />
@@ -66,7 +65,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_top_rank"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="205dp"
             android:layout_marginTop="12dp"
             app:layout_constraintBottom_toTopOf="@id/spinner_home_genre"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +100,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_genre"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="205dp"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,9 +112,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:layout_marginTop="36dp"
-            android:text="어린이 관람 가능 공연"
+            android:text="@string/home_kid_able"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/rv_home_kid_show"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,13 +124,55 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_kid_show"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="205dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_home_kid_title" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/skeleton_top_rank_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title">
+
+            <include
+                layout="@layout/skeleton_home_poster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/skeleton_genre_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/spinner_home_genre">
+
+            <include
+                layout="@layout/skeleton_home_poster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/skeleton_kid_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_kid_title">
+
+            <include
+                layout="@layout/skeleton_home_poster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
