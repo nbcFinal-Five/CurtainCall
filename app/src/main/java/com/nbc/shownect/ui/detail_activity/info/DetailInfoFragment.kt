@@ -31,8 +31,22 @@ class DetailInfoFragment : Fragment() {
 	}
 
 	private fun setUpObserve() {
+		viewModel.point.observe(viewLifecycleOwner) {
+			binding.rbDetailBar.rating = it.toFloat()
+		}
+
+		viewModel.totalExpectationCount.observe(viewLifecycleOwner) {
+			binding.tvDetailExpectationsNum.text = "기대평 ${it}개"
+		}
+
 		viewModel.detailInfoList.observe(viewLifecycleOwner) {
 			val firstShowDetail = it!!.first()
+
+			val id = firstShowDetail.mt20id
+			if (id != null) {
+				viewModel.setInfo(id)
+			}
+
 			with(binding) {
 				ivDetailPoster.load(firstShowDetail.poster)
 				tvDetailShowNameSub.text = firstShowDetail.prfnm
