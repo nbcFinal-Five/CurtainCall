@@ -1,4 +1,4 @@
-package com.nbc.shownect.ui.detail_activity.expectation
+package com.nbc.shownect.ui.detail_activity.er.expectation
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +20,6 @@ import com.nbc.shownect.ui.auth.AuthActivity
 class ExpectationFragment(
 	private val mt20id: String,
 	private val poster: String,
-	private val onUpdate: () -> Unit
 ) : Fragment() {
 	private val expectationViewModel by lazy { ViewModelProvider(this)[ExpectationViewModel::class.java] }
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
@@ -106,9 +105,7 @@ class ExpectationFragment(
 					model = model,
 					context = requireContext(),
 					errorMessage = getString(R.string.already_sakusei)
-				) {
-					onUpdate()
-				}
+				)
 			}
 		}
 	}

@@ -14,31 +14,31 @@ import com.nbc.shownect.ui.detail_activity.DetailViewModel
 
 
 class IntroImageFragment : Fragment() {
-    private var _binding: FramgentDetailIntroImageBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel: DetailViewModel by activityViewModels<DetailViewModel>()
+	private var _binding: FramgentDetailIntroImageBinding? = null
+	private val binding get() = _binding!!
+	private val viewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FramgentDetailIntroImageBinding.inflate(inflater, container, false)
-        viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it.first()
-            binding.ivDetailIntroPoster.load(firstShowDetail.styurls?.styurlList?.get(0)) {
-                size(resolver = SizeResolver(Size.ORIGINAL))
-            }
-        }
-        return binding.root
-    }
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
+		_binding = FramgentDetailIntroImageBinding.inflate(inflater, container, false)
+		viewModel.detailInfoList.observe(viewLifecycleOwner) {
+			val firstShowDetail = it!!.first()
+			binding.ivDetailIntroPoster.load(firstShowDetail.styurls?.styurlList?.get(0)) {
+				size(resolver = SizeResolver(Size.ORIGINAL))
+			}
+		}
+		return binding.root
+	}
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+	}
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+	override fun onDestroy() {
+		super.onDestroy()
+		_binding = null
+	}
 }

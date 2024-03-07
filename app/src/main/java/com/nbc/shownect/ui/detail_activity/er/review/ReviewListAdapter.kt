@@ -1,4 +1,4 @@
-package com.nbc.shownect.ui.detail_activity.review
+package com.nbc.shownect.ui.detail_activity.er.review
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,7 +27,7 @@ class ReviewListAdapter :
 			val outputDateString = dateTime.format(outputFormatter)
 
 			tvCreatedAt.text = outputDateString
-			
+
 			listOf(
 				ivPoint1,
 				ivPoint2,
