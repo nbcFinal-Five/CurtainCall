@@ -1,4 +1,4 @@
-package com.nbc.shownect.ui.detail_activity.review
+package com.nbc.shownect.ui.detail_activity.er.review
 
 import android.content.Context
 import android.util.Log

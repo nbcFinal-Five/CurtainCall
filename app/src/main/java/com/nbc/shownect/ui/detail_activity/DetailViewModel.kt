@@ -22,22 +22,7 @@ class DetailViewModel : ViewModel() {
     private val _detailInfoList = MutableLiveData<List<DbResponse>?>()
     val detailInfoList: LiveData<List<DbResponse>?> get() = _detailInfoList
 
-    companion object {
-        const val EXPECTATION = "EXPECTATION"
-        const val REVIEW = "REVIEW"
-    }
-
     private var _totalExpectationCount: MutableLiveData<Int> = MutableLiveData(0)
-    val totalExpectationCount: LiveData<Int>
-        get() = _totalExpectationCount
-
-    private var _mode: MutableLiveData<String> = MutableLiveData(EXPECTATION)
-    val mode: LiveData<String>
-        get() = _mode
-
-    fun setMode(mode: String) {
-        _mode.value = mode
-    }
 
     fun sharedId(mt20Id: String, mt10Id: String) {
         showId = mt20Id

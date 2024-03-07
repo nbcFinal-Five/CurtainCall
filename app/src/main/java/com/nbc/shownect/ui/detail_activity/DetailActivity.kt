@@ -7,16 +7,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nbc.shownect.databinding.ActivityDetailBinding
-import com.nbc.shownect.ui.UserViewModel
 import com.nbc.shownect.ui.detail_activity.adapter.DetailPagerAdapter
 import com.nbc.shownect.util.Constants
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
-
     private val detailViewModel by lazy { ViewModelProvider(this)[DetailViewModel::class.java] }
-    private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
-
     private val adapter: DetailPagerAdapter by lazy { DetailPagerAdapter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
