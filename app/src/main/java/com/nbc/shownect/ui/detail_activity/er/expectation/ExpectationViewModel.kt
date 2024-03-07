@@ -1,4 +1,4 @@
-package com.nbc.shownect.ui.detail_activity.expectation
+package com.nbc.shownect.ui.detail_activity.er.expectation
 
 import android.content.Context
 import android.util.Log
@@ -61,7 +61,7 @@ class ExpectationViewModel : ViewModel() {
 		_comment.value = inputComment
 	}
 
-	fun createExpectation(model: PostExpectationModel, context: Context, errorMessage: String, onSuccess: () -> Unit) {
+	fun createExpectation(model: PostExpectationModel, context: Context, errorMessage: String) {
 		_isCreateExpectationLoading.value = true
 
 		CoroutineScope(Dispatchers.IO).launch {
@@ -75,7 +75,6 @@ class ExpectationViewModel : ViewModel() {
 					setCount(model.mt20id)
 					setList(model.mt20id)
 				}
-				onSuccess()
 			} catch (e: RestException) {
 				Log.d("create expectation", e.error)
 

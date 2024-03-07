@@ -16,54 +16,41 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DetailViewModel : ViewModel() {
-    private val fetchRemoteRepository: FetchRepositoryImpl = FetchRepositoryImpl(fetch = fetch)
-    private lateinit var showId: String //공연 id
-    private lateinit var facilityId: String //공연장 id
-    private val _detailInfoList = MutableLiveData<List<DbResponse>>()
-    val detailInfoList: LiveData<List<DbResponse>> get() = _detailInfoList
+	private val fetchRemoteRepository: FetchRepositoryImpl = FetchRepositoryImpl(fetch = fetch)
+	private lateinit var showId: String //공연 id
+	private lateinit var facilityId: String //공연장 id
+	private val _detailInfoList = MutableLiveData<List<DbResponse>?>()
+	val detailInfoList: MutableLiveData<List<DbResponse>?> get() = _detailInfoList
 
-    companion object {
-        const val EXPECTATION = "EXPECTATION"
-        const val REVIEW = "REVIEW"
-    }
+	private var _totalExpectationCount: MutableLiveData<Int> = MutableLiveData(0)
+	val totalExpectationCount: LiveData<Int>
+		get() = _totalExpectationCount
+	
+	fun sharedId(mt20Id: String, mt10Id: String) {
+		showId = mt20Id
+		facilityId = mt10Id
+	}
 
-    private var _totalExpectationCount: MutableLiveData<Int> = MutableLiveData(0)
-    val totalExpectationCount: LiveData<Int>
-        get() = _totalExpectationCount
+	fun setExpectationCount(mt20id: String) {
+		CoroutineScope(Dispatchers.IO).launch {
+			val count = Supabase.client
+				.from("expectations")
+				.select {
+					filter {
+						eq(column = "mt20id", value = mt20id)
+					}
+					count(Count.EXACT)
+				}.countOrNull()!!
 
-    private var _mode: MutableLiveData<String> = MutableLiveData(EXPECTATION)
-    val mode: LiveData<String>
-        get() = _mode
+			withContext(Dispatchers.Main) { _totalExpectationCount.value = count.toInt() }
+		}
+	}
 
-    fun setMode(mode: String) {
-        _mode.value = mode
-    }
-
-    fun sharedId(mt20Id: String, mt10Id: String) {
-        showId = mt20Id
-        facilityId = mt10Id
-    }
-
-    fun setExpectationCount(mt20id: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val count = Supabase.client
-                .from("expectations")
-                .select {
-                    filter {
-                        eq(column = "mt20id", value = mt20id)
-                    }
-                    count(Count.EXACT)
-                }.countOrNull()!!
-
-            withContext(Dispatchers.Main) { _totalExpectationCount.value = count.toInt() }
-        }
-    }
-
-    fun fetchDetailInfo() {
-        viewModelScope.launch {
-            runCatching {
-                _detailInfoList.value = fetch.fetchShowDetail(path = showId).showList
-            }
-        }
-    }
+	fun fetchDetailInfo() {
+		viewModelScope.launch {
+			runCatching {
+				_detailInfoList.value = fetch.fetchShowDetail(path = showId).showList
+			}
+		}
+	}
 }
