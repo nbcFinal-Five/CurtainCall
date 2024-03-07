@@ -19,8 +19,8 @@ class DetailViewModel : ViewModel() {
     private val fetchRemoteRepository: FetchRepositoryImpl = FetchRepositoryImpl(fetch = fetch)
     private lateinit var showId: String //공연 id
     private lateinit var facilityId: String //공연장 id
-    private val _detailInfoList = MutableLiveData<List<DbResponse>>()
-    val detailInfoList: LiveData<List<DbResponse>> get() = _detailInfoList
+    private val _detailInfoList = MutableLiveData<List<DbResponse>?>()
+    val detailInfoList: LiveData<List<DbResponse>?> get() = _detailInfoList
 
     companion object {
         const val EXPECTATION = "EXPECTATION"
@@ -62,7 +62,8 @@ class DetailViewModel : ViewModel() {
     fun fetchDetailInfo() {
         viewModelScope.launch {
             runCatching {
-                _detailInfoList.value = fetch.fetchShowDetail(path = showId).showList
+                _detailInfoList.value =
+                    fetchRemoteRepository.fetchShowDetail(path = showId).showList
             }
         }
     }

@@ -32,23 +32,25 @@ class DetailInfoFragment : Fragment() {
 
     private fun setUpObserve() {
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it.first()
-            with(binding) {
-                ivDetailPoster.load(firstShowDetail.poster)
-                tvDetailShowNameSub.text = firstShowDetail.prfnm
-                tvDetailGenreSub.text = firstShowDetail.genrenm
-                tvDetailAgeSub.text = firstShowDetail.prfage
-                tvDetailRuntimeSub.text = firstShowDetail.prfruntime
-                tvDetailPriceSub.text = firstShowDetail.pcseguidance
-                tvDetailShowStateSub.text = firstShowDetail.prfstate
-                tvDetailPlaceSub.text = firstShowDetail.fcltynm
-                tvDetailPeriodSub.text =
-                    "${firstShowDetail.prfpdfrom} ~ ${firstShowDetail.prfpdto}"
-                tvDetailTimeSub.text = firstShowDetail.dtguidance
-                tvDetailCastSub.text =
-                    if (firstShowDetail.prfcast.isNullOrBlank()) "미상" else firstShowDetail.prfcast
-                tvDetailProductSub.text =
-                    if (firstShowDetail.entrpsnm.isNullOrBlank()) "미상" else firstShowDetail.entrpsnm
+            val firstShowDetail = it?.first()
+            if (firstShowDetail != null) {
+                with(binding) {
+                    ivDetailPoster.load(firstShowDetail.poster)
+                    tvDetailShowNameSub.text = firstShowDetail.prfnm
+                    tvDetailGenreSub.text = firstShowDetail.genrenm
+                    tvDetailAgeSub.text = firstShowDetail.prfage
+                    tvDetailRuntimeSub.text = firstShowDetail.prfruntime
+                    tvDetailPriceSub.text = firstShowDetail.pcseguidance
+                    tvDetailShowStateSub.text = firstShowDetail.prfstate
+                    tvDetailPlaceSub.text = firstShowDetail.fcltynm
+                    tvDetailPeriodSub.text =
+                        "${firstShowDetail.prfpdfrom} ~ ${firstShowDetail.prfpdto}"
+                    tvDetailTimeSub.text = firstShowDetail.dtguidance
+                    tvDetailCastSub.text =
+                        if (firstShowDetail.prfcast.isNullOrBlank()) "미상" else firstShowDetail.prfcast
+                    tvDetailProductSub.text =
+                        if (firstShowDetail.entrpsnm.isNullOrBlank()) "미상" else firstShowDetail.entrpsnm
+                }
             }
         }
     }

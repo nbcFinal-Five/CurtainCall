@@ -25,8 +25,8 @@ class IntroImageFragment : Fragment() {
     ): View {
         _binding = FramgentDetailIntroImageBinding.inflate(inflater, container, false)
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it.first()
-            binding.ivDetailIntroPoster.load(firstShowDetail.styurls?.styurlList?.get(0)) {
+            val firstShowDetail = it?.first()
+            binding.ivDetailIntroPoster.load(firstShowDetail?.styurls?.styurlList?.get(0)) {
                 size(resolver = SizeResolver(Size.ORIGINAL))
             }
         }

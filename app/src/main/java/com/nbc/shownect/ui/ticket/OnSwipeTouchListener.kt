@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-
+//Gesture
 open class OnSwipeTouchListener(ctx: Context) : View.OnTouchListener {
 
     private val gestureDetector: GestureDetector
