@@ -1,11 +1,14 @@
 package com.nbc.shownect.ui.detail_activity.er.review
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
@@ -84,6 +87,7 @@ class ReviewFragment(
 		}
 
 		btnSubmit.setOnClickListener {
+			hideKeyboard()
 			isError = true
 
 			val point = reviewViewModel.point.value
@@ -174,5 +178,10 @@ class ReviewFragment(
 	private fun isValidComment(comment: String?): Boolean {
 		if (comment == null) return false
 		return (comment.length >= 10) && (comment.length <= 30)
+	}
+
+	private fun hideKeyboard() {
+		val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+		imm.hideSoftInputFromWindow(view?.windowToken, 0)
 	}
 }
