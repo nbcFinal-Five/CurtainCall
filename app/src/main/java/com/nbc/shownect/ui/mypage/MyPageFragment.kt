@@ -67,7 +67,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		rvReview.adapter = reviewAdapter
 		rvReview.addItemDecoration(
 			GridItemDecoration(
-				horizontalSpacing = (24 * density).toInt(),
+				horizontalSpacing = (12 * density).toInt(),
 				verticalSpacing = (12 * density).toInt()
 			)
 		)
