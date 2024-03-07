@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".ui.detail.review.ReviewFragment">
+             tools:context=".ui.detail_activity.review.ReviewFragment">
 
   <!-- TODO: Update blank fragment layout -->
   <TextView
