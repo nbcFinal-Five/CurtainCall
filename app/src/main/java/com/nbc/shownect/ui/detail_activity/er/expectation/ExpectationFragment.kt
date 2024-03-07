@@ -1,13 +1,16 @@
 package com.nbc.shownect.ui.detail_activity.er.expectation
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbc.shownect.R
@@ -15,12 +18,14 @@ import com.nbc.shownect.databinding.FragmentExpectationBinding
 import com.nbc.shownect.supabase.model.PostExpectationModel
 import com.nbc.shownect.ui.UserViewModel
 import com.nbc.shownect.ui.auth.AuthActivity
+import com.nbc.shownect.ui.detail_activity.DetailViewModel
 
 
 class ExpectationFragment(
 	private val mt20id: String,
 	private val poster: String,
 ) : Fragment() {
+	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val expectationViewModel by lazy { ViewModelProvider(this)[ExpectationViewModel::class.java] }
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 
@@ -76,6 +81,7 @@ class ExpectationFragment(
 		}
 
 		btnSubmit.setOnClickListener {
+			hideKeyboard()
 			isError = true
 
 			val isExpect = expectationViewModel.isExpect.value
@@ -105,7 +111,9 @@ class ExpectationFragment(
 					model = model,
 					context = requireContext(),
 					errorMessage = getString(R.string.already_sakusei)
-				)
+				) {
+					detailViewModel.setInfo(mt20id)
+				}
 			}
 		}
 	}
@@ -170,5 +178,10 @@ class ExpectationFragment(
 	private fun isValidComment(comment: String?): Boolean {
 		if (comment == null) return false
 		return (comment.length >= 10) && (comment.length <= 30)
+	}
+
+	private fun hideKeyboard() {
+		val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+		imm.hideSoftInputFromWindow(view?.windowToken, 0)
 	}
 }

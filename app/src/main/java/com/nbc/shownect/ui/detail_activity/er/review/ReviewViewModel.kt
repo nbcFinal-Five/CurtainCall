@@ -53,7 +53,7 @@ class ReviewViewModel : ViewModel() {
 		_comment.value = inputComment
 	}
 
-	fun createReview(model: PostReviewModel, context: Context, errorMessage: String) {
+	fun createReview(model: PostReviewModel, context: Context, errorMessage: String, onSuccess: () -> Unit) {
 		_isCreateReviewLoading.value = true
 
 		CoroutineScope(Dispatchers.IO).launch {
@@ -65,6 +65,7 @@ class ReviewViewModel : ViewModel() {
 				withContext(Dispatchers.Main) {
 					setTotalCount(model.mt20id)
 					setList(model.mt20id)
+					onSuccess()
 				}
 			} catch (e: RestException) {
 				Log.d("create review", e.error)
