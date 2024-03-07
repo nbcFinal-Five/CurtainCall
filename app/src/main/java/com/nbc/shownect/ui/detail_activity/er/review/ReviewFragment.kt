@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbc.shownect.R
@@ -18,11 +19,13 @@ import com.nbc.shownect.databinding.FragmentReviewBinding
 import com.nbc.shownect.supabase.model.PostReviewModel
 import com.nbc.shownect.ui.UserViewModel
 import com.nbc.shownect.ui.auth.AuthActivity
+import com.nbc.shownect.ui.detail_activity.DetailViewModel
 
 class ReviewFragment(
 	private val mt20id: String,
 	private val poster: String
 ) : Fragment() {
+	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val reviewViewModel by lazy { ViewModelProvider(this)[ReviewViewModel::class.java] }
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 
@@ -117,7 +120,9 @@ class ReviewFragment(
 					model = model,
 					context = requireContext(),
 					errorMessage = getString(R.string.already_point)
-				)
+				) {
+					detailViewModel.setInfo(mt20id)
+				}
 			}
 		}
 	}
