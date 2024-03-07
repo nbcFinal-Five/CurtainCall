@@ -11,10 +11,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url = uri ("http://oss.sonatype.org/content/repositories/snapshots")
-            isAllowInsecureProtocol = true
+            url = uri ("https://naver.jfrog.io/artifactory/maven/")
         }
-        maven ("https://devrepo.kakao.com/nexus/repository/kakaomap-releases/")
     }
 }
 
