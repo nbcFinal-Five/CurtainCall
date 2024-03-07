@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentExpectationBinding
 import com.nbc.curtaincall.supabase.Supabase
@@ -31,7 +32,6 @@ class ExpectationFragment(
 	private val poster: String,
 	private val onUpdate: () -> Unit
 ) : Fragment() {
-	private val detailViewModel by lazy { ViewModelProvider(this)[DetailViewModel::class.java] }
 	private val expectationViewModel by lazy { ViewModelProvider(this)[ExpectationViewModel::class.java] }
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 
@@ -42,6 +42,8 @@ class ExpectationFragment(
 	private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 		userViewModel.setUser()
 	}
+
+	private lateinit var listAdapter: ExpectationListAdapter
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -60,11 +62,20 @@ class ExpectationFragment(
 
 		initHandle()
 		initViewModel()
+		initList()
 		initData()
+	}
+
+	private fun initList() {
+		listAdapter = ExpectationListAdapter()
+
+		binding.rvExpectations.adapter = listAdapter
+		binding.rvExpectations.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 	}
 
 	private fun initData() {
 		expectationViewModel.setCount(mt20id)
+		expectationViewModel.setList(mt20id)
 	}
 
 	private fun initHandle() = with(binding) {
@@ -152,6 +163,18 @@ class ExpectationFragment(
 		}
 		expectationViewModel.totalCount.observe(viewLifecycleOwner) {
 			// TODO 기대평 총개수
+		}
+
+		expectationViewModel.comments.observe(viewLifecycleOwner) {
+			if (it.isEmpty()) {
+				binding.tvEmptyExpectations.visibility = View.VISIBLE
+				binding.rvExpectations.visibility = View.INVISIBLE
+			} else {
+				binding.tvEmptyExpectations.visibility = View.INVISIBLE
+				binding.rvExpectations.visibility = View.VISIBLE
+
+				listAdapter.submitList(it)
+			}
 		}
 	}
 

@@ -8,9 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.supabase.Supabase
+import com.nbc.curtaincall.supabase.model.GetExpectationModel
 import com.nbc.curtaincall.supabase.model.PostExpectationModel
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.postgrest.query.Count
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,10 +32,6 @@ class ExpectationViewModel : ViewModel() {
 	val isCreateExpectationLoading: LiveData<Boolean>
 		get() = _isCreateExpectationLoading
 
-	private var _isReadExpectationLoading: MutableLiveData<Boolean> = MutableLiveData(false)
-	val isReadExpectationLoading: LiveData<Boolean>
-		get() = _isReadExpectationLoading
-
 	private var _goodCount: MutableLiveData<Int> = MutableLiveData(0)
 	val goodCount: LiveData<Int>
 		get() = _goodCount
@@ -45,6 +43,15 @@ class ExpectationViewModel : ViewModel() {
 	private var _totalCount: MutableLiveData<Int> = MutableLiveData(0)
 	val totalCount: LiveData<Int>
 		get() = _totalCount
+
+	private var _isReadExpectationLoading: MutableLiveData<Boolean> = MutableLiveData(false)
+	val isReadExpectationLoading: LiveData<Boolean>
+		get() = _isReadExpectationLoading
+
+	private var _comments: MutableLiveData<List<GetExpectationModel>> = MutableLiveData(emptyList())
+	val comments: LiveData<List<GetExpectationModel>>
+		get() = _comments
+
 
 	fun setIsExpect(expect: Boolean?) {
 		_isExpect.value = expect
@@ -63,7 +70,11 @@ class ExpectationViewModel : ViewModel() {
 					.from("expectations")
 					.insert<PostExpectationModel>(model)
 
-				setCount(model.mt20id)
+
+				withContext(Dispatchers.Main) {
+					setCount(model.mt20id)
+					setList(model.mt20id)
+				}
 				onSuccess()
 			} catch (e: RestException) {
 				Log.d("create expectation", e.error)
@@ -121,6 +132,37 @@ class ExpectationViewModel : ViewModel() {
 				}.countOrNull()!!
 
 			withContext(Dispatchers.Main) { _totalCount.value = count.toInt() }
+		}
+	}
+
+	fun setList(mt20id: String) {
+		_isReadExpectationLoading.value = true
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				val columns = Columns.raw(
+					"""
+					*, profile:profiles(*)
+				""".trimIndent()
+				)
+
+				val list = Supabase.client
+					.from("expectations")
+					.select(columns) {
+						filter {
+							eq(column = "mt20id", value = mt20id)
+						}
+
+						range(0, 3)
+					}
+					.decodeList<GetExpectationModel>()
+
+				withContext(Dispatchers.Main) { _comments.value = list }
+			} catch (e: RestException) {
+				Log.d("read expectations", e.error)
+			} finally {
+				withContext(Dispatchers.Main) { _isReadExpectationLoading.value = false }
+			}
 		}
 	}
 }

@@ -183,5 +183,29 @@
               android:textColor="@color/white"
       />
     </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_expectations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_comment_warning"
+            android:layout_marginTop="24dp"
+    />
+
+    <TextView
+            android:id="@+id/tv_empty_expectations"
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
+            android:gravity="center"
+            android:text="@string/empty_expectations"
+            android:textSize="20sp"
+            android:textColor="@color/bottom_navi_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_comment_warning"
+            android:lineHeight="30dp"
+            android:layout_marginTop="24dp"
+    />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
