@@ -27,8 +27,7 @@ class ReviewListAdapter :
 			val outputDateString = dateTime.format(outputFormatter)
 
 			tvCreatedAt.text = outputDateString
-
-			// TODO Point
+			
 			listOf(
 				ivPoint1,
 				ivPoint2,
