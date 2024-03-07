@@ -162,16 +162,18 @@ class ExpectationFragment(
 			binding.tvFalseCount.text = it.toString()
 		}
 		expectationViewModel.totalCount.observe(viewLifecycleOwner) {
-			// TODO 기대평 총개수
+			binding.btnMore.text = getString(R.string.more_expectation_text) + "($it)"
 		}
 
 		expectationViewModel.comments.observe(viewLifecycleOwner) {
 			if (it.isEmpty()) {
 				binding.tvEmptyExpectations.visibility = View.VISIBLE
 				binding.rvExpectations.visibility = View.INVISIBLE
+				binding.btnMore.visibility = View.INVISIBLE
 			} else {
 				binding.tvEmptyExpectations.visibility = View.INVISIBLE
 				binding.rvExpectations.visibility = View.VISIBLE
+				binding.btnMore.visibility = View.VISIBLE
 
 				listAdapter.submitList(it)
 			}
