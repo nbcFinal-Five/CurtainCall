@@ -24,6 +24,13 @@ class HomeViewModel(
 
     private val _kidShow = MutableLiveData<List<DbResponse>>()
     val kidShow: LiveData<List<DbResponse>> get() = _kidShow
+    private val _isLoadingRecommend = MutableLiveData<Boolean>(false)
+    val isLoadingRecommend: LiveData<Boolean> get() = _isLoadingRecommend
+    private val _isLoadingGenre = MutableLiveData<Boolean>(false)
+    val isLoadingGenre: LiveData<Boolean> get() = _isLoadingGenre
+
+    private val _isLoadingKid = MutableLiveData<Boolean>(false)
+    val isLoadingKid: LiveData<Boolean> get() = _isLoadingKid
 
 
     fun fetchUpcoming() {
@@ -40,6 +47,7 @@ class HomeViewModel(
         viewModelScope.launch {
             runCatching {
                 _topRank.value = fetchRemoteRepository.fetchTopRank().boxof
+                _isLoadingRecommend.value = true
             }.onFailure {
 
             }
@@ -51,6 +59,7 @@ class HomeViewModel(
             runCatching {
                 _genre.value =
                     fetchRemoteRepository.fetchGenre(shcate = getGenreCode(genre)).showList
+                    _isLoadingGenre.value = true
             }.onFailure {
             }
         }
@@ -64,6 +73,7 @@ class HomeViewModel(
                     eddate = "20240328",
                     kidstate = "Y"
                 ).showList
+                _isLoadingKid.value = true
             }
         }
     }
@@ -84,6 +94,7 @@ class HomeViewModel(
         }
     }
 }
+
 class HomeViewModelFactory(
     private val fetchRemoteRepository: FetchRepositoryImpl,
 ) : ViewModelProvider.Factory {

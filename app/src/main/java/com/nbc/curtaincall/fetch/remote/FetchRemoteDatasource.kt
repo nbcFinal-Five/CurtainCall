@@ -34,7 +34,7 @@ interface FetchRemoteDatasource {
         @Query("eddate") eddate: String = Constants.END_DATE,
         @Query("cpage") cpage: String = Constants.CURRENT_PAGE,
         @Query("rows") rows: String = Constants.PAGE_INDEX,
-        @Query("openrun") openrun: String? = "Y",
+        @Query("openrun") openrun: String? = "N",
         @Query("newsql") newsql: String? = "Y",
         @Query("shcate") shcate: String? = "01",
         @Query("kidstate") kidstate: String? = null,
