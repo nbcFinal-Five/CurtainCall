@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
@@ -22,11 +23,13 @@ import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class ExpectationFragment(
 	private val mt20id: String,
-	private val poster: String
+	private val poster: String,
+	private val onUpdate: () -> Unit
 ) : Fragment() {
 	private val detailViewModel by lazy { ViewModelProvider(this)[DetailViewModel::class.java] }
 	private val expectationViewModel by lazy { ViewModelProvider(this)[ExpectationViewModel::class.java] }
@@ -57,6 +60,11 @@ class ExpectationFragment(
 
 		initHandle()
 		initViewModel()
+		initData()
+	}
+
+	private fun initData() {
+		expectationViewModel.setCount(mt20id)
 	}
 
 	private fun initHandle() = with(binding) {
@@ -85,7 +93,6 @@ class ExpectationFragment(
 					return@setOnClickListener
 				}
 
-
 				val model = PostExpectationModel(
 					userId = userId,
 					mt20id = mt20id,
@@ -94,19 +101,12 @@ class ExpectationFragment(
 					comment = comment!!
 				)
 
-				CoroutineScope(Dispatchers.IO).launch {
-					try {
-						Supabase.client
-							.from("expectations")
-							.insert<PostExpectationModel>(model)
-					} catch (e: RestException) {
-						Log.d("create expectation", e.error)
-
-						if (e.error == "duplicate key value violates unique constraint \"unique_mt20id_user_id\"") {
-							// TODO 중복 오류 처리 -> 토스트
-
-						}
-					}
+				expectationViewModel.createExpectation(
+					model = model,
+					context = requireContext(),
+					errorMessage = getString(R.string.already_sakusei)
+				) {
+					onUpdate()
 				}
 			}
 		}
@@ -126,8 +126,8 @@ class ExpectationFragment(
 
 				if (it == null) return@observe
 
-				btnExpectTrue.setBackgroundResource(if (it) R.color.primary_color else R.color.background_color)
-				btnExpectFalse.setBackgroundResource(if (!it) R.color.primary_color else R.color.background_color)
+				btnExpectTrue.setBackgroundResource(if (it) R.drawable.circle_on else R.drawable.circle_off)
+				btnExpectFalse.setBackgroundResource(if (!it) R.drawable.circle_on else R.drawable.circle_off)
 			}
 		}
 
@@ -136,6 +136,22 @@ class ExpectationFragment(
 				binding.tvCommentWarning.visibility = if (isValidComment(it!!)) View.INVISIBLE else View.VISIBLE
 				binding.btnSubmit.isClickable = isValidComment(it)
 			}
+		}
+
+		expectationViewModel.isCreateExpectationLoading.observe(viewLifecycleOwner) {
+			if (it == null) return@observe
+
+			binding.btnSubmit.isClickable = !it
+		}
+
+		expectationViewModel.goodCount.observe(viewLifecycleOwner) {
+			binding.tvTrueCount.text = it.toString()
+		}
+		expectationViewModel.badCount.observe(viewLifecycleOwner) {
+			binding.tvFalseCount.text = it.toString()
+		}
+		expectationViewModel.totalCount.observe(viewLifecycleOwner) {
+			// TODO 기대평 총개수
 		}
 	}
 

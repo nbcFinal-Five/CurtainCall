@@ -24,4 +24,7 @@
   <color name="filter_btn_text_color">#646568</color>
   <color name="filter_selected_color">#462123</color>
   <color name="half_dark">#6B6B6B</color>
+  <color name="good">#8F9DE9</color>
+  <color name="bad">#FFB7B7</color>
+  <color name="focus">#3E1719</color>
 </resources>

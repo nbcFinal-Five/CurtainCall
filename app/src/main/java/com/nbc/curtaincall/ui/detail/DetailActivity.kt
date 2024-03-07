@@ -64,11 +64,15 @@ class DetailActivity : AppCompatActivity() {
 					mt20id = firstShowDetail.mt20id!!
 					poster = firstShowDetail.poster!!
 
+					detailViewModel.setExpectationCount(firstShowDetail.mt20id!!)
+
 					setFragment(
 						ExpectationFragment(
 							mt20id = firstShowDetail.mt20id!!,
 							poster = firstShowDetail.poster!!
-						)
+						) {
+							detailViewModel.setExpectationCount(mt20id!!)
+						}
 					)
 
 					with(binding) {
@@ -127,7 +131,9 @@ class DetailActivity : AppCompatActivity() {
 								ExpectationFragment(
 									mt20id = mt20id!!,
 									poster = poster!!
-								)
+								) {
+									detailViewModel.setExpectationCount(mt20id!!)
+								}
 							)
 							btnReviews.setBackgroundResource(R.color.component_background_color)
 							btnReviews.setTextColor(ContextCompat.getColor(this@DetailActivity, R.color.component_color))
@@ -138,6 +144,10 @@ class DetailActivity : AppCompatActivity() {
 					}
 				}
 			}
+		}
+
+		detailViewModel.totalExpectationCount.observe(this) {
+			binding.tvDetailExpectationsNum.text = "기대평 $it 개"
 		}
 	}
 
