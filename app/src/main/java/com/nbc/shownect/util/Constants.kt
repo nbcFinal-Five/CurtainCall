@@ -24,6 +24,7 @@ object Constants {
     const val SEARCH_WORD = "searchword"
 
     const val SHOW_ID = "fromTicketId"
+    const val FACILITY_ID = "facilityId"
 
     // Map auth
     const val MAP_CLIENT_ID = BuildConfig.MAP_CLIENT_ID

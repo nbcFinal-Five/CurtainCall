@@ -30,6 +30,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
         )
     }
     private var ticketId = ""
+    private var facilityId = ""
 
     override fun onStart() {
         super.onStart()
@@ -69,23 +70,24 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                 sharedViewModel.fetchShowDetail(id)
                 ticketId = id
             }
-            showDetailInfo.observe(viewLifecycleOwner) { showDetailInfoList ->
+            showDetailInfo.observe(viewLifecycleOwner) {
+                val showDetail = it.first()
                 with(binding) {
-                    tvSimpleShowNameSub.text = showDetailInfoList[0].prfnm
-                    ivSimplePosterImage.load(showDetailInfoList[0].poster)
-                    tvSimpleAge.text = showDetailInfoList[0].prfage
-                    tvSimpleRuntimeSub.text = showDetailInfoList[0].prfruntime
-                    tvSimplePlaceSub.text = showDetailInfoList[0].dtguidance
-                    tvSimplePriceSub.text = showDetailInfoList[0].pcseguidance
-                    tvSimplePlaceSub.text = showDetailInfoList[0].fcltynm
-                    tvSimpleGenre.text = showDetailInfoList[0].genrenm
-                    tvSimpleShowState.text = showDetailInfoList[0].prfstate
+                    tvSimpleShowNameSub.text = showDetail.prfnm
+                    ivSimplePosterImage.load(showDetail.poster)
+                    tvSimpleAge.text = showDetail.prfage
+                    tvSimpleRuntimeSub.text = showDetail.prfruntime
+                    tvSimplePlaceSub.text = showDetail.dtguidance
+                    tvSimplePriceSub.text = showDetail.pcseguidance
+                    tvSimplePlaceSub.text = showDetail.fcltynm
+                    tvSimpleGenre.text = showDetail.genrenm
+                    tvSimpleShowState.text = showDetail.prfstate
                     tvSimpleCastSub.text =
-                        if (showDetailInfoList[0].prfcast.isNullOrBlank()) "미상" else showDetailInfoList[0].prfcast
+                        if (showDetail.prfcast.isNullOrBlank()) "미상" else showDetail.prfcast
                     tvSimpleProductSub.text =
-                        if (showDetailInfoList[0].entrpsnm.isNullOrBlank()) "미상" else showDetailInfoList[0].entrpsnm
+                        if (showDetail.entrpsnm.isNullOrBlank()) "미상" else showDetail.entrpsnm
                 }
-
+                facilityId = showDetail.mt20id.toString()
             }
         }
         //Swipe Gesture
@@ -93,8 +95,10 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
             OnSwipeTouchListener(requireContext()) {
             override fun onSwipeTop() {
                 super.onSwipeTop()
-                val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra(Constants.SHOW_ID, ticketId)
+                val intent = Intent(context, DetailActivity::class.java).apply {
+                    putExtra(Constants.SHOW_ID, ticketId)
+                    putExtra(Constants.FACILITY_ID,facilityId)
+                }
                 startActivity(intent)
                 activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
             }
