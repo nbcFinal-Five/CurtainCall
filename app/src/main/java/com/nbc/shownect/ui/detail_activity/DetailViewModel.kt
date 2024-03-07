@@ -1,5 +1,6 @@
 package com.nbc.shownect.ui.detail_activity
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,12 +9,17 @@ import com.nbc.shownect.fetch.model.DbResponse
 import com.nbc.shownect.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.shownect.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.shownect.supabase.Supabase
+import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Count
+import io.github.jan.supabase.postgrest.rpc
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 class DetailViewModel : ViewModel() {
     private val fetchRemoteRepository: FetchRepositoryImpl = FetchRepositoryImpl(fetch = fetch)
@@ -23,6 +29,16 @@ class DetailViewModel : ViewModel() {
     val detailInfoList: LiveData<List<DbResponse>?> get() = _detailInfoList
 
     private var _totalExpectationCount: MutableLiveData<Int> = MutableLiveData(0)
+    val totalExpectationCount: LiveData<Int>
+        get() = _totalExpectationCount
+
+    private var _point: MutableLiveData<Double> = MutableLiveData(0.0)
+    val point: LiveData<Double>
+        get() = _point
+
+    private var _isBookmark: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isBookmark: LiveData<Boolean>
+        get() = _isBookmark
 
     fun sharedId(mt20Id: String, mt10Id: String) {
         showId = mt20Id
@@ -51,5 +67,52 @@ class DetailViewModel : ViewModel() {
                     fetchRemoteRepository.fetchShowDetail(path = showId).showList
             }
         }
+    }
+
+    fun setInfo(mt20id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val count = Supabase.client
+                .from("expectations")
+                .select {
+                    filter {
+                        eq(column = "mt20id", value = mt20id)
+                    }
+                    count(Count.EXACT)
+                }.countOrNull()!!
+
+            withContext(Dispatchers.Main) { _totalExpectationCount.value = count.toInt() }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val point = Supabase.client.postgrest.rpc(
+                    function = "get_average_point",
+                    parameters = buildJsonObject {
+                        put("mt20id_arg", mt20id)
+                    }
+                ).data.toDouble()
+
+                withContext(Dispatchers.Main) {
+                    _point.value = point
+                }
+            } catch (e: RestException) {
+                Log.d("set point", e.error)
+            }
+        }
+    }
+
+    fun setIsLike(mt20id: String, userId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = Supabase.client.postgrest.rpc(
+                function = "check_bookmark_exists",
+                parameters = buildJsonObject {
+                    put("mt20id_arg", mt20id)
+                    put("user_id_arg", userId)
+                }
+            ).data.toBoolean()
+
+            withContext(Dispatchers.Main) { _isBookmark.value = result }
+        }
+
     }
 }

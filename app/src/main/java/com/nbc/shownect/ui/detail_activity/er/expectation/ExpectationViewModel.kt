@@ -61,7 +61,7 @@ class ExpectationViewModel : ViewModel() {
 		_comment.value = inputComment
 	}
 
-	fun createExpectation(model: PostExpectationModel, context: Context, errorMessage: String) {
+	fun createExpectation(model: PostExpectationModel, context: Context, errorMessage: String, onSuccess: () -> Unit) {
 		_isCreateExpectationLoading.value = true
 
 		CoroutineScope(Dispatchers.IO).launch {
@@ -74,6 +74,7 @@ class ExpectationViewModel : ViewModel() {
 				withContext(Dispatchers.Main) {
 					setCount(model.mt20id)
 					setList(model.mt20id)
+					onSuccess()
 				}
 			} catch (e: RestException) {
 				Log.d("create expectation", e.error)
