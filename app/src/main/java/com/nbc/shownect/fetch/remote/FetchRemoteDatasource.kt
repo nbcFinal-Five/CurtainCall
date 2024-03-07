@@ -66,6 +66,12 @@ interface FetchRemoteDatasource {
     suspend fun fetchShowDetail(
         @Path("id") path: String,
     ): DbsResponse
+
+    // 공연장 정보
+    @GET("prfplc/{id}")
+    suspend fun getLocationList(
+        @Path("id") path: String,
+    ): DbsResponse
 }
 
 

@@ -1,5 +1,7 @@
 package com.nbc.shownect.util
 
+import com.nbc.shownect.BuildConfig
+
 object Constants {
     const val DRAMA = "AAAA" //연극
     const val DANCE = "BBBC" //무용 (서양/한국무용)
@@ -23,4 +25,7 @@ object Constants {
 
     const val SHOW_ID = "fromTicketId"
     const val FACILITY_ID = "facilityId"
+
+    // Map auth
+    const val MAP_CLIENT_ID = BuildConfig.MAP_CLIENT_ID
 }
