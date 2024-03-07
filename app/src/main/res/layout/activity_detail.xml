@@ -24,30 +24,6 @@
             app:tabRippleColor="@null"
             app:tabTextColor="@color/white">
 
-            <com.google.android.material.tabs.TabItem
-                style="@style/TicketTitleTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="상세 정보" />
-
-            <com.google.android.material.tabs.TabItem
-                style="@style/TicketTitleTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="소개 이미지" />
-
-            <com.google.android.material.tabs.TabItem
-                style="@style/TicketTitleTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="공연장 위치" />
-
-            <com.google.android.material.tabs.TabItem
-                style="@style/TicketTitleTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="기대평 / 리뷰" />
-
         </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

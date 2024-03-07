@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.tabs.TabLayoutMediator
 import com.nbc.shownect.databinding.ActivityDetailBinding
 import com.nbc.shownect.fetch.network.retrofit.RetrofitClient
 import com.nbc.shownect.ui.UserViewModel
@@ -30,7 +31,19 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.detailViewPager.adapter = adapter
+        with(binding) {
+            detailViewPager.adapter = adapter
+            TabLayoutMediator(tabLayoutDetail, detailViewPager) { tab, position ->
+                detailViewPager.currentItem = tab.position
+                tab.text = when (position) {
+                    0 -> "상세 정보"
+                    1 -> "소개 이미지"
+                    2 -> "공연장 위치"
+                    3 -> "기대평/리뷰"
+                    else -> ""
+                }
+            }.attach()
+        }
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
