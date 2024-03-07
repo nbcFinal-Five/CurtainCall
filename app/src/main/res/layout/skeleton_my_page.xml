@@ -3,70 +3,71 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="324dp"
+        android:layout_height="332dp"
 >
   <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
-          android:layout_height="324dp"
+          android:layout_height="332dp"
   >
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="156dp"
+            android:layout_width="384dp"
+            android:layout_height="160dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
     >
       <androidx.cardview.widget.CardView
               app:cardBackgroundColor="@color/component_background_color"
-              app:cardCornerRadius="10dp"
-              android:layout_width="0dp"
-              android:layout_height="156dp"
+              app:cardCornerRadius="3dp"
+              android:layout_width="120dp"
+              android:layout_height="160dp"
               android:layout_weight="1"
               android:layout_marginEnd="12dp"
-
       />
       <androidx.cardview.widget.CardView
               app:cardBackgroundColor="@color/component_background_color"
-              app:cardCornerRadius="10dp"
-              android:layout_width="0dp"
-              android:layout_height="156dp"
+              app:cardCornerRadius="3dp"
+              android:layout_width="120dp"
+              android:layout_height="160dp"
               android:layout_weight="1"
-              android:layout_marginHorizontal="12dp"
       />
       <androidx.cardview.widget.CardView
               app:cardBackgroundColor="@color/component_background_color"
-              app:cardCornerRadius="10dp"
-              android:layout_width="0dp"
-              android:layout_height="156dp"
+              app:cardCornerRadius="3dp"
+              android:layout_width="120dp"
+              android:layout_height="160dp"
               android:layout_weight="1"
               android:layout_marginStart="12dp"
       />
     </LinearLayout>
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="156dp"
+            android:layout_width="384dp"
+            android:layout_height="160dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
     >
       <androidx.cardview.widget.CardView
               app:cardBackgroundColor="@color/component_background_color"
-              app:cardCornerRadius="10dp"
-              android:layout_width="0dp"
-              android:layout_height="156dp"
+              app:cardCornerRadius="3dp"
+              android:layout_width="120dp"
+              android:layout_height="160dp"
               android:layout_weight="1"
               android:layout_marginEnd="12dp"
       />
       <androidx.cardview.widget.CardView
               app:cardBackgroundColor="@color/component_background_color"
-              app:cardCornerRadius="10dp"
-              android:layout_width="0dp"
-              android:layout_height="156dp"
+              app:cardCornerRadius="3dp"
+              android:layout_width="120dp"
+              android:layout_height="160dp"
               android:layout_weight="1"
-              android:layout_marginHorizontal="12dp"
       />
       <androidx.cardview.widget.CardView
               app:cardBackgroundColor="@color/component_background_color"
-              app:cardCornerRadius="10dp"
-              android:layout_width="0dp"
-              android:layout_height="156dp"
+              app:cardCornerRadius="3dp"
+              android:layout_width="120dp"
+              android:layout_height="160dp"
               android:layout_weight="1"
               android:layout_marginStart="12dp"
       />

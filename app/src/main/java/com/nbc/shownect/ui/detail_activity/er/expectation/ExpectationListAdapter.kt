@@ -1,4 +1,4 @@
-package com.nbc.shownect.ui.detail_activity.expectation
+package com.nbc.shownect.ui.detail_activity.er.expectation
 
 import android.util.Log
 import android.view.LayoutInflater

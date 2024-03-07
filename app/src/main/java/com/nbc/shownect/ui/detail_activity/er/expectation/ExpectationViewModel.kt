@@ -1,4 +1,4 @@
-package com.nbc.shownect.ui.detail_activity.expectation
+package com.nbc.shownect.ui.detail_activity.er.expectation
 
 import android.content.Context
 import android.util.Log
@@ -74,8 +74,8 @@ class ExpectationViewModel : ViewModel() {
 				withContext(Dispatchers.Main) {
 					setCount(model.mt20id)
 					setList(model.mt20id)
+					onSuccess()
 				}
-				onSuccess()
 			} catch (e: RestException) {
 				Log.d("create expectation", e.error)
 
