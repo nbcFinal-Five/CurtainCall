@@ -22,4 +22,5 @@ object Constants {
     const val SEARCH_WORD = "searchword"
 
     const val SHOW_ID = "fromTicketId"
+    const val FACILITY_ID = "facilityId"
 }
