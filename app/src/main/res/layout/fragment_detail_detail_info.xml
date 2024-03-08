@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                       xmlns:app="http://schemas.android.com/apk/res-auto"
-                                       xmlns:tools="http://schemas.android.com/tools"
-                                       android:layout_width="match_parent"
-                                       android:layout_height="match_parent"
-                                       android:background="@color/background_color"
-                                       app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-          android:id="@+id/constraint_layout"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
+        <ImageView
             android:id="@+id/iv_detail_poster"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -20,9 +20,9 @@
             android:src="@mipmap/ic_launcher"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <RatingBar
+        <RatingBar
             android:id="@+id/rb_detail_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
@@ -34,12 +34,11 @@
             android:progressBackgroundTint="@color/primary_color"
             android:rating="0"
             android:stepSize="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_detail_poster"
             android:theme="@style/RatingBar"
-    />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_detail_poster" />
 
-    <ImageView
+        <ImageView
             android:id="@+id/iv_detail_wishlist"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -47,9 +46,9 @@
             android:background="@drawable/ic_heart_empty_24dp"
             app:layout_constraintBottom_toBottomOf="@id/rb_detail_bar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/rb_detail_bar"/>
+            app:layout_constraintTop_toTopOf="@id/rb_detail_bar" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_expectationsNum"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -57,18 +56,18 @@
             android:layout_marginTop="12dp"
             android:text="기대평 1개"
             app:layout_constraintStart_toStartOf="@id/rb_detail_bar"
-            app:layout_constraintTop_toBottomOf="@id/rb_detail_bar"/>
+            app:layout_constraintTop_toBottomOf="@id/rb_detail_bar" />
 
-    <ImageView
+        <ImageView
             android:layout_width="10dp"
             android:layout_height="0dp"
             android:layout_marginStart="3dp"
             android:src="@drawable/right_arrow"
             app:layout_constraintBottom_toBottomOf="@id/tv_detail_expectationsNum"
             app:layout_constraintStart_toEndOf="@id/tv_detail_expectationsNum"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_expectationsNum"/>
+            app:layout_constraintTop_toTopOf="@id/tv_detail_expectationsNum" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_show_name_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -77,9 +76,9 @@
             android:text="@string/ticket_show_name_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_show_name_sub"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_show_name_sub"/>
+            app:layout_constraintTop_toTopOf="@id/tv_detail_show_name_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_show_name_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -90,9 +89,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_detail_show_name_title"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_expectationsNum"
-            tools:text="제목"/>
+            tools:text="제목" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_genre_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -100,9 +99,9 @@
             android:text="@string/detail_genre_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_genre_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_genre_sub"/>
+            app:layout_constraintTop_toTopOf="@id/tv_detail_genre_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_genre_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -111,9 +110,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_show_name_sub"
-            tools:text="연극"/>
+            tools:text="연극" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_age_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -121,9 +120,9 @@
             android:text="@string/detail_age_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_age_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_age_sub"/>
+            app:layout_constraintTop_toTopOf="@id/tv_detail_age_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_age_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -132,9 +131,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_genre_sub"
-            tools:text="만 12 세 이상"/>
+            tools:text="만 12 세 이상" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_runtime_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -142,9 +141,9 @@
             android:text="@string/ticket_runtime_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_runtime_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_runtime_sub"/>
+            app:layout_constraintTop_toTopOf="@id/tv_detail_runtime_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_runtime_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -153,9 +152,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_age_sub"
-            tools:text="런타임"/>
+            tools:text="런타임" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_price_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -164,9 +163,9 @@
             android:text="@string/ticket_price_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_price_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_detail_price_sub"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_detail_price_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_price_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -175,9 +174,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_runtime_sub"
-            tools:text="가격"/>
+            tools:text="가격" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_show_state_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -186,9 +185,9 @@
             android:text="@string/detail_show_state_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_show_state_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_detail_show_state_sub"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_detail_show_state_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_show_state_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -197,9 +196,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_price_sub"
-            tools:text="공연 예정"/>
+            tools:text="공연 예정" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_place_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -208,9 +207,9 @@
             android:text="@string/ticket_place_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_place_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_detail_place_sub"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_detail_place_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_place_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -219,9 +218,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_show_state_sub"
-            tools:text="세종문화회관"/>
+            tools:text="세종문화회관" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_period_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -230,9 +229,9 @@
             android:text="@string/detail_period_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_period_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_detail_period_sub"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_detail_period_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_period_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -241,9 +240,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_place_sub"
-            tools:text="2024.04.27 ~ 2024.04.28"/>
+            tools:text="2024.04.27 ~ 2024.04.28" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_time_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -252,9 +251,9 @@
             android:text="@string/detail_time_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_time_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_detail_time_sub"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_detail_time_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_time_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -263,9 +262,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_period_sub"
-            tools:text="토요일(11:00,14:00,16:00), 일요일(11:00,14:00)"/>
+            tools:text="토요일(11:00,14:00,16:00), 일요일(11:00,14:00)" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_cast_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -274,9 +273,9 @@
             android:text="@string/ticket_cast_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_cast_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_cast_sub"/>
+            app:layout_constraintTop_toTopOf="@id/tv_detail_cast_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_cast_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -285,9 +284,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_time_sub"
-            tools:text="출연진"/>
+            tools:text="출연진" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_product_title"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -295,9 +294,9 @@
             android:text="@string/ticket_product_title"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_product_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_name_title"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_product_sub"/>
+            app:layout_constraintTop_toTopOf="@id/tv_detail_product_sub" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_detail_product_sub"
             style="@style/TicketSubTextStyle"
             android:layout_width="0dp"
@@ -306,7 +305,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_detail_cast_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_cast_sub"
-            tools:text="제작사"/>
-  </androidx.constraintlayout.widget.ConstraintLayout>
+            tools:text="제작사" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
