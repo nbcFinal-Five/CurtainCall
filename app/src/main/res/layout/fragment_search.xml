@@ -95,6 +95,15 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_searchfilter_child"
         app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_child" />
 
+    <ImageView
+        android:id="@+id/iv_search_noresult"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_search_noresult"
+        android:src="@drawable/ic_search_empty_result"/>
+
     <TextView
         android:id="@+id/tv_search_noresult"
         android:layout_width="wrap_content"

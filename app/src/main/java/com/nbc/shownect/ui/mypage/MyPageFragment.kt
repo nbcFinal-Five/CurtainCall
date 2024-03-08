@@ -153,14 +153,14 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		myPageViewModel.reviews.observe(viewLifecycleOwner) {
 			if (it == null) {
 				rvShowcase.visibility = View.INVISIBLE
-				tvShowcaseDetail.visibility = View.VISIBLE
+				llShowcaseDetail.visibility = View.VISIBLE
 			} else {
 				if (it.isEmpty()) {
 					rvShowcase.visibility = View.INVISIBLE
-					tvShowcaseDetail.visibility = View.VISIBLE
+					llShowcaseDetail.visibility = View.VISIBLE
 				} else {
 					rvShowcase.visibility = View.VISIBLE
-					tvShowcaseDetail.visibility = View.INVISIBLE
+					llShowcaseDetail.visibility = View.INVISIBLE
 
 					reviewAdapter.submitList(it.take(6))
 				}
@@ -171,7 +171,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 			if (it) {
 				clReviewSkeleton.visibility = View.VISIBLE
 				rvShowcase.visibility = View.INVISIBLE
-				tvShowcaseDetail.visibility = View.INVISIBLE
+				llShowcaseDetail.visibility = View.INVISIBLE
 			} else {
 				clReviewSkeleton.visibility = View.INVISIBLE
 			}
@@ -196,14 +196,14 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		myPageViewModel.bookmarks.observe(viewLifecycleOwner) {
 			if (it == null) {
 				rvBookmarks.visibility = View.INVISIBLE
-				tvLikeDetail.visibility = View.VISIBLE
+				llLikeDetail.visibility = View.VISIBLE
 			} else {
 				if (it.isEmpty()) {
 					rvBookmarks.visibility = View.INVISIBLE
-					tvLikeDetail.visibility = View.VISIBLE
+					llLikeDetail.visibility = View.VISIBLE
 				} else {
 					rvBookmarks.visibility = View.VISIBLE
-					tvLikeDetail.visibility = View.INVISIBLE
+					llLikeDetail.visibility = View.INVISIBLE
 
 					bookmarkAdapter.submitList(it.take(6))
 				}
@@ -214,7 +214,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 			if (it) {
 				clBookmarkSkeleton.visibility = View.VISIBLE
 				rvBookmarks.visibility = View.INVISIBLE
-				tvLikeDetail.visibility = View.INVISIBLE
+				llLikeDetail.visibility = View.INVISIBLE
 			} else {
 				clBookmarkSkeleton.visibility = View.INVISIBLE
 
