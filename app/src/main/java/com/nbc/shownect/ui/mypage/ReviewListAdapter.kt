@@ -23,8 +23,7 @@ class ReviewListAdapter(
 ) : ListAdapter<GetReviewModel, ReviewListAdapter.ViewHolder>(MyDiffCallback()) {
 	inner class ViewHolder(private val binding: MyPageItemBinding) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(item: GetReviewModel) {
-			Glide.with(binding.root).load(item.poster).into(binding.ivItem)
-
+			Glide.with(itemView).load(item.poster).into(binding.ivItem)
 			binding.root.setOnClickListener {
 				val intent = Intent(context, DetailActivity::class.java).apply {
 					putExtra(Constants.SHOW_ID, item.mt20id)

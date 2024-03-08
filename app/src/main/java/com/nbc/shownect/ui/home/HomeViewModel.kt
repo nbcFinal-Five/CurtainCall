@@ -14,23 +14,31 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val fetchRemoteRepository: FetchRepositoryImpl,
 ) : ViewModel() {
-    private val _showList = MutableLiveData<List<DbResponse>>()
-    val showList: LiveData<List<DbResponse>> get() = _showList
+    private val _showList = MutableLiveData<List<DbResponse>?>()
+    val showList: LiveData<List<DbResponse>?> get() = _showList
 
-    private val _topRank = MutableLiveData<List<BoxofResponse>>()
-    val topRank: LiveData<List<BoxofResponse>> get() = _topRank
-    private val _genre = MutableLiveData<List<DbResponse>>()
-    val genre: LiveData<List<DbResponse>> get() = _genre
 
-    private val _kidShow = MutableLiveData<List<DbResponse>>()
-    val kidShow: LiveData<List<DbResponse>> get() = _kidShow
+    private val _topRank = MutableLiveData<List<BoxofResponse>?>()
+    val topRank: LiveData<List<BoxofResponse>?> get() = _topRank
+
+    private val _genre = MutableLiveData<List<DbResponse>?>()
+    val genre: LiveData<List<DbResponse>?> get() = _genre
+
+
+    private val _kidShow = MutableLiveData<List<DbResponse>?>()
+    val kidShow: LiveData<List<DbResponse>?> get() = _kidShow
+
     private val _isLoadingRecommend = MutableLiveData<Boolean>(false)
     val isLoadingRecommend: LiveData<Boolean> get() = _isLoadingRecommend
+
     private val _isLoadingGenre = MutableLiveData<Boolean>(false)
     val isLoadingGenre: LiveData<Boolean> get() = _isLoadingGenre
 
     private val _isLoadingKid = MutableLiveData<Boolean>(false)
     val isLoadingKid: LiveData<Boolean> get() = _isLoadingKid
+
+    private val _tabPosition = MutableLiveData<Int>()
+    val tabPosition: LiveData<Int> get() = _tabPosition
 
 
     fun fetchUpcoming() {
@@ -59,7 +67,7 @@ class HomeViewModel(
             runCatching {
                 _genre.value =
                     fetchRemoteRepository.fetchGenre(shcate = getGenreCode(genre)).showList
-                    _isLoadingGenre.value = true
+                _isLoadingGenre.value = true
             }.onFailure {
             }
         }
@@ -78,6 +86,9 @@ class HomeViewModel(
         }
     }
 
+    fun saveTabPosition(tabPosition: Int) {
+        _tabPosition.value = tabPosition
+    }
 
     private fun getGenreCode(genre: Int): String {
         return when (genre) {

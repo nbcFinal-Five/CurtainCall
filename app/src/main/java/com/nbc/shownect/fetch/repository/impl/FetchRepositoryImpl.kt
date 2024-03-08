@@ -28,7 +28,8 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
         cpage: String,
         rows: String,
         openrun: String?,
-        shcate: String?
+        shcate: String?,
+        newsql: String?,
     ): DbsResponse =
         withContext(Dispatchers.IO) {
             fetch.fetchShowList(shcate = shcate)

@@ -207,21 +207,36 @@
       />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-            android:id="@+id/tv_showcase_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/showcase_empty"
-            android:textSize="16sp"
-            android:textColor="@color/bottom_navi_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_showcase"
-            app:layout_constraintBottom_toTopOf="@id/tv_like"
-            android:lineHeight="30dp"
-    />
+    <LinearLayout
+        android:id="@+id/ll_showcase_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_my_page_showcase"
+        app:layout_constraintBottom_toTopOf="@id/tv_like">
+
+      <ImageView
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_gravity="center"
+          android:src="@drawable/ic_mypage_empty_review"/>
+
+      <TextView
+          android:id="@+id/tv_showcase_detail"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:layout_marginTop="12dp"
+          android:text="@string/showcase_empty"
+          android:textSize="16sp"
+          android:textColor="@color/bottom_navi_color"
+          android:lineHeight="30dp"
+          />
+    </LinearLayout>
+
     <TextView
             android:id="@+id/tv_like"
             android:layout_width="wrap_content"
@@ -262,19 +277,35 @@
 
     </LinearLayout>
 
-    <TextView
-            android:id="@+id/tv_like_Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/bottom_navi_color"
-            android:text="@string/bookmarks_empty"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_like"
-            app:layout_constraintBottom_toBottomOf="parent"
-    />
+    <LinearLayout
+        android:id="@+id/ll_like_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_like"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+      <ImageView
+          android:id="@+id/iv_like_detail"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_gravity="center"
+          android:src="@drawable/ic_mypage_empty_bookmark"/>
+
+      <TextView
+          android:id="@+id/tv_like_Detail"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:textColor="@color/bottom_navi_color"
+          android:text="@string/bookmarks_empty"
+          android:textSize="16sp"
+          />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_bookmarks"

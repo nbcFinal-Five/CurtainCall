@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
 import com.nbc.shownect.databinding.ConstraintLayoutSearchRvBinding
 import com.nbc.shownect.search.model.SearchItem
 import com.nbc.shownect.ui.home.adapter.PosterClickListener
@@ -26,7 +26,13 @@ class SearchListAdapter(private val listener: PosterClickListener? = null) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchShowViewHolder {
-        return SearchShowViewHolder(ConstraintLayoutSearchRvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return SearchShowViewHolder(
+            ConstraintLayoutSearchRvBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ), parent, false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: SearchShowViewHolder, position: Int) {
@@ -34,13 +40,13 @@ class SearchListAdapter(private val listener: PosterClickListener? = null) :
         holder.bind(showItem)
     }
 
-    inner class  SearchShowViewHolder(private val binding:ConstraintLayoutSearchRvBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : SearchItem) {
+    inner class SearchShowViewHolder(private val binding: ConstraintLayoutSearchRvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: SearchItem) {
             with(binding) {
-//                Glide.with(itemView).load(item.poster).into(ivSearchResult)
+                Glide.with(itemView).load(item.poster).into(ivSearchResult)
                 tvSearchitemGenre.setText(item.genrenm)
                 tvSearchitemPrfstate.setText(item.prfstate)
-                ivSearchResult.load(item.poster)
                 ivSearchResult.setOnClickListener {
                     item.mt20id?.let { id ->
                         listener?.posterClicked(id) // 클릭시 해당 id 전달하여 간단화면 띄우기
