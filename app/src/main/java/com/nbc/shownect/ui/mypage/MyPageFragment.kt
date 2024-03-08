@@ -26,8 +26,8 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		userViewModel.setUser()
 	}
 
-	private val reviewAdapter by lazy { ReviewListAdapter() }
-	private val bookmarkAdapter by lazy { BookmarkListAdapter() }
+	private val reviewAdapter by lazy { ReviewListAdapter(requireContext(), launcher) }
+	private val bookmarkAdapter by lazy { BookmarkListAdapter(requireContext(), launcher) }
 
 	override fun onLogoutConfirmed() {
 		userViewModel.setUser()
@@ -98,14 +98,14 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 			val intent = Intent(requireActivity(), MoreActivity::class.java)
 			intent.putExtra("mode", "reviews")
 
-			startActivity(intent)
+			launcher.launch(intent)
 		}
 
 		llLikesMore.setOnClickListener {
 			val intent = Intent(requireActivity(), MoreActivity::class.java)
 			intent.putExtra("mode", "likes")
 
-			startActivity(intent)
+			launcher.launch(intent)
 		}
 
 		tvDattai.setOnClickListener {

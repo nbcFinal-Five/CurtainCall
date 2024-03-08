@@ -19,6 +19,9 @@ data class GetBookmarkModel(
 
 	@SerialName("mt20id")
 	val mt20id: String,
+
+	@SerialName("mt10id")
+	val mt10id: String,
 )
 
 @Serializable
@@ -31,4 +34,7 @@ data class PostBookmarkModel(
 
 	@SerialName("mt20id")
 	val mt20id: String,
+
+	@SerialName("mt10id")
+	val mt10id: String,
 )

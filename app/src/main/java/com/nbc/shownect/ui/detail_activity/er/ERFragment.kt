@@ -56,6 +56,7 @@ class ERFragment : Fragment() {
 
 			changeFragmentByMode(
 				mt20id = firstShowDetail.mt20id!!,
+				mt10id = firstShowDetail.mt10id!!,
 				poster = firstShowDetail.poster!!,
 				mode = ERViewModel.EXPECTATION
 			)
@@ -65,6 +66,7 @@ class ERFragment : Fragment() {
 			if (info != null) {
 				changeFragmentByMode(
 					mt20id = info!!.mt20id!!,
+					mt10id = info!!.mt10id!!,
 					poster = info!!.poster!!,
 					mode = it
 				)
@@ -72,13 +74,14 @@ class ERFragment : Fragment() {
 		}
 	}
 
-	private fun changeFragmentByMode(mode: String, mt20id: String, poster: String) {
+	private fun changeFragmentByMode(mode: String, mt10id: String, mt20id: String, poster: String) {
 		with(binding) {
 			when (mode) {
 				ERViewModel.REVIEW -> {
 					setFragment(
 						ReviewFragment(
 							mt20id = mt20id,
+							mt10id = mt10id,
 							poster = poster
 						)
 					)
@@ -93,6 +96,7 @@ class ERFragment : Fragment() {
 					setFragment(
 						ExpectationFragment(
 							mt20id = mt20id,
+							mt10id = mt10id,
 							poster = poster
 						)
 					)

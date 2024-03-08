@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_simple_scrollview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ticket_shape"
-    android:clipToOutline="true"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:id="@+id/layout_simple_scrollview"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+                                       android:background="@drawable/ticket_shape"
+                                       android:clipToOutline="true"
+                                       app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+  <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+    <ImageView
             android:id="@+id/iv_simple_posterImage"
             android:layout_width="270dp"
             android:layout_height="360dp"
@@ -27,18 +27,18 @@
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        <View
+    <View
             android:id="@+id/gradient_view"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:background="@drawable/bg_ticket_poster_bottom_gradient"
             app:layout_constraintBottom_toBottomOf="@id/iv_simple_posterImage"
             app:layout_constraintEnd_toEndOf="@id/iv_simple_posterImage"
-            app:layout_constraintStart_toStartOf="@id/iv_simple_posterImage" />
+            app:layout_constraintStart_toStartOf="@id/iv_simple_posterImage"/>
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,9 +50,9 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_simple_posterImage"
             app:layout_constraintEnd_toEndOf="@id/iv_simple_posterImage"
-            tools:text="무용 (서양/한국무용)" />
+            tools:text="무용 (서양/한국무용)"/>
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_show_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,9 +61,9 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/tv_simple_genre"
             app:layout_constraintEnd_toEndOf="@id/tv_simple_genre"
-            tools:text="공연종료" />
+            tools:text="공연종료"/>
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_age"
             style="@style/TicketTitleTextStyle"
             android:layout_width="wrap_content"
@@ -73,9 +73,9 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_simple_posterImage"
             app:layout_constraintStart_toStartOf="@id/iv_simple_posterImage"
-            tools:text="전체연령" />
+            tools:text="전체연령"/>
 
-        <RatingBar
+    <RatingBar
             android:id="@+id/rb_simple_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
@@ -88,9 +88,11 @@
             android:rating="0"
             android:stepSize="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_simple_posterImage" />
+            app:layout_constraintTop_toBottomOf="@id/iv_simple_posterImage"
+            android:theme="@style/RatingBar"
+    />
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_expectationsNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,18 +102,18 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/rb_simple_bar"
             app:layout_constraintStart_toEndOf="@id/rb_simple_bar"
-            app:layout_constraintTop_toTopOf="@id/rb_simple_bar" />
+            app:layout_constraintTop_toTopOf="@id/rb_simple_bar"/>
 
-        <ImageView
+    <ImageView
             android:layout_width="6dp"
             android:layout_height="12dp"
             android:layout_marginStart="3dp"
             android:background="@drawable/right_arrow"
             app:layout_constraintBottom_toBottomOf="@id/tv_simple_expectationsNum"
             app:layout_constraintStart_toEndOf="@id/tv_simple_expectationsNum"
-            app:layout_constraintTop_toTopOf="@id/tv_simple_expectationsNum" />
+            app:layout_constraintTop_toTopOf="@id/tv_simple_expectationsNum"/>
 
-        <ImageView
+    <ImageView
             android:id="@+id/iv_simple_wishlist"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -119,10 +121,10 @@
             android:background="@drawable/ic_detail_gonelove"
             app:layout_constraintBottom_toBottomOf="@id/rb_simple_bar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/rb_simple_bar" />
+            app:layout_constraintTop_toTopOf="@id/rb_simple_bar"/>
 
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_show_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -134,23 +136,23 @@
             app:layout_constraintEnd_toEndOf="@id/gradient_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rb_simple_bar"
-            tools:text="BAEKHYUN ASIA TOUR:Lonsdaleite [서울]" />
+            tools:text="BAEKHYUN ASIA TOUR:Lonsdaleite [서울]"/>
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/tv_simple_runtime"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="6dp"-->
-        <!--            android:layout_marginEnd="32dp"-->
-        <!--            android:textColor="@color/white"-->
-        <!--            android:textSize="12sp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@id/tv_simple_age"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toEndOf="@id/tv_simple_age"-->
-        <!--            app:layout_constraintTop_toTopOf="@id/tv_simple_age"-->
-        <!--            tools:text="2시간" />-->
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_simple_runtime"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="6dp"-->
+    <!--            android:layout_marginEnd="32dp"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textSize="12sp"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@id/tv_simple_age"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/tv_simple_age"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/tv_simple_age"-->
+    <!--            tools:text="2시간" />-->
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -160,10 +162,10 @@
             app:layout_constraintEnd_toEndOf="@id/gradient_view"
             app:layout_constraintStart_toStartOf="@id/tv_simple_show_title"
             app:layout_constraintTop_toBottomOf="@id/tv_simple_show_title"
-            tools:text="친구석 60,000원, 전설석 50,000원" />
+            tools:text="친구석 60,000원, 전설석 50,000원"/>
 
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_place"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -173,9 +175,9 @@
             app:layout_constraintEnd_toEndOf="@id/gradient_view"
             app:layout_constraintStart_toStartOf="@id/tv_simple_show_title"
             app:layout_constraintTop_toBottomOf="@id/tv_simple_price"
-            tools:text="세종문화회관" />
+            tools:text="세종문화회관"/>
 
-        <View
+    <View
             android:id="@+id/ticket_hall_left"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -183,9 +185,9 @@
             android:background="@drawable/bg_ticket_hall"
             app:layout_constraintBottom_toBottomOf="@id/line"
             app:layout_constraintStart_toStartOf="@id/line"
-            app:layout_constraintTop_toTopOf="@id/line" />
+            app:layout_constraintTop_toTopOf="@id/line"/>
 
-        <View
+    <View
             android:id="@+id/ticket_hall_right"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -193,18 +195,18 @@
             android:background="@drawable/bg_ticket_hall"
             app:layout_constraintBottom_toBottomOf="@id/line"
             app:layout_constraintEnd_toEndOf="@id/line"
-            app:layout_constraintTop_toTopOf="@id/line" />
+            app:layout_constraintTop_toTopOf="@id/line"/>
 
-        <View
+    <View
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/ic_ticket_dash"
-            app:layout_constraintTop_toBottomOf="@id/tv_simple_place" />
+            app:layout_constraintTop_toBottomOf="@id/tv_simple_place"/>
 
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_cast_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -213,9 +215,9 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_simple_cast_sub"
             app:layout_constraintStart_toStartOf="@id/tv_simple_show_title"
-            app:layout_constraintTop_toTopOf="@id/tv_simple_cast_sub" />
+            app:layout_constraintTop_toTopOf="@id/tv_simple_cast_sub"/>
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_cast_sub"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -228,9 +230,9 @@
             app:layout_constraintEnd_toEndOf="@id/gradient_view"
             app:layout_constraintStart_toEndOf="@id/tv_simple_cast_title"
             app:layout_constraintTop_toBottomOf="@id/line"
-            tools:text="출연진" />
+            tools:text="출연진"/>
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_product_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -239,9 +241,9 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_simple_product_sub"
             app:layout_constraintStart_toStartOf="@id/tv_simple_show_title"
-            app:layout_constraintTop_toTopOf="@id/tv_simple_product_sub" />
+            app:layout_constraintTop_toTopOf="@id/tv_simple_product_sub"/>
 
-        <TextView
+    <TextView
             android:id="@+id/tv_simple_product_sub"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -253,9 +255,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_simple_cast_sub"
             app:layout_constraintTop_toBottomOf="@id/tv_simple_cast_sub"
-            tools:text="제작사" />
+            tools:text="제작사"/>
 
-        <ImageView
+    <ImageView
             android:id="@+id/iv_simple_swipe_top"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -265,7 +267,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_simple_product_sub" />
+            app:layout_constraintTop_toBottomOf="@id/tv_simple_product_sub"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

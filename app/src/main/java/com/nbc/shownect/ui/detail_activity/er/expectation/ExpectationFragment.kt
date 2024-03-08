@@ -23,6 +23,7 @@ import com.nbc.shownect.ui.detail_activity.DetailViewModel
 
 class ExpectationFragment(
 	private val mt20id: String,
+	private val mt10id: String,
 	private val poster: String,
 ) : Fragment() {
 	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
@@ -104,7 +105,8 @@ class ExpectationFragment(
 					mt20id = mt20id,
 					poster = poster,
 					isExpect = isExpect,
-					comment = comment!!
+					comment = comment!!,
+					mt10id = mt10id
 				)
 
 				expectationViewModel.createExpectation(
