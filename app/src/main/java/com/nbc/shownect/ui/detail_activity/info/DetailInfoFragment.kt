@@ -94,8 +94,6 @@ class DetailInfoFragment : Fragment() {
 		viewModel.isBookmark.observe(viewLifecycleOwner) {
 			val info = viewModel.detailInfoList.value?.first()
 
-			Log.d("debug", it.toString())
-
 			with(binding) {
 				if (it) {
 					ivDetailWishlist.setBackgroundResource(R.drawable.ic_heart_full_24dp)
