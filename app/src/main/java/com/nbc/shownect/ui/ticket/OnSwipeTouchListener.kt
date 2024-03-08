@@ -10,8 +10,8 @@ open class OnSwipeTouchListener(ctx: Context) : View.OnTouchListener {
     private val gestureDetector: GestureDetector
 
     companion object {
-        private val SWIPE_THRESHOLD = 100
-        private val SWIPE_VELOCITY_THRESHOLD = 100
+        private val SWIPE_THRESHOLD = 500 // 스와이프 거리를 늘릴 값
+        private val SWIPE_VELOCITY_THRESHOLD = 500 // 스와이프 인식에 필요한 최소 속도를 늘릴 값
     }
 
     init {

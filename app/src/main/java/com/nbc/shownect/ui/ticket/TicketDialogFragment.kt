@@ -77,15 +77,11 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                 with(binding) {
                     tvSimpleShowTitle.text = showDetail.prfnm
                     tvSimpleAge.text = showDetail.prfage
-                    //tvSimpleRuntime.text = showDetail.prfruntime
-                    tvSimplePrice.text = showDetail.pcseguidance
                     tvSimplePlace.text = showDetail.fcltynm
                     tvSimpleGenre.text = showDetail.genrenm
                     tvSimpleShowState.text = showDetail.prfstate
                     tvSimpleCastSub.text =
                         if (showDetail.prfcast.isNullOrBlank()) "미상" else showDetail.prfcast
-                    tvSimpleProductSub.text =
-                        if (showDetail.entrpsnm.isNullOrBlank()) "미상" else showDetail.entrpsnm
                     ivSimplePosterImage.load(showDetail.poster) {
                         size(resolver = SizeResolver(Size.ORIGINAL))
                     }

@@ -43,14 +43,13 @@ class DetailInfoFragment : Fragment() {
                     ivDetailPoster.load(firstShowDetail.poster) {
                         size(resolver = SizeResolver(Size.ORIGINAL))
                     }
-                    tvDetailShowNameSub.text = firstShowDetail.prfnm
-                    tvDetailGenreSub.text = firstShowDetail.genrenm
+                    tvDetailShowTitle.text = firstShowDetail.prfnm
+                    tvDetailGenre.text = firstShowDetail.genrenm
                     tvDetailAgeSub.text = firstShowDetail.prfage
-                    tvDetailRuntimeSub.text = firstShowDetail.prfruntime
                     tvDetailPriceSub.text = firstShowDetail.pcseguidance
-                    tvDetailShowStateSub.text = firstShowDetail.prfstate
-                    tvDetailPlaceSub.text = firstShowDetail.fcltynm
-                    tvDetailPeriodSub.text =
+                    tvDetailShowState.text = firstShowDetail.prfstate
+                    tvDetailPlace.text = firstShowDetail.fcltynm
+                    tvDetailPeriod.text =
                         "${firstShowDetail.prfpdfrom} ~ ${firstShowDetail.prfpdto}"
                     tvDetailTimeSub.text = firstShowDetail.dtguidance
                     tvDetailCastSub.text =
