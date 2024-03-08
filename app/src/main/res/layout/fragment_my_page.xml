@@ -188,7 +188,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_showcase"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="332dp"
             app:layout_constraintTop_toBottomOf="@id/tv_my_page_showcase"
             app:layout_constraintBottom_toTopOf="@id/tv_like"
             android:layout_marginVertical="32dp"
@@ -198,7 +198,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_review_skeleton"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="332dp"
             app:layout_constraintTop_toTopOf="@id/rv_showcase"
             app:layout_constraintBottom_toBottomOf="@id/rv_showcase"
     >
@@ -226,7 +226,7 @@
             android:id="@+id/tv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="388dp"
+            android:layout_marginTop="396dp"
             android:textColor="@color/white"
             android:text="@string/bookmark_title"
             android:textSize="20sp"
@@ -279,7 +279,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_bookmarks"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="332dp"
             app:layout_constraintTop_toBottomOf="@id/tv_like"
             android:layout_marginVertical="32dp"
             android:overScrollMode="never"
@@ -288,7 +288,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_bookmark_skeleton"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="332dp"
             app:layout_constraintTop_toTopOf="@id/rv_bookmarks"
     >
       <include
@@ -296,7 +296,7 @@
       />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <TextView
             android:id="@+id/btn_dattai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -304,8 +304,7 @@
             app:layout_constraintTop_toBottomOf="@id/rv_bookmarks"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
-            android:background="@drawable/button_gradient"
-            android:textColor="@color/white"
+            android:textColor="@color/input_text_color"
     />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
