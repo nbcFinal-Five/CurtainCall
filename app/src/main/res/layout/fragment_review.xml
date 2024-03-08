@@ -180,7 +180,7 @@
             android:layout_height="240dp"
             android:gravity="center"
             android:text="@string/empty_reviews"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/bottom_navi_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
