@@ -1,9 +1,12 @@
 package com.nbc.shownect.ui.detail_activity.info
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +17,7 @@ import com.nbc.shownect.R
 import com.nbc.shownect.databinding.FragmentDetailDetailInfoBinding
 import com.nbc.shownect.supabase.Supabase
 import com.nbc.shownect.ui.UserViewModel
+import com.nbc.shownect.ui.auth.AuthActivity
 import com.nbc.shownect.ui.detail_activity.DetailViewModel
 import io.github.jan.supabase.gotrue.auth
 
@@ -21,6 +25,23 @@ class DetailInfoFragment : Fragment() {
 	private var _binding: FragmentDetailDetailInfoBinding? = null
 	private val binding get() = _binding!!
 	private val viewModel: DetailViewModel by activityViewModels<DetailViewModel>()
+	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
+
+	private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+		userViewModel.setUser()
+
+		val user = userViewModel.userInfo.value
+
+		val info = viewModel.detailInfoList.value?.first()
+
+		if (info != null && user != null) {
+			viewModel.setInfo(info.mt20id!!)
+			viewModel.setIsLike(
+				mt20id = info.mt20id!!,
+				userId = user.id
+			)
+		}
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -71,7 +92,38 @@ class DetailInfoFragment : Fragment() {
 		}
 
 		viewModel.isBookmark.observe(viewLifecycleOwner) {
-			binding.ivDetailWishlist.setBackgroundResource(if (it) R.drawable.ic_heart_full_24dp else R.drawable.ic_heart_empty_24dp)
+			val info = viewModel.detailInfoList.value?.first()
+
+			with(binding) {
+				if (it) {
+					ivDetailWishlist.setBackgroundResource(R.drawable.ic_heart_full_24dp)
+					ivDetailWishlist.setOnClickListener {
+						val user = userViewModel.userInfo.value!!
+						
+						viewModel.deleteBookmark(
+							mt20id = info?.mt20id!!,
+							userId = user.id,
+						)
+					}
+				} else {
+					ivDetailWishlist.setBackgroundResource(R.drawable.ic_heart_empty_24dp)
+					ivDetailWishlist.setOnClickListener {
+						val user = userViewModel.userInfo.value
+
+						if (user == null) {
+							val intent = Intent(requireActivity(), AuthActivity::class.java)
+							launcher.launch(intent)
+							return@setOnClickListener
+						} else {
+							viewModel.createBookmark(
+								mt20id = info?.mt20id!!,
+								poster = info?.poster!!,
+								userId = user.id
+							)
+						}
+					}
+				}
+			}
 		}
 
 		viewModel.detailInfoList.observe(viewLifecycleOwner) {
@@ -81,7 +133,7 @@ class DetailInfoFragment : Fragment() {
 			if (id != null) {
 				viewModel.setInfo(id)
 
-				val user = Supabase.client.auth.currentUserOrNull()
+				val user = userViewModel.userInfo.value
 
 				if (user != null) {
 					viewModel.setIsLike(id, user.id)
