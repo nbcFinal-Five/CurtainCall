@@ -91,7 +91,12 @@ class DetailViewModel : ViewModel() {
 		}
 	}
 
-	fun setIsLike(mt20id: String, userId: String) {
+	fun setIsLike(mt20id: String, userId: String?) {
+		if (userId == null) {
+			_isBookmark.value = false
+			return
+		}
+
 		CoroutineScope(Dispatchers.IO).launch {
 			val result = Supabase.client.postgrest.rpc(
 				function = "check_bookmark_exists",
@@ -116,13 +121,14 @@ class DetailViewModel : ViewModel() {
 		}
 	}
 
-	fun createBookmark(mt20id: String, userId: String, poster: String) {
+	fun createBookmark(mt20id: String, mt10id: String, userId: String, poster: String) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				val bookmarkModel = PostBookmarkModel(
 					mt20id = mt20id,
 					userId = userId,
-					poster = poster
+					poster = poster,
+					mt10id = mt10id
 				)
 
 				Supabase.client

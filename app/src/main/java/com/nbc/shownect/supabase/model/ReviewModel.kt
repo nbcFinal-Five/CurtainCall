@@ -26,6 +26,9 @@ data class GetReviewModel(
 	@SerialName("mt20id")
 	val mt20id: String,
 
+	@SerialName("mt10id")
+	val mt10id: String,
+
 	@SerialName("profile")
 	val profile: ProfileModel
 )
@@ -46,4 +49,7 @@ data class PostReviewModel(
 
 	@SerialName("mt20id")
 	val mt20id: String,
+
+	@SerialName("mt10id")
+	val mt10id: String,
 )

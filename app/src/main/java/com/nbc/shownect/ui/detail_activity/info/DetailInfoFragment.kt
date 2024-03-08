@@ -99,7 +99,7 @@ class DetailInfoFragment : Fragment() {
 					ivDetailWishlist.setBackgroundResource(R.drawable.ic_heart_full_24dp)
 					ivDetailWishlist.setOnClickListener {
 						val user = userViewModel.userInfo.value!!
-						
+
 						viewModel.deleteBookmark(
 							mt20id = info?.mt20id!!,
 							userId = user.id,
@@ -117,7 +117,8 @@ class DetailInfoFragment : Fragment() {
 						} else {
 							viewModel.createBookmark(
 								mt20id = info?.mt20id!!,
-								poster = info?.poster!!,
+								mt10id = info.mt10id!!,
+								poster = info.poster!!,
 								userId = user.id
 							)
 						}

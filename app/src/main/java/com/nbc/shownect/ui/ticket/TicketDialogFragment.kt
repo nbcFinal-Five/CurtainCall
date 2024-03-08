@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,8 +19,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.shownect.R
 import com.nbc.shownect.databinding.SimpleInfoBottomsheetDialogBinding
+import com.nbc.shownect.fetch.model.DbResponse
 import com.nbc.shownect.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.shownect.fetch.repository.impl.FetchRepositoryImpl
+import com.nbc.shownect.supabase.Supabase
 import com.nbc.shownect.ui.UserViewModel
 import com.nbc.shownect.ui.auth.AuthActivity
 import com.nbc.shownect.ui.detail_activity.DetailActivity
@@ -27,22 +30,23 @@ import com.nbc.shownect.ui.detail_activity.DetailViewModel
 import com.nbc.shownect.ui.main.MainViewModel
 import com.nbc.shownect.ui.main.MainViewModelFactory
 import com.nbc.shownect.util.Constants
+import io.github.jan.supabase.gotrue.auth
 
 class TicketDialogFragment : BottomSheetDialogFragment() {
 	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 
+	// activity 닫혔을 때 갱신용 launcher
+	private var info: DbResponse? = null
 	private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 		userViewModel.setUser()
 
-		val user = userViewModel.userInfo.value
-
-		val info = detailViewModel.detailInfoList.value?.first()
+		val user = Supabase.client.auth.currentUserOrNull()
 
 		if (info != null && user != null) {
-			detailViewModel.setInfo(info.mt20id!!)
+			detailViewModel.setInfo(info!!.mt20id!!)
 			detailViewModel.setIsLike(
-				mt20id = info.mt20id!!,
+				mt20id = info!!.mt20id!!,
 				userId = user.id
 			)
 		}
@@ -103,18 +107,16 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
 
 		sharedViewModel.showDetailInfo.observe(viewLifecycleOwner) {
 			val showDetail = it.first()
+			info = showDetail
 
 			val id = showDetail.mt20id
 			val user = userViewModel.userInfo.value
 
 			if (id != null) {
 				detailViewModel.setInfo(id)
-			}
-
-			if (id != null && user != null) {
 				detailViewModel.setIsLike(
 					mt20id = id,
-					userId = user.id
+					userId = user?.id
 				)
 			}
 
@@ -171,6 +173,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
 						} else {
 							detailViewModel.createBookmark(
 								mt20id = info?.mt20id!!,
+								mt10id = info?.mt10id!!,
 								poster = info.poster!!,
 								userId = user.id
 							)
@@ -192,7 +195,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
 					putExtra(Constants.SHOW_ID, ticketId)
 					putExtra(Constants.FACILITY_ID, facilityId)
 				}
-				startActivity(intent)
+				launcher.launch(intent)
 				activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
 			}
 		})
