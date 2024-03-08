@@ -124,7 +124,7 @@ class SearchFragment : Fragment(), PosterClickListener {
                 if (isLoading) {
                     clSearchSkeleton.visibility = View.VISIBLE
                     tvSearchNoresult.visibility = View.GONE
-                    rvSearch.visibility = View.GONE
+                    rvSearch.visibility = View.INVISIBLE
                 } else {
                     clSearchSkeleton.visibility = View.GONE
                     rvSearch.visibility = View.VISIBLE
