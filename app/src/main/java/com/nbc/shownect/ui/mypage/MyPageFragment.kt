@@ -108,7 +108,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 			startActivity(intent)
 		}
 
-		btnDattai.setOnClickListener {
+		tvDattai.setOnClickListener {
 			val dialog = QuitDialogFragment()
 			dialog.setListener(this@MyPageFragment)
 			dialog.show(childFragmentManager, "Logout Dialog")
