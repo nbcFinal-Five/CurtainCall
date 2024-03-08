@@ -108,7 +108,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 			startActivity(intent)
 		}
 
-		btnDattai.setOnClickListener {
+		tvDattai.setOnClickListener {
 			val dialog = QuitDialogFragment()
 			dialog.setListener(this@MyPageFragment)
 			dialog.show(childFragmentManager, "Logout Dialog")
@@ -123,6 +123,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 				tvNickname.text = ""
 				tvEmail.text = ""
 				tvSignOut.visibility = View.INVISIBLE
+				tvDattai.visibility = View.INVISIBLE
 
 				llReviewsMore.visibility = View.INVISIBLE
 				llLikesMore.visibility = View.INVISIBLE
@@ -135,6 +136,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 				tvNickname.text = it.userMetadata!!["name"].toString().removeSurrounding("\"")
 				tvEmail.text = it.email
 				tvSignOut.visibility = View.VISIBLE
+				tvDattai.visibility = View.VISIBLE
 
 				llReviewsMore.visibility = View.VISIBLE
 				llLikesMore.visibility = View.VISIBLE

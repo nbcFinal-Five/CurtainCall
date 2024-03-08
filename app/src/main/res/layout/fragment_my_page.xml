@@ -213,7 +213,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/showcase_empty"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/bottom_navi_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
@@ -268,7 +268,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/bottom_navi_color"
             android:text="@string/bookmarks_empty"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -297,14 +297,19 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-            android:id="@+id/btn_dattai"
+            android:id="@+id/tv_dattai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="@string/dattai"
             app:layout_constraintTop_toBottomOf="@id/rv_bookmarks"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/input_text_color"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/component_color"
     />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
