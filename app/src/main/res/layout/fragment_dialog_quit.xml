@@ -8,6 +8,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/background_color"
+        android:paddingHorizontal="12dp"
 >
 
   <TextView
@@ -30,7 +31,6 @@
           android:layout_height="wrap_content"
           app:layout_constraintTop_toBottomOf="@id/tv_quit"
           app:cardCornerRadius="3dp"
-          android:layout_marginHorizontal="12dp"
           android:layout_marginVertical="24dp"
           app:cardBackgroundColor="@color/input_background_color"
   >
@@ -60,12 +60,14 @@
 
   <LinearLayout
           android:id="@+id/ll_agree"
-          android:layout_width="match_parent"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="12dp"
           app:layout_constraintTop_toBottomOf="@id/ll_checks"
           android:gravity="center"
           android:orientation="horizontal"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
   >
     <TextView
             android:layout_width="wrap_content"
@@ -75,6 +77,7 @@
             android:textSize="16sp"
     />
     <CheckBox
+            android:id="@+id/cb_agree"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="8dp"
@@ -90,9 +93,9 @@
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintTop_toBottomOf="@id/ll_agree"
           app:cardCornerRadius="10dp"
-          android:layout_marginHorizontal="44dp"
+          android:layout_marginHorizontal="32dp"
           android:layout_marginTop="20dp"
-          android:layout_marginBottom="44dp"
+          android:layout_marginBottom="32dp"
   >
     <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_cancel"
@@ -113,9 +116,9 @@
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintTop_toBottomOf="@id/ll_agree"
           app:cardCornerRadius="10dp"
-          android:layout_marginHorizontal="44dp"
+          android:layout_marginHorizontal="32dp"
           android:layout_marginTop="20dp"
-          android:layout_marginBottom="44dp"
+          android:layout_marginBottom="32dp"
   >
     <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ok"
@@ -124,6 +127,7 @@
             android:text="@string/ok"
             android:background="@color/component_color"
             android:textColor="@color/black"
+            android:clickable="false"
     />
   </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
