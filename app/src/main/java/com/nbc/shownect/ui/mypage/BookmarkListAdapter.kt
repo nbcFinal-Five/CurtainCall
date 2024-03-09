@@ -1,22 +1,34 @@
 package com.nbc.shownect.ui.mypage
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.nbc.shownect.R
 import com.nbc.shownect.databinding.MyPageItemBinding
 import com.nbc.shownect.supabase.model.GetBookmarkModel
+import com.nbc.shownect.ui.detail_activity.DetailActivity
+import com.nbc.shownect.util.Constants
 
-class BookmarkListAdapter : ListAdapter<GetBookmarkModel, BookmarkListAdapter.ViewHolder>(MyBookmarkCallback()) {
+class BookmarkListAdapter(
+	private val context: Context,
+	private val launcher: ActivityResultLauncher<Intent>
+) : ListAdapter<GetBookmarkModel, BookmarkListAdapter.ViewHolder>(MyBookmarkCallback()) {
 	inner class ViewHolder(private val binding: MyPageItemBinding) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(item: GetBookmarkModel) {
 			Glide.with(binding.root).load(item.poster).into(binding.ivItem)
 
 			binding.root.setOnClickListener {
-				// TODO 상세 넘어가게
-				
+				val intent = Intent(context, DetailActivity::class.java).apply {
+					putExtra(Constants.SHOW_ID, item.mt20id)
+					putExtra(Constants.FACILITY_ID, item.mt10id)
+				}
+				launcher.launch(intent)
 			}
 		}
 	}

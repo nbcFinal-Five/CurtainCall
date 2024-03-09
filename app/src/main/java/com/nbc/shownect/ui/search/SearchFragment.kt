@@ -119,12 +119,13 @@ class SearchFragment : Fragment(), PosterClickListener {
                 searchViewModel.fetchSearchFilterResult()
             }
 
-            // 검색 시 로딩바 보여주기
+            // 검색 시 스켈레톤 보여주기
             searchViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
                 if (isLoading) {
                     clSearchSkeleton.visibility = View.VISIBLE
                     tvSearchNoresult.visibility = View.GONE
-                    rvSearch.visibility = View.GONE
+                    ivSearchNoresult.visibility = View.GONE
+                    rvSearch.visibility = View.INVISIBLE
                 } else {
                     clSearchSkeleton.visibility = View.GONE
                     rvSearch.visibility = View.VISIBLE
@@ -144,8 +145,10 @@ class SearchFragment : Fragment(), PosterClickListener {
                 searchListAdapter.submitList(result)
                 if(result == null) {
                     tvSearchNoresult.visibility = View.VISIBLE
+                    ivSearchNoresult.visibility = View.VISIBLE
                 } else {
                     tvSearchNoresult.visibility = View.GONE
+                    ivSearchNoresult.visibility = View.GONE
                 }
             }
 

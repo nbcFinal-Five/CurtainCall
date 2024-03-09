@@ -23,7 +23,8 @@ import com.nbc.shownect.ui.detail_activity.DetailViewModel
 
 class ReviewFragment(
 	private val mt20id: String,
-	private val poster: String
+	private val mt10id: String,
+	private val poster: String,
 ) : Fragment() {
 	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val reviewViewModel by lazy { ViewModelProvider(this)[ReviewViewModel::class.java] }
@@ -113,7 +114,8 @@ class ReviewFragment(
 					mt20id = mt20id,
 					poster = poster,
 					point = point,
-					comment = comment!!
+					comment = comment!!,
+					mt10id = mt10id
 				)
 
 				reviewViewModel.createReview(

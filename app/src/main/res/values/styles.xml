@@ -116,7 +116,7 @@
   <style name="detailLocationTextContents">
     <item name="android:layout_width">0dp</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:textSize">18sp</item>
+    <item name="android:textSize">17sp</item>
     <item name="android:layout_marginTop">35dp</item>
     <item name="android:layout_marginEnd">15dp</item>
     <item name="android:textColor">@color/text_color</item>

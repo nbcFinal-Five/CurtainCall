@@ -26,8 +26,8 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		userViewModel.setUser()
 	}
 
-	private val reviewAdapter by lazy { ReviewListAdapter() }
-	private val bookmarkAdapter by lazy { BookmarkListAdapter() }
+	private val reviewAdapter by lazy { ReviewListAdapter(requireContext(), launcher) }
+	private val bookmarkAdapter by lazy { BookmarkListAdapter(requireContext(), launcher) }
 
 	override fun onLogoutConfirmed() {
 		userViewModel.setUser()
@@ -98,17 +98,17 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 			val intent = Intent(requireActivity(), MoreActivity::class.java)
 			intent.putExtra("mode", "reviews")
 
-			startActivity(intent)
+			launcher.launch(intent)
 		}
 
 		llLikesMore.setOnClickListener {
 			val intent = Intent(requireActivity(), MoreActivity::class.java)
 			intent.putExtra("mode", "likes")
 
-			startActivity(intent)
+			launcher.launch(intent)
 		}
 
-		btnDattai.setOnClickListener {
+		tvDattai.setOnClickListener {
 			val dialog = QuitDialogFragment()
 			dialog.setListener(this@MyPageFragment)
 			dialog.show(childFragmentManager, "Logout Dialog")
@@ -123,6 +123,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 				tvNickname.text = ""
 				tvEmail.text = ""
 				tvSignOut.visibility = View.INVISIBLE
+				tvDattai.visibility = View.INVISIBLE
 
 				llReviewsMore.visibility = View.INVISIBLE
 				llLikesMore.visibility = View.INVISIBLE
@@ -135,6 +136,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 				tvNickname.text = it.userMetadata!!["name"].toString().removeSurrounding("\"")
 				tvEmail.text = it.email
 				tvSignOut.visibility = View.VISIBLE
+				tvDattai.visibility = View.VISIBLE
 
 				llReviewsMore.visibility = View.VISIBLE
 				llLikesMore.visibility = View.VISIBLE
@@ -151,14 +153,14 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		myPageViewModel.reviews.observe(viewLifecycleOwner) {
 			if (it == null) {
 				rvShowcase.visibility = View.INVISIBLE
-				tvShowcaseDetail.visibility = View.VISIBLE
+				llShowcaseDetail.visibility = View.VISIBLE
 			} else {
 				if (it.isEmpty()) {
 					rvShowcase.visibility = View.INVISIBLE
-					tvShowcaseDetail.visibility = View.VISIBLE
+					llShowcaseDetail.visibility = View.VISIBLE
 				} else {
 					rvShowcase.visibility = View.VISIBLE
-					tvShowcaseDetail.visibility = View.INVISIBLE
+					llShowcaseDetail.visibility = View.INVISIBLE
 
 					reviewAdapter.submitList(it.take(6))
 				}
@@ -169,7 +171,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 			if (it) {
 				clReviewSkeleton.visibility = View.VISIBLE
 				rvShowcase.visibility = View.INVISIBLE
-				tvShowcaseDetail.visibility = View.INVISIBLE
+				llShowcaseDetail.visibility = View.INVISIBLE
 			} else {
 				clReviewSkeleton.visibility = View.INVISIBLE
 			}
@@ -194,14 +196,14 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		myPageViewModel.bookmarks.observe(viewLifecycleOwner) {
 			if (it == null) {
 				rvBookmarks.visibility = View.INVISIBLE
-				tvLikeDetail.visibility = View.VISIBLE
+				llLikeDetail.visibility = View.VISIBLE
 			} else {
 				if (it.isEmpty()) {
 					rvBookmarks.visibility = View.INVISIBLE
-					tvLikeDetail.visibility = View.VISIBLE
+					llLikeDetail.visibility = View.VISIBLE
 				} else {
 					rvBookmarks.visibility = View.VISIBLE
-					tvLikeDetail.visibility = View.INVISIBLE
+					llLikeDetail.visibility = View.INVISIBLE
 
 					bookmarkAdapter.submitList(it.take(6))
 				}
@@ -212,7 +214,7 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 			if (it) {
 				clBookmarkSkeleton.visibility = View.VISIBLE
 				rvBookmarks.visibility = View.INVISIBLE
-				tvLikeDetail.visibility = View.INVISIBLE
+				llLikeDetail.visibility = View.INVISIBLE
 			} else {
 				clBookmarkSkeleton.visibility = View.INVISIBLE
 

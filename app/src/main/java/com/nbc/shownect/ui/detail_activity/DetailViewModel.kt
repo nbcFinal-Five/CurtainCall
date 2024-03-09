@@ -9,6 +9,7 @@ import com.nbc.shownect.fetch.model.DbResponse
 import com.nbc.shownect.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.shownect.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.shownect.supabase.Supabase
+import com.nbc.shownect.supabase.model.PostBookmarkModel
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
@@ -47,21 +48,6 @@ class DetailViewModel : ViewModel() {
     fun sharedId(mt20Id: String, mt10Id: String) {
         showId = mt20Id
         facilityId = mt10Id
-    }
-
-    fun setExpectationCount(mt20id: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val count = Supabase.client
-                .from("expectations")
-                .select {
-                    filter {
-                        eq(column = "mt20id", value = mt20id)
-                    }
-                    count(Count.EXACT)
-                }.countOrNull()!!
-
-            withContext(Dispatchers.Main) { _totalExpectationCount.value = count.toInt() }
-        }
     }
 
     fun fetchDetailInfo() {
@@ -105,7 +91,12 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun setIsLike(mt20id: String, userId: String) {
+    fun setIsLike(mt20id: String, userId: String?) {
+        if (userId == null) {
+            _isBookmark.value = false
+            return
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
             val result = Supabase.client.postgrest.rpc(
                 function = "check_bookmark_exists",
@@ -117,7 +108,6 @@ class DetailViewModel : ViewModel() {
 
             withContext(Dispatchers.Main) { _isBookmark.value = result }
         }
-
     }
 
     fun fetchDetailLocation() {
@@ -127,6 +117,54 @@ class DetailViewModel : ViewModel() {
                 Log.d("ViewModel", "fetchDetailLocation: ${locationList}")
             }.onFailure {
                 Log.e("DetailViewModel", "fetchDetailLocation: ${it.message}")
+            }
+        }
+    }
+
+    fun createBookmark(mt20id: String, mt10id: String, userId: String, poster: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val bookmarkModel = PostBookmarkModel(
+                    mt20id = mt20id,
+                    userId = userId,
+                    poster = poster,
+                    mt10id = mt10id
+                )
+
+                Supabase.client
+                    .from("bookmarks")
+                    .insert<PostBookmarkModel>(bookmarkModel)
+
+                withContext(Dispatchers.Main) {
+                    setIsLike(
+                        mt20id = mt20id,
+                        userId = userId
+                    )
+                }
+            } catch (e: RestException) {
+                Log.d("create bookmarks", e.error)
+            }
+        }
+    }
+
+    fun deleteBookmark(mt20id: String, userId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                Supabase.client
+                    .from("bookmarks")
+                    .delete {
+                        filter {
+                            eq("user_id", userId)
+                            eq("mt20id", mt20id)
+                        }
+                    }
+
+                setIsLike(
+                    mt20id = mt20id,
+                    userId = userId
+                )
+            } catch (e: RestException) {
+                Log.d("delete bookmarks", e.error)
             }
         }
     }

@@ -2,7 +2,9 @@ package com.nbc.shownect.ui.more
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nbc.shownect.R
@@ -13,13 +15,23 @@ import com.nbc.shownect.ui.mypage.GridItemDecoration
 import com.nbc.shownect.ui.mypage.ReviewListAdapter
 
 class MoreActivity : AppCompatActivity() {
+	private var globalMode: String? = null
 	private lateinit var binding: ActivityMoreBinding
 
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 	private val moreViewModel by lazy { ViewModelProvider(this)[MoreViewModel::class.java] }
 
-	private val reviewAdapter by lazy { ReviewListAdapter() }
-	private val bookmarkAdapter by lazy { BookmarkListAdapter() }
+	private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+		userViewModel.setUser()
+
+		if (globalMode != null) {
+			Log.d("debug", globalMode.toString())
+			initData(globalMode!!)
+		}
+	}
+
+	private val reviewAdapter by lazy { ReviewListAdapter(this, launcher) }
+	private val bookmarkAdapter by lazy { BookmarkListAdapter(this, launcher) }
 
 	private val layoutManager by lazy { GridLayoutManager(this@MoreActivity, 3) }
 
@@ -29,6 +41,8 @@ class MoreActivity : AppCompatActivity() {
 		setContentView(binding.root)
 
 		val mode = intent.getStringExtra("mode") ?: return finish()
+
+		globalMode = mode
 
 		initTitle(mode)
 		initViewModel(mode)

@@ -1,6 +1,7 @@
 package com.nbc.shownect.ui.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,8 @@ class QuitDialogFragment : DialogFragment() {
 
 	private lateinit var binding: FragmentDialogQuitBinding
 	private var listener: QuitDialogListener? = null
+
+	private var isChecked = false
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -55,19 +58,38 @@ class QuitDialogFragment : DialogFragment() {
 				dismiss()
 			}
 		}
+
+		btnOk.isClickable = false
+		btnOk.setBackgroundResource(R.color.component_background_color)
+		btnOk.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_color))
+
+		cbAgree.setOnCheckedChangeListener { _, isCheckedChecked ->
+			isChecked = isCheckedChecked
+			btnOk.isClickable = isCheckedChecked
+			
+			if (isChecked) {
+				btnOk.setBackgroundResource(R.color.primary_color)
+				btnOk.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+			} else {
+				btnOk.setBackgroundResource(R.color.component_background_color)
+				btnOk.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_color))
+			}
+		}
 	}
 
 	private fun initViewModel() = with(binding) {
 		userViewModel.isQuitLoading.observe(viewLifecycleOwner) {
-			btnCancel.isClickable = !it
-			btnOk.isClickable = !it
+			if (isChecked) {
+				btnCancel.isClickable = !it
+				btnOk.isClickable = !it
 
-			if (it) {
-				btnOk.setBackgroundResource(R.color.component_background_color)
-				btnOk.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_color))
-			} else {
-				btnOk.setBackgroundResource(R.color.component_color)
-				btnOk.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+				if (it) {
+					btnOk.setBackgroundResource(R.color.component_background_color)
+					btnOk.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_color))
+				} else {
+					btnOk.setBackgroundResource(R.color.component_color)
+					btnOk.setTextColor(ContextCompat.getColor(requireContext(), R.color.component_background_color))
+				}
 			}
 		}
 	}
