@@ -61,7 +61,6 @@ class HomeFragment : Fragment(), PosterClickListener {
             binding.tvPageIndicator.text = "${position + 1} / 10"
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -96,38 +95,35 @@ class HomeFragment : Fragment(), PosterClickListener {
         topRankAdapter
         kidShowAdapter
         initRecyclerView()
-        with(viewModel) {
-            showList.observe(viewLifecycleOwner) {
-                upComingShowAdapter.submitList(it)
-                with(binding) {
-                    //viewpager 연결
-                    viewPager.adapter = upComingShowAdapter
-                    viewPager.offscreenPageLimit = 1
-                    viewPager.setPageTransformer(SliderTransformer(requireContext()))
 
-                    val itemDecoration = HorizontalMarginItemDecoration(
-                        requireContext(),
-                        R.dimen.viewpager_current_item_horizontal_margin
-                    )
-                    viewPager.addItemDecoration(itemDecoration)
-                    viewPager.registerOnPageChangeCallback(onPageChangeCallback)
+        //viewpager 연결
+        with(binding.viewPager) {
+            adapter = upComingShowAdapter
+            offscreenPageLimit = 1
+            setPageTransformer(SliderTransformer(requireContext()))
+            val itemDecoration = HorizontalMarginItemDecoration(
+                requireContext(),
+                R.dimen.viewpager_current_item_horizontal_margin
+            )
+            addItemDecoration(itemDecoration)
+            registerOnPageChangeCallback(onPageChangeCallback)
 
-                    //tab 연결
-                    TabLayoutMediator(tabPosterIndicator, viewPager) { tab, position ->
-                        viewPager.currentItem = tab.position
-                    }.attach()
-
-                }
-                if (!isPaging) startPaging()
-            }
-            //장르 연극 초기화
-            fetchGenre(0)
+            //tab 연결
+            TabLayoutMediator(binding.tabPosterIndicator, this) { tab, position ->
+                currentItem = tab.position
+            }.attach()
         }
+        //장르 연극 초기화
+        viewModel.fetchGenre(0)
     }
 
     //옵저브 세팅
     private fun setUpObserve() {
         with(viewModel) {
+            showList.observe(viewLifecycleOwner) {
+                upComingShowAdapter.submitList(it)
+                if (!isPaging) startPaging()
+            }
             topRank.observe(viewLifecycleOwner) {
                 topRankAdapter.submitList(it?.take(10))
             }
@@ -147,6 +143,7 @@ class HomeFragment : Fragment(), PosterClickListener {
             isLoadingKid.observe(viewLifecycleOwner) {
                 binding.skeletonKidLoading.isVisible = !it
             }
+
         }
     }
 
