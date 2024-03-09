@@ -49,9 +49,12 @@ android {
 fun getAuthKey(propertyKey: String): String =
 	gradleLocalProperties(rootDir).getProperty(propertyKey)
 dependencies {
-
-	//coil 라이브러리
-	implementation("io.coil-kt:coil:2.4.0")
+	// glide 
+	implementation ("com.github.bumptech.glide:glide:4.16.0")
+	annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+	// glide blur transformation
+	implementation ("jp.wasabeef:glide-transformations:4.3.0")
+	implementation ("jp.co.cyberagent.android:gpuimage:2.1.0")
 
 	// navigation
 	implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
@@ -99,13 +102,7 @@ dependencies {
 	// Naver Map
 	implementation("com.naver.maps:map-sdk:3.17.0")
 
-	//BottomSheet, Chip
-	implementation("com.google.android.material:material:1.11.0")
-
-	//Glide
-	implementation("com.github.bumptech.glide:glide:4.16.0")
-	annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
-
 	// shimmer
 	implementation("com.facebook.shimmer:shimmer:0.5.0")
+
 }

@@ -12,6 +12,19 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tv_home_state_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="32dp"
+            android:text="공연 예정"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/viewPager"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/tv_page_indicator"
             android:layout_width="50dp"
             android:layout_height="20dp"
@@ -67,6 +80,7 @@
             android:layout_width="0dp"
             android:layout_height="205dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
             app:layout_constraintBottom_toTopOf="@id/spinner_home_genre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="205dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner_home_genre" />
@@ -126,6 +141,7 @@
             android:layout_width="0dp"
             android:layout_height="205dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
