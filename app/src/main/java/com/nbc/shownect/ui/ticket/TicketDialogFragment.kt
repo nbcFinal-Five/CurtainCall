@@ -75,24 +75,27 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                 ticketId = id
             }
             showDetailInfo.observe(viewLifecycleOwner) {
-                val showDetail = it.first()
-                with(binding) {
-                    tvSimpleShowTitle.text = showDetail.prfnm
-                    tvSimpleAge.text = showDetail.prfage
-                    tvSimplePlace.text = showDetail.fcltynm
-                    tvSimpleGenre.text = showDetail.genrenm
-                    tvSimpleShowState.text = showDetail.prfstate
-                    tvSimpleCastSub.text =
-                        if (showDetail.prfcast.isNullOrBlank()) "미상" else showDetail.prfcast
-                    Glide.with(requireContext()).load(showDetail.poster).into(ivSimplePosterImage)
-                    Glide.with(requireContext()).load(showDetail.poster)
-                        .override(Target.SIZE_ORIGINAL).apply(
-                        RequestOptions.bitmapTransform(
-                            BlurTransformation(15, 1)
-                        )
-                    ).into(ivSimplePosterBlur)
+                val showDetail = it?.first()
+                if (showDetail != null) {
+                    with(binding) {
+                        tvSimpleShowTitle.text = showDetail.prfnm
+                        tvSimpleAge.text = showDetail.prfage
+                        tvSimplePlace.text = showDetail.fcltynm
+                        tvSimpleGenre.text = showDetail.genrenm
+                        tvSimpleShowState.text = showDetail.prfstate
+                        tvSimpleCastSub.text =
+                            if (showDetail.prfcast.isNullOrBlank()) "미상" else showDetail.prfcast
+                        Glide.with(requireContext()).load(showDetail.poster)
+                            .into(ivSimplePosterImage)
+                        Glide.with(requireContext()).load(showDetail.poster)
+                            .override(Target.SIZE_ORIGINAL).apply(
+                                RequestOptions.bitmapTransform(
+                                    BlurTransformation(15, 1)
+                                )
+                            ).into(ivSimplePosterBlur)
+                    }
+                    facilityId = showDetail.mt10id.toString()
                 }
-                facilityId = showDetail.mt10id.toString()
             }
         }
         //Swipe Gesture

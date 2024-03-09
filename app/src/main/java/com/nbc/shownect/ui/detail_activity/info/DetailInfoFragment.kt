@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import coil.load
-import coil.size.Size
-import coil.size.SizeResolver
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target
 import com.nbc.shownect.R
 import com.nbc.shownect.databinding.FragmentDetailDetailInfoBinding
 import com.nbc.shownect.supabase.Supabase
@@ -40,9 +39,7 @@ class DetailInfoFragment : Fragment() {
             val firstShowDetail = it?.first()
             if (firstShowDetail != null) {
                 with(binding) {
-                    ivDetailPoster.load(firstShowDetail.poster) {
-                        size(resolver = SizeResolver(Size.ORIGINAL))
-                    }
+                    Glide.with(requireContext()).load(firstShowDetail.poster).override(Target.SIZE_ORIGINAL).into(ivDetailPoster)
                     tvDetailShowTitle.text = firstShowDetail.prfnm
                     tvDetailGenre.text = firstShowDetail.genrenm
                     tvDetailAgeSub.text = firstShowDetail.prfage

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
 import com.nbc.shownect.databinding.ItemKidShowBinding
 import com.nbc.shownect.fetch.model.DbResponse
 
@@ -25,7 +25,7 @@ class KidShowAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
             with(binding) {
-                ivKidShow.load(item.poster)
+                Glide.with(itemView).load(item.poster).into(ivKidShow)
                 tvKidPeriod.text = "~ ${item.prfpdto}"
                 tvKidGenre.text = item.genrenm
                 tvKidShowingState.text = item.prfstate

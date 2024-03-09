@@ -61,6 +61,7 @@ class HomeFragment : Fragment(), PosterClickListener {
             binding.tvPageIndicator.text = "${position + 1} / 10"
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

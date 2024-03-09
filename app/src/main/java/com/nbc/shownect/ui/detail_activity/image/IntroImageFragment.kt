@@ -25,9 +25,6 @@ class IntroImageFragment : Fragment() {
         _binding = FramgentDetailIntroImageBinding.inflate(inflater, container, false)
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
             val firstShowDetail = it!!.first()
-//            binding.ivDetailIntroPoster.load(firstShowDetail.styurls?.styurlList?.get(0)) {
-//                size(resolver = SizeResolver(Size.ORIGINAL))
-//            }
             Glide.with(requireContext()).load(firstShowDetail.styurls?.styurlList?.get(0)).override(Target.SIZE_ORIGINAL).into(binding.ivDetailIntroPoster)
         }
         return binding.root

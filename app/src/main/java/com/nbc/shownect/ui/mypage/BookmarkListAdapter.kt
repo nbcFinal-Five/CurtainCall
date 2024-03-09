@@ -5,15 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
 import com.nbc.shownect.databinding.MyPageItemBinding
 import com.nbc.shownect.supabase.model.GetBookmarkModel
 
 class BookmarkListAdapter : ListAdapter<GetBookmarkModel, BookmarkListAdapter.ViewHolder>(MyBookmarkCallback()) {
 	inner class ViewHolder(private val binding: MyPageItemBinding) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(item: GetBookmarkModel) {
-			binding.ivItem.load(item.poster)
-			//Glide.with(binding.root).load(item.poster).into(binding.ivItem)
+			Glide.with(binding.root).load(item.poster).into(binding.ivItem)
 
 			binding.root.setOnClickListener {
 				// TODO 상세 넘어가게

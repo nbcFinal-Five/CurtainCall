@@ -8,15 +8,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
 import com.nbc.shownect.databinding.MyPageItemBinding
 import com.nbc.shownect.supabase.model.GetReviewModel
 
 class ReviewListAdapter : ListAdapter<GetReviewModel, ReviewListAdapter.ViewHolder>(MyDiffCallback()) {
 	inner class ViewHolder(private val binding: MyPageItemBinding) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(item: GetReviewModel) {
-			binding.ivItem.load(item.poster)
-
+			Glide.with(itemView).load(item.poster).into(binding.ivItem)
 			binding.root.setOnClickListener {
 				// TODO 상세 넘어가게
 			}

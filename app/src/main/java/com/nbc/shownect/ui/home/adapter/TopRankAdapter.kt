@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
 import com.nbc.shownect.databinding.ItemTopRankBinding
 import com.nbc.shownect.fetch.model.BoxofResponse
 
@@ -26,7 +26,8 @@ class TopRankAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BoxofResponse) {
             with(binding) {
-                ivHomeHotRecommend.load("http://www.kopis.or.kr${item.poster}")
+                Glide.with(itemView).load("http://www.kopis.or.kr${item.poster}").into(ivHomeHotRecommend)
+                //ivHomeHotRecommend.load("http://www.kopis.or.kr${item.poster}")
                 tvHotRecommendGenre.text = item.cate
                 tvHotRecommendPeriod.text = item.prfpd?.substring(10, 21)
                 tvHotRecommendPlaceName.text = item.prfplcnm

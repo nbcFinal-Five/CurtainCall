@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : ViewModel() {
     //공연 상세 정보 리스트
-    private val _showDetailInfo = MutableLiveData<List<DbResponse>>()
-    val showDetailInfo: LiveData<List<DbResponse>> get() = _showDetailInfo
+    private val _showDetailInfo = MutableLiveData<List<DbResponse>?>()
+    val showDetailInfo: LiveData<List<DbResponse>?> get() = _showDetailInfo
     //공연 id
     private val _showId = MutableLiveData<String>()
     val showId: LiveData<String> get() = _showId

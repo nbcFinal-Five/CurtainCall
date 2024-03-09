@@ -52,11 +52,9 @@ dependencies {
 	// glide 
 	implementation ("com.github.bumptech.glide:glide:4.16.0")
 	annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
-
+	// glide blur transformation
 	implementation ("jp.wasabeef:glide-transformations:4.3.0")
 	implementation ("jp.co.cyberagent.android:gpuimage:2.1.0")
-	// coil
-	implementation("io.coil-kt:coil:2.6.0")
 
 	// navigation
 	implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")

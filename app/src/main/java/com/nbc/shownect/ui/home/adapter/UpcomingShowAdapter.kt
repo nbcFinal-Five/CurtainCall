@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
 import com.nbc.shownect.databinding.ItemUpcomingShowBinding
 import com.nbc.shownect.fetch.model.DbResponse
 
@@ -26,7 +26,7 @@ class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
             with(binding) {
-                ivHomeUpcomingShowPoster.load(item.poster)
+                Glide.with(itemView).load(item.poster).into(ivHomeUpcomingShowPoster)
                 tvPerformanceName.text = item.prfnm
                 tvPeriod.text = "${item.prfpdfrom} ~ ${item.prfpdto}"
                 tvFacilityName.text = item.fcltynm
