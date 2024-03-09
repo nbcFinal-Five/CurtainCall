@@ -37,9 +37,6 @@ class HomeViewModel(
     private val _isLoadingKid = MutableLiveData<Boolean>(false)
     val isLoadingKid: LiveData<Boolean> get() = _isLoadingKid
 
-    private val _tabPosition = MutableLiveData<Int>()
-    val tabPosition: LiveData<Int> get() = _tabPosition
-
 
     fun fetchUpcoming() {
         viewModelScope.launch {
@@ -86,9 +83,6 @@ class HomeViewModel(
         }
     }
 
-    fun saveTabPosition(tabPosition: Int) {
-        _tabPosition.value = tabPosition
-    }
 
     private fun getGenreCode(genre: Int): String {
         return when (genre) {
