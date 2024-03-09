@@ -61,7 +61,6 @@ class HomeFragment : Fragment(), PosterClickListener {
             binding.tvPageIndicator.text = "${position + 1} / 10"
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -129,7 +128,7 @@ class HomeFragment : Fragment(), PosterClickListener {
     private fun setUpObserve() {
         with(viewModel) {
             topRank.observe(viewLifecycleOwner) {
-                topRankAdapter.submitList(it.take(10))
+                topRankAdapter.submitList(it?.take(10))
             }
             genre.observe(viewLifecycleOwner) {
                 genreAdapter.submitList(it)
@@ -137,6 +136,7 @@ class HomeFragment : Fragment(), PosterClickListener {
             kidShow.observe(viewLifecycleOwner) {
                 kidShowAdapter.submitList(it)
             }
+            //로딩 화면 처리
             isLoadingGenre.observe(viewLifecycleOwner) {
                 binding.skeletonGenreLoading.isVisible = !it
             }

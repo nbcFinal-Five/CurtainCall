@@ -25,12 +25,12 @@ class KidShowAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
             with(binding) {
+                ivKidShow.load(item.poster)
                 tvKidPeriod.text = "~ ${item.prfpdto}"
                 tvKidGenre.text = item.genrenm
                 tvKidShowingState.text = item.prfstate
                 tvKidPerformanceTitle.text = item.prfnm
                 tvKidShowPlaceName.text = item.fcltynm
-                ivKidShow.load(item.poster)
                 ivKidShow.setOnClickListener { item.mt20id?.let { id -> listener?.posterClicked(id) } }
             }
         }

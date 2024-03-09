@@ -25,13 +25,13 @@ class GenreAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
             with(binding) {
+                ivHomeGenrePoster.load(item.poster)
                 tvGenre.text = item.genrenm
                 tvShowingState.text = item.prfstate
                 tvGenre.text = item.genrenm
                 tvGenrePeriod.text = "~ ${item.prfpdto}"
                 tvPlaceName.text = item.fcltynm
                 tvPerformanceName.text = item.prfnm
-                ivHomeGenrePoster.load(item.poster)
                 ivHomeGenrePoster.setOnClickListener {
                     item.mt20id?.let { id -> listener?.posterClicked(id) }
                 }

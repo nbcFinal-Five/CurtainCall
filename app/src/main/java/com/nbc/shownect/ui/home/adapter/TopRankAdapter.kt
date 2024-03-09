@@ -26,11 +26,11 @@ class TopRankAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BoxofResponse) {
             with(binding) {
+                ivHomeHotRecommend.load("http://www.kopis.or.kr${item.poster}")
                 tvHotRecommendGenre.text = item.cate
                 tvHotRecommendPeriod.text = item.prfpd?.substring(10, 21)
                 tvHotRecommendPlaceName.text = item.prfplcnm
                 tvHotRecommendPerformanceName.text = item.prfnm
-                ivHomeHotRecommend.load("http://www.kopis.or.kr${item.poster}")
                 ivHomeHotRecommend.setOnClickListener {
                     item.mt20id?.let { id ->
                         listener?.posterClicked(

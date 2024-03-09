@@ -14,6 +14,32 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/iv_simple_poster_blur"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/shape_searchlist_radius3"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:id="@+id/blur_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.6"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/iv_simple_poster_blur"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_simple_poster_blur"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
             android:id="@+id/iv_simple_posterImage"
             android:layout_width="0dp"
             android:layout_height="440dp"
@@ -31,6 +57,7 @@
             android:id="@+id/gradient_view"
             android:layout_width="0dp"
             android:layout_height="60dp"
+            android:alpha="0.6"
             android:background="@drawable/bg_ticket_poster_bottom_gradient"
             app:layout_constraintBottom_toBottomOf="@id/iv_simple_posterImage"
             app:layout_constraintEnd_toEndOf="@id/iv_simple_posterImage"
@@ -153,7 +180,6 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="-24dp"
-            android:alpha="0.1"
             android:background="@drawable/bg_ticket_hall"
             app:layout_constraintBottom_toBottomOf="@id/line"
             app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +190,6 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="-24dp"
-            android:alpha="0.1"
             android:background="@drawable/bg_ticket_hall"
             app:layout_constraintBottom_toBottomOf="@id/line"
             app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +200,6 @@
             android:layout_width="0dp"
             android:layout_height="5dp"
             android:layout_marginTop="60dp"
-            android:alpha="0.1"
             android:background="@drawable/ic_ticket_dash"
             app:layout_constraintEnd_toStartOf="@id/ticket_hall_right"
             app:layout_constraintStart_toEndOf="@id/ticket_hall_left"

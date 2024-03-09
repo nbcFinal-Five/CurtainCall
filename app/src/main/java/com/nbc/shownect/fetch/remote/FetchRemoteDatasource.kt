@@ -49,7 +49,8 @@ interface FetchRemoteDatasource {
         @Query("cpage") cpage: String = Constants.CURRENT_PAGE,
         @Query("rows") rows: String = Constants.PAGE_INDEX,
         @Query("openrun") openrun: String? = null,
-        @Query("shcate") shcate: String? = null
+        @Query("shcate") shcate: String? = null,
+        @Query("newsql") newsql: String? = "Y"
     ): DbsResponse
 
     //박스오피스 랭킹순 목록
