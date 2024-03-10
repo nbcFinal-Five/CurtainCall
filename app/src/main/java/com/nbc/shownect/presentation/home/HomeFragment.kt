@@ -1,13 +1,10 @@
 package com.nbc.shownect.ui.home
 
-import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.DimenRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -15,13 +12,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nbc.shownect.R
 import com.nbc.shownect.databinding.FragmentHomeBinding
 import com.nbc.shownect.fetch.network.retrofit.RetrofitClient.fetch
 import com.nbc.shownect.fetch.repository.impl.FetchRepositoryImpl
+import com.nbc.shownect.presentation.home.HorizontalMarginItemDecoration
 import com.nbc.shownect.ui.home.adapter.GenreAdapter
 import com.nbc.shownect.ui.home.adapter.KidShowAdapter
 import com.nbc.shownect.ui.home.adapter.PosterClickListener
@@ -56,11 +53,13 @@ class HomeFragment : Fragment(), PosterClickListener {
     private var isPaging = false
     private var pagingJob: Job? = null
     private val onPageChangeCallback: OnPageChangeCallback = object : OnPageChangeCallback() {
+        //페이지가 선택될 때 마다 호출
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
             binding.tvPageIndicator.text = "${position + 1} / 10"
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -99,6 +98,7 @@ class HomeFragment : Fragment(), PosterClickListener {
         //viewpager 연결
         with(binding.viewPager) {
             adapter = upComingShowAdapter
+            //ViewPager PageTransformer 세팅
             offscreenPageLimit = 1
             setPageTransformer(SliderTransformer(requireContext()))
             val itemDecoration = HorizontalMarginItemDecoration(
@@ -106,6 +106,8 @@ class HomeFragment : Fragment(), PosterClickListener {
                 R.dimen.viewpager_current_item_horizontal_margin
             )
             addItemDecoration(itemDecoration)
+
+            //PageChangeCallback
             registerOnPageChangeCallback(onPageChangeCallback)
 
             //tab 연결
@@ -217,18 +219,7 @@ class HomeFragment : Fragment(), PosterClickListener {
     }
 }
 
-class HorizontalMarginItemDecoration(context: Context, @DimenRes horizontalMarginInDp: Int) :
-    RecyclerView.ItemDecoration() {
-    private val horizontalMarginInPx: Int =
-        context.resources.getDimension(horizontalMarginInDp).toInt()
 
-    override fun getItemOffsets(
-        outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
-    ) {
-        outRect.right = horizontalMarginInPx
-        outRect.left = horizontalMarginInPx
-    }
-}
 
 
 
