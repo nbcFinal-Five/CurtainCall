@@ -226,25 +226,25 @@ private fun changeFilterUiDesign() {
                 setHasFixedSize(true)
 
                 // 무한 스크롤을 위한 리사이클러뷰 위치 감지
-                addOnScrollListener(object: RecyclerView.OnScrollListener(){
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        super.onScrolled(recyclerView, dx, dy)
-                        val layoutManager = layoutManager as GridLayoutManager
-                        val visibleItemCount = layoutManager.childCount
-                        val totalItemCount = layoutManager.itemCount
-                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
-                        // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
-//                        if (!isLoading && !isLastPage) {
-//                            if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
-//                                && firstVisibleItemPosition >= 0
-//                                && totalItemCount >= PAGE_SIZE) {
-//                                searchviewmodl.추가 데이터 요청 함수()
+//                addOnScrollListener(object: RecyclerView.OnScrollListener(){
+//                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                        super.onScrolled(recyclerView, dx, dy)
+//                        val visibleThreshold = 1
+//                        val layoutManager = layoutManager as GridLayoutManager
+//                        val visibleItemCount = layoutManager.childCount
+//                        val totalItemCount = layoutManager.itemCount
+//                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+//                        val lastCompletelyVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
+//                        val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+//
+//                        // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
+//
+//                            if (totalItemCount - lastVisibleItemPosition <= visibleThreshold
+//                            ) {
+//                                searchViewModel.loadMoreSearchResult()
 //                            }
-//                        }
-
-                    }
-                })
+//                    }
+//                })
             }
         }
     }
