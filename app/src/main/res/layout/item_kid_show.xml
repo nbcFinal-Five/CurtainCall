@@ -8,10 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_kid_show"
-        android:layout_width="120dp"
-        android:layout_height="150dp"
+        style="@style/posterStyle"
         android:clipToOutline="true"
-        android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
