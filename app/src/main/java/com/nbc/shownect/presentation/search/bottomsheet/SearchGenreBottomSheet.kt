@@ -38,6 +38,7 @@ class SearchGenreBottomSheet() : BottomSheetDialogFragment() {
         }
     }
     private var selectedGenreChips : List<Chip>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -98,8 +99,10 @@ class SearchGenreBottomSheet() : BottomSheetDialogFragment() {
 
     private fun restorePreviouslySelectedGenreChips() {
         searchFilterViewModel.saveCategoryGenreTitle.observe(viewLifecycleOwner) {categoryTitle->
-            val selectedChip = binding.cpGroupGenre.children.find { categoryTitle.contains((it as Chip).id) } as? Chip
-            selectedChip?.isChecked = true
+            categoryTitle.forEach {
+                id ->  val selectedChip = binding.cpGroupGenre.findViewById<Chip>(id)
+                selectedChip.isChecked = true
+            }
         }
     }
 }

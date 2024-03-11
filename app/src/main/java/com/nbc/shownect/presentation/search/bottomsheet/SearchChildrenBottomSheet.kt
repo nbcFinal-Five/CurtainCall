@@ -31,6 +31,7 @@ class SearchChildrenBottomSheet() : BottomSheetDialogFragment() {
         }
     }
     private var selectedChildChips : List<Chip>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

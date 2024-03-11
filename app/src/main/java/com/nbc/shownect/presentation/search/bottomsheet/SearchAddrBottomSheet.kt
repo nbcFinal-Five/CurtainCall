@@ -46,6 +46,7 @@ class SearchAddrBottomSheet() : BottomSheetDialogFragment() {
         }
     }
     private var selectedAddrChips : List<Chip>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -104,8 +105,10 @@ class SearchAddrBottomSheet() : BottomSheetDialogFragment() {
 
     private fun restorePreviouslySelectedAddrChips() {
         searchFilterViewModel.saveCategoryAddrTitle.observe(viewLifecycleOwner) {categoryTitle->
-            val selectedChip = binding.cpGroupAddr.children.find { categoryTitle.contains((it as Chip).id) } as? Chip
-            selectedChip?.isChecked = true
+            categoryTitle.forEach {
+                id ->  val selectedChip = binding.cpGroupAddr.findViewById<Chip>(id)
+                selectedChip.isChecked = true
+            }
         }
     }
 }

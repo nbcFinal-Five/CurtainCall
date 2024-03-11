@@ -243,7 +243,6 @@ private fun changeFilterUiDesign() {
     private fun filterReset(){
         binding.ivSearchFilterReset.setOnClickListener {
             searchViewModel.resetData()
-            searchViewModel.fetchSearchFilterResult()
         }
     }
 
