@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
@@ -13,8 +14,7 @@ import com.nbc.shownect.R
 import com.nbc.shownect.databinding.SearchBottomsheetDialogChildrenBinding
 import com.nbc.shownect.ui.search.SearchViewModel
 
-class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<Int>?,
-                                private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
+class SearchChildrenBottomSheet() : BottomSheetDialogFragment() {
 
     private var _binding: SearchBottomsheetDialogChildrenBinding? = null
 
@@ -52,7 +52,7 @@ class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<I
         with(binding) {
             cpGroupChildren.setOnCheckedStateChangeListener { group, checkedIds ->
                 val selectedChips = checkedIds.toList()
-                chipClickListener(selectedChips)
+                searchFilterViewModel.saveCategoryChildTitle(checkedIds)
                 selectedChildChips = checkedIds.map { group.findViewById<Chip>(it)}
                 if(checkedIds.isNotEmpty()) {
                     btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
@@ -63,17 +63,6 @@ class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<I
                     btnChildrenCheck.setTypeface(null, Typeface.NORMAL)
                     btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
-            }
-
-            // 필터 다시 선택했을 때 기존 필터 선택데이터가 있다면 버튼 색상 변경
-            if(previouslySelectedChildChips?.isNotEmpty() == true) {
-                btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
-                btnChildrenCheck.setTypeface(null, Typeface.BOLD)
-                btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
-            } else {
-                btnChildrenCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
-                btnChildrenCheck.setTypeface(null, Typeface.NORMAL)
-                btnChildrenCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
             }
 
             ivChildrenFilterClose.setOnClickListener {
@@ -99,9 +88,9 @@ class SearchChildrenBottomSheet(private val previouslySelectedChildChips: List<I
     }
 
     private fun restorePreviouslySelectedChildChips() {
-        previouslySelectedChildChips?.forEach { chipId ->
-            val chip = binding.cpGroupChildren.findViewById<Chip>(chipId)
-            chip.isChecked = true
+        searchFilterViewModel.saveCategoryChildTitle.observe(viewLifecycleOwner) {categoryTitle->
+            val selectedChip = binding.cpGroupChildren.children.firstOrNull { categoryTitle.contains((it as Chip).id) } as? Chip
+            selectedChip?.isChecked = true
         }
     }
 }

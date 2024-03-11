@@ -46,9 +46,6 @@ class SearchFragment : Fragment(), PosterClickListener {
             )
         )
     }
-    private var previouslySelectedGenreChips: List<Int>? = null
-    private var previouslySelectedAddrChips: List<Int>? = null
-    private var previouslySelectedChildChips: List<Int>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,31 +69,25 @@ class SearchFragment : Fragment(), PosterClickListener {
         showBottomSheet()
         showSearchList()
         changeFilterUiDesign()
+        filterReset()
     }
 
     private fun showBottomSheet() { // 검색 필터 클릭시 bottom sheet 띄우기
         with(binding) {
             tvSearchfilterGenre.setOnClickListener {
-                val genreBottomSheet = SearchGenreBottomSheet(previouslySelectedGenreChips) { selectedChips ->
-                    // 클릭한 칩을 저장합니다. 콜백함수
-                    previouslySelectedGenreChips = selectedChips
-                }
+                val genreBottomSheet = SearchGenreBottomSheet()
                 genreBottomSheet.show(childFragmentManager, genreBottomSheet.tag)
                 genreBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
 
             tvSearchfilterAddr.setOnClickListener {
-                val addrBottomSheet = SearchAddrBottomSheet(previouslySelectedAddrChips) { selectedChips ->
-                    previouslySelectedAddrChips = selectedChips
-                }
+                val addrBottomSheet = SearchAddrBottomSheet()
                 addrBottomSheet.show(childFragmentManager, addrBottomSheet.tag)
                 addrBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
 
             tvSearchfilterChild.setOnClickListener {
-                val chilrenBottomSheet = SearchChildrenBottomSheet(previouslySelectedChildChips) { selectedChips ->
-                    previouslySelectedChildChips = selectedChips
-                }
+                val chilrenBottomSheet = SearchChildrenBottomSheet()
                 chilrenBottomSheet.show(childFragmentManager, chilrenBottomSheet.tag)
                 chilrenBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
@@ -246,6 +237,13 @@ private fun changeFilterUiDesign() {
 //                    }
 //                })
             }
+        }
+    }
+
+    private fun filterReset(){
+        binding.ivSearchFilterReset.setOnClickListener {
+            searchViewModel.resetData()
+            searchViewModel.fetchSearchFilterResult()
         }
     }
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
@@ -13,8 +14,7 @@ import com.nbc.shownect.R
 import com.nbc.shownect.databinding.SearchBottomsheetDialogAddrBinding
 import com.nbc.shownect.ui.search.SearchViewModel
 
-class SearchAddrBottomSheet(private val previouslySelectedAddrChips: List<Int>?,
-                            private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
+class SearchAddrBottomSheet() : BottomSheetDialogFragment() {
 
     private var _binding: SearchBottomsheetDialogAddrBinding? = null
 
@@ -67,7 +67,7 @@ class SearchAddrBottomSheet(private val previouslySelectedAddrChips: List<Int>?,
         with(binding) {
             cpGroupAddr.setOnCheckedStateChangeListener { group, checkedIds ->
                 val selectedChips = checkedIds.toList()
-                chipClickListener(selectedChips)
+                searchFilterViewModel.saveCategoryAddrTitle(selectedChips)
                 selectedAddrChips  = checkedIds.map { group.findViewById<Chip>(it)}
                     if(checkedIds.isNotEmpty()) {
                         btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
@@ -78,17 +78,6 @@ class SearchAddrBottomSheet(private val previouslySelectedAddrChips: List<Int>?,
                         btnAddrCheck.setTypeface(null, Typeface.NORMAL)
                         btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
-            }
-
-            // 필터 다시 선택했을 때 기존 필터 선택데이터가 있다면 버튼 색상 변경
-            if(previouslySelectedAddrChips?.isNotEmpty() == true) {
-                btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
-                btnAddrCheck.setTypeface(null, Typeface.BOLD)
-                btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
-            } else {
-                btnAddrCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
-                btnAddrCheck.setTypeface(null, Typeface.NORMAL)
-                btnAddrCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
             }
 
             ivAddrFilterClose.setOnClickListener {
@@ -114,9 +103,9 @@ class SearchAddrBottomSheet(private val previouslySelectedAddrChips: List<Int>?,
     }
 
     private fun restorePreviouslySelectedAddrChips() {
-        previouslySelectedAddrChips?.forEach { chipId ->
-            val chip = binding.cpGroupAddr.findViewById<Chip>(chipId)
-            chip.isChecked = true
+        searchFilterViewModel.saveCategoryAddrTitle.observe(viewLifecycleOwner) {categoryTitle->
+            val selectedChip = binding.cpGroupAddr.children.find { categoryTitle.contains((it as Chip).id) } as? Chip
+            selectedChip?.isChecked = true
         }
     }
 }

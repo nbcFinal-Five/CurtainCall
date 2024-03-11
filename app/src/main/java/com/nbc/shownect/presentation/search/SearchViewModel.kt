@@ -18,6 +18,19 @@ class SearchViewModel : ViewModel() {
     val searchResultList :LiveData<List<SearchItem>?>
         get() = _searchResultList
 
+    private val _saveCategoryAddrTitle = MutableLiveData<List<Int>>()
+    val saveCategoryAddrTitle: LiveData<List<Int>>
+        get() = _saveCategoryAddrTitle
+
+    private val _saveCategoryGenreTitle = MutableLiveData<List<Int>>()
+    val saveCategoryGenreTitle: LiveData<List<Int>>
+        get() = _saveCategoryGenreTitle
+
+    private val _saveCategoryChildTitle = MutableLiveData<List<Int>>()
+    val saveCategoryChildTitle: LiveData<List<Int>>
+        get() = _saveCategoryChildTitle
+
+
    private val _addrFilterResultList = MutableLiveData<List<Pair<Chip,String>?>?>()
     val addrFilterResultList : LiveData<List<Pair<Chip,String>?>?>
         get() = _addrFilterResultList
@@ -123,6 +136,26 @@ class SearchViewModel : ViewModel() {
 
     fun getSearchWord(search: String) {
         _searchWord.value = search
+    }
+
+    fun resetData() {
+        _genreFilterResultList.value = null
+        _addrFilterResultList.value = null
+        _childFilterResultList.value = null
+        _searchWord.value = null
+    }
+
+    //선택된 칩 위치를 기억 하기 위한 코드
+    fun saveCategoryAddrTitle(category: List<Int>) {
+        _saveCategoryAddrTitle.value = category
+    }
+
+    fun saveCategoryGenreTitle(category: List<Int>) {
+        _saveCategoryGenreTitle.value = category
+    }
+
+    fun saveCategoryChildTitle(category: List<Int>) {
+        _saveCategoryChildTitle.value = category
     }
 
     private fun handleFailure(exception: Exception) {
