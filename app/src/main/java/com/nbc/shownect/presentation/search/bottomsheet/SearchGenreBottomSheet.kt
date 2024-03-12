@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
@@ -13,8 +14,7 @@ import com.nbc.shownect.R
 import com.nbc.shownect.databinding.SearchBottomsheetDialogGenreBinding
 import com.nbc.shownect.ui.search.SearchViewModel
 
-class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>?,
-                             private val chipClickListener: (List<Int>) -> Unit) : BottomSheetDialogFragment() {
+class SearchGenreBottomSheet() : BottomSheetDialogFragment() {
 
     private var _binding: SearchBottomsheetDialogGenreBinding? = null
 
@@ -38,6 +38,7 @@ class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>
         }
     }
     private var selectedGenreChips : List<Chip>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,7 +61,7 @@ class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>
         with(binding) {
             cpGroupGenre.setOnCheckedStateChangeListener { group, checkedIds ->
                 val selectedChips = checkedIds.toList()
-                chipClickListener(selectedChips)
+                searchFilterViewModel.saveCategoryGenreTitle(selectedChips)
                 selectedGenreChips = checkedIds.map { group.findViewById<Chip>(it)}
                 // 칩 선택유무에 따라 조건검색 버튼 색상 변경
                 if(checkedIds.isNotEmpty()) {
@@ -72,16 +73,6 @@ class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>
                     btnGenreCheck.setTypeface(null, Typeface.NORMAL)
                     btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
                 }
-            }
-            // 필터 다시 선택했을 때 기존 필터 선택데이터가 있다면 버튼 색상 변경
-            if(previouslySelectedGenreChips?.isNotEmpty() == true) {
-                btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
-                btnGenreCheck.setTypeface(null, Typeface.BOLD)
-                btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_color))
-            } else {
-                btnGenreCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color))
-                btnGenreCheck.setTypeface(null, Typeface.NORMAL)
-                btnGenreCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.filter_btn_color))
             }
 
             ivGenreFilterClose.setOnClickListener {
@@ -107,9 +98,11 @@ class SearchGenreBottomSheet(private val previouslySelectedGenreChips: List<Int>
     }
 
     private fun restorePreviouslySelectedGenreChips() {
-        previouslySelectedGenreChips?.forEach { chipId ->
-            val chip = binding.cpGroupGenre.findViewById<Chip>(chipId)
-            chip.isChecked = true
+        searchFilterViewModel.saveCategoryGenreTitle.observe(viewLifecycleOwner) {categoryTitle->
+            categoryTitle.forEach {
+                id ->  val selectedChip = binding.cpGroupGenre.findViewById<Chip>(id)
+                selectedChip.isChecked = true
+            }
         }
     }
 }

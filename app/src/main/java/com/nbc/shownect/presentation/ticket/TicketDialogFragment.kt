@@ -37,11 +37,11 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
 	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 
+
 	// activity 닫혔을 때 갱신용 launcher
 	private var info: DbResponse? = null
 	private val launcher =
-		registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ ->
-			Log.d("debug", "実行")
+		registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 			userViewModel.setUser()
 
 			val user = Supabase.client.auth.currentUserOrNull()

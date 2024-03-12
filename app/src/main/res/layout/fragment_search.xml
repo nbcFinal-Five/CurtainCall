@@ -59,7 +59,7 @@
         style="@style/SearchFilterStyle"
         android:layout_marginHorizontal="20dp"
         android:text="@string/filter_addr"
-        app:layout_constraintBottom_toBottomOf="@id/tv_searchfilter_genre"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_genre"
         app:layout_constraintEnd_toStartOf="@+id/tv_searchfilter_child"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_searchfilter_genre"
@@ -80,7 +80,7 @@
         style="@style/SearchFilterStyle"
         android:text="@string/filter_children"
         app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_addr"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_search_filter_reset"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_searchfilter_addr"
         app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_addr" />
@@ -96,13 +96,26 @@
         app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_child" />
 
     <ImageView
+        android:id="@+id/iv_search_filter_reset"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_search_filter_reset"
+        android:layout_marginStart="15dp"
+        android:paddingTop="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_child"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_searchfilter_child"
+        app:layout_constraintTop_toTopOf="@+id/tv_searchfilter_child" />
+
+    <ImageView
         android:id="@+id/iv_search_noresult"
         android:layout_width="80dp"
         android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_search_empty_result"
         app:layout_constraintBottom_toTopOf="@+id/tv_search_noresult"
-        android:src="@drawable/ic_search_empty_result"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_search_noresult"
