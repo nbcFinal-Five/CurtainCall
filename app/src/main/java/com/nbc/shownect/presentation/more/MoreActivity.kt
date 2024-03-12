@@ -25,7 +25,6 @@ class MoreActivity : AppCompatActivity() {
 		userViewModel.setUser()
 
 		if (globalMode != null) {
-			Log.d("debug", globalMode.toString())
 			initData(globalMode!!)
 		}
 	}

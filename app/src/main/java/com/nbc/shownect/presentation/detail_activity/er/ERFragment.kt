@@ -54,12 +54,20 @@ class ERFragment : Fragment() {
 
 			info = firstShowDetail
 
-			changeFragmentByMode(
-				mt20id = firstShowDetail.mt20id!!,
-				mt10id = firstShowDetail.mt10id!!,
-				poster = firstShowDetail.poster!!,
-				mode = ERViewModel.EXPECTATION
-			)
+
+			val mt20id = firstShowDetail.mt20id
+			val mt10id = firstShowDetail.mt10id
+			val poster = firstShowDetail.poster
+
+			if (mt20id != null && mt10id != null && poster != null) {
+				changeFragmentByMode(
+					mt20id = mt20id,
+					mt10id = mt10id,
+					poster = poster,
+					mode = ERViewModel.EXPECTATION
+				)
+			}
+
 		}
 
 		erViewModel.mode.observe(viewLifecycleOwner) {
