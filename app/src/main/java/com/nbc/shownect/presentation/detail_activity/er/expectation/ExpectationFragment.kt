@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbc.shownect.R
 import com.nbc.shownect.databinding.FragmentExpectationBinding
+import com.nbc.shownect.presentation.detail_activity.er.more.ErActivity
 import com.nbc.shownect.supabase.model.PostExpectationModel
 import com.nbc.shownect.ui.UserViewModel
 import com.nbc.shownect.ui.auth.AuthActivity
@@ -117,6 +118,15 @@ class ExpectationFragment(
 					detailViewModel.setInfo(mt20id)
 				}
 			}
+		}
+
+		btnMore.setOnClickListener {
+			val intent = Intent(requireActivity(), ErActivity::class.java)
+
+			intent.putExtra("mt20id", mt20id)
+			intent.putExtra("mode", "expectations")
+
+			launcher.launch(intent)
 		}
 	}
 
