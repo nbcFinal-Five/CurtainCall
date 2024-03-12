@@ -5,7 +5,6 @@ import com.nbc.shownect.fetch.remote.FetchRemoteDatasource
 import com.nbc.shownect.search.SearchRemoteDatasource
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
@@ -14,9 +13,6 @@ private const val BASE_URL = "http://kopis.or.kr/openApi/restful/"
 private const val KOPIS_API_KEY = BuildConfig.KOPIS_API_KEY
 
 object RetrofitClient {
-    private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY // 로깅 레벨 설정 (BASIC, HEADERS, BODY)
-    }
 
     // API Key 삽입을 위한 인터셉터
     private val apiKeyInterceptor = Interceptor { chain ->
@@ -33,7 +29,6 @@ object RetrofitClient {
     // OkHttpClient 설정
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(apiKeyInterceptor)
-        .addInterceptor(loggingInterceptor)
         .readTimeout(15, TimeUnit.SECONDS)
         .writeTimeout(15, TimeUnit.SECONDS)
         .connectTimeout(15, TimeUnit.SECONDS)
