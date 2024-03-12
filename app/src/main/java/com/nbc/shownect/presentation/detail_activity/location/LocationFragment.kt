@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
@@ -82,6 +83,10 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
                     16.0 // 줌 레벨
                 )
                 naverMap.cameraPosition = cameraPosition
+
+                naverMap.minZoom = 6.0
+                naverMap.maxZoom = 18.0
+                naverMap.extent = LatLngBounds(LatLng(32.973077, 124.270981), LatLng(38.856197,130.051725 ))
             }
         }
     }
