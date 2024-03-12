@@ -143,6 +143,9 @@ class SearchViewModel : ViewModel() {
         _addrFilterResultList.value = null
         _childFilterResultList.value = null
         _searchWord.value = null
+        _saveCategoryAddrTitle.value = listOf()
+        _saveCategoryGenreTitle.value = listOf()
+        _saveCategoryChildTitle.value = listOf()
     }
 
     //선택된 칩 위치를 기억 하기 위한 코드

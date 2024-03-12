@@ -241,9 +241,16 @@ private fun changeFilterUiDesign() {
     }
 
     private fun filterReset(){
-        binding.ivSearchFilterReset.setOnClickListener {
-            searchViewModel.resetData()
+        with(binding) {
+            ivSearchFilterReset.setOnClickListener {
+                searchViewModel.resetData()
+                searchListAdapter.submitList(null)
+                Toast.makeText(requireActivity(),R.string.search_result_reset,Toast.LENGTH_SHORT).show()
+                tvSearchNoresult.visibility = View.VISIBLE
+                ivSearchNoresult.visibility = View.VISIBLE
+            }
         }
+
     }
 
     override fun posterClicked(id: String) { // 해당 아이템 클릭시 간단화면 띄우기
