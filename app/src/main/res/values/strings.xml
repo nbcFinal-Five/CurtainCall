@@ -147,6 +147,7 @@
   <string name="hall_call_number">전화번호</string>
   <string name="hall_homepage">홈페이지</string>
   <string name="parking_area">주차시설</string>
+  <string name="map_marker_in_place">원위치</string>
 
     <!-- 검색화면 리셋 -->
     <string name="search_result_reset">검색 결과가 초기화 되었습니다</string>

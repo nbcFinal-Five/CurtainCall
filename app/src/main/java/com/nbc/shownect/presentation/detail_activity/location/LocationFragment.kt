@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.NaverMapSdk
@@ -48,6 +49,9 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         viewModel.fetchDetailLocation()
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+        binding.btnMapMarkerInPlace.setOnClickListener {
+            moveToMarkerPosition()
+        }
     }
 
     private fun setUpObserve() {
@@ -89,6 +93,23 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
+
+    private fun moveToMarkerPosition() {
+        val firstLocation = viewModel.locationList.value?.firstOrNull()
+        firstLocation?.let { location ->
+            val latitude = location.la?.toDouble() ?: 0.0
+            val longitude = location.lo?.toDouble() ?: 0.0
+
+            val cameraPosition = CameraPosition(
+                LatLng(latitude, longitude),
+                16.0
+            )
+            mapView.getMapAsync { naverMap ->
+                naverMap.moveCamera(CameraUpdate.toCameraPosition(cameraPosition))
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         mapView.onStart()
