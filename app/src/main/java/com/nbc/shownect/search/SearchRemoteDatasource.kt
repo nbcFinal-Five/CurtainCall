@@ -22,7 +22,7 @@ interface SearchRemoteDatasource {
     suspend fun getSearchFilterShowList(
         @Query("stdate") stdate: String = currentDateString,
         @Query("eddate") eddate: String = futureDateSting,
-        @Query("cpage") cpage: String? = null,
+        @Query("cpage") cpage: Int? = null,
         @Query("rows") rows: String = "30",
         @Query("shcate") shcate: String? = null, // 장르코드
         @Query("shprfnm") shprfnm: String? = null, // 공연명

@@ -46,9 +46,6 @@ class SearchFragment : Fragment(), PosterClickListener {
             )
         )
     }
-    private var previouslySelectedGenreChips: List<Int>? = null
-    private var previouslySelectedAddrChips: List<Int>? = null
-    private var previouslySelectedChildChips: List<Int>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,31 +69,25 @@ class SearchFragment : Fragment(), PosterClickListener {
         showBottomSheet()
         showSearchList()
         changeFilterUiDesign()
+        filterReset()
     }
 
     private fun showBottomSheet() { // 검색 필터 클릭시 bottom sheet 띄우기
         with(binding) {
             tvSearchfilterGenre.setOnClickListener {
-                val genreBottomSheet = SearchGenreBottomSheet(previouslySelectedGenreChips) { selectedChips ->
-                    // 클릭한 칩을 저장합니다. 콜백함수
-                    previouslySelectedGenreChips = selectedChips
-                }
+                val genreBottomSheet = SearchGenreBottomSheet()
                 genreBottomSheet.show(childFragmentManager, genreBottomSheet.tag)
                 genreBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
 
             tvSearchfilterAddr.setOnClickListener {
-                val addrBottomSheet = SearchAddrBottomSheet(previouslySelectedAddrChips) { selectedChips ->
-                    previouslySelectedAddrChips = selectedChips
-                }
+                val addrBottomSheet = SearchAddrBottomSheet()
                 addrBottomSheet.show(childFragmentManager, addrBottomSheet.tag)
                 addrBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
 
             tvSearchfilterChild.setOnClickListener {
-                val chilrenBottomSheet = SearchChildrenBottomSheet(previouslySelectedChildChips) { selectedChips ->
-                    previouslySelectedChildChips = selectedChips
-                }
+                val chilrenBottomSheet = SearchChildrenBottomSheet()
                 chilrenBottomSheet.show(childFragmentManager, chilrenBottomSheet.tag)
                 chilrenBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
             }
@@ -226,27 +217,40 @@ private fun changeFilterUiDesign() {
                 setHasFixedSize(true)
 
                 // 무한 스크롤을 위한 리사이클러뷰 위치 감지
-                addOnScrollListener(object: RecyclerView.OnScrollListener(){
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        super.onScrolled(recyclerView, dx, dy)
-                        val layoutManager = layoutManager as GridLayoutManager
-                        val visibleItemCount = layoutManager.childCount
-                        val totalItemCount = layoutManager.itemCount
-                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
-                        // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
-//                        if (!isLoading && !isLastPage) {
-//                            if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
-//                                && firstVisibleItemPosition >= 0
-//                                && totalItemCount >= PAGE_SIZE) {
-//                                searchviewmodl.추가 데이터 요청 함수()
+//                addOnScrollListener(object: RecyclerView.OnScrollListener(){
+//                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                        super.onScrolled(recyclerView, dx, dy)
+//                        val visibleThreshold = 1
+//                        val layoutManager = layoutManager as GridLayoutManager
+//                        val visibleItemCount = layoutManager.childCount
+//                        val totalItemCount = layoutManager.itemCount
+//                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+//                        val lastCompletelyVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
+//                        val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+//
+//                        // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
+//
+//                            if (totalItemCount - lastVisibleItemPosition <= visibleThreshold
+//                            ) {
+//                                searchViewModel.loadMoreSearchResult()
 //                            }
-//                        }
-
-                    }
-                })
+//                    }
+//                })
             }
         }
+    }
+
+    private fun filterReset(){
+        with(binding) {
+            ivSearchFilterReset.setOnClickListener {
+                searchViewModel.resetData()
+                searchListAdapter.submitList(null)
+                Toast.makeText(requireActivity(),R.string.search_result_reset,Toast.LENGTH_SHORT).show()
+                tvSearchNoresult.visibility = View.VISIBLE
+                ivSearchNoresult.visibility = View.VISIBLE
+            }
+        }
+
     }
 
     override fun posterClicked(id: String) { // 해당 아이템 클릭시 간단화면 띄우기
