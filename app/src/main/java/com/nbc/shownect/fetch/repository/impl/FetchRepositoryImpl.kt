@@ -17,9 +17,10 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
         shcate: String?,
         kidstate: String?,
         prfstate: String?,
+
     ): DbsResponse =
         withContext(Dispatchers.IO) {
-            fetch.fetchShowList(stdate = stdate, eddate = eddate, kidstate = kidstate, openrun = "Y")
+            fetch.fetchShowList(stdate = stdate, eddate = eddate, kidstate = kidstate, openrun = "Y", prfstate = prfstate)
         }
 
     override suspend fun fetchGenre(
@@ -30,19 +31,21 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
         openrun: String?,
         shcate: String?,
         newsql: String?,
+        prfstate:String?,
     ): DbsResponse =
         withContext(Dispatchers.IO) {
-            fetch.fetchShowList(shcate = shcate)
+            fetch.fetchShowList(shcate = shcate, prfstate = "02")
         }
 
     override suspend fun fetchTopRank(
         ststype: String,
         data: String,
         catecode: String?,
-        area: String?
+        area: String?,
+        newsql:String?
     ): BoxOfsResponse =
         withContext(Dispatchers.IO) {
-            fetch.fetchTopRank()
+            fetch.fetchTopRank(newsql = "Y")
         }
 
     override suspend fun fetchShowDetail(path: String): DbsResponse =

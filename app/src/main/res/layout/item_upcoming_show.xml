@@ -10,6 +10,8 @@
         android:layout_width="220dp"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
+        android:background="@drawable/shape_searchlist_radius3"
+        android:clipToOutline="true"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

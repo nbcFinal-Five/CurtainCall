@@ -41,7 +41,7 @@ class HomeViewModel(
     fun fetchUpcoming() {
         viewModelScope.launch {
             runCatching {
-                _showList.value = fetchRemoteRepository.fetchShowList().showList
+                _showList.value = fetchRemoteRepository.fetchShowList(prfstate = "01").showList
             }.onFailure {
 
             }

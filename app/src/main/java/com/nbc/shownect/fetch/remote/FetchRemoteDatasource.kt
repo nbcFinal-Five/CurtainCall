@@ -36,7 +36,7 @@ interface FetchRemoteDatasource {
         @Query("rows") rows: String = Constants.PAGE_INDEX,
         @Query("openrun") openrun: String? = "N",
         @Query("newsql") newsql: String? = "Y",
-        @Query("shcate") shcate: String? = "01",
+        @Query("shcate") shcate: String? = null,
         @Query("kidstate") kidstate: String? = null,
         @Query("prfstate") prfstate: String? = null,
     ): DbsResponse
@@ -50,16 +50,18 @@ interface FetchRemoteDatasource {
         @Query("rows") rows: String = Constants.PAGE_INDEX,
         @Query("openrun") openrun: String? = null,
         @Query("shcate") shcate: String? = null,
-        @Query("newsql") newsql: String? = "Y"
+        @Query("newsql") newsql: String? = "Y",
+        @Query("prfstate") prfstate: String? = "02"
     ): DbsResponse
 
     //박스오피스 랭킹순 목록
     @GET("boxoffice")
     suspend fun fetchTopRank(
-        @Query("ststype") ststype: String = "month",
+        @Query("ststype") ststype: String = "week",
         @Query("date") data: String = Converter.nowDateFormat(), //현재 날짜를 yyyyMMdd 형식 으로 변환
         @Query("catecode") catecode: String? = null,
         @Query("area") area: String? = null,
+        @Query("newsql") newsql: String? = "Y",
     ): BoxOfsResponse
 
     //공연 상세 정보
