@@ -27,7 +27,6 @@ class TopRankAdapter(private val listener: PosterClickListener? = null) :
         fun bind(item: BoxofResponse) {
             with(binding) {
                 Glide.with(itemView).load("http://www.kopis.or.kr${item.poster}").into(ivHomeHotRecommend)
-                //ivHomeHotRecommend.load("http://www.kopis.or.kr${item.poster}")
                 tvHotRecommendGenre.text = item.cate
                 tvHotRecommendPeriod.text = item.prfpd?.substring(10, 21)
                 tvHotRecommendPlaceName.text = item.prfplcnm
