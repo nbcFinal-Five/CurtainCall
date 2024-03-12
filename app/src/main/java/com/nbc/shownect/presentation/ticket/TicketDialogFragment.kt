@@ -41,7 +41,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
     private val launcher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             userViewModel.setUser()
-
+            
             val user = Supabase.client.auth.currentUserOrNull()
 
             if (info != null && user != null) {

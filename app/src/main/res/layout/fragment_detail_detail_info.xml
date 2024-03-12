@@ -22,6 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="90dp"
@@ -108,7 +109,6 @@
             android:id="@+id/ticket_hall_left"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:alpha="0.1"
             android:layout_marginStart="-24dp"
             android:background="@drawable/bg_ticket_hall"
             app:layout_constraintBottom_toBottomOf="@id/line"
@@ -122,7 +122,6 @@
             android:layout_marginEnd="-24dp"
             android:background="@drawable/bg_ticket_hall"
             app:layout_constraintBottom_toBottomOf="@id/line"
-            android:alpha="0.1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/line" />
 
@@ -132,6 +131,7 @@
             android:layout_height="8dp"
             android:layout_marginTop="48dp"
             android:background="@drawable/ic_ticket_dash"
+            android:backgroundTint="@color/white"
             app:layout_constraintEnd_toStartOf="@id/ticket_hall_right"
             app:layout_constraintStart_toEndOf="@id/ticket_hall_left"
             app:layout_constraintTop_toBottomOf="@id/rb_detail_bar" />
@@ -217,8 +217,9 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:layout_marginTop="36dp"
-            android:alpha="0.1"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginTop="24dp"
+            android:alpha="0.5"
             android:background="@drawable/ic_ticket_dash"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_cast_sub" />
 
@@ -251,8 +252,9 @@
             android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:layout_marginTop="36dp"
-            android:alpha="0.1"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginTop="24dp"
+            android:alpha="0.5"
             android:background="@drawable/ic_ticket_dash"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_product_sub" />
@@ -285,8 +287,9 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:layout_marginTop="36dp"
-            android:alpha="0.1"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginTop="24dp"
+            android:alpha="0.5"
             android:background="@drawable/ic_ticket_dash"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_price_sub" />
 
