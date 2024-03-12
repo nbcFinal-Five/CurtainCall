@@ -72,21 +72,25 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
                 val latitude = location.la // 위도
                 val longitude = location.lo // 경도
 
-                // 위도와 경도를 사용하여 마커를 생성합니다.
+                // 위도와 경도를 사용하여 마커를 생성
                 val marker = Marker()
                 marker.position = LatLng(latitude?.toDouble() ?:0.0, longitude?.toDouble() ?:0.0) // 마커의 위치 설정
                 marker.map = naverMap // 마커를 지도에 추가
 
-                // 해당 위치로 지도를 이동합니다.
+                // 해당 위치로 지도를 이동
                 val cameraPosition = CameraPosition(
                     LatLng(latitude?.toDouble() ?:0.0, longitude?.toDouble() ?:0.0), // 지도의 중심점 위치
                     16.0 // 줌 레벨
                 )
                 naverMap.cameraPosition = cameraPosition
 
+                // 지도 범위 제한 (대한민국)
                 naverMap.minZoom = 6.0
                 naverMap.maxZoom = 18.0
                 naverMap.extent = LatLngBounds(LatLng(32.973077, 124.270981), LatLng(38.856197,130.051725 ))
+
+                // 줌인 했을 때 내부 지도 있을 경우 띄우기
+                naverMap.isIndoorEnabled = true
             }
         }
     }
