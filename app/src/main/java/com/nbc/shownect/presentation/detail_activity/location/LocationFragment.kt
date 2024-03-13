@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.naver.maps.geometry.LatLng
@@ -15,6 +16,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.NaverMapSdk
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
+import com.nbc.shownect.R
 import com.nbc.shownect.databinding.FragmentDetailLocationBinding
 import com.nbc.shownect.ui.detail_activity.DetailViewModel
 import com.nbc.shownect.util.Constants
@@ -49,8 +51,11 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         viewModel.fetchDetailLocation()
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-        binding.btnMapMarkerInPlace.setOnClickListener {
-            moveToMarkerPosition()
+        binding.btnMapMarkerInPlace.apply {
+            setOnClickListener {
+                moveToMarkerPosition()
+            }
+            setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.map_in_place))
         }
     }
 

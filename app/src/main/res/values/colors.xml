@@ -27,4 +27,5 @@
   <color name="good">#8F9DE9</color>
   <color name="bad">#FFB7B7</color>
   <color name="focus">#3E1719</color>
+  <color name="map_in_place">#71C38D</color>
 </resources>
