@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_rank"
+        android:name="com.nbc.shownect.presentation.rank.RankFragment"
+        android:label="@string/title_rank"
+        tools:layout="@layout/fragment_rank" />
+
+    <fragment
         android:id="@+id/navigation_search"
         android:name="com.nbc.shownect.ui.search.SearchFragment"
         android:label="@string/title_search"

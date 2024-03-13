@@ -5,6 +5,10 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/menu_home_selector_icon"
         android:title="@string/title_home" />
+    <item
+        android:id="@+id/navigation_rank"
+        android:icon="@drawable/menu_rank_selector_icon"
+        android:title="@string/title_rank" />
 
     <item
         android:id="@+id/navigation_search"

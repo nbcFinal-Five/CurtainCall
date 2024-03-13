@@ -39,13 +39,13 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
 
     override suspend fun fetchTopRank(
         ststype: String,
-        data: String,
+        date: String,
         catecode: String?,
         area: String?,
         newsql:String?
     ): BoxOfsResponse =
         withContext(Dispatchers.IO) {
-            fetch.fetchTopRank(newsql = "Y")
+            fetch.fetchTopRank(newsql = "Y", catecode = catecode, ststype = ststype, date = date)
         }
 
     override suspend fun fetchShowDetail(path: String): DbsResponse =
