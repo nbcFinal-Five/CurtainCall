@@ -151,4 +151,5 @@
 
     <!-- 검색화면 리셋 -->
     <string name="search_result_reset">검색 결과가 초기화 되었습니다</string>
+    <string name="title_rank">Rank</string>
 </resources>

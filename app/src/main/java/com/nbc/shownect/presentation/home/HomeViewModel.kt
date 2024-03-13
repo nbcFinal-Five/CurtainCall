@@ -51,7 +51,7 @@ class HomeViewModel(
     fun fetchTopRank() {
         viewModelScope.launch {
             runCatching {
-                _topRank.value = fetchRemoteRepository.fetchTopRank().boxof
+                _topRank.value = fetchRemoteRepository.fetchTopRank("month").boxof
                 _isLoadingRecommend.value = true
             }.onFailure {
 
