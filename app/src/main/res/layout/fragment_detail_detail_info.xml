@@ -79,7 +79,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_heart_empty_24dp"
+            android:background="@drawable/ic_heart_fill"
             app:layout_constraintEnd_toEndOf="@id/iv_detail_poster"
             app:layout_constraintTop_toTopOf="@id/iv_detail_poster" />
 

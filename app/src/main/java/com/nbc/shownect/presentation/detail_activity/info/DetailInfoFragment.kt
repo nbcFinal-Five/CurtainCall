@@ -90,7 +90,7 @@ class DetailInfoFragment : Fragment() {
 
 
         viewModel.isBookmark.observe(viewLifecycleOwner) {
-            binding.ivDetailWishlist.setBackgroundResource(if (it) R.drawable.ic_heart_full_24dp else R.drawable.ic_heart_empty_24dp)
+            binding.ivDetailWishlist.setBackgroundResource(if (it) R.drawable.ic_heart_full_24dp else R.drawable.ic_heart_fill)
         }
 
         viewModel.isBookmark.observe(viewLifecycleOwner) {
@@ -108,7 +108,7 @@ class DetailInfoFragment : Fragment() {
                         )
                     }
                 } else {
-                    ivDetailWishlist.setBackgroundResource(R.drawable.ic_heart_empty_24dp)
+                    ivDetailWishlist.setBackgroundResource(R.drawable.ic_heart_fill)
                     ivDetailWishlist.setOnClickListener {
                         val user = userViewModel.userInfo.value
 

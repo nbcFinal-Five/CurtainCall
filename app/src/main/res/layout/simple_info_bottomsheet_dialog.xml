@@ -145,7 +145,7 @@
             android:layout_height="25dp"
             android:layout_margin="12dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/ic_heart_empty_24dp"
+            android:background="@drawable/ic_heart_fill"
             app:layout_constraintEnd_toEndOf="@id/iv_simple_posterImage"
             app:layout_constraintTop_toTopOf="@id/iv_simple_posterImage"/>
 

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -203,7 +202,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
 						)
 					}
 				} else {
-					ivSimpleWishlist.setBackgroundResource(R.drawable.ic_heart_empty_24dp)
+					ivSimpleWishlist.setBackgroundResource(R.drawable.ic_heart_fill)
 					ivSimpleWishlist.setOnClickListener {
 						val user = userViewModel.userInfo.value
 
