@@ -32,14 +32,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_map" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_map_marker_in_place"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/map_marker_in_place"
-            android:backgroundTint="#9CCC65"
-            android:layout_margin="5dp"
-            app:layout_constraintTop_toTopOf="@+id/fv_hall_naver_map"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/map_in_place"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_location_in_place"
+            app:layout_constraintBottom_toBottomOf="@+id/fv_hall_naver_map"
             app:layout_constraintEnd_toEndOf="@+id/fv_hall_naver_map"/>
 
 
