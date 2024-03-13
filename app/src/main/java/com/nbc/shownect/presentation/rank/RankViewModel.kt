@@ -14,15 +14,15 @@ class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : Vi
     val rankInitList: LiveData<List<BoxofResponse>?> get() = _rankInitList
     private val _isRankLoading = MutableLiveData<Boolean>(true)
     val isRankLoading: LiveData<Boolean> get() = _isRankLoading
-    private val _periodText = MutableLiveData<String>()
-    val periodText: LiveData<String> get() = _periodText
-    private val _genreText = MutableLiveData<String>()
-    val genreText: LiveData<String> get() = _genreText
 
     private val _rankList = MutableLiveData<List<BoxofResponse>?>()
-    val rankList : MutableLiveData<List<BoxofResponse>?>get() = _rankList
+    val rankList: MutableLiveData<List<BoxofResponse>?> get() = _rankList
+
+    //초기 설정용 상태 값
     private val _initState = MutableLiveData<Boolean>(false)
-    val initState :LiveData<Boolean>get() = _initState
+    val initState: LiveData<Boolean> get() = _initState
+
+    //초기 화면 세팅
     fun fetchInitRank() {
         viewModelScope.launch {
             runCatching {
@@ -35,6 +35,7 @@ class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : Vi
         }
     }
 
+    //장르 선택시
     fun fetchRank(selectedPeriod: String, selectedGenre: String) {
         viewModelScope.launch {
             runCatching {
@@ -49,15 +50,12 @@ class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : Vi
         }
     }
 
-    fun saveSelectedChipText(period: String, genre: String) {
-        _periodText.value = period
-        _genreText.value = genre
-    }
-    fun initState(initState:Boolean){
+    //초기 화면 세팅용 함수
+    fun initState(initState: Boolean) {
         _initState.value = initState
     }
 
-
+    //컨버트 함수
     private fun getPeriod(period: String): String {
         return when (period) {
             "일간" -> "day"
@@ -67,6 +65,7 @@ class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : Vi
         }
     }
 
+    //컨버트 함수
     private fun getGenre(genre: String): String {
         return when (genre) {
             "전체" -> ""

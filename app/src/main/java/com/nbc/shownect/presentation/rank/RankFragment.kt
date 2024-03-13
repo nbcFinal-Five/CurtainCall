@@ -55,12 +55,7 @@ class RankFragment : Fragment(), PosterClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpClickListener()
-        viewModel.initState.observe(viewLifecycleOwner) {
-            if (!it) {
-                viewModel.fetchInitRank()
-                viewModel.initState(true)
-            }
-        }
+
     }
 
     private fun initRecyclerView() {
@@ -73,6 +68,7 @@ class RankFragment : Fragment(), PosterClickListener {
     }
 
     private fun setUpObserve() {
+        //초기 아이템 설정
         with(viewModel) {
             rankInitList.observe(viewLifecycleOwner) {
                 rankAdapter.submitList(it) {
@@ -86,9 +82,21 @@ class RankFragment : Fragment(), PosterClickListener {
                     rvRank.isVisible = !it
                 }
             }
+            //칩 선택시 아이템 리스트 변경
             rankList.observe(viewLifecycleOwner) {
                 rankAdapter.submitList(it)
                 binding.rvRank.smoothScrollToPosition(0)
+            }
+            //초기 화면 한 번만 초기화 되도록 설정
+            initState.observe(viewLifecycleOwner) {
+                if (!it) {
+                    with(binding) {
+                        chipDay.isChecked = true
+                        chipRankAll.isChecked = true
+                    }
+                    fetchInitRank()
+                    initState(true)
+                }
             }
         }
     }
@@ -100,28 +108,16 @@ class RankFragment : Fragment(), PosterClickListener {
                 val checkedGenre =
                     chipGroupBottom.children.firstOrNull { (it as Chip).isChecked } as? Chip
                 viewModel.fetchRank(chipDay.text.toString(), checkedGenre?.text.toString())
-                viewModel.saveSelectedChipText(
-                    chipDay.text.toString(),
-                    checkedGenre?.text.toString()
-                )
             }
             chipWeek.setOnClickListener {
                 val checkedGenre =
                     chipGroupBottom.children.firstOrNull { (it as Chip).isChecked } as? Chip
                 viewModel.fetchRank(chipWeek.text.toString(), checkedGenre?.text.toString())
-                viewModel.saveSelectedChipText(
-                    chipDay.text.toString(),
-                    checkedGenre?.text.toString()
-                )
             }
             chipMonth.setOnClickListener {
                 val checkedGenre =
                     chipGroupBottom.children.firstOrNull { (it as Chip).isChecked } as? Chip
                 viewModel.fetchRank(chipMonth.text.toString(), checkedGenre?.text.toString())
-                viewModel.saveSelectedChipText(
-                    chipDay.text.toString(),
-                    checkedGenre?.text.toString()
-                )
             }
 
             //장르별 칩
@@ -129,21 +125,12 @@ class RankFragment : Fragment(), PosterClickListener {
                 val checkedPeriod =
                     chipGroupTop.children.firstOrNull { (it as Chip).isChecked } as? Chip
                 viewModel.fetchRank(checkedPeriod?.text.toString(), "전체")
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankAll.text.toString()
-                )
 
             }
             chipRankDrama.setOnClickListener {
                 val checkedPeriod =
                     chipGroupTop.children.firstOrNull { (it as Chip).isChecked } as? Chip
                 viewModel.fetchRank(checkedPeriod?.text.toString(), chipRankDrama.text.toString())
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankDrama.text.toString()
-                )
-
             }
             chipRankMusical.setOnClickListener {
                 val checkedPeriod =
@@ -152,11 +139,6 @@ class RankFragment : Fragment(), PosterClickListener {
                     checkedPeriod?.text.toString(),
                     chipRankMusical.text.toString()
                 )
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankMusical.text.toString()
-                )
-
             }
             chipRankClassic.setOnClickListener {
                 val checkedPeriod =
@@ -165,21 +147,11 @@ class RankFragment : Fragment(), PosterClickListener {
                     checkedPeriod?.text.toString(),
                     chipRankClassic.text.toString()
                 )
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankClassic.text.toString()
-                )
-
             }
             chipRankDance.setOnClickListener {
                 val checkedPeriod =
                     chipGroupTop.children.firstOrNull { (it as Chip).isChecked } as? Chip
                 viewModel.fetchRank(checkedPeriod?.text.toString(), chipRankDance.text.toString())
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankDance.text.toString()
-                )
-
             }
             chipRankKoreaMusic.setOnClickListener {
                 val checkedPeriod =
@@ -188,11 +160,6 @@ class RankFragment : Fragment(), PosterClickListener {
                     checkedPeriod?.text.toString(),
                     chipRankKoreaMusic.text.toString()
                 )
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankKoreaMusic.text.toString()
-                )
-
             }
             chipRankPopularMusic.setOnClickListener {
                 val checkedPeriod =
@@ -201,21 +168,11 @@ class RankFragment : Fragment(), PosterClickListener {
                     checkedPeriod?.text.toString(),
                     chipRankPopularMusic.text.toString()
                 )
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankPopularMusic.text.toString()
-                )
-
             }
             chipRankMagic.setOnClickListener {
                 val checkedPeriod =
                     chipGroupTop.children.firstOrNull { (it as Chip).isChecked } as? Chip
                 viewModel.fetchRank(checkedPeriod?.text.toString(), chipRankMagic.text.toString())
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankMagic.text.toString()
-                )
-
             }
             chipRankComplex.setOnClickListener {
                 val checkedPeriod =
@@ -224,11 +181,6 @@ class RankFragment : Fragment(), PosterClickListener {
                     checkedPeriod?.text.toString(),
                     chipRankComplex.text.toString()
                 )
-                viewModel.saveSelectedChipText(
-                    checkedPeriod?.text.toString(),
-                    chipRankComplex.text.toString()
-                )
-
             }
         }
     }
