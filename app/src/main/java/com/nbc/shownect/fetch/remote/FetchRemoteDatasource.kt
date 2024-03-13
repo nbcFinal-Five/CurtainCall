@@ -57,8 +57,8 @@ interface FetchRemoteDatasource {
     //박스오피스 랭킹순 목록
     @GET("boxoffice")
     suspend fun fetchTopRank(
-        @Query("ststype") ststype: String = "week",
-        @Query("date") data: String = Converter.nowDateFormat(), //현재 날짜를 yyyyMMdd 형식 으로 변환
+        @Query("ststype") ststype: String,
+        @Query("date") date: String = Converter.newDateDayFormat(), //현재 날짜 하루 전을 yyyyMMdd 형식 으로 변환
         @Query("catecode") catecode: String? = null,
         @Query("area") area: String? = null,
         @Query("newsql") newsql: String? = "Y",

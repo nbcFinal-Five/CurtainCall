@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,159 +7,166 @@
     android:background="@color/background_color"
     tools:context=".presentation.rank.RankFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_layout_rank_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_rank_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="장르별 랭킹"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_rank_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="장르별 랭킹"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_rank_title"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_day"
+            style="@style/CustomChipChoice."
+            android:layout_width="65dp"
+            android:layout_height="36dp"
+            android:text="일간"
+            android:textSize="12sp"
+            app:rippleColor="@null" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_week"
+            style="@style/CustomChipChoice."
+            android:layout_width="65dp"
+            android:layout_height="36dp"
+            android:text="주간"
+            android:textSize="12sp"
+            app:rippleColor="@null" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_month"
+            style="@style/CustomChipChoice."
+            android:layout_width="65dp"
+            android:layout_height="36dp"
+            android:text="월간"
+            android:textSize="12sp"
+            app:rippleColor="@null" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <HorizontalScrollView
+        android:id="@+id/chip_horizontal_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/chipGroup_top">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup_top"
-            android:layout_width="match_parent"
+            android:id="@+id/chipGroup_bottom"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_rank_title"
             app:selectionRequired="true"
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_day"
+                android:id="@+id/chip_rank_all"
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
-                android:layout_height="36dp"
-                android:text="일간"
+                android:layout_height="35dp"
+                android:text="전체"
+                android:textSize="12sp"
                 app:rippleColor="@null" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_week"
+                android:id="@+id/chip_rank_drama"
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
-                android:layout_height="36dp"
-                android:text="주간"
+                android:layout_height="35dp"
+                android:text="연극"
+                android:textSize="12sp"
                 app:rippleColor="@null" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_month"
+                android:id="@+id/chip_rank_musical"
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
-                android:layout_height="36dp"
-                android:text="월간"
+                android:layout_height="35dp"
+                android:text="뮤지컬"
+                android:textSize="12sp"
+                app:rippleColor="@null" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_rank_classic"
+                style="@style/CustomChipChoice."
+                android:layout_width="65dp"
+                android:layout_height="35dp"
+                android:text="클래식"
+                android:textSize="12sp"
+                app:rippleColor="@null" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_rank_dance"
+                style="@style/CustomChipChoice."
+                android:layout_width="65dp"
+                android:layout_height="35dp"
+                android:text="무용"
+                android:textSize="12sp"
+                app:rippleColor="@null" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_rank_korea_music"
+                style="@style/CustomChipChoice."
+                android:layout_width="65dp"
+                android:layout_height="35dp"
+                android:text="국악"
+                android:textSize="12sp"
+                app:rippleColor="@null" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_rank_popular_music"
+                style="@style/CustomChipChoice."
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="대중음악"
+                android:textSize="12sp"
+                app:rippleColor="@null" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_rank_magic"
+                style="@style/CustomChipChoice."
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="서커스/마술"
+                android:textSize="12sp"
+                app:rippleColor="@null" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_rank_complex"
+                style="@style/CustomChipChoice."
+                android:layout_width="65dp"
+                android:layout_height="35dp"
+                android:text="복합"
+                android:textSize="12sp"
                 app:rippleColor="@null" />
         </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
 
-        <HorizontalScrollView
-            android:id="@+id/chip_horizontal_scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@id/chipGroup_top">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_rank"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chip_horizontal_scrollview" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup_bottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:selectionRequired="true"
-                app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_all"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="전체"
-                    app:rippleColor="@null" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_drama"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="연극"
-                    app:rippleColor="@null" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_musical"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="뮤지컬"
-                    app:rippleColor="@null" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_classic"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="클래식"
-                    app:rippleColor="@null" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_dance"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="무용"
-                    app:rippleColor="@null" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_korea_music"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="국악"
-                    app:rippleColor="@null" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_popular_music"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="대중음악"
-                    app:rippleColor="@null" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_magic"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="서커스/마술"
-                    app:rippleColor="@null" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rank_complex"
-                    style="@style/CustomChipChoice."
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
-                    android:text="복합"
-                    app:rippleColor="@null" />
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="36dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chip_horizontal_scrollview" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
