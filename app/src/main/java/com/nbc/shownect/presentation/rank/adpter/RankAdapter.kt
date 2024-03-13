@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nbc.shownect.databinding.ItemRankBinding
 import com.nbc.shownect.fetch.model.BoxofResponse
+import com.nbc.shownect.ui.home.adapter.PosterClickListener
 
-class RankAdapter :
+class RankAdapter(private val listener: PosterClickListener? = null) :
     androidx.recyclerview.widget.ListAdapter<BoxofResponse, RankAdapter.RankViewHolder>(object :
         DiffUtil.ItemCallback<BoxofResponse>() {
         override fun areItemsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
@@ -30,6 +31,9 @@ class RankAdapter :
                 tvTitle.text = item.prfnm
                 tvPlace.text = item.prfplcnm
                 tvPeriod.text = item.prfpd
+                ivRankPoster.setOnClickListener {
+                    listener?.posterClicked(item.mt20id.toString())
+                }
             }
         }
     }

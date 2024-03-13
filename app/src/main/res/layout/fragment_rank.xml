@@ -103,6 +103,15 @@
                 app:rippleColor="@null" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chip_rank_popular_music"
+                style="@style/CustomChipChoice."
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="대중음악"
+                android:textSize="12sp"
+                app:rippleColor="@null" />
+
+            <com.google.android.material.chip.Chip
                 android:id="@+id/chip_rank_classic"
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
@@ -126,15 +135,6 @@
                 android:layout_width="65dp"
                 android:layout_height="35dp"
                 android:text="국악"
-                android:textSize="12sp"
-                app:rippleColor="@null" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_rank_popular_music"
-                style="@style/CustomChipChoice."
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:text="대중음악"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -168,5 +168,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chip_horizontal_scrollview" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/skeleton_rank_loading"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chip_horizontal_scrollview">
+
+        <include layout="@layout/skeleton_rank_poster" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

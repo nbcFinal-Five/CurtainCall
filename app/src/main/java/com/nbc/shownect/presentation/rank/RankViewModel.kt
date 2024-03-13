@@ -10,33 +10,54 @@ import com.nbc.shownect.fetch.repository.impl.FetchRepositoryImpl
 import kotlinx.coroutines.launch
 
 class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : ViewModel() {
-    private val _rankList = MutableLiveData<List<BoxofResponse>?>()
-    val rankList: LiveData<List<BoxofResponse>?> get() = _rankList
+    private val _rankInitList = MutableLiveData<List<BoxofResponse>?>()
+    val rankInitList: LiveData<List<BoxofResponse>?> get() = _rankInitList
+    private val _isRankLoading = MutableLiveData<Boolean>(true)
+    val isRankLoading: LiveData<Boolean> get() = _isRankLoading
+    private val _periodText = MutableLiveData<String>()
+    val periodText: LiveData<String> get() = _periodText
+    private val _genreText = MutableLiveData<String>()
+    val genreText: LiveData<String> get() = _genreText
 
+    private val _rankList = MutableLiveData<List<BoxofResponse>?>()
+    val rankList : MutableLiveData<List<BoxofResponse>?>get() = _rankList
+    private val _initState = MutableLiveData<Boolean>(false)
+    val initState :LiveData<Boolean>get() = _initState
     fun fetchInitRank() {
         viewModelScope.launch {
-            _rankList.value = fetchRemoteRepository.fetchTopRank(ststype = "day").boxof
+            runCatching {
+                _isRankLoading.value = true
+                _rankInitList.value = fetchRemoteRepository.fetchTopRank(
+                    ststype = "day",
+                ).boxof
+                _isRankLoading.value = false
+            }
         }
     }
 
-    fun fetchPeriod(selectedPeriod: String, selectedGenre: String) {
+    fun fetchRank(selectedPeriod: String, selectedGenre: String) {
         viewModelScope.launch {
-            _rankList.value =
-                fetchRemoteRepository.fetchTopRank(
-                    ststype = getPeriod(selectedPeriod),
-                    catecode = getGenre(selectedGenre)
-                ).boxof
+            runCatching {
+                _isRankLoading.value = true
+                _rankList.value =
+                    fetchRemoteRepository.fetchTopRank(
+                        ststype = getPeriod(selectedPeriod),
+                        catecode = getGenre(selectedGenre)
+                    ).boxof
+                _isRankLoading.value = false
+            }
         }
     }
-    fun fetchGenre(selectedPeriod: String,selectedGenre: String){
-        viewModelScope.launch {
-            _rankList.value =
-                fetchRemoteRepository.fetchTopRank(
-                    ststype = getPeriod(selectedPeriod),
-                    catecode = getGenre(selectedGenre)
-                ).boxof
-        }
+
+    fun saveSelectedChipText(period: String, genre: String) {
+        _periodText.value = period
+        _genreText.value = genre
     }
+    fun initState(initState:Boolean){
+        _initState.value = initState
+    }
+
+
     private fun getPeriod(period: String): String {
         return when (period) {
             "일간" -> "day"
