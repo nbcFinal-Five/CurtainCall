@@ -34,6 +34,7 @@ class RankFragment : Fragment() {
         initRecyclerView()
         viewModel.rankList.observe(viewLifecycleOwner) {
             rankAdapter.submitList(it)
+            binding.rvRank.smoothScrollToPosition(0)
         }
         initView()
         return binding.root
