@@ -53,17 +53,18 @@ class ERFragment : Fragment() {
 
 			info = firstShowDetail
 
-
 			val mt20id = firstShowDetail.mt20id
 			val mt10id = firstShowDetail.mt10id
 			val poster = firstShowDetail.poster
+			val prfState = firstShowDetail.prfstate
 
-			if (mt20id != null && mt10id != null && poster != null) {
+			if (mt20id != null && mt10id != null && poster != null && prfState != null) {
 				changeFragmentByMode(
 					mt20id = mt20id,
 					mt10id = mt10id,
 					poster = poster,
-					mode = ERViewModel.EXPECTATION
+					mode = ERViewModel.EXPECTATION,
+					prfState = prfState
 				)
 			}
 		}
@@ -74,13 +75,14 @@ class ERFragment : Fragment() {
 					mt20id = info!!.mt20id!!,
 					mt10id = info!!.mt10id!!,
 					poster = info!!.poster!!,
-					mode = it
+					mode = it,
+					prfState = info!!.prfstate!!
 				)
 			}
 		}
 	}
 
-	private fun changeFragmentByMode(mode: String, mt10id: String, mt20id: String, poster: String) {
+	private fun changeFragmentByMode(mode: String, mt10id: String, mt20id: String, poster: String, prfState: String) {
 		with(binding) {
 			when (mode) {
 				ERViewModel.REVIEW -> {
@@ -88,7 +90,8 @@ class ERFragment : Fragment() {
 						ReviewFragment(
 							mt20id = mt20id,
 							mt10id = mt10id,
-							poster = poster
+							poster = poster,
+							prfState = prfState
 						)
 					)
 					btnReviews.setBackgroundResource(R.color.primary_color)
@@ -117,8 +120,6 @@ class ERFragment : Fragment() {
 	}
 
 	private fun setFragment(frag: Fragment) {
-
-		
 		this.childFragmentManager.beginTransaction()
 			.replace(binding.flComment.id, frag).commit()
 	}

@@ -3,6 +3,7 @@ package com.nbc.curtaincall.ui.detail_activity.er.review
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,7 @@ class ReviewFragment(
 	private val mt20id: String,
 	private val mt10id: String,
 	private val poster: String,
+	private val prfState: String,
 ) : Fragment() {
 	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val reviewViewModel by lazy { ViewModelProvider(this)[ReviewViewModel::class.java] }
@@ -60,6 +62,12 @@ class ReviewFragment(
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		if (prfState == "공연예정") {
+			hideAll()
+
+			return
+		}
 
 		initHandle()
 		initViewModel()
@@ -199,5 +207,19 @@ class ReviewFragment(
 	private fun hideKeyboard() {
 		val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 		imm.hideSoftInputFromWindow(view?.windowToken, 0)
+	}
+
+	private fun hideAll() = with(binding) {
+		tvPoints.visibility = View.GONE
+		llPoints.visibility = View.GONE
+		tvReviewTitle.visibility = View.GONE
+		cvReview.visibility = View.GONE
+		cvSubmit.visibility = View.GONE
+		tvCommentWarning.visibility = View.GONE
+		rvReviews.visibility = View.GONE
+		btnMore.visibility = View.GONE
+		tvEmptyReviews.visibility = View.GONE
+
+		llNonShowing.visibility = View.VISIBLE
 	}
 }
