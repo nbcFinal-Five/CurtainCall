@@ -73,13 +73,21 @@
             app:layout_constraintEnd_toStartOf="@id/tv_detail_expectationsNum"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_place" />
 
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_heart_gadient"
+            app:layout_constraintBottom_toBottomOf="@id/iv_detail_wishlist"
+            app:layout_constraintEnd_toEndOf="@id/iv_detail_wishlist"
+            app:layout_constraintStart_toStartOf="@id/iv_detail_wishlist"
+            app:layout_constraintTop_toTopOf="@id/iv_detail_wishlist" />
+
         <ImageView
             android:id="@+id/iv_detail_wishlist"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_heart_fill"
+            android:layout_width="22dp"
+            android:layout_height="20dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/ic_heart_empty_24dp"
             app:layout_constraintEnd_toEndOf="@id/iv_detail_poster"
             app:layout_constraintTop_toTopOf="@id/iv_detail_poster" />
 
@@ -190,10 +198,9 @@
             android:id="@+id/tv_detail_cast_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="@string/ticket_cast_title"
             android:textColor="#959595"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/tv_detail_cast_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_title"
@@ -207,7 +214,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="36dp"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_detail_cast_title"
             app:layout_constraintTop_toBottomOf="@id/line"
@@ -229,7 +236,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ticket_product_title"
             android:textColor="#959595"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/tv_detail_product_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_title"
@@ -242,7 +249,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@id/tv_detail_cast_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_cast_sub"
             app:layout_constraintTop_toBottomOf="@id/divider2"
@@ -265,7 +272,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ticket_price_title"
             android:textColor="#959595"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/tv_detail_price_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_title"
@@ -299,7 +306,7 @@
             android:layout_height="wrap_content"
             android:text="@string/detail_time_title"
             android:textColor="#959595"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_detail_time_sub"
             app:layout_constraintStart_toStartOf="@id/tv_detail_show_title"
             app:layout_constraintTop_toTopOf="@id/tv_detail_time_sub" />

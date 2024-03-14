@@ -1,131 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!--bottome sheet chip design-->
-  <style name="CustomChipChoice." parent="@style/Widget.MaterialComponents.Chip.Choice">
-    <item name="chipBackgroundColor">@color/search_chip_bg_state_list</item>
-    <item name="android:textColor">@color/search_chip_text_state_list</item>
-    <item name="chipStrokeColor">@color/input_background_color</item>
-    <item name="chipStrokeWidth">1dp</item>
-    <item name="android:textSize">14sp</item>
-    <item name="chipCornerRadius">5dp</item>
-    <item name="chipMinHeight">45dp</item>
-    <item name="android:textAlignment">center</item>
-  </style>
+    <!--bottome sheet chip design-->
+    <style name="CustomChipChoice." parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/search_chip_bg_state_list</item>
+        <item name="android:textColor">@color/search_chip_text_state_list</item>
+        <item name="chipStrokeColor">@color/input_background_color</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="chipCornerRadius">5dp</item>
+        <item name="chipMinHeight">45dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
 
-  <!--bottome sheet filter button design-->
-  <style name="SearchFilterButton">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">60dp</item>
-    <item name="android:layout_marginTop">40dp</item>
-    <item name="android:layout_marginBottom">30dp</item>
-    <item name="android:backgroundTint">@color/filter_btn_color</item>
-    <item name="android:textColor">@color/filter_btn_text_color</item>
-    <item name="android:textSize">16sp</item>
-  </style>
+    <!--bottome sheet filter button design-->
+    <style name="SearchFilterButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:layout_marginBottom">30dp</item>
+        <item name="android:backgroundTint">@color/filter_btn_color</item>
+        <item name="android:textColor">@color/filter_btn_text_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
-  <!--search rv badge design-->
-  <style name="posterTopLabel">
-    <item name="android:background">@drawable/bg_label_container</item>
-    <item name="android:gravity">center</item>
-    <item name="android:textColor">@color/white</item>
-    <item name="android:textSize">8sp</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:layout_width">40dp</item>
-  </style>
+    <!--search rv badge design-->
+    <style name="posterTopLabel">
+        <item name="android:background">@drawable/bg_label_container</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">40dp</item>
+    </style>
 
-  <!--search filter bottom sheet close ic design-->
-  <style name="SearchFilterCloseImageStyle">
-    <item name="android:layout_width">16dp</item>
-    <item name="android:layout_height">16dp</item>
-    <item name="android:tint">@color/bottom_navi_item_color</item>
-  </style>
+    <!--search filter bottom sheet close ic design-->
+    <style name="SearchFilterCloseImageStyle">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:tint">@color/bottom_navi_item_color</item>
+    </style>
 
-  <!--bottome sheet topcorner radius-->
-  <style name="RoundCornerBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-    <item name="bottomSheetStyle">@style/RoundCornerModalStyle</item>
-  </style>
-  <!--bottome sheet topcorner radius-->
-  <style name="RoundCornerModalStyle" parent="Widget.Design.BottomSheet.Modal">
-    <item name="android:background">@drawable/search_bottom_sheet_background</item>
-  </style>
+    <!--bottome sheet topcorner radius-->
+    <style name="RoundCornerBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RoundCornerModalStyle</item>
+    </style>
+    <!--bottome sheet topcorner radius-->
+    <style name="RoundCornerModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/search_bottom_sheet_background</item>
+    </style>
 
-  <style name="HomePosterTitleStyle">
-    <item name="android:layout_marginTop">8dp</item>
-    <item name="android:ellipsize">end</item>
-    <item name="android:textColor">@color/white</item>
-    <item name="android:textSize">12sp</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:maxLines">1</item>
-  </style>
+    <style name="HomePosterTitleStyle">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+    </style>
 
-  <style name="HomePosterPlaceNameStyle">
-    <item name="android:ellipsize">end</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:textColor">#E2E2E2</item>
-    <item name="android:textSize">10sp</item>
-    <item name="android:layout_marginTop">4dp</item>
-  </style>
+    <style name="HomePosterPlaceNameStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">#E2E2E2</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
 
-  <style name="TicketTitleTextStyle">
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/white</item>
-    <item name="android:layout_marginTop">12dp</item>
-  </style>
+    <style name="TicketTitleTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginTop">12dp</item>
+    </style>
 
-  <style name="TicketSubTextStyle">
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/bottom_navi_color</item>
-    <item name="android:layout_marginTop">12dp</item>
-    <item name="android:layout_marginEnd">12dp</item>
-  </style>
+    <style name="TicketSubTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/bottom_navi_color</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+    </style>
 
-  <style name="posterStyle">
-    <item name="android:layout_width">120dp</item>
-    <item name="android:layout_height">160dp</item>
-    <item name="android:background">@drawable/shape_searchlist_radius3</item>
-    <item name="android:scaleType">fitXY</item>
-  </style>
+    <style name="posterStyle">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">160dp</item>
+        <item name="android:background">@drawable/shape_searchlist_radius3</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
 
-  <style name="SearchFilterStyle">
-    <item name="android:layout_width">90dp</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:background">@drawable/shape_searchfilter_radius</item>
-    <item name="android:textAlignment">center</item>
-    <item name="android:paddingVertical">5dp</item>
-    <item name="android:paddingEnd">3dp</item>
-    <item name="android:textColor">@color/text_color</item>
-    <item name="android:textSize">12sp</item>
-  </style>
+    <style name="SearchFilterStyle">
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_searchfilter_radius</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingVertical">5dp</item>
+        <item name="android:paddingEnd">3dp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
 
-  <style name="skeletonSearchStyle">
-    <item name="android:layout_width">120dp</item>
-    <item name="android:layout_height">160dp</item>
-    <item name="android:layout_weight">1</item>
-  </style>
+    <style name="skeletonSearchStyle">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">160dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
 
-  <style name="detailLocationTextTitleStyle">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:textSize">16sp</item>
-    <item name="android:textColor">@color/input_text_color</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:layout_marginStart">20dp</item>
-  </style>
+    <style name="detailLocationTextTitleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/input_text_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">20dp</item>
+    </style>
 
-  <style name="detailLocationTextContents">
-    <item name="android:layout_width">0dp</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:textSize">17sp</item>
-    <item name="android:layout_marginTop">35dp</item>
-    <item name="android:layout_marginEnd">15dp</item>
-    <item name="android:textColor">@color/text_color</item>
-  </style>
+    <style name="detailLocationTextContents">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_marginTop">35dp</item>
+        <item name="android:layout_marginEnd">15dp</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
 
-  <style name="RatingBar" parent="Theme.AppCompat">
-    <item name="colorControlNormal">@color/input_text_color</item>
-    <item name="colorControlActivated">@color/primary_color</item>
-  </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/input_text_color</item>
+        <item name="colorControlActivated">@color/primary_color</item>
+    </style>
 
+    <style name="CustomChipPeriod" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_bg_state_list</item>
+        <item name="android:textColor">@color/chip_text_state_list</item>
+        <item name="chipStrokeColor">@color/white</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="chipCornerRadius">29dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
 </resources>
 
