@@ -242,7 +242,7 @@ private fun changeFilterUiDesign() {
 
     private fun filterReset(){
         with(binding) {
-            ivSearchFilterReset.setOnClickListener {
+            llSearchFilterReset.setOnClickListener {
                 searchViewModel.resetData()
                 searchListAdapter.submitList(null)
                 Toast.makeText(requireActivity(),R.string.search_result_reset,Toast.LENGTH_SHORT).show()
