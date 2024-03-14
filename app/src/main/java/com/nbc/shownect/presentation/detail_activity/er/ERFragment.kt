@@ -1,6 +1,7 @@
 package com.nbc.shownect.ui.detail_activity.er
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,7 +68,6 @@ class ERFragment : Fragment() {
 					mode = ERViewModel.EXPECTATION
 				)
 			}
-
 		}
 
 		erViewModel.mode.observe(viewLifecycleOwner) {
@@ -119,9 +119,9 @@ class ERFragment : Fragment() {
 	}
 
 	private fun setFragment(frag: Fragment) {
-		requireActivity().supportFragmentManager.commit {
-			replace(R.id.fl_comment, frag)
-			setReorderingAllowed(true)
-		}
+
+		
+		this.childFragmentManager.beginTransaction()
+			.replace(binding.flComment.id, frag).commit()
 	}
 }
