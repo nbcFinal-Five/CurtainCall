@@ -16,15 +16,15 @@ class AuthActivity : AppCompatActivity() {
 		setContentView(binding.root)
 
 		binding.btnAuthBack.setOnClickListener {
-			finish()
+			onBackPressedDispatcher.onBackPressed()
 		}
 
-		setFragment(LoginFragment(supportFragmentManager))
+		setFragment(LoginFragment(binding.fragmentAuth.id))
 	}
 
 	private fun setFragment(frag: Fragment) {  //2번
 		supportFragmentManager.commit {
-			replace(R.id.fragment_auth, frag)
+			replace(binding.fragmentAuth.id, frag)
 			setReorderingAllowed(true)
 		}
 	}

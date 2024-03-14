@@ -166,6 +166,11 @@
     <string name="rank_chip_magic">서커스/마술</string>
     <string name="rank_chip_complex">복합</string>
 
+    <!-- 네트워크 확인 -->
+    <string name="network_check">확인</string>
+    <string name="network_check_necessary">네트워크 연결 필요</string>
+    <string name="network_check_necessary_message">앱을 사용하려면 인터넷 연결이 필요합니다.</string>
+
     <!-- 통계화면 -->
     <string name="stats_my_review_score_average">나의 리뷰 점수 평균</string>
     <string name="stats_my_expectation_count">나의 기대평 갯수</string>
