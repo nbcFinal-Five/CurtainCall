@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_color"
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_color"
 >
   <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
@@ -189,5 +190,34 @@
             android:lineHeight="30dp"
             android:layout_marginTop="24dp"
     />
+
+    <LinearLayout
+            android:id="@+id/ll_non_showing"
+            android:layout_width="match_parent"
+            android:layout_height="332dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+    >
+      <ImageView
+              android:layout_width="60dp"
+              android:layout_height="60dp"
+              android:src="@drawable/ic_mypage_empty_review"
+      />
+
+      <TextView
+              android:id="@+id/tv_not_showing"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="아직 상영전입니다."
+              android:textColor="@color/white"
+              android:textSize="20sp"
+              android:layout_marginTop="12dp"
+      />
+
+    </LinearLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
