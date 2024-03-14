@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/white"
@@ -46,7 +46,7 @@
         android:id="@+id/tv_place"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="6dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/white"
@@ -59,10 +59,10 @@
         android:id="@+id/tv_period"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
         android:textColor="#A9A9A9"
+        app:layout_constraintBottom_toBottomOf="@id/iv_rank_poster"
         app:layout_constraintStart_toStartOf="@id/tv_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_place"
         tools:text="2024-03-01 ~ 2024-04-01" />
 
     <View

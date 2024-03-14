@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-	namespace = "com.nbc.shownect"
+	namespace = "com.nbc.curtaincall"
 	compileSdk = 34
 
 	defaultConfig {
-		applicationId = "com.nbc.shownect"
+		applicationId = "com.nbc.curtaincall"
 		minSdk = 26
 		targetSdk = 34
 		versionCode = 2

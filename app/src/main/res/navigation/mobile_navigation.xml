@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.nbc.shownect.ui.home.HomeFragment"
+        android:name="com.nbc.curtaincall.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_rank"
-        android:name="com.nbc.shownect.presentation.rank.RankFragment"
+        android:name="com.nbc.curtaincall.presentation.rank.RankFragment"
         android:label="@string/title_rank"
         tools:layout="@layout/fragment_rank" />
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.nbc.shownect.ui.search.SearchFragment"
+        android:name="com.nbc.curtaincall.ui.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_my_page"
-        android:name="com.nbc.shownect.ui.mypage.MyPageFragment"
-        android:label="@string/title_my_page"
+        android:name="com.nbc.curtaincall.ui.mypage.MyPageFragment"
+        android:label="내 정보"
         tools:layout="@layout/fragment_my_page" />
 </navigation>

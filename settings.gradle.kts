@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ShowNect"
+rootProject.name = "CurtainCall"
 include(":app")
  
