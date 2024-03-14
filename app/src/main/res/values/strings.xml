@@ -149,7 +149,12 @@
   <string name="parking_area">주차시설</string>
   <string name="map_marker_in_place">원위치</string>
 
-    <!-- 검색화면 리셋 -->
-    <string name="search_result_reset">검색 결과가 초기화 되었습니다</string>
-    <string name="title_rank">Rank</string>
+  <!-- 검색화면 리셋 -->
+  <string name="search_result_reset">검색 결과가 초기화 되었습니다</string>
+  <string name="title_rank">Rank</string>
+
+  <!-- 네트워크 확인 -->
+  <string name="network_check">확인</string>
+  <string name="network_check_necessary">네트워크 연결 필요</string>
+  <string name="network_check_necessary_message">앱을 사용하려면 인터넷 연결이 필요합니다.</string>
 </resources>
