@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="장르별 랭킹"
+        android:text="@string/rank_title"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -37,7 +37,7 @@
             style="@style/CustomChipPeriod"
             android:layout_width="80dp"
             android:layout_height="45dp"
-            android:text="일간"
+            android:text="@string/rank_chip_day"
             android:textSize="12sp"
             app:rippleColor="@null" />
 
@@ -46,7 +46,7 @@
             style="@style/CustomChipPeriod"
             android:layout_width="80dp"
             android:layout_height="45dp"
-            android:text="주간"
+            android:text="@string/rank_chip_week"
             android:textSize="12sp"
             app:rippleColor="@null" />
 
@@ -55,7 +55,7 @@
             style="@style/CustomChipPeriod"
             android:layout_width="80dp"
             android:layout_height="45dp"
-            android:text="월간"
+            android:text="@string/rank_chip_month"
             android:textSize="12sp"
             app:rippleColor="@null" />
     </com.google.android.material.chip.ChipGroup>
@@ -80,7 +80,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
                 android:layout_height="35dp"
-                android:text="전체"
+                android:text="@string/rank_chip_all"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -89,7 +89,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
                 android:layout_height="35dp"
-                android:text="연극"
+                android:text="@string/rank_chip_drama"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -98,7 +98,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
                 android:layout_height="35dp"
-                android:text="뮤지컬"
+                android:text="@string/rank_chip_musical"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -107,7 +107,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:text="대중음악"
+                android:text="@string/rank_chip_popular_music"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -116,7 +116,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
                 android:layout_height="35dp"
-                android:text="클래식"
+                android:text="@string/rank_chip_classic"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -125,7 +125,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
                 android:layout_height="35dp"
-                android:text="무용"
+                android:text="@string/rank_chip_dance"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -134,7 +134,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
                 android:layout_height="35dp"
-                android:text="국악"
+                android:text="@string/rank_chip_korea_music"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -143,7 +143,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:text="서커스/마술"
+                android:text="@string/rank_chip_magic"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
 
@@ -152,7 +152,7 @@
                 style="@style/CustomChipChoice."
                 android:layout_width="65dp"
                 android:layout_height="35dp"
-                android:text="복합"
+                android:text="@string/rank_chip_complex"
                 android:textSize="12sp"
                 app:rippleColor="@null" />
         </com.google.android.material.chip.ChipGroup>
