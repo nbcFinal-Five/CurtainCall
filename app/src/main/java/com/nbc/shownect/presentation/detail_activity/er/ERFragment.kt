@@ -119,6 +119,8 @@ class ERFragment : Fragment() {
 	}
 
 	private fun setFragment(frag: Fragment) {
+
+		
 		this.childFragmentManager.beginTransaction()
 			.replace(binding.flComment.id, frag).commit()
 	}
