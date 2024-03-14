@@ -176,4 +176,5 @@
     <string name="stats_my_expectation_count">나의 기대평 갯수</string>
     <string name="stats_my_review_date">날짜별 리뷰 분포</string>
     <string name="stats_my_review_genre">장르별 리뷰 분포</string>
+    <string name="my_stats">나의 스탯</string>
 </resources>

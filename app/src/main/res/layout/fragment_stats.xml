@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".presentation.statics.StatsFragment">
+    tools:context="com.nbc.curtaincall.presentation.stats.StatsDialogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp">
 
         <TextView
             android:id="@+id/tv_statics_title"
@@ -54,8 +55,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_review_score"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/component_background_color"
             app:cardCornerRadius="10dp"
@@ -77,8 +78,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_expectation_count"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/component_background_color"
             app:cardCornerRadius="10dp"
