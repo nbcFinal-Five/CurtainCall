@@ -46,234 +46,184 @@ import java.text.DecimalFormat
 import kotlin.math.round
 
 class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
-    private var _binding: FragmentStatsBinding? = null
-    private val binding get() = _binding!!
-    private val expectationViewModel by viewModels<ExpectationViewModel>()
-    private val reviewViewModel by viewModels<ReviewViewModel>()
+	private var _binding: FragmentStatsBinding? = null
+	private val binding get() = _binding!!
+	private val expectationViewModel by viewModels<ExpectationViewModel>()
+	private val reviewViewModel by viewModels<ReviewViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+	}
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentStatsBinding.inflate(inflater,container,false)
-        return binding.root
-    }
+	override fun onCreateView(
+		inflater: LayoutInflater, container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View? {
+		_binding = FragmentStatsBinding.inflate(inflater, container, false)
+		return binding.root
+	}
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        getUserNickname(userInfo.id)
-        averageMyReviewScore()
-        countMyexpectation()
-        setPieChart()
-        setBarChart()
-    }
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		getUserNickname(userInfo.id)
+		averageMyReviewScore()
+		countMyexpectation()
+		setPieChart()
+	}
 
-    @SuppressLint("SetTextI18n")
-    private fun getUserNickname(userId: String) {
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    val columns = Columns.raw(
-                        """
-					*
-				""".trimIndent()
-                    )
-                    val response = Supabase.client
-                        .from("profiles")
-                        .select(columns){
-                            filter {
-                                eq(column = "user_id", value = userId)
-                            }
-                        }.decodeSingle<ProfileModel>()
+	@SuppressLint("SetTextI18n")
+	private fun getUserNickname(userId: String) {
+		lifecycleScope.launch {
+			withContext(Dispatchers.IO) {
+				try {
+					val response = Supabase.client
+						.from("profiles")
+						.select {
+							filter {
+								eq(column = "user_id", value = userId)
+							}
+						}.decodeSingle<ProfileModel>()
 
-                        val nickname = response.name
-                        withContext(Dispatchers.Main) {
-                            binding.tvStaticsTitle.text = nickname + "님의 스탯"
-                    }
-                } catch (e: RestException) {
+					val nickname = response.name
+					withContext(Dispatchers.Main) {
+						binding.tvStaticsTitle.text = nickname + "님의 스탯"
+					}
+				} catch (e: RestException) {
 
-                }
-            }
-        }
-    }
+				}
+			}
+		}
+	}
 
-    private fun averageMyReviewScore() {
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    val point = Supabase.client.postgrest.rpc(
-                        function = "get_review_average_point",
-                        parameters = buildJsonObject {
-                            put("user_id_arg", userInfo.id)
-                        }
-                    ).data.toDouble()
-                    withContext(Dispatchers.Main) {
-                        val df = DecimalFormat("#.#")
-                        df.roundingMode = RoundingMode.DOWN
-                        val roundoff = df.format(point)
-                        binding.tvReviewScore.setText(roundoff)
-                    }
-                } catch (e: RestException) {
+	private fun averageMyReviewScore() {
+		lifecycleScope.launch {
+			withContext(Dispatchers.IO) {
+				try {
+					val point = Supabase.client.postgrest.rpc(
+						function = "get_review_average_point",
+						parameters = buildJsonObject {
+							put("user_id_arg", userInfo.id)
+						}
+					).data.toDouble()
+					withContext(Dispatchers.Main) {
+						val df = DecimalFormat("#.#")
+						df.roundingMode = RoundingMode.DOWN
+						val roundoff = df.format(point)
+						binding.tvReviewScore.setText(roundoff)
+					}
+				} catch (e: RestException) {
 
-                }
-            }
-        }
-    }
+				}
+			}
+		}
+	}
 
-    private fun countMyexpectation() {
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    val count = Supabase.client
-                        .from("expectations")
-                        .select {
-                            filter {
-                                // supabase에 있는 user_id 와 현재 userInfo.id 를 비교해서 같은지 테이블 확인
-                                eq(column = "user_id", value = userInfo.id)
-                            }
-                            count(Count.EXACT)
-                        }.countOrNull()!!
+	private fun countMyexpectation() {
+		lifecycleScope.launch {
+			withContext(Dispatchers.IO) {
+				try {
+					val count = Supabase.client
+						.from("expectations")
+						.select {
+							filter {
+								// supabase에 있는 user_id 와 현재 userInfo.id 를 비교해서 같은지 테이블 확인
+								eq(column = "user_id", value = userInfo.id)
+							}
+							count(Count.EXACT)
+						}.countOrNull()!!
 
-                    withContext(Dispatchers.Main) {
-                        binding.tvExpectationCount.setText(count.toString())
-                    }
-                } catch (e : RestException) {
+					withContext(Dispatchers.Main) {
+						binding.tvExpectationCount.setText(count.toString())
+					}
+				} catch (e: RestException) {
 
-                }
-            }
-        }
+				}
+			}
+		}
+	}
 
-    }
+	private fun setPieChart() {
+		val genres = listOf("연극", "뮤지컬", "무용", "대중무용", "클래식", "국악", "대중음악", "서커스/마술", "복합")
 
-    private fun setBarChart(){
-        val backgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
-        // 먼저 바 차트를 초기화합니다.
-        val barChart = binding.bcDateReview
+		val backgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
+		// PieChart를 binding에서 가져옵니다.
+		val pieChart = binding.pcGenreReview
 
-        // 바 차트의 데이터를 설정합니다.
-        val entries = ArrayList<BarEntry>()
-        entries.add(BarEntry(0f, 10f))
-        entries.add(BarEntry(1f, 20f))
-        entries.add(BarEntry(2f, 30f))
-        entries.add(BarEntry(3f, 40f))
-        entries.add(BarEntry(4f, 50f))
+		// PieChart에 적용할 색상을 정의합니다.
+		val colorsItems = arrayListOf<Int>().apply {
+			addAll(ColorTemplate.VORDIPLOM_COLORS.asList())
+			addAll(ColorTemplate.JOYFUL_COLORS.asList())
+			addAll(ColorTemplate.COLORFUL_COLORS.asList())
+			addAll(ColorTemplate.LIBERTY_COLORS.asList())
+			addAll(ColorTemplate.PASTEL_COLORS.asList())
+			addAll(ColorTemplate.COLORFUL_COLORS.asList())
+			add(ColorTemplate.getHoloBlue())
+		}
 
-        // 데이터 세트를 만듭니다.
-        val dataSet = BarDataSet(entries, "Label")
-        dataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
+		// PieDataSet을 생성하고 데이터 및 스타일을 설정합니다.
+		val textColor = ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color)
 
-        // 바 차트에 데이터를 설정합니다.
-        val data = BarData(dataSet)
-        barChart.data = data
+		// PieChart에 생성한 데이터를 적용합니다.
+		val labelBackgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
+		val labelTextColor = ContextCompat.getColor(requireContext(), R.color.text_color)
 
-        // 바 차트를 스타일링합니다.
-        // 바 차트를 더 잘 표시하기 위해 설정을 변경할 수 있습니다.
-        barChart.apply {
-            setDrawBarShadow(false)
-            setDrawValueAboveBar(true)
-            description.isEnabled = false
-            setFitBars(true)
-            animateY(1400)
-            invalidate()
-            setBackgroundColor(backgroundColor)
-        }
-    }
+		pieChart.apply {
+			description.isEnabled = false // 설명문구 표시 여부
+			isRotationEnabled = true // 차트 회전여부
+			centerText = getString(R.string.stats_genre) // 가운데에 표시할 텍스트 설정
+			setDrawCenterText(true)
+			setCenterTextSize(16f) // 가운데 텍스트 크기 설정
+			setCenterTextRadiusPercent(100f) // 원 크기를 조정합니다.
+			setCenterTextColor(labelTextColor) // 텍스트 색상을 설정합니다.
+			setHoleColor(labelBackgroundColor) // 원의 배경 색상을 설정합니다.
+			setUsePercentValues(true) // 백분율로 표시할지 여부
+			setEntryLabelColor(textColor) // 항목 라벨 색상 설정
+			setBackgroundColor(backgroundColor)
+		}
 
-    private fun setPieChart() {
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                runCatching {
-                    val pieEntries= listOf("연극", "뮤지컬", "무용", "대중무용", "클래식", "국악", "대중음악", "서커스/마술", "복합").map {
-                        val countResponse= Supabase.client
-                            .from("reviews")
-                            .select {
-                            filter {
-                                // supabase에 있는 user_id 와 현재 userInfo.id 를 비교해서 같은지 테이블 확인
-                                eq(column = "user_id", value = userInfo.id)
-                            }
-                            count(Count.EXACT)
-                        }
-                    }
+		CoroutineScope(Dispatchers.IO).launch {
+			val deferredResults = genres.map {
+				async {
+					Supabase.client
+						.from("reviews")
+						.select {
+							filter {
+								eq(column = "user_id", value = userInfo.id)
+								eq(column = "shcate", value = it)
+							}
 
-                    withContext(Dispatchers.Main) {
-                        val backgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
-                        // PieChart를 binding에서 가져옵니다.
-                        val pieChart = binding.pcGenreReview
+							count(Count.EXACT)
+						}
+				}
+			}
 
-                        // PieChart에 표시할 데이터를 설정합니다.
-                        val entries = arrayListOf(
-                            PieEntry(100f, getString(R.string.filter_genre_theater)),
-                            PieEntry(120f, getString(R.string.filter_genre_publicfutility)),
-                            PieEntry(10f, getString(R.string.filter_genre_classic)),
-                            PieEntry(50f, getString(R.string.filter_genre_musical)),
-                            PieEntry(0f, getString(R.string.filter_genre_circus)),
-                            PieEntry(0f, getString(R.string.filter_genre_futility)),
-                            PieEntry(0f, getString(R.string.filter_genre_korean_classic)),
-                            PieEntry(0f, getString(R.string.filter_genre_popular_music)),
-                            PieEntry(0f, getString(R.string.filter_genre_mix))
-                        )
+			val finalResults = deferredResults.awaitAll().map { it.countOrNull() }
 
+			val newEntries = finalResults.mapIndexed { index, value ->
+				PieEntry(value?.toFloat() ?: 0F, "${genres[index]}")
+			}.filter { it.value > 0 }
 
-                        // PieChart에 적용할 색상을 정의합니다.
-                        val colorsItems = arrayListOf<Int>().apply {
-                            addAll(ColorTemplate.VORDIPLOM_COLORS.asList())
-                            addAll(ColorTemplate.JOYFUL_COLORS.asList())
-                            addAll(ColorTemplate.COLORFUL_COLORS.asList())
-                            addAll(ColorTemplate.LIBERTY_COLORS.asList())
-                            addAll(ColorTemplate.PASTEL_COLORS.asList())
-                            addAll(ColorTemplate.COLORFUL_COLORS.asList())
-                            add(ColorTemplate.getHoloBlue())
-                        }
+			val newPieDataSet = PieDataSet(newEntries, "장르별").apply {
+				colors = colorsItems
+				valueTextColor = textColor
+				valueTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+				valueTextSize = 18f
+			}
 
-                        // PieDataSet을 생성하고 데이터 및 스타일을 설정합니다.
-                        val textColor = ContextCompat.getColor(requireContext(),R.color.filter_btn_text_color)
-                        val pieDataSet = PieDataSet(entries, "장르별").apply {
-                            colors = colorsItems
-                            valueTextColor = textColor
-                            valueTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
-                            valueTextSize = 18f
-                        }
+			val newPieData = PieData(newPieDataSet)
 
-                        // PieData를 생성하고 데이터를 설정합니다.
-                        val pieData = PieData(pieDataSet)
+			withContext(Dispatchers.Main) {
+				pieChart.apply {
+					data = newPieData
+					animateY(1400, Easing.EaseInOutQuad) // 애니메이션 설정
+					animate() // 애니메이션 시작
+				}
+			}
+		}
+	}
 
-
-                        // PieChart에 생성한 데이터를 적용합니다.
-                        val labelBackgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
-                        val labelTextColor = ContextCompat.getColor(requireContext(), R.color.text_color)
-                        pieChart.apply {
-                            data = pieData
-                            description.isEnabled = false // 설명문구 표시 여부
-                            isRotationEnabled = true // 차트 회전여부
-                            centerText = getString(R.string.stats_genre) // 가운데에 표시할 텍스트 설정
-                            setDrawCenterText(true)
-                            setCenterTextSize(16f) // 가운데 텍스트 크기 설정
-                            setCenterTextRadiusPercent(100f) // 원 크기를 조정합니다.
-                            setCenterTextColor(labelTextColor) // 텍스트 색상을 설정합니다.
-                            setHoleColor(labelBackgroundColor) // 원의 배경 색상을 설정합니다.
-                            setUsePercentValues(true) // 백분율로 표시할지 여부
-                            setEntryLabelColor(textColor) // 항목 라벨 색상 설정
-                            setBackgroundColor(backgroundColor)
-                            animateY(1400, Easing.EaseInOutQuad) // 애니메이션 설정
-                            animate() // 애니메이션 시작
-                        }
-
-                    }
-
-                }.onFailure {
-
-                }
-            }
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
+	override fun onDestroyView() {
+		super.onDestroyView()
+		_binding = null
+	}
 }
