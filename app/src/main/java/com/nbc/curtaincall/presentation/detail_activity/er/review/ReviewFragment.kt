@@ -27,6 +27,7 @@ class ReviewFragment(
 	private val mt10id: String,
 	private val poster: String,
 	private val prfState: String,
+	private val shcate: String
 ) : Fragment() {
 	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val reviewViewModel by lazy { ViewModelProvider(this)[ReviewViewModel::class.java] }
@@ -123,7 +124,8 @@ class ReviewFragment(
 					poster = poster,
 					point = point,
 					comment = comment!!,
-					mt10id = mt10id
+					mt10id = mt10id,
+					shcate = shcate
 				)
 
 				reviewViewModel.createReview(

@@ -57,14 +57,16 @@ class ERFragment : Fragment() {
 			val mt10id = firstShowDetail.mt10id
 			val poster = firstShowDetail.poster
 			val prfState = firstShowDetail.prfstate
+			val shcate = firstShowDetail.genrenm
 
-			if (mt20id != null && mt10id != null && poster != null && prfState != null) {
+			if (mt20id != null && mt10id != null && poster != null && prfState != null && shcate != null)  {
 				changeFragmentByMode(
 					mt20id = mt20id,
 					mt10id = mt10id,
 					poster = poster,
 					mode = ERViewModel.EXPECTATION,
-					prfState = prfState
+					prfState = prfState,
+					shcate = shcate
 				)
 			}
 		}
@@ -76,13 +78,14 @@ class ERFragment : Fragment() {
 					mt10id = info!!.mt10id!!,
 					poster = info!!.poster!!,
 					mode = it,
-					prfState = info!!.prfstate!!
+					prfState = info!!.prfstate!!,
+					shcate = info!!.genrenm!!
 				)
 			}
 		}
 	}
 
-	private fun changeFragmentByMode(mode: String, mt10id: String, mt20id: String, poster: String, prfState: String) {
+	private fun changeFragmentByMode(mode: String, mt10id: String, mt20id: String, poster: String, prfState: String, shcate: String) {
 		with(binding) {
 			when (mode) {
 				ERViewModel.REVIEW -> {
@@ -91,7 +94,8 @@ class ERFragment : Fragment() {
 							mt20id = mt20id,
 							mt10id = mt10id,
 							poster = poster,
-							prfState = prfState
+							prfState = prfState,
+							shcate = shcate
 						)
 					)
 					btnReviews.setBackgroundResource(R.color.primary_color)

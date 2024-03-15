@@ -10,21 +10,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp">
+        android:paddingHorizontal="40dp">
 
         <TextView
             android:id="@+id/tv_statics_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="닉네임 누구님의 요약"
             android:textColor="@color/text_color"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text = "OO님의 스탯"/>
 
         <TextView
             android:id="@+id/tv_my_review_average"
@@ -55,7 +55,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_review_score"
-            android:layout_width="130dp"
+            android:layout_width="110dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/component_background_color"
@@ -70,7 +70,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="4.2"
                 android:textColor="@color/component_color"
                 android:textSize="30sp" />
 
@@ -78,7 +77,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_expectation_count"
-            android:layout_width="130dp"
+            android:layout_width="110dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/component_background_color"
@@ -93,7 +92,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="100"
                 android:textColor="@color/component_color"
                 android:textSize="30sp" />
 
@@ -107,17 +105,17 @@
             android:text="@string/stats_my_review_date"
             android:textColor="@color/text_color"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/cv_review_score"
+            app:layout_constraintStart_toStartOf="@+id/tv_statics_title"
             app:layout_constraintTop_toBottomOf="@+id/cv_review_score" />
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bc_date_review"
             android:layout_width="0dp"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_marginTop="10dp"
             app:layout_constraintCircleRadius="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/cv_expectation_count"
-            app:layout_constraintStart_toStartOf="@+id/cv_review_score"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_date_review_distribution" />
 
         <TextView
@@ -128,7 +126,7 @@
             android:text="@string/stats_my_review_genre"
             android:textColor="@color/text_color"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/cv_review_score"
+            app:layout_constraintStart_toStartOf="@+id/tv_statics_title"
             app:layout_constraintTop_toBottomOf="@+id/bc_date_review" />
 
         <com.github.mikephil.charting.charts.PieChart
@@ -137,8 +135,8 @@
             android:layout_height="300dp"
             android:layout_marginVertical="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cv_expectation_count"
-            app:layout_constraintStart_toStartOf="@+id/cv_review_score"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_genre_review_distribution" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

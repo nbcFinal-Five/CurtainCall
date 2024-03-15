@@ -1,6 +1,7 @@
 package com.nbc.curtaincall.presentation.stats
 
 import android.annotation.SuppressLint
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,6 +35,8 @@ import io.github.jan.supabase.postgrest.query.Count
 import io.github.jan.supabase.postgrest.rpc
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.buildJsonObject
@@ -181,55 +184,91 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
     }
 
     private fun setPieChart() {
-        val backgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
-        // PieChart를 binding에서 가져옵니다.
-        val pieChart = binding.pcGenreReview
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                runCatching {
+                    val pieEntries= listOf("연극", "뮤지컬", "무용", "대중무용", "클래식", "국악", "대중음악", "서커스/마술", "복합").map {
+                        val countResponse= Supabase.client
+                            .from("reviews")
+                            .select {
+                            filter {
+                                // supabase에 있는 user_id 와 현재 userInfo.id 를 비교해서 같은지 테이블 확인
+                                eq(column = "user_id", value = userInfo.id)
+                            }
+                            count(Count.EXACT)
+                        }
+                    }
 
-        // PieChart에 표시할 데이터를 설정합니다.
-        val entries = arrayListOf(
-            PieEntry(14f, "Apple"),
-            PieEntry(22f, "Orange"),
-            PieEntry(7f, "Mango"),
-            PieEntry(31f, "RedOrange"),
-            PieEntry(26f, "Other")
-        )
+                    withContext(Dispatchers.Main) {
+                        val backgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
+                        // PieChart를 binding에서 가져옵니다.
+                        val pieChart = binding.pcGenreReview
 
-        // PieChart에 적용할 색상을 정의합니다.
-        val colorsItems = arrayListOf<Int>().apply {
-            addAll(ColorTemplate.VORDIPLOM_COLORS.asList())
-            addAll(ColorTemplate.JOYFUL_COLORS.asList())
-            addAll(ColorTemplate.COLORFUL_COLORS.asList())
-            addAll(ColorTemplate.LIBERTY_COLORS.asList())
-            addAll(ColorTemplate.PASTEL_COLORS.asList())
-            add(ColorTemplate.getHoloBlue())
+                        // PieChart에 표시할 데이터를 설정합니다.
+                        val entries = arrayListOf(
+                            PieEntry(100f, getString(R.string.filter_genre_theater)),
+                            PieEntry(120f, getString(R.string.filter_genre_publicfutility)),
+                            PieEntry(10f, getString(R.string.filter_genre_classic)),
+                            PieEntry(50f, getString(R.string.filter_genre_musical)),
+                            PieEntry(0f, getString(R.string.filter_genre_circus)),
+                            PieEntry(0f, getString(R.string.filter_genre_futility)),
+                            PieEntry(0f, getString(R.string.filter_genre_korean_classic)),
+                            PieEntry(0f, getString(R.string.filter_genre_popular_music)),
+                            PieEntry(0f, getString(R.string.filter_genre_mix))
+                        )
+
+
+                        // PieChart에 적용할 색상을 정의합니다.
+                        val colorsItems = arrayListOf<Int>().apply {
+                            addAll(ColorTemplate.VORDIPLOM_COLORS.asList())
+                            addAll(ColorTemplate.JOYFUL_COLORS.asList())
+                            addAll(ColorTemplate.COLORFUL_COLORS.asList())
+                            addAll(ColorTemplate.LIBERTY_COLORS.asList())
+                            addAll(ColorTemplate.PASTEL_COLORS.asList())
+                            addAll(ColorTemplate.COLORFUL_COLORS.asList())
+                            add(ColorTemplate.getHoloBlue())
+                        }
+
+                        // PieDataSet을 생성하고 데이터 및 스타일을 설정합니다.
+                        val textColor = ContextCompat.getColor(requireContext(),R.color.filter_btn_text_color)
+                        val pieDataSet = PieDataSet(entries, "장르별").apply {
+                            colors = colorsItems
+                            valueTextColor = textColor
+                            valueTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                            valueTextSize = 18f
+                        }
+
+                        // PieData를 생성하고 데이터를 설정합니다.
+                        val pieData = PieData(pieDataSet)
+
+
+                        // PieChart에 생성한 데이터를 적용합니다.
+                        val labelBackgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
+                        val labelTextColor = ContextCompat.getColor(requireContext(), R.color.text_color)
+                        pieChart.apply {
+                            data = pieData
+                            description.isEnabled = false // 설명문구 표시 여부
+                            isRotationEnabled = true // 차트 회전여부
+                            centerText = getString(R.string.stats_genre) // 가운데에 표시할 텍스트 설정
+                            setDrawCenterText(true)
+                            setCenterTextSize(16f) // 가운데 텍스트 크기 설정
+                            setCenterTextRadiusPercent(100f) // 원 크기를 조정합니다.
+                            setCenterTextColor(labelTextColor) // 텍스트 색상을 설정합니다.
+                            setHoleColor(labelBackgroundColor) // 원의 배경 색상을 설정합니다.
+                            setUsePercentValues(true) // 백분율로 표시할지 여부
+                            setEntryLabelColor(textColor) // 항목 라벨 색상 설정
+                            setBackgroundColor(backgroundColor)
+                            animateY(1400, Easing.EaseInOutQuad) // 애니메이션 설정
+                            animate() // 애니메이션 시작
+                        }
+
+                    }
+
+                }.onFailure {
+
+                }
+            }
         }
-
-        // PieDataSet을 생성하고 데이터 및 스타일을 설정합니다.
-        val textColor = ContextCompat.getColor(requireContext(),R.color.filter_btn_text_color)
-        val pieDataSet = PieDataSet(entries, "").apply {
-            colors = colorsItems
-            valueTextColor = textColor
-            valueTextSize = 18f
-        }
-
-        // PieData를 생성하고 데이터를 설정합니다.
-        val pieData = PieData(pieDataSet)
-
-
-        // PieChart에 생성한 데이터를 적용합니다.
-        pieChart.apply {
-            data = pieData
-            description.isEnabled = false
-            isRotationEnabled = false
-            centerText = "장르별" // 가운데에 표시할 텍스트 설정
-            setUsePercentValues(true) // 백분율로 표시할지 여부
-            setCenterTextSize(20f) // 가운데 텍스트 크기 설정
-            setEntryLabelColor(textColor) // 항목 라벨 색상 설정
-            setBackgroundColor(backgroundColor)
-            animateY(1400, Easing.EaseInOutQuad) // 애니메이션 설정
-            animate() // 애니메이션 시작
-        }
-
     }
 
     override fun onDestroyView() {

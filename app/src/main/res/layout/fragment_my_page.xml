@@ -14,7 +14,7 @@
             android:id="@+id/btn_stats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="65dp"
             android:background="@drawable/button_gradient"
             android:text="@string/my_stats"
             android:textColor="@color/text_color"

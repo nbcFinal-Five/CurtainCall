@@ -30,7 +30,10 @@ data class GetReviewModel(
 	val mt10id: String,
 
 	@SerialName("profile")
-	val profile: ProfileModel
+	val profile: ProfileModel,
+
+	@SerialName("shcate")
+	val shcate : String
 )
 
 @Serializable
@@ -52,4 +55,7 @@ data class PostReviewModel(
 
 	@SerialName("mt10id")
 	val mt10id: String,
+
+	@SerialName("shcate")
+	val shcate : String
 )
