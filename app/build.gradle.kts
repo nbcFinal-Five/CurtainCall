@@ -51,8 +51,8 @@ fun getAuthKey(propertyKey: String): String =
 dependencies {
 	// glide 
 	implementation ("com.github.bumptech.glide:glide:4.16.0")
-	implementation("androidx.activity:activity:1.8.0")
 	annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+
 	// glide blur transformation
 	implementation ("jp.wasabeef:glide-transformations:4.3.0")
 	implementation ("jp.co.cyberagent.android:gpuimage:2.1.0")
@@ -75,8 +75,8 @@ dependencies {
 	implementation ("org.simpleframework:simple-xml:2.7.1")
 	implementation ("com.squareup.retrofit2:converter-simplexml:2.9.0")
 	// Coroutine
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 
 	// Lifecycle components
 	implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")

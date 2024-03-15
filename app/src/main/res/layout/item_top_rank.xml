@@ -48,16 +48,6 @@
         tools:text="무용(서양/한국무용)" />
 
     <TextView
-        android:id="@+id/tv_hot_recommend_showing_state"
-        style="@style/posterTopLabel"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:text="공연중"
-        app:layout_constraintBottom_toBottomOf="@id/tv_hot_recommend_genre"
-        app:layout_constraintStart_toEndOf="@id/tv_hot_recommend_genre"
-        app:layout_constraintTop_toTopOf="@id/tv_hot_recommend_genre" />
-
-    <TextView
         android:id="@+id/tv_hot_recommend_performance_name"
         style="@style/HomePosterTitleStyle"
         android:layout_width="0dp"
