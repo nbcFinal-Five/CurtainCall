@@ -15,7 +15,7 @@ import com.nbc.curtaincall.databinding.FragmentLoginBinding
 import com.nbc.curtaincall.ui.UserViewModel
 import java.util.regex.Pattern
 
-class LoginFragment(private val supportFragmentManager: FragmentManager) : Fragment() {
+class LoginFragment(private val fragmentId: Int) : Fragment() {
 	private val loginViewModel by lazy { ViewModelProvider(this)[LoginViewModel::class.java] }
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
 
@@ -44,9 +44,10 @@ class LoginFragment(private val supportFragmentManager: FragmentManager) : Fragm
 
 	private fun initHandle() = with(binding) {
 		tvRegister.setOnClickListener {
-			supportFragmentManager.commit {
-				replace(R.id.fragment_auth, RegisterFragment())
+			requireActivity().supportFragmentManager.commit {
+				replace(fragmentId, RegisterFragment())
 				setReorderingAllowed(true)
+				addToBackStack(null)
 			}
 		}
 

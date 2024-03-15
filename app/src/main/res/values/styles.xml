@@ -135,5 +135,12 @@
         <item name="chipCornerRadius">29dp</item>
         <item name="android:textAlignment">center</item>
     </style>
+
+    <style name="MyAlertDialogStyle" parent="@style/Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/background_color</item>
+    </style>
+
 </resources>
 
