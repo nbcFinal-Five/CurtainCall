@@ -203,7 +203,7 @@ class ReviewFragment(
 
 	private fun isValidComment(comment: String?): Boolean {
 		if (comment == null) return false
-		return (comment.length >= 10) && (comment.length <= 30)
+		return (comment.length <= 30)
 	}
 
 	private fun hideKeyboard() {
