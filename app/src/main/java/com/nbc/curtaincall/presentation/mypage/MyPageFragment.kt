@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.ui.auth.AuthActivity
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
+import com.nbc.curtaincall.presentation.stats.StatsDialogFragment
 import com.nbc.curtaincall.ui.UserViewModel
 import com.nbc.curtaincall.ui.more.MoreActivity
 
@@ -56,7 +57,22 @@ class MyPageFragment : Fragment(), LogoutDialogFragment.LogoutDialogListener, Qu
 		initViewModel()
 		initHandle()
 		initList()
+		showUserInfoStats()
 	}
+
+	private fun showUserInfoStats() {
+		userViewModel.userInfo.observe(viewLifecycleOwner) {userInfo ->
+			if(userInfo == null) binding.btnStats.visibility = View.GONE
+				else {
+				binding.btnStats.visibility = View.VISIBLE
+				binding.btnStats.setOnClickListener {
+					val dialog = StatsDialogFragment(userInfo)
+					dialog.show(requireActivity().supportFragmentManager, "DialogFragment")
+			}
+			}
+		}
+	}
+
 
 	private fun initList() {
 		val rvReview = binding.rvShowcase

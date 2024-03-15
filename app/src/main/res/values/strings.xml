@@ -170,4 +170,12 @@
     <string name="network_check">확인</string>
     <string name="network_check_necessary">네트워크 연결 필요</string>
     <string name="network_check_necessary_message">앱을 사용하려면 인터넷 연결이 필요합니다.</string>
+
+    <!-- 통계화면 -->
+    <string name="stats_my_review_score_average">리뷰 점수 평균</string>
+    <string name="stats_my_expectation_count">기대평 총 갯수</string>
+    <string name="stats_my_review_date">날짜별 리뷰 분포</string>
+    <string name="stats_my_review_genre">장르별 리뷰 분포</string>
+    <string name="my_stats">나의 스탯</string>
+    <string name="stats_genre">장르별</string>
 </resources>

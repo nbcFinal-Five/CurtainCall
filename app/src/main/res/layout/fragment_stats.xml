@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context="com.nbc.curtaincall.presentation.stats.StatsDialogFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="40dp">
+
+        <TextView
+            android:id="@+id/tv_statics_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text = "OO님의 스탯"/>
+
+        <TextView
+            android:id="@+id/tv_my_review_average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/stats_my_review_score_average"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tv_my_expectation_count"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_statics_title" />
+
+        <TextView
+            android:id="@+id/tv_my_expectation_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stats_my_expectation_count"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_my_review_average"
+            app:layout_constraintTop_toTopOf="@+id/tv_my_review_average" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_review_score"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/component_background_color"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_my_review_average"
+            app:layout_constraintStart_toStartOf="@+id/tv_my_review_average"
+            app:layout_constraintTop_toBottomOf="@+id/tv_my_review_average">
+
+            <TextView
+                android:id="@+id/tv_review_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/component_color"
+                android:textSize="30sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_expectation_count"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/component_background_color"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_my_expectation_count"
+            app:layout_constraintStart_toStartOf="@+id/tv_my_expectation_count"
+            app:layout_constraintTop_toBottomOf="@+id/tv_my_expectation_count">
+
+            <TextView
+                android:id="@+id/tv_expectation_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/component_color"
+                android:textSize="30sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_date_review_distribution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/stats_my_review_date"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_statics_title"
+            app:layout_constraintTop_toBottomOf="@+id/cv_review_score" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bc_date_review"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintCircleRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date_review_distribution" />
+
+        <TextView
+            android:id="@+id/tv_genre_review_distribution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/stats_my_review_genre"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_statics_title"
+            app:layout_constraintTop_toBottomOf="@+id/bc_date_review" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pc_genre_review"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_genre_review_distribution" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
