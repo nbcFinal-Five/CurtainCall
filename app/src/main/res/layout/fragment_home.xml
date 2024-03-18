@@ -32,7 +32,7 @@
             android:background="@drawable/bg_page_indicator_container"
             android:gravity="center"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/tab_poster_indicator"
+            app:layout_constraintBottom_toBottomOf="@id/viewPager"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="1/10" />
 
@@ -49,19 +49,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_poster_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/background_color"
-            android:clickable="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewPager"
-            app:tabBackground="@drawable/selector_tab"
-            app:tabIndicator="@null"
-            app:tabRippleColor="@null" />
-
         <TextView
             android:id="@+id/tv_home_hot_recommend_title"
             android:layout_width="0dp"
@@ -73,7 +60,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tab_poster_indicator" />
+            app:layout_constraintTop_toBottomOf="@id/viewPager" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_top_rank"

@@ -37,6 +37,7 @@ class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
         }
     }
 
+    override fun getItemCount(): Int = currentList.size * currentList.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingShowViewHolder {
         val inflater =
             parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -45,6 +46,6 @@ class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
     }
 
     override fun onBindViewHolder(holder: UpcomingShowViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position % currentList.size])
     }
 }
