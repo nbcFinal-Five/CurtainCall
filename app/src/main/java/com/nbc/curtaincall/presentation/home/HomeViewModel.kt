@@ -9,6 +9,7 @@ import com.nbc.curtaincall.fetch.model.BoxofResponse
 import com.nbc.curtaincall.fetch.model.DbResponse
 import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.util.Constants
+import com.nbc.curtaincall.util.Converter
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -41,7 +42,12 @@ class HomeViewModel(
     fun fetchUpcoming() {
         viewModelScope.launch {
             runCatching {
-                _showList.value = fetchRemoteRepository.fetchShowList(prfstate = "01").showList
+                _showList.value = fetchRemoteRepository.fetchShowList(
+                    stdate = Converter.nowDateFormat(),
+                    eddate = Converter.oneMonthFromNow(),
+                    prfstate = "01",
+                    openrun = "N"
+                ).showList
             }.onFailure {
 
             }
@@ -63,7 +69,11 @@ class HomeViewModel(
         viewModelScope.launch {
             runCatching {
                 _genre.value =
-                    fetchRemoteRepository.fetchGenre(shcate = getGenreCode(genre)).showList
+                    fetchRemoteRepository.fetchShowList(
+                        stdate = Converter.nowDateFormat(),
+                        eddate = Converter.oneMonthFromNow(),
+                        shcate = getGenreCode(genre),
+                    ).showList
                 _isLoadingGenre.value = true
             }.onFailure {
             }
@@ -74,9 +84,10 @@ class HomeViewModel(
         viewModelScope.launch {
             runCatching {
                 _kidShow.value = fetchRemoteRepository.fetchShowList(
-                    stdate = "20240101",
-                    eddate = "20240328",
-                    kidstate = "Y"
+                    stdate = Converter.nowDateFormat(),
+                    eddate = Converter.oneMonthFromNow(),
+                    kidstate = "Y",
+                    openrun = "Y"
                 ).showList
                 _isLoadingKid.value = true
             }
