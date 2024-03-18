@@ -74,6 +74,7 @@ dependencies {
 	// simpleXml
 	implementation ("org.simpleframework:simple-xml:2.7.1")
 	implementation ("com.squareup.retrofit2:converter-simplexml:2.9.0")
+	
 	// Coroutine
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
@@ -86,7 +87,6 @@ dependencies {
 
 	//powerspinner
 	implementation("com.github.skydoves:powerspinner:1.2.6")
-
 	implementation("androidx.core:core-ktx:1.12.0")
 	implementation("androidx.appcompat:appcompat:1.6.1")
 	implementation("com.google.android.material:material:1.11.0")
