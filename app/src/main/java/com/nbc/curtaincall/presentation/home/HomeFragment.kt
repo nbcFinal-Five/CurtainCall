@@ -1,6 +1,7 @@
 package com.nbc.curtaincall.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +57,8 @@ class HomeFragment : Fragment(), PosterClickListener {
         //페이지가 선택될 때 마다 호출
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-            binding.tvPageIndicator.text = "${position + 1} / 10"
+            binding.tvPageIndicator.text =
+                "${position + 1} / ${upComingShowAdapter.currentList.size}"
         }
     }
 
@@ -175,13 +177,14 @@ class HomeFragment : Fragment(), PosterClickListener {
     private fun nextPage() {
         runCatching {
             with(binding) {
-                if (viewPager.currentItem == 9) {
+                if (viewPager.currentItem == upComingShowAdapter.currentList.size - 1) {
                     lifecycleScope.launch {
                         delay(3000)
                     }
                     viewPager.currentItem = 0
                 } else {
                     viewPager.currentItem++
+                    Log.d("TAG", "nextPage:${viewPager.currentItem} ")
                 }
             }
         }.onFailure {

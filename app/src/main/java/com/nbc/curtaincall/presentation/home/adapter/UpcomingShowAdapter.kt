@@ -31,7 +31,7 @@ class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
                 tvPeriod.text = "${item.prfpdfrom} ~ ${item.prfpdto}"
                 tvFacilityName.text = item.fcltynm
                 ivHomeUpcomingShowPoster.setOnClickListener {
-                    item.mt20id?.let { it1 -> listener?.posterClicked(it1) }
+                    item.mt20id?.let { id -> listener?.posterClicked(id) }
                 }
             }
         }

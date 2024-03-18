@@ -46,7 +46,7 @@ class HomeViewModel(
                     stdate = Converter.nowDateFormat(),
                     eddate = Converter.oneMonthFromNow(),
                     prfstate = "01",
-                    openrun = "N"
+                    openrun = "Y"
                 ).showList
             }.onFailure {
 
