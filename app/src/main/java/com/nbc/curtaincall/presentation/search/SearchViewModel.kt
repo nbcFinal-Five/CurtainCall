@@ -2,7 +2,6 @@ package com.nbc.curtaincall.ui.search
 
 import android.annotation.SuppressLint
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -70,6 +69,7 @@ class SearchViewModel : ViewModel() {
         get() = _failureMessage
 
     private var nextPage = 2
+    private var canLoadMore = true
 
     @SuppressLint("SuspiciousIndentation")
     fun fetchSearchFilterResult() {
@@ -86,6 +86,7 @@ class SearchViewModel : ViewModel() {
                 _isLoading.value = true
                 try {
                     nextPage = 2
+                    canLoadMore = true
                     val result = getSearchResultByFilter(searchWord, genre, addr, child)
                     _searchResultList.postValue(result)
                 } catch (e : Exception){
@@ -113,25 +114,25 @@ class SearchViewModel : ViewModel() {
         val searchWord = searchWord.value
 
         viewModelScope.launch {
-            try {
-                _isNextLoading.value = true
-                val nextResult = getSearchResultNextPage(nextPage, searchWord, genre, addr, child)
-                val currentList = _searchResultList.value.orEmpty().toMutableList()
+            if(canLoadMore) {
+                try {
+                    _isNextLoading.value = true
+                    val nextResult = getSearchResultNextPage(nextPage, searchWord, genre, addr, child)
+                    val currentList = _searchResultList.value.orEmpty().toMutableList()
 
-                if(nextResult == null) {
-                    _nextResultState.postValue(false)
-                } else {
-                    if(nextResult?.size!! > 5 ) {
+                    if(nextResult == null) {
+                        _nextResultState.postValue(false)
+                    } else {
                         nextResult.let { currentList.addAll(it) }
                         _searchResultList.postValue(currentList)
                         nextPage++
                         _nextResultState.postValue(true)
                     }
+                } catch (e : Exception) {
+                    Log.e(TAG, "loadMoreSearchResult: ${e.message}")
+                } finally {
+                    _isNextLoading.value = false
                 }
-            } catch (e : Exception) {
-                Log.e(TAG, "loadMoreSearchResult: ${e.message}")
-            } finally {
-                _isNextLoading.value = false
             }
         }
     }
@@ -180,9 +181,14 @@ class SearchViewModel : ViewModel() {
         _saveCategoryChildTitle.value = category
     }
 
+    fun setCanLoadMore (value : Boolean) {
+        canLoadMore = value
+    }
+
     private fun handleFailure(exception: Exception) {
         _failureMessage.value = "서버 오류가 발생하였습니다"
     }
+
     companion object{
         const val TAG = "SearchViewModel"
     }

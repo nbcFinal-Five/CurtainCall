@@ -176,6 +176,7 @@ class SearchFragment : Fragment(), PosterClickListener {
                 searchViewModel.nextResultState.observe(viewLifecycleOwner) {hasData ->
                     if(!hasData) {
                         Toast.makeText(requireContext(), getString(R.string.search_nextresult_not), Toast.LENGTH_SHORT).show()
+                        searchViewModel.setCanLoadMore(false)
                     }
                 }
 
