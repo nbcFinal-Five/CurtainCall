@@ -178,6 +178,14 @@ class SearchFragment : Fragment(), PosterClickListener {
                         Toast.makeText(requireContext(), getString(R.string.search_nextresult_not), Toast.LENGTH_SHORT).show()
                     }
                 }
+
+                searchViewModel.isNextLoading.observe(viewLifecycleOwner) {isloading ->
+                    if(isloading) {
+                        pbNextresultLoading.visibility = View.VISIBLE
+                    } else {
+                        pbNextresultLoading.visibility = View.GONE
+                    }
+                }
             }
         }
     }
