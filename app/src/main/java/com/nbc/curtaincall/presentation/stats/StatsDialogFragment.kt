@@ -102,6 +102,7 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 		}
 	}
 
+	@SuppressLint("SetTextI18n")
 	private fun averageMyReviewScore() {
 		lifecycleScope.launch {
 			withContext(Dispatchers.IO) {
@@ -116,7 +117,7 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 						val df = DecimalFormat("#.#")
 						df.roundingMode = RoundingMode.DOWN
 						val roundoff = df.format(point)
-						binding.tvReviewScore.setText(roundoff)
+						binding.tvReviewScore.setText("${roundoff}점")
 					}
 				} catch (e: RestException) {
 
@@ -125,6 +126,7 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 		}
 	}
 
+	@SuppressLint("all")
 	private fun countMyexpectation() {
 		lifecycleScope.launch {
 			withContext(Dispatchers.IO) {
@@ -140,7 +142,7 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 						}.countOrNull()!!
 
 					withContext(Dispatchers.Main) {
-						binding.tvExpectationCount.setText(count.toString())
+						binding.tvExpectationCount.setText("${count}개")
 					}
 				} catch (e: RestException) {
 

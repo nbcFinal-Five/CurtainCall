@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentSearchBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
@@ -145,69 +146,6 @@ class SearchFragment : Fragment(), PosterClickListener {
         }
     }
 
-@SuppressLint("SetTextI18n")
-private fun changeFilterUiDesign() {
-    searchViewModel.genreFilterResultList.observe(viewLifecycleOwner) { genreList ->
-        if (genreList != null && genreList.isNotEmpty()) {
-            val selectedGenreCount = genreList.size
-            with(binding) {
-                tvSearchfilterGenre.setText(getString(R.string.filter_genre) + " : ${selectedGenreCount}")
-                tvSearchfilterGenre.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
-                tvSearchfilterGenre.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
-                tvSearchfilterGenre.setTypeface(null, Typeface.BOLD)
-                ivGenreArrow.visibility = View.GONE
-            }
-        } else {
-            with(binding) {
-                tvSearchfilterGenre.setText(R.string.filter_genre)
-                tvSearchfilterGenre.setBackgroundResource(R.drawable.shape_searchfilter_radius)
-                tvSearchfilterGenre.setTypeface(null, Typeface.NORMAL)
-                ivGenreArrow.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    searchViewModel.addrFilterResultList.observe(viewLifecycleOwner) { addrList ->
-        if (addrList != null && addrList.isNotEmpty()) {
-            val selectedAddrCount = addrList.size
-            with(binding) {
-                tvSearchfilterAddr.setText(getString(R.string.filter_addr) + " : ${selectedAddrCount}")
-                tvSearchfilterAddr.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
-                tvSearchfilterAddr.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
-                tvSearchfilterAddr.setTypeface(null, Typeface.BOLD)
-                ivAddrArrow.visibility = View.GONE
-            }
-        } else {
-            with(binding) {
-                tvSearchfilterAddr.setText(R.string.filter_addr)
-                tvSearchfilterAddr.setBackgroundResource(R.drawable.shape_searchfilter_radius)
-                tvSearchfilterAddr.setTypeface(null, Typeface.NORMAL)
-                ivAddrArrow.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    searchViewModel.childFilterResultList.observe(viewLifecycleOwner) { childList ->
-        if (childList != null && childList.isNotEmpty()) {
-            val selectedChildCount = childList.size
-            with(binding) {
-                tvSearchfilterChild.setText(getString(R.string.filter_children) + " : ${selectedChildCount}")
-                tvSearchfilterChild.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
-                tvSearchfilterChild.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
-                tvSearchfilterChild.setTypeface(null, Typeface.BOLD)
-                ivAddrArrow.visibility = View.GONE
-            }
-        } else {
-            with(binding) {
-                tvSearchfilterChild.setText(R.string.filter_children)
-                tvSearchfilterChild.setBackgroundResource(R.drawable.shape_searchfilter_radius)
-                tvSearchfilterChild.setTypeface(null, Typeface.NORMAL)
-                ivAddrArrow.visibility = View.VISIBLE
-            }
-        }
-    }
-}
-
     private fun initList() { // 검색 결과 recyclerview 만들기
         with(binding) {
             with(rvSearch) {
@@ -216,25 +154,102 @@ private fun changeFilterUiDesign() {
                 setHasFixedSize(true)
 
                 // 무한 스크롤을 위한 리사이클러뷰 위치 감지
-//                addOnScrollListener(object: RecyclerView.OnScrollListener(){
-//                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                        super.onScrolled(recyclerView, dx, dy)
-//                        val visibleThreshold = 1
-//                        val layoutManager = layoutManager as GridLayoutManager
-//                        val visibleItemCount = layoutManager.childCount
-//                        val totalItemCount = layoutManager.itemCount
-//                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-//                        val lastCompletelyVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
-//                        val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-//
-//                        // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
-//
-//                            if (totalItemCount - lastVisibleItemPosition <= visibleThreshold
-//                            ) {
-//                                searchViewModel.loadMoreSearchResult()
-//                            }
-//                    }
-//                })
+                addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+
+                        val visibleThreshold = 1
+                        val layoutManager = layoutManager as GridLayoutManager
+                        val totalItemCount = layoutManager.itemCount // rv의 총 항목의 갯수
+                        val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition() // RecyclerView에서 마지막으로 보이는 항목의 인덱스
+
+                        // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
+                        if (!searchViewModel.isNextLoading.value!! &&
+                            totalItemCount <= lastVisibleItemPosition + visibleThreshold
+                        ) {
+                            searchViewModel.loadMoreSearchResult()
+                        }
+                    }
+                })
+
+                // 더이상 데이터를 받아 올 수 없을 때 안내창
+                searchViewModel.nextResultState.observe(viewLifecycleOwner) {hasData ->
+                    if(!hasData) {
+                        Toast.makeText(requireContext(), getString(R.string.search_nextresult_not), Toast.LENGTH_SHORT).show()
+                        searchViewModel.setCanLoadMore(false)
+                    }
+                }
+
+                searchViewModel.isNextLoading.observe(viewLifecycleOwner) {isloading ->
+                    if(isloading) {
+                        pbNextresultLoading.visibility = View.VISIBLE
+                    } else {
+                        pbNextresultLoading.visibility = View.GONE
+                    }
+                }
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun changeFilterUiDesign() {
+        searchViewModel.genreFilterResultList.observe(viewLifecycleOwner) { genreList ->
+            if (genreList != null && genreList.isNotEmpty()) {
+                val selectedGenreCount = genreList.size
+                with(binding) {
+                    tvSearchfilterGenre.setText(getString(R.string.filter_genre) + " : ${selectedGenreCount}")
+                    tvSearchfilterGenre.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
+                    tvSearchfilterGenre.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                    tvSearchfilterGenre.setTypeface(null, Typeface.BOLD)
+                    ivGenreArrow.visibility = View.GONE
+                }
+            } else {
+                with(binding) {
+                    tvSearchfilterGenre.setText(R.string.filter_genre)
+                    tvSearchfilterGenre.setBackgroundResource(R.drawable.shape_searchfilter_radius)
+                    tvSearchfilterGenre.setTypeface(null, Typeface.NORMAL)
+                    ivGenreArrow.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        searchViewModel.addrFilterResultList.observe(viewLifecycleOwner) { addrList ->
+            if (addrList != null && addrList.isNotEmpty()) {
+                val selectedAddrCount = addrList.size
+                with(binding) {
+                    tvSearchfilterAddr.setText(getString(R.string.filter_addr) + " : ${selectedAddrCount}")
+                    tvSearchfilterAddr.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
+                    tvSearchfilterAddr.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                    tvSearchfilterAddr.setTypeface(null, Typeface.BOLD)
+                    ivAddrArrow.visibility = View.GONE
+                }
+            } else {
+                with(binding) {
+                    tvSearchfilterAddr.setText(R.string.filter_addr)
+                    tvSearchfilterAddr.setBackgroundResource(R.drawable.shape_searchfilter_radius)
+                    tvSearchfilterAddr.setTypeface(null, Typeface.NORMAL)
+                    ivAddrArrow.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        searchViewModel.childFilterResultList.observe(viewLifecycleOwner) { childList ->
+            if (childList != null && childList.isNotEmpty()) {
+                val selectedChildCount = childList.size
+                with(binding) {
+                    tvSearchfilterChild.setText(getString(R.string.filter_children) + " : ${selectedChildCount}")
+                    tvSearchfilterChild.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
+                    tvSearchfilterChild.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                    tvSearchfilterChild.setTypeface(null, Typeface.BOLD)
+                    ivAddrArrow.visibility = View.GONE
+                }
+            } else {
+                with(binding) {
+                    tvSearchfilterChild.setText(R.string.filter_children)
+                    tvSearchfilterChild.setBackgroundResource(R.drawable.shape_searchfilter_radius)
+                    tvSearchfilterChild.setTypeface(null, Typeface.NORMAL)
+                    ivAddrArrow.visibility = View.VISIBLE
+                }
             }
         }
     }

@@ -14,14 +14,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SearchViewModel : ViewModel() {
+    // 검색 결과 리스트
     private val _searchResultList = MutableLiveData<List<SearchItem>?>()
-    val searchResultList :LiveData<List<SearchItem>?>
+    val searchResultList : LiveData<List<SearchItem>?>
         get() = _searchResultList
 
+    // 지역 선택한 필터 리스트
     private val _saveCategoryAddrTitle = MutableLiveData<List<Int>>()
     val saveCategoryAddrTitle: LiveData<List<Int>>
         get() = _saveCategoryAddrTitle
 
+    // 장르 선택한 필터 리스트
     private val _saveCategoryGenreTitle = MutableLiveData<List<Int>>()
     val saveCategoryGenreTitle: LiveData<List<Int>>
         get() = _saveCategoryGenreTitle
@@ -30,7 +33,7 @@ class SearchViewModel : ViewModel() {
     val saveCategoryChildTitle: LiveData<List<Int>>
         get() = _saveCategoryChildTitle
 
-
+    // 필터에서 요청한 값
    private val _addrFilterResultList = MutableLiveData<List<Pair<Chip,String>?>?>()
     val addrFilterResultList : LiveData<List<Pair<Chip,String>?>?>
         get() = _addrFilterResultList
@@ -43,6 +46,7 @@ class SearchViewModel : ViewModel() {
     val genreFilterResultList : LiveData<List<Pair<Chip,String>?>?>
         get() = _genreFilterResultList
 
+    // 검색 키워드
     private val _searchWord = MutableLiveData<String?>()
     val searchWord : LiveData<String?> get() = _searchWord
 
@@ -51,16 +55,21 @@ class SearchViewModel : ViewModel() {
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
+    // 무한 스크롤 로딩
     private val _isNextLoading = MutableLiveData<Boolean>(false)
     val isNextLoading: LiveData<Boolean>
         get() = _isNextLoading
+
+    private val _nextResultState = MutableLiveData<Boolean>()
+    val nextResultState: LiveData<Boolean>
+        get() = _nextResultState
 
     private val _failureMessage = MutableLiveData<String>()
     val failureMessage: LiveData<String>
         get() = _failureMessage
 
     private var nextPage = 2
-    var isLastPage = false
+    private var canLoadMore = true
 
     @SuppressLint("SuspiciousIndentation")
     fun fetchSearchFilterResult() {
@@ -75,14 +84,17 @@ class SearchViewModel : ViewModel() {
 
             viewModelScope.launch {
                 _isLoading.value = true
-                runCatching {
+                try {
+                    nextPage = 2
+                    canLoadMore = true
                     val result = getSearchResultByFilter(searchWord, genre, addr, child)
-                    _searchResultList.value = result
-                }.onFailure { exception ->
-                    handleFailure(exception as Exception)
-                    Log.e(TAG, "fetchSearchFilterResult: ${exception.message}")
+                    _searchResultList.postValue(result)
+                } catch (e : Exception){
+                    handleFailure(e)
+                    Log.e(TAG, "fetchSearchFilterResult: ${e.message}")
+                } finally {
+                    _isLoading.value = false
                 }
-                _isLoading.value = false
             }
     }
 
@@ -102,17 +114,25 @@ class SearchViewModel : ViewModel() {
         val searchWord = searchWord.value
 
         viewModelScope.launch {
-            try {
-                _isNextLoading.value = true
-                val nextResult = getSearchResultNextPage(nextPage, searchWord, genre, addr, child)
-                Log.d(TAG, "loadMoreSearchResult: ${nextResult}")
-                _searchResultList.value?.plus(nextResult)
-                nextPage++
-                Log.d(TAG, "loadMoreSearchResult nextpage: $nextPage ")
-            } catch (e : Exception) {
-                Log.e(TAG, "loadMoreSearchResult: ${e.message}")
-            } finally {
-                _isNextLoading.value = false
+            if(canLoadMore) {
+                try {
+                    _isNextLoading.value = true
+                    val nextResult = getSearchResultNextPage(nextPage, searchWord, genre, addr, child)
+                    val currentList = _searchResultList.value.orEmpty().toMutableList()
+
+                    if(nextResult == null) {
+                        _nextResultState.postValue(false)
+                    } else {
+                        nextResult.let { currentList.addAll(it) }
+                        _searchResultList.postValue(currentList)
+                        nextPage++
+                        _nextResultState.postValue(true)
+                    }
+                } catch (e : Exception) {
+                    Log.e(TAG, "loadMoreSearchResult: ${e.message}")
+                } finally {
+                    _isNextLoading.value = false
+                }
             }
         }
     }
@@ -161,9 +181,14 @@ class SearchViewModel : ViewModel() {
         _saveCategoryChildTitle.value = category
     }
 
+    fun setCanLoadMore (value : Boolean) {
+        canLoadMore = value
+    }
+
     private fun handleFailure(exception: Exception) {
         _failureMessage.value = "서버 오류가 발생하였습니다"
     }
+
     companion object{
         const val TAG = "SearchViewModel"
     }
