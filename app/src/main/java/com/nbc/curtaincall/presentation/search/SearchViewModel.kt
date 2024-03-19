@@ -118,19 +118,16 @@ class SearchViewModel : ViewModel() {
                 val nextResult = getSearchResultNextPage(nextPage, searchWord, genre, addr, child)
                 val currentList = _searchResultList.value.orEmpty().toMutableList()
 
-                Log.d(TAG, "loadMoreSearchResult: ${nextResult}")
                 if(nextResult == null) {
                     _nextResultState.postValue(false)
                 } else {
                     if(nextResult?.size!! > 5 ) {
-                        Log.d(TAG, "loadMoreSearchResult nextpage: $nextPage ")
                         nextResult.let { currentList.addAll(it) }
                         _searchResultList.postValue(currentList)
                         nextPage++
                         _nextResultState.postValue(true)
                     }
                 }
-
             } catch (e : Exception) {
                 Log.e(TAG, "loadMoreSearchResult: ${e.message}")
             } finally {
