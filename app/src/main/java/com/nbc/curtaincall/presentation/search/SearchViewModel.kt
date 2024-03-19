@@ -166,6 +166,8 @@ class SearchViewModel : ViewModel() {
         _saveCategoryAddrTitle.value = listOf()
         _saveCategoryGenreTitle.value = listOf()
         _saveCategoryChildTitle.value = listOf()
+        _searchResultList.value = null
+        _nextResultState.postValue(true)
     }
 
     //선택된 칩 위치를 기억 하기 위한 코드
