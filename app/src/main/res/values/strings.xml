@@ -27,6 +27,7 @@
     <item>서커스/마술</item>
     <item>뮤지컬</item>
   </string-array>
+
   <string name="age_10">10대</string>
   <string name="age_20">20대</string>
   <string name="age_30">30대</string>
@@ -37,6 +38,7 @@
   <!-- SearchFragment -->
   <string name="search_result_not">검색 결과가 없습니다</string>
   <string name="input_search">검색어를 입력해주세요</string>
+  <string name="search_nextresult_not">더 이상 검색 결과가 없습니다</string>
 
   <string name="filter_genre">장르</string>
   <string name="filter_genre_theater">연극</string>
@@ -121,7 +123,6 @@
   <string name="warning_age_gender">성별과 연령대를 선택해주세요</string>
   <string name="reviews">리뷰</string>
   <string name="expectations">기대평</string>
-  <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="good">기대돼요</string>
   <string name="bad">글쎄요</string>
@@ -149,7 +150,7 @@
   <string name="parking_area">주차시설</string>
   <string name="map_marker_in_place">원위치</string>
 
-  <!-- 검색화면 리셋 -->
+  <!-- 검색화면 리셋 및 랭킹 화면 -->
   <string name="search_result_reset">검색 결과가 초기화 되었습니다</string>
   <string name="title_rank">Rank</string>
   <string name="rank_title">장르별 랭킹</string>
