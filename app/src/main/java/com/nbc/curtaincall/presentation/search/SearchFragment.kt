@@ -157,7 +157,7 @@ class SearchFragment : Fragment(), PosterClickListener {
                         val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition() // RecyclerView에서 마지막으로 보이는 항목의 인덱스
 
                         // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
-                        if (!searchViewModel.isNextLoading.value!! &&
+                        if (searchViewModel.searchResultList.value != null && !searchViewModel.isNextLoading.value!! &&
                             totalItemCount <= lastVisibleItemPosition + visibleThreshold
                         ) {
                             searchViewModel.loadMoreSearchResult()
