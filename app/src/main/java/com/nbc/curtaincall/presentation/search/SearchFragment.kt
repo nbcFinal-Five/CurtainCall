@@ -123,13 +123,6 @@ class SearchFragment : Fragment(), PosterClickListener {
                 }
             }
 
-            // 통신 장애시 안내 문구
-            searchViewModel.failureMessage.observe(viewLifecycleOwner) {
-                if (!it.isNullOrEmpty()) {
-                    Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
-                }
-
-            }
 
             // 검색 리스트 구독하여 변경점 생기면, listadapter가 확인하여 리사이클러뷰 업데이트 , 검색결과 안내 text visible 유무
             searchViewModel.searchResultList.observe(viewLifecycleOwner) { result ->
