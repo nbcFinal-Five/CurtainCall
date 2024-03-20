@@ -187,6 +187,10 @@ class SearchViewModel : ViewModel() {
         canLoadMore = value
     }
 
+    fun setNextResultState (value: Boolean) {
+        _nextResultState.postValue(value)
+    }
+
     private fun handleFailure(exception: Exception) {
         _failureMessage.value = "서버 오류가 발생하였습니다"
     }
