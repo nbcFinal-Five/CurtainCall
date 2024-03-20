@@ -44,7 +44,7 @@ class SearchListAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchItem) {
             with(binding) {
-                Glide.with(itemView).load(item.poster).into(ivSearchResult)
+                Glide.with(itemView).load(item.poster).override(240,320).into(ivSearchResult)
                 tvSearchitemGenre.setText(item.genrenm)
                 tvSearchitemPrfstate.setText(item.prfstate)
                 ivSearchResult.setOnClickListener {

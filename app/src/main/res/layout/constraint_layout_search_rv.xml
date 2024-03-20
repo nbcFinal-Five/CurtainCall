@@ -19,7 +19,8 @@
     <TextView
         android:id="@+id/tv_searchitem_genre"
         style="@style/posterTopLabel"
-        android:layout_height="25dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="1dp"
         android:text="@string/filter_genre"
         app:layout_constraintStart_toStartOf="@+id/iv_search_result"
         app:layout_constraintTop_toTopOf="@+id/iv_search_result" />
