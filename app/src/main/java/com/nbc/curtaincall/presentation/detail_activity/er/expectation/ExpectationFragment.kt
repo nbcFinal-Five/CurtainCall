@@ -116,6 +116,8 @@ class ExpectationFragment(
 					errorMessage = getString(R.string.already_sakusei)
 				) {
 					detailViewModel.setInfo(mt20id)
+					etExpectation.setText("")
+					expectationViewModel.setComment("")
 				}
 			}
 		}
