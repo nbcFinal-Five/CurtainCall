@@ -134,6 +134,8 @@ class ReviewFragment(
 					errorMessage = getString(R.string.already_point)
 				) {
 					detailViewModel.setInfo(mt20id)
+					etReview.setText("")
+					reviewViewModel.setComment("")
 				}
 			}
 		}
