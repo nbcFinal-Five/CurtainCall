@@ -49,6 +49,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/iv_viewpager_error"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="130dp"
+            android:src="@drawable/ic_home_error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/component_color" />
+
+        <TextView
+            android:id="@+id/tv_viewpager_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="서버에서 응답을 받을 수 없습니다."
+            android:textColor="@color/bottom_navi_item_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_viewpager_error" />
+
         <TextView
             android:id="@+id/tv_home_hot_recommend_title"
             android:layout_width="0dp"
@@ -73,20 +96,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title" />
 
+        <ImageView
+            android:id="@+id/iv_top_rank_error"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/ic_home_error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title"
+            app:tint="@color/component_color" />
+
+        <TextView
+            android:id="@+id/tv_top_rank_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="서버에서 응답을 받을 수 없습니다."
+            android:textColor="@color/bottom_navi_item_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_top_rank_error" />
+
         <com.skydoves.powerspinner.PowerSpinnerView
             android:id="@+id/spinner_home_genre"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="253dp"
             android:background="@null"
             android:gravity="start"
             android:padding="10dp"
-            android:text="연극"
+            android:text="@string/rank_chip_drama"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_home_top_rank"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title"
             app:spinner_arrow_gravity="end"
             app:spinner_arrow_padding="8dp"
             app:spinner_divider_color="@color/white"
@@ -108,12 +154,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner_home_genre" />
 
+        <ImageView
+            android:id="@+id/iv_genre_error"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/ic_home_error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_home_genre"
+            app:tint="@color/component_color" />
+
+        <TextView
+            android:id="@+id/tv_genre_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="서버에서 응답을 받을 수 없습니다."
+            android:textColor="@color/bottom_navi_item_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_genre_error" />
+
         <TextView
             android:id="@+id/tv_home_kid_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="253dp"
             android:text="@string/home_kid_able"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -121,7 +190,7 @@
             app:layout_constraintBottom_toTopOf="@id/rv_home_kid_show"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_home_genre" />
+            app:layout_constraintTop_toBottomOf="@id/spinner_home_genre" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_kid_show"
@@ -134,6 +203,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_home_kid_title" />
+
+        <ImageView
+            android:id="@+id/iv_kid_error"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/ic_home_error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_kid_title"
+            app:tint="@color/component_color" />
+
+        <TextView
+            android:id="@+id/tv_kid_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="서버에서 응답을 받을 수 없습니다."
+            android:textColor="@color/bottom_navi_item_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_kid_error" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/skeleton_top_rank_loading"

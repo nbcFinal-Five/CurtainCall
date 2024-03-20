@@ -135,17 +135,37 @@ class HomeFragment : Fragment(), PosterClickListener {
             kidShow.observe(viewLifecycleOwner) {
                 kidShowAdapter.submitList(it)
             }
-            //로딩 화면 처리
-            isLoadingGenre.observe(viewLifecycleOwner) {
-                binding.skeletonGenreLoading.isVisible = !it
+            with(binding) {
+                //로딩 화면 처리
+                isLoadingGenre.observe(viewLifecycleOwner) { state ->
+                    skeletonGenreLoading.isVisible = state
+                }
+                isLoadingRecommend.observe(viewLifecycleOwner) { state ->
+                    skeletonTopRankLoading.isVisible = state
+                }
+                isLoadingKid.observe(viewLifecycleOwner) { state ->
+                    skeletonKidLoading.isVisible = state
+                }
+                isServerErrorViewPager.observe(viewLifecycleOwner) { state ->
+                    ivViewpagerError.isVisible = state
+                    tvViewpagerError.isVisible = state
+                }
+                isServerErrorTopRank.observe(viewLifecycleOwner) { state ->
+                    ivTopRankError.isVisible = state
+                    tvTopRankError.isVisible = state
+                    rvHomeTopRank.isVisible = !state
+                }
+                isServerErrorGenre.observe(viewLifecycleOwner) { state ->
+                    ivGenreError.isVisible = state
+                    tvGenreError.isVisible = state
+                    rvHomeGenre.isVisible = !state
+                }
+                isServerErrorKid.observe(viewLifecycleOwner) { state ->
+                    ivKidError.isVisible = state
+                    tvKidError.isVisible = state
+                    rvHomeKidShow.isVisible = !state
+                }
             }
-            isLoadingRecommend.observe(viewLifecycleOwner) {
-                binding.skeletonTopRankLoading.isVisible = !it
-            }
-            isLoadingKid.observe(viewLifecycleOwner) {
-                binding.skeletonKidLoading.isVisible = !it
-            }
-
         }
     }
 
