@@ -34,6 +34,9 @@ class RankAdapter(private val listener: PosterClickListener? = null) :
                 ivRankPoster.setOnClickListener {
                     listener?.posterClicked(item.mt20id.toString())
                 }
+                tvTitle.setOnClickListener {
+                    listener?.posterClicked(item.mt20id.toString())
+                }
             }
         }
     }
