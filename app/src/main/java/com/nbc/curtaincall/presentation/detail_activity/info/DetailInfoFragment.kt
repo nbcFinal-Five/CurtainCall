@@ -55,8 +55,6 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		viewModel.fetchDetailInfo()
-
 		binding.tvDetailExpectationsNum.setOnClickListener {
 			(activity as? DetailActivity)?.changeFragER()
 		}

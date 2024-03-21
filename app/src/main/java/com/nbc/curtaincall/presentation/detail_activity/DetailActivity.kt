@@ -35,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
 
 			val direct = intent.getBooleanExtra(Constants.IS_DIRECT, false)
 			if (direct) {
-				detailViewPager.currentItem = 3
+				detailViewPager.setCurrentItem(3, false)
 			}
 		}
 
@@ -50,6 +50,7 @@ class DetailActivity : AppCompatActivity() {
 		val facilityId = intent.getStringExtra(Constants.FACILITY_ID)
 		if (showId != null && facilityId != null) {
 			detailViewModel.sharedId(showId, facilityId)
+			detailViewModel.fetchDetailInfo()
 		}
 	}
 
