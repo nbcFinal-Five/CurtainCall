@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.ActivityErBinding
-import com.nbc.curtaincall.ui.detail_activity.er.expectation.ExpectationListAdapter
+import com.nbc.curtaincall.presentation.detail_activity.er.expectation.ExpectationListAdapter
 import com.nbc.curtaincall.ui.detail_activity.er.review.ReviewListAdapter
 import com.nbc.curtaincall.ui.more.InfiniteScrollListener
 
@@ -18,7 +18,7 @@ class ErActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityErBinding
 
 	private val reviewAdapter by lazy { ReviewListAdapter() }
-	private val expectationAdapter by lazy { ExpectationListAdapter() }
+	private val expectationAdapter by lazy { ExpectationListAdapter(this) }
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -101,8 +101,8 @@ class ErActivity : AppCompatActivity() {
 		}
 
 		when (mode) {
-			"reviews" -> rvReviews.visibility = android.view.View.VISIBLE
-			"expectations" -> rvExpectations.visibility = android.view.View.VISIBLE
+			"reviews" -> rvReviews.visibility = View.VISIBLE
+			"expectations" -> rvExpectations.visibility = View.VISIBLE
 		}
 	}
 }
