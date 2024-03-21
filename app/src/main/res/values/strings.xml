@@ -177,6 +177,6 @@
   <string name="stats_my_expectation_count">기대평 총 갯수</string>
   <string name="stats_my_review_date">날짜별 리뷰 분포</string>
   <string name="stats_my_review_genre">장르별 리뷰 분포</string>
-  <string name="my_stats">나의 스탯</string>
+  <string name="my_stats">공연 지수</string>
   <string name="stats_genre">장르별(%)</string>
 </resources>
