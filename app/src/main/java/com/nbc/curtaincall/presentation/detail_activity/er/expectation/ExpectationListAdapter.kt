@@ -11,6 +11,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import com.nbc.curtaincall.databinding.ExpectationItemBinding
 import com.nbc.curtaincall.supabase.model.GetExpectationModel
+import java.time.OffsetDateTime
 
 class ExpectationListAdapter(
 	private val context: Context
@@ -29,14 +30,10 @@ class ExpectationListAdapter(
 				tvIsExpect.text = context.getString(R.string.bad)
 			}
 
-			val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX")
-			val dateTime = LocalDateTime.parse(item.createdAt, inputFormatter)
-
-			// 출력 형식 지정
 			val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
-			val outputDateString = dateTime.format(outputFormatter)
+			val offsetDateTime = OffsetDateTime.parse(item.createdAt).format(outputFormatter)
 
-			tvCreatedAt.text = outputDateString
+			tvCreatedAt.text = offsetDateTime.toString()
 		}
 	}
 
