@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -13,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.google.android.material.tabs.TabLayoutMediator
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
 import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
@@ -56,7 +54,8 @@ class HomeFragment : Fragment(), PosterClickListener {
         //페이지가 선택될 때 마다 호출
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-            binding.tvPageIndicator.text = "${position + 1} / 10"
+            binding.tvPageIndicator.text =
+                "${(position % upComingShowAdapter.currentList.size) + 1} / ${upComingShowAdapter.currentList.size}"
         }
     }
 
@@ -110,10 +109,6 @@ class HomeFragment : Fragment(), PosterClickListener {
             //PageChangeCallback
             registerOnPageChangeCallback(onPageChangeCallback)
 
-            //tab 연결
-            TabLayoutMediator(binding.tabPosterIndicator, this) { tab, position ->
-                currentItem = tab.position
-            }.attach()
         }
         //장르 연극 초기화
         viewModel.fetchGenre(0)
@@ -124,6 +119,11 @@ class HomeFragment : Fragment(), PosterClickListener {
         with(viewModel) {
             showList.observe(viewLifecycleOwner) {
                 upComingShowAdapter.submitList(it)
+                //포지션을 중간위치에 맞추기 위한 코드 / 추가된 리스트의 크기가 짝수/홀수 일때 처리 (인디케이터)
+                binding.viewPager.currentItem =
+                    if (upComingShowAdapter.itemCount % 2 == 0) (upComingShowAdapter.itemCount / 2)
+                    else (upComingShowAdapter.itemCount / 2) - (upComingShowAdapter.currentList.size / 2)
+                //페이징 초기화
                 if (!isPaging) startPaging()
             }
             topRank.observe(viewLifecycleOwner) {
@@ -135,17 +135,37 @@ class HomeFragment : Fragment(), PosterClickListener {
             kidShow.observe(viewLifecycleOwner) {
                 kidShowAdapter.submitList(it)
             }
-            //로딩 화면 처리
-            isLoadingGenre.observe(viewLifecycleOwner) {
-                binding.skeletonGenreLoading.isVisible = !it
+            with(binding) {
+                //로딩 화면 처리
+                isLoadingGenre.observe(viewLifecycleOwner) { state ->
+                    skeletonGenreLoading.isVisible = state
+                }
+                isLoadingRecommend.observe(viewLifecycleOwner) { state ->
+                    skeletonTopRankLoading.isVisible = state
+                }
+                isLoadingKid.observe(viewLifecycleOwner) { state ->
+                    skeletonKidLoading.isVisible = state
+                }
+                isServerErrorViewPager.observe(viewLifecycleOwner) { state ->
+                    ivViewpagerError.isVisible = state
+                    tvViewpagerError.isVisible = state
+                }
+                isServerErrorTopRank.observe(viewLifecycleOwner) { state ->
+                    ivTopRankError.isVisible = state
+                    tvTopRankError.isVisible = state
+                    rvHomeTopRank.isVisible = !state
+                }
+                isServerErrorGenre.observe(viewLifecycleOwner) { state ->
+                    ivGenreError.isVisible = state
+                    tvGenreError.isVisible = state
+                    rvHomeGenre.isVisible = !state
+                }
+                isServerErrorKid.observe(viewLifecycleOwner) { state ->
+                    ivKidError.isVisible = state
+                    tvKidError.isVisible = state
+                    rvHomeKidShow.isVisible = !state
+                }
             }
-            isLoadingRecommend.observe(viewLifecycleOwner) {
-                binding.skeletonTopRankLoading.isVisible = !it
-            }
-            isLoadingKid.observe(viewLifecycleOwner) {
-                binding.skeletonKidLoading.isVisible = !it
-            }
-
         }
     }
 
@@ -175,17 +195,16 @@ class HomeFragment : Fragment(), PosterClickListener {
     private fun nextPage() {
         runCatching {
             with(binding) {
-                if (viewPager.currentItem == 9) {
+                if (viewPager.currentItem == upComingShowAdapter.itemCount - 1) {
                     lifecycleScope.launch {
                         delay(3000)
                     }
-                    viewPager.currentItem = 0
+                    viewPager.currentItem =
+                        (upComingShowAdapter.itemCount / 2) - (upComingShowAdapter.currentList.size / 2)
                 } else {
                     viewPager.currentItem++
                 }
             }
-        }.onFailure {
-            Toast.makeText(context, "Exception nextPage()", Toast.LENGTH_SHORT).show()
         }
     }
 

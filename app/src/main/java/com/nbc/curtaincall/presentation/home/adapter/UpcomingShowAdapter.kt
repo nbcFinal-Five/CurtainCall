@@ -31,12 +31,13 @@ class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
                 tvPeriod.text = "${item.prfpdfrom} ~ ${item.prfpdto}"
                 tvFacilityName.text = item.fcltynm
                 ivHomeUpcomingShowPoster.setOnClickListener {
-                    item.mt20id?.let { it1 -> listener?.posterClicked(it1) }
+                    item.mt20id?.let { id -> listener?.posterClicked(id) }
                 }
             }
         }
     }
 
+    override fun getItemCount(): Int = currentList.size * currentList.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingShowViewHolder {
         val inflater =
             parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -45,6 +46,6 @@ class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
     }
 
     override fun onBindViewHolder(holder: UpcomingShowViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position % currentList.size])
     }
 }

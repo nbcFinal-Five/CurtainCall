@@ -30,35 +30,22 @@ interface FetchRemoteDatasource {
     //공연 목록
     @GET("pblprfr")
     suspend fun fetchShowList(
-        @Query("stdate") stdate: String = Constants.START_DATE,
-        @Query("eddate") eddate: String = Constants.END_DATE,
+        @Query("stdate") stdate: String,
+        @Query("eddate") eddate: String,
         @Query("cpage") cpage: String = Constants.CURRENT_PAGE,
         @Query("rows") rows: String = Constants.PAGE_INDEX,
-        @Query("openrun") openrun: String? = "N",
+        @Query("openrun") openrun: String? = null,
         @Query("newsql") newsql: String? = "Y",
         @Query("shcate") shcate: String? = null,
         @Query("kidstate") kidstate: String? = null,
         @Query("prfstate") prfstate: String? = null,
     ): DbsResponse
 
-    //장르별 공연
-    @GET("pblprfr")
-    suspend fun fetchGenre(
-        @Query("stdate") stdate: String = Constants.START_DATE,
-        @Query("eddate") eddate: String = Constants.END_DATE,
-        @Query("cpage") cpage: String = Constants.CURRENT_PAGE,
-        @Query("rows") rows: String = Constants.PAGE_INDEX,
-        @Query("openrun") openrun: String? = null,
-        @Query("shcate") shcate: String? = null,
-        @Query("newsql") newsql: String? = "Y",
-        @Query("prfstate") prfstate: String? = "02"
-    ): DbsResponse
-
     //박스오피스 랭킹순 목록
     @GET("boxoffice")
     suspend fun fetchTopRank(
         @Query("ststype") ststype: String,
-        @Query("date") date: String = Converter.newDateDayFormat(), //현재 날짜 하루 전을 yyyyMMdd 형식 으로 변환
+        @Query("date") date: String = Converter.nowDateOneDayAgo(), //현재 날짜 하루 전을 yyyyMMdd 형식 으로 변환
         @Query("catecode") catecode: String? = null,
         @Query("area") area: String? = null,
         @Query("newsql") newsql: String? = "Y",
