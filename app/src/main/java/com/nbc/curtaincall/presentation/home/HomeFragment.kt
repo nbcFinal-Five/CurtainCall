@@ -50,6 +50,7 @@ class HomeFragment : Fragment(), PosterClickListener {
     private val kidShowAdapter: KidShowAdapter by lazy { KidShowAdapter(this) }
     private var isPaging = false
     private var pagingJob: Job? = null
+    private var isPositionInit = false
     private val onPageChangeCallback: OnPageChangeCallback = object : OnPageChangeCallback() {
         //페이지가 선택될 때 마다 호출
         override fun onPageSelected(position: Int) {
@@ -119,10 +120,8 @@ class HomeFragment : Fragment(), PosterClickListener {
         with(viewModel) {
             showList.observe(viewLifecycleOwner) {
                 upComingShowAdapter.submitList(it)
-                //포지션을 중간위치에 맞추기 위한 코드 / 추가된 리스트의 크기가 짝수/홀수 일때 처리 (인디케이터)
-                binding.viewPager.currentItem =
-                    if (upComingShowAdapter.itemCount % 2 == 0) (upComingShowAdapter.itemCount / 2)
-                    else (upComingShowAdapter.itemCount / 2) - (upComingShowAdapter.currentList.size / 2)
+                //포지션 초기화 
+                if (!isPositionInit) positionInit()
                 //페이징 초기화
                 if (!isPaging) startPaging()
             }
@@ -217,6 +216,14 @@ class HomeFragment : Fragment(), PosterClickListener {
                 nextPage()
             }
         }
+    }
+
+    //포지션을 중간위치에 맞추기 위한 코드 / 추가된 리스트의 크기가 짝수/홀수 일때 처리 (인디케이터)
+    private fun positionInit() {
+        binding.viewPager.currentItem =
+            if (upComingShowAdapter.itemCount % 2 == 0) (upComingShowAdapter.itemCount / 2)
+            else (upComingShowAdapter.itemCount / 2) - (upComingShowAdapter.currentList.size / 2)
+        isPositionInit = true
     }
 
     override fun onDestroyView() {
