@@ -206,7 +206,7 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 				PieEntry(value?.toFloat() ?: 0F, "${genres[index]}")
 			}.filter { it.value > 0 }
 
-			val newPieDataSet = PieDataSet(newEntries, "장르별").apply {
+			val newPieDataSet = PieDataSet(newEntries, "").apply {
 				colors = colorsItems
 				valueTextColor = labelTextColor
 				valueLineColor = labelTextColor
