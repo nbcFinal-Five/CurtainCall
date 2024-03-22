@@ -136,6 +136,11 @@ class SearchFragment : Fragment(), PosterClickListener {
                 }
             }
 
+            // 서버 통신 문제시
+            searchViewModel.failureMessage.observe(viewLifecycleOwner) {
+                Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 
