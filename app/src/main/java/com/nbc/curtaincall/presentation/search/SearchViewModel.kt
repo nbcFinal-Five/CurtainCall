@@ -129,6 +129,7 @@ class SearchViewModel : ViewModel() {
                         _nextResultState.postValue(true)
                     }
                 } catch (e : Exception) {
+                    handleFailure(e)
                     Log.e(TAG, "loadMoreSearchResult: ${e.message}")
                 } finally {
                     _isNextLoading.value = false
@@ -187,8 +188,12 @@ class SearchViewModel : ViewModel() {
         canLoadMore = value
     }
 
+    fun setNextResultState (value: Boolean) {
+        _nextResultState.postValue(value)
+    }
+
     private fun handleFailure(exception: Exception) {
-        _failureMessage.value = "서버 오류가 발생하였습니다"
+        _failureMessage.value = "서버에서 응답을 받을 수 없습니다. \n나중에 다시 시도해주세요"
     }
 
     companion object{

@@ -1,30 +1,39 @@
-package com.nbc.curtaincall.ui.detail_activity.er.expectation
+package com.nbc.curtaincall.presentation.detail_activity.er.expectation
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.nbc.curtaincall.R
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import com.nbc.curtaincall.databinding.ExpectationItemBinding
 import com.nbc.curtaincall.supabase.model.GetExpectationModel
+import java.time.OffsetDateTime
 
-class ExpectationListAdapter :
+class ExpectationListAdapter(
+	private val context: Context
+) :
 	ListAdapter<GetExpectationModel, ExpectationListAdapter.ViewHolder>(ExpectationDiffCallback()) {
 	inner class ViewHolder(private val binding: ExpectationItemBinding) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(item: GetExpectationModel) = with(binding) {
 			tvName.text = item.profile.name
 			tvComment.text = item.comment
 
-			val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX")
-			val dateTime = LocalDateTime.parse(item.createdAt, inputFormatter)
+			if (item.isExpect) {
+				ivIsExpect.setImageResource(R.drawable.curtain_open)
+				tvIsExpect.text = context.getString(R.string.good)
+			} else {
+				ivIsExpect.setImageResource(R.drawable.curtain_close)
+				tvIsExpect.text = context.getString(R.string.bad)
+			}
 
-			// 출력 형식 지정
 			val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
-			val outputDateString = dateTime.format(outputFormatter)
+			val offsetDateTime = OffsetDateTime.parse(item.createdAt).format(outputFormatter)
 
-			tvCreatedAt.text = outputDateString
+			tvCreatedAt.text = offsetDateTime.toString()
 		}
 	}
 

@@ -12,7 +12,7 @@ import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentERBinding
 import com.nbc.curtaincall.fetch.model.DbResponse
 import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
-import com.nbc.curtaincall.ui.detail_activity.er.expectation.ExpectationFragment
+import com.nbc.curtaincall.presentation.detail_activity.er.expectation.ExpectationFragment
 import com.nbc.curtaincall.ui.detail_activity.er.review.ReviewFragment
 
 class ERFragment : Fragment() {
@@ -59,7 +59,7 @@ class ERFragment : Fragment() {
 			val prfState = firstShowDetail.prfstate
 			val shcate = firstShowDetail.genrenm
 
-			if (mt20id != null && mt10id != null && poster != null && prfState != null && shcate != null)  {
+			if (mt20id != null && mt10id != null && poster != null && prfState != null && shcate != null) {
 				changeFragmentByMode(
 					mt20id = mt20id,
 					mt10id = mt10id,
@@ -85,19 +85,21 @@ class ERFragment : Fragment() {
 		}
 	}
 
-	private fun changeFragmentByMode(mode: String, mt10id: String, mt20id: String, poster: String, prfState: String, shcate: String) {
+	private fun changeFragmentByMode(
+		mode: String,
+		mt10id: String,
+		mt20id: String,
+		poster: String,
+		prfState: String,
+		shcate: String
+	) {
 		with(binding) {
 			when (mode) {
 				ERViewModel.REVIEW -> {
-					setFragment(
-						ReviewFragment(
-							mt20id = mt20id,
-							mt10id = mt10id,
-							poster = poster,
-							prfState = prfState,
-							shcate = shcate
-						)
-					)
+					val fragment = ReviewFragment()
+					fragment.setData(mt20id, mt10id, poster, prfState, shcate)
+
+					setFragment(fragment)
 					btnReviews.setBackgroundResource(R.color.primary_color)
 					btnReviews.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
 
@@ -106,13 +108,11 @@ class ERFragment : Fragment() {
 				}
 
 				ERViewModel.EXPECTATION -> {
-					setFragment(
-						ExpectationFragment(
-							mt20id = mt20id,
-							mt10id = mt10id,
-							poster = poster
-						)
-					)
+					val fragment = ExpectationFragment()
+					fragment.setData(mt20id, mt10id, poster)
+
+					setFragment(fragment)
+
 					btnReviews.setBackgroundResource(R.color.component_background_color)
 					btnReviews.setTextColor(ContextCompat.getColor(requireActivity(), R.color.component_color))
 

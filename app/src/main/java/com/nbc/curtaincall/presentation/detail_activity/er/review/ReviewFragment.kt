@@ -22,13 +22,7 @@ import com.nbc.curtaincall.ui.UserViewModel
 import com.nbc.curtaincall.ui.auth.AuthActivity
 import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
 
-class ReviewFragment(
-	private val mt20id: String,
-	private val mt10id: String,
-	private val poster: String,
-	private val prfState: String,
-	private val shcate: String
-) : Fragment() {
+class ReviewFragment : Fragment() {
 	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val reviewViewModel by lazy { ViewModelProvider(this)[ReviewViewModel::class.java] }
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
@@ -51,6 +45,20 @@ class ReviewFragment(
 			binding.ivPoint4,
 			binding.ivPoint5
 		)
+	}
+
+	private var mt20id: String = ""
+	private var mt10id: String = ""
+	private var poster: String = ""
+	private var prfState: String = ""
+	private var shcate: String = ""
+
+	fun setData(mt20id: String, mt10id: String, poster: String, prfState: String, shcate: String) {
+		this.mt20id = mt20id
+		this.mt10id = mt10id
+		this.poster = poster
+		this.prfState = prfState
+		this.shcate = shcate
 	}
 
 	override fun onCreateView(
@@ -134,6 +142,8 @@ class ReviewFragment(
 					errorMessage = getString(R.string.already_point)
 				) {
 					detailViewModel.setInfo(mt20id)
+					etReview.setText("")
+					reviewViewModel.setComment("")
 				}
 			}
 		}

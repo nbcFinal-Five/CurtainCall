@@ -1,4 +1,4 @@
-package com.nbc.curtaincall.ui.detail_activity.er.expectation
+package com.nbc.curtaincall.presentation.detail_activity.er.expectation
 
 import android.content.Context
 import android.content.Intent
@@ -20,13 +20,10 @@ import com.nbc.curtaincall.supabase.model.PostExpectationModel
 import com.nbc.curtaincall.ui.UserViewModel
 import com.nbc.curtaincall.ui.auth.AuthActivity
 import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
+import com.nbc.curtaincall.ui.detail_activity.er.expectation.ExpectationViewModel
 
 
-class ExpectationFragment(
-	private val mt20id: String,
-	private val mt10id: String,
-	private val poster: String,
-) : Fragment() {
+class ExpectationFragment : Fragment() {
 	private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 	private val expectationViewModel by lazy { ViewModelProvider(this)[ExpectationViewModel::class.java] }
 	private val userViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
@@ -41,8 +38,14 @@ class ExpectationFragment(
 
 	private lateinit var listAdapter: ExpectationListAdapter
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
+	private var mt20id: String = ""
+	private var mt10id: String = ""
+	private var poster: String = ""
+
+	fun setData(mt20id: String, mt10id: String, poster: String) {
+		this.mt20id = mt20id
+		this.mt10id = mt10id
+		this.poster = poster
 	}
 
 	override fun onCreateView(
@@ -63,7 +66,7 @@ class ExpectationFragment(
 	}
 
 	private fun initList() {
-		listAdapter = ExpectationListAdapter()
+		listAdapter = ExpectationListAdapter(requireContext())
 
 		binding.rvExpectations.adapter = listAdapter
 		binding.rvExpectations.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -116,6 +119,8 @@ class ExpectationFragment(
 					errorMessage = getString(R.string.already_sakusei)
 				) {
 					detailViewModel.setInfo(mt20id)
+					etExpectation.setText("")
+					expectationViewModel.setComment("")
 				}
 			}
 		}

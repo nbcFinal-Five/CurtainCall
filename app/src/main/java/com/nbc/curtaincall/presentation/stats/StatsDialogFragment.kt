@@ -93,7 +93,7 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 
 					val nickname = response.name
 					withContext(Dispatchers.Main) {
-						binding.tvStaticsTitle.text = nickname + "님의 스탯"
+						binding.tvStaticsTitle.text = nickname + "님의 공연 지수"
 					}
 				} catch (e: RestException) {
 
@@ -154,40 +154,35 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 	private fun setPieChart() {
 		val genres = listOf("연극", "뮤지컬", "무용", "대중무용", "클래식", "국악", "대중음악", "서커스/마술", "복합")
 
-		val backgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
 		// PieChart를 binding에서 가져옵니다.
 		val pieChart = binding.pcGenreReview
 
 		// PieChart에 적용할 색상을 정의합니다.
 		val colorsItems = arrayListOf<Int>().apply {
-			addAll(ColorTemplate.VORDIPLOM_COLORS.asList())
-			addAll(ColorTemplate.JOYFUL_COLORS.asList())
-			addAll(ColorTemplate.COLORFUL_COLORS.asList())
-			addAll(ColorTemplate.LIBERTY_COLORS.asList())
-			addAll(ColorTemplate.PASTEL_COLORS.asList())
-			addAll(ColorTemplate.COLORFUL_COLORS.asList())
-			add(ColorTemplate.getHoloBlue())
+			addAll(ColorTemplate.MATERIAL_COLORS.asList())
 		}
 
 		// PieDataSet을 생성하고 데이터 및 스타일을 설정합니다.
 		val textColor = ContextCompat.getColor(requireContext(), R.color.filter_btn_text_color)
-
-		// PieChart에 생성한 데이터를 적용합니다.
-		val labelBackgroundColor = ContextCompat.getColor(requireContext(), R.color.component_color)
+		val backgroundColor = ContextCompat.getColor(requireContext(), R.color.background_color)
 		val labelTextColor = ContextCompat.getColor(requireContext(), R.color.text_color)
+
 
 		pieChart.apply {
 			description.isEnabled = false // 설명문구 표시 여부
 			isRotationEnabled = true // 차트 회전여부
 			centerText = getString(R.string.stats_genre) // 가운데에 표시할 텍스트 설정
 			setDrawCenterText(true)
-			setCenterTextSize(16f) // 가운데 텍스트 크기 설정
+			setCenterTextSize(18f) // 가운데 텍스트 크기 설정
 			setCenterTextRadiusPercent(100f) // 원 크기를 조정합니다.
-			setCenterTextColor(labelTextColor) // 텍스트 색상을 설정합니다.
-			setHoleColor(labelBackgroundColor) // 원의 배경 색상을 설정합니다.
 			setUsePercentValues(true) // 백분율로 표시할지 여부
-			setEntryLabelColor(textColor) // 항목 라벨 색상 설정
-			setBackgroundColor(backgroundColor)
+			setEntryLabelTypeface(Typeface.defaultFromStyle(Typeface.BOLD)) // 라벨 텍스트 굵기
+			setBackgroundColor(backgroundColor) // 차트 뒷 배경 색상
+			setCenterTextColor(labelTextColor) // 텍스트 색상을 설정합니다
+			setHoleColor(backgroundColor) // 원의 배경 색상을 설정합니다
+			setEntryLabelColor(labelTextColor) // 항목 라벨 색상 설정
+			setNoDataTextColor(labelTextColor) // 원형 데이터 나오기 직전 보여주는 text 색상
+			legend.textColor = labelTextColor // 하단 범례 글자 색상
 		}
 
 		CoroutineScope(Dispatchers.IO).launch {
@@ -200,7 +195,6 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 								eq(column = "user_id", value = userInfo.id)
 								eq(column = "shcate", value = it)
 							}
-
 							count(Count.EXACT)
 						}
 				}
@@ -212,9 +206,10 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 				PieEntry(value?.toFloat() ?: 0F, "${genres[index]}")
 			}.filter { it.value > 0 }
 
-			val newPieDataSet = PieDataSet(newEntries, "장르별").apply {
+			val newPieDataSet = PieDataSet(newEntries, "").apply {
 				colors = colorsItems
-				valueTextColor = textColor
+				valueTextColor = labelTextColor
+				valueLineColor = labelTextColor
 				valueTypeface = Typeface.defaultFromStyle(Typeface.BOLD)
 				valueTextSize = 18f
 			}
@@ -224,7 +219,7 @@ class StatsDialogFragment(private val userInfo: UserInfo) : DialogFragment() {
 			withContext(Dispatchers.Main) {
 				pieChart.apply {
 					data = newPieData
-					animateY(1400, Easing.EaseInOutQuad) // 애니메이션 설정
+					animateY(700, Easing.EaseInOutQuad) // 애니메이션 설정
 					animate() // 애니메이션 시작
 				}
 			}
