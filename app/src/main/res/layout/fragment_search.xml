@@ -58,7 +58,7 @@
     <TextView
         android:id="@+id/tv_searchfilter_addr"
         style="@style/SearchFilterStyle"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="13dp"
         android:text="@string/filter_addr"
         app:layout_constraintBottom_toBottomOf="@+id/tv_searchfilter_genre"
         app:layout_constraintEnd_toStartOf="@+id/tv_searchfilter_child"

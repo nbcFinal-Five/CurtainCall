@@ -157,7 +157,7 @@ class SearchFragment : Fragment(), PosterClickListener {
                         val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition() // RecyclerView에서 마지막으로 보이는 항목의 인덱스
 
                         // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
-                        if (!searchViewModel.isNextLoading.value!! &&
+                        if (searchViewModel.searchResultList.value != null && !searchViewModel.isNextLoading.value!! &&
                             totalItemCount <= lastVisibleItemPosition + visibleThreshold
                         ) {
                             searchViewModel.loadMoreSearchResult()
@@ -173,6 +173,7 @@ class SearchFragment : Fragment(), PosterClickListener {
                     }
                 }
 
+                // 무한스크롤로 인한 추가 데이터 요청시 로딩바 제공
                 searchViewModel.isNextLoading.observe(viewLifecycleOwner) {isloading ->
                     if(isloading) {
                         pbNextresultLoading.visibility = View.VISIBLE
@@ -277,6 +278,12 @@ class SearchFragment : Fragment(), PosterClickListener {
         super.onResume()
         // 검색했던 검색어 검색창에 불러오기
         binding.etSearch.setText(App.prefs.loadSearchWord())
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // 무한 스크롤 추가 검색 결과 없을 시 토스트 메세지 띄우는것 1회만 하도록
+        searchViewModel.setNextResultState(true)
     }
 
     override fun onDestroyView() {
