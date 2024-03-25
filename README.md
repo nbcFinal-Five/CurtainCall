@@ -6,8 +6,7 @@
   
   **세상의 모든 공연 정보를 모았다!** 
 
-> **공연중, 공연예정 정보를 보여주며, 장르별 핫한 공연목록을 제공해줍니다. 검색조건 필터를통해 원하는 공연을 찾아드립니다. 랭킹 차트를 통해 최근에 핫한 공연 정보까지 볼 수 있습니다.**
-> 
+> **공연중, 공연예정 정보를 보여주며, 장르별 핫한 공연목록을 제공해줍니다. 검색조건 필터를통해 원하는 공연을 찾아드립니다. 랭킹 차트를 통해 최근에 핫한 공연 정보까지 볼 수 있습니다.** 
 </aside>
 
 <aside>
@@ -72,11 +71,10 @@
     - 작성한 리뷰 공연 목록은 마이페이지 ShowCase 목록에 자동 연동
 - 간단/상세화면 미리보기
     
-
-- 기대평 및 리뷰화면 미리보기
-    
-
 ![detail](https://github.com/nbcFinal-Five/Shownect/assets/127379797/56297207-6854-4d77-bdde-727bc09dbc07)
+- 기대평 및 리뷰화면 미리보기
+  
+![er](https://github.com/nbcFinal-Five/Shownect/assets/127379797/5f29b1bd-b521-4756-8a5c-fc3764b12dd7)
 
 ### 마이페이지
 
@@ -152,3 +150,7 @@ firebase와 거의 비슷하지만 supabase는 데이터를 비교적 많이 사
 
 ## 🧑🏻‍💻**👩🏻‍💻 Team members**
 ![스크린샷 2024-03-25 170710](https://github.com/nbcFinal-Five/Shownect/assets/127379797/c8e6f415-1e3c-4dfd-b189-a40cc91e9b4f)
+
+이호   <https://github.com/dlho1222> / <https://dlho1222.tistory.com/>   
+이다익 <https://github.com/kkukileon305> / <https://velog.io/@kkukileon305>   
+최성진 <https://github.com/CodeNewbieee> / <https://long-study.tistory.com/>   
