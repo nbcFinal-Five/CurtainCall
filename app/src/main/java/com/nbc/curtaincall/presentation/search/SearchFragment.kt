@@ -261,6 +261,8 @@ class SearchFragment : Fragment(), PosterClickListener {
                 Toast.makeText(requireActivity(),R.string.search_result_reset,Toast.LENGTH_SHORT).show()
                 tvSearchNoresult.visibility = View.VISIBLE
                 ivSearchNoresult.visibility = View.VISIBLE
+                etSearch.setText("")
+                App.prefs.saveSearchWord("")
             }
         }
 
