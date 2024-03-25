@@ -88,6 +88,7 @@ class HomeViewModel(
                     ).showList
             }.onSuccess {
                 _isLoadingGenre.value = false
+                _isServerErrorGenre.value = false
             }.onFailure {
                 _isServerErrorGenre.value = true
                 _isLoadingGenre.value = false

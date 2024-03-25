@@ -228,6 +228,7 @@ class HomeFragment : Fragment(), PosterClickListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.spinnerHomeGenre.dismiss()
         _binding = null
         isPaging = false
         pagingJob?.cancel()
