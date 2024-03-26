@@ -6,7 +6,7 @@ object SearchFilterManager {
     val genreList = listOf<SearchFIlterData>(
         SearchFIlterData("서커스/마술","EEEB"),
         SearchFIlterData("클래식","CCCA"),
-        SearchFIlterData("cpBottomFutility","BBBC"),
+        SearchFIlterData("무용","BBBC"),
         SearchFIlterData("복합" , "EEEA"),
         SearchFIlterData("뮤지컬" , "GGGA"),
         SearchFIlterData("국악" , "CCCC"),

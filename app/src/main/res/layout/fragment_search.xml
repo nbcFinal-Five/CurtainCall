@@ -14,12 +14,12 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/shape_search_radius"
         android:hint="@string/input_search"
-        android:textSize="16sp"
         android:inputType="text|textAutoCorrect"
         android:paddingStart="20dp"
         android:singleLine="true"
         android:textColor="@color/text_color"
         android:textColorHint="@color/bottom_navi_item_color"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -178,6 +178,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ftb_scroll_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/bottom_navi_color"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_serach_gotop"
+        android:visibility="invisible"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

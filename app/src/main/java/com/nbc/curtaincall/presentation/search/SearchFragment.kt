@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -151,7 +152,11 @@ class SearchFragment : Fragment(), PosterClickListener {
                 layoutManager = GridLayoutManager(requireActivity(),3)
                 setHasFixedSize(true)
 
-                // 무한 스크롤을 위한 리사이클러뷰 위치 감지
+                val fadeIn = AlphaAnimation(0f,1f).apply { duration = 200 } // 서서히 나오기 , f는 투명도
+                val fadeOut = AlphaAnimation(1f,0f).apply { duration = 200 } // 서서히 사라지기, f는 투명도
+                var isTop = true
+
+                // 무한 스크롤 및 플로팅버튼을 위한 리사이클러뷰 위치 감지
                 addOnScrollListener(object: RecyclerView.OnScrollListener(){
                     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                         super.onScrollStateChanged(recyclerView, newState)
@@ -167,6 +172,22 @@ class SearchFragment : Fragment(), PosterClickListener {
                         ) {
                             searchViewModel.loadMoreSearchResult()
                         }
+
+                        if(!rvSearch.canScrollVertically(-1)&& newState==RecyclerView.SCROLL_STATE_IDLE){
+                            // 스크롤이 최상단인 상태면서 스크롤을 하지 않은 상태일때
+                            ftbScrollUp.startAnimation(fadeOut)
+                            ftbScrollUp.visibility = View.GONE
+                            isTop=true
+                        } else if(isTop) {
+                            ftbScrollUp.visibility = View.VISIBLE
+                            ftbScrollUp.startAnimation(fadeIn)
+                            isTop=false
+                        }
+
+                        ftbScrollUp.setOnClickListener {
+                            rvSearch.smoothScrollToPosition(0)
+                        }
+
                     }
                 })
 
