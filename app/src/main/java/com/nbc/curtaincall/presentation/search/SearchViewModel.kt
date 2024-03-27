@@ -83,8 +83,8 @@ class SearchViewModel : ViewModel() {
         val searchWord = searchWord.value
 
             viewModelScope.launch {
-                _isLoading.value = true
                 try {
+                    _isLoading.value = true
                     nextPage = 2
                     canLoadMore = true
                     val result = getSearchResultByFilter(searchWord, genre, addr, child)

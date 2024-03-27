@@ -3,7 +3,5 @@
     android:shape="rectangle">
     <corners android:radius="50dp"/>
     <solid android:color="@color/primary_color"/>
-    <stroke android:color="@color/bottom_navi_item_color"
-        android:width="2dp"/>
 
 </shape>
