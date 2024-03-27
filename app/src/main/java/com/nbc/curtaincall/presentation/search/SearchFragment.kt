@@ -154,7 +154,6 @@ class SearchFragment : Fragment(), PosterClickListener {
 
                 val fadeIn = AlphaAnimation(0f,1f).apply { duration = 200 } // 서서히 나오기 , f는 투명도
                 val fadeOut = AlphaAnimation(1f,0f).apply { duration = 200 } // 서서히 사라지기, f는 투명도
-                var isTop = true
 
                 // 무한 스크롤 및 플로팅버튼을 위한 리사이클러뷰 위치 감지
                 addOnScrollListener(object: RecyclerView.OnScrollListener(){
@@ -177,11 +176,9 @@ class SearchFragment : Fragment(), PosterClickListener {
                             // 스크롤이 최상단인 상태면서 스크롤을 하지 않은 상태일때
                             ftbScrollUp.startAnimation(fadeOut)
                             ftbScrollUp.visibility = View.GONE
-                            isTop=true
-                        } else if(isTop) {
+                        } else if(ftbScrollUp.visibility != View.VISIBLE) {
                             ftbScrollUp.visibility = View.VISIBLE
                             ftbScrollUp.startAnimation(fadeIn)
-                            isTop=false
                         }
 
                         ftbScrollUp.setOnClickListener {
@@ -277,13 +274,22 @@ class SearchFragment : Fragment(), PosterClickListener {
     private fun filterReset(){
         with(binding) {
             llSearchFilterReset.setOnClickListener {
-                searchViewModel.resetData()
-                searchListAdapter.submitList(null)
-                Toast.makeText(requireActivity(),R.string.search_result_reset,Toast.LENGTH_SHORT).show()
-                tvSearchNoresult.visibility = View.VISIBLE
-                ivSearchNoresult.visibility = View.VISIBLE
-                etSearch.setText("")
-                App.prefs.saveSearchWord("")
+                if(!searchViewModel.isLoading.value!! && !searchViewModel.isNextLoading.value!!) {
+                    // 검색결과 리스트 초기화
+                    searchViewModel.resetData()
+                    searchListAdapter.submitList(null)
+                    tvSearchNoresult.visibility = View.VISIBLE
+                    ivSearchNoresult.visibility = View.VISIBLE
+                    Toast.makeText(requireActivity(),R.string.search_result_reset,Toast.LENGTH_SHORT).show()
+                    // 검색어 초기화
+                    etSearch.setText("")
+                    App.prefs.saveSearchWord("")
+                    //플로팅 버튼 안보이게
+                    ftbScrollUp.visibility = View.INVISIBLE
+                    rvSearch.scrollToPosition(0)
+                } else {
+                    Toast.makeText(requireActivity(), R.string.search_reset_impossible, Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

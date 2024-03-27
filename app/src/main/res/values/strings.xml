@@ -152,6 +152,7 @@
 
   <!-- 검색화면 리셋 및 랭킹 화면 -->
   <string name="search_result_reset">검색 결과가 초기화 되었습니다</string>
+  <string name="search_reset_impossible">검색 결과를 불러오는 중입니다 \n결과가 완료된 후에 초기화를 시도해주세요</string>
   <string name="title_rank">Rank</string>
   <string name="rank_title">장르별 랭킹</string>
   <string name="rank_chip_day">일간</string>

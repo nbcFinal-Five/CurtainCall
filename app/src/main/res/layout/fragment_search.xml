@@ -184,11 +184,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/bottom_navi_color"
+        android:backgroundTint="@color/text_color"
         android:importantForAccessibility="no"
         android:src="@drawable/ic_serach_gotop"
         android:visibility="invisible"
-        app:fabSize="auto"
+        app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
