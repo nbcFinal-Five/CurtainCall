@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 		// 현재 선택된 아이템이 가장 왼쪽의 아이템인지 확인
 		if (navView.selectedItemId == R.id.navigation_home) {
 			// 뒤로가기 버튼을 눌렀을 때 동작
-			if (System.currentTimeMillis() - backPressdTime <= 2000) {
+			if (System.currentTimeMillis() - backPressdTime <= 2500) {
 				super.onBackPressed()
 				finish()
 			} else {
