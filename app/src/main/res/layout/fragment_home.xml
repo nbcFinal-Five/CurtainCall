@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="32dp"
-            android:text="공연 예정"
+            android:text="HOT 추천"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -73,42 +73,42 @@
             app:layout_constraintTop_toBottomOf="@id/iv_viewpager_error" />
 
         <TextView
-            android:id="@+id/tv_home_hot_recommend_title"
+            android:id="@+id/tv_home_upcoming_show_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/home_recommend"
+            android:layout_marginTop="253dp"
+            android:text="공연 예정"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewPager" />
+            app:layout_constraintTop_toBottomOf="@id/spinner_home_genre"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_top_rank"
+            android:id="@+id/rv_home_upcoming_show"
             android:layout_width="0dp"
             android:layout_height="205dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            app:layout_constraintBottom_toTopOf="@id/spinner_home_genre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_home_upcoming_show_title" />
 
         <ImageView
-            android:id="@+id/iv_top_rank_error"
+            android:id="@+id/iv_upcoming_show_error"
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:layout_marginTop="36dp"
             android:src="@drawable/ic_home_error"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_upcoming_show_title"
             app:tint="@color/component_color" />
 
         <TextView
-            android:id="@+id/tv_top_rank_error"
+            android:id="@+id/tv_upcoming_show_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -117,14 +117,15 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_top_rank_error" />
+            app:layout_constraintTop_toBottomOf="@id/iv_upcoming_show_error"
+            />
 
         <com.skydoves.powerspinner.PowerSpinnerView
             android:id="@+id/spinner_home_genre"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="253dp"
+            android:layout_marginTop="36dp"
             android:background="@null"
             android:gravity="start"
             android:padding="10dp"
@@ -132,7 +133,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title"
+            app:layout_constraintTop_toBottomOf="@id/viewPager"
             app:spinner_arrow_gravity="end"
             app:spinner_arrow_padding="8dp"
             app:spinner_divider_color="@color/white"
@@ -187,10 +188,8 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/rv_home_kid_show"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinner_home_genre" />
+            app:layout_constraintTop_toBottomOf="@id/tv_home_upcoming_show_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_kid_show"
@@ -227,13 +226,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_kid_error" />
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/skeleton_top_rank_loading"
+            android:id="@+id/skeleton_upcoming_show_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_hot_recommend_title">
+            app:layout_constraintTop_toBottomOf="@id/tv_home_upcoming_show_title">
 
             <include
                 layout="@layout/skeleton_home_poster"

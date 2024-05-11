@@ -140,7 +140,7 @@ class HomeFragment : Fragment(), PosterClickListener {
                     skeletonGenreLoading.isVisible = state
                 }
                 isLoadingRecommend.observe(viewLifecycleOwner) { state ->
-                    skeletonTopRankLoading.isVisible = state
+                    skeletonUpcomingShowLoading.isVisible = state
                 }
                 isLoadingKid.observe(viewLifecycleOwner) { state ->
                     skeletonKidLoading.isVisible = state
@@ -150,9 +150,9 @@ class HomeFragment : Fragment(), PosterClickListener {
                     tvViewpagerError.isVisible = state
                 }
                 isServerErrorTopRank.observe(viewLifecycleOwner) { state ->
-                    ivTopRankError.isVisible = state
-                    tvTopRankError.isVisible = state
-                    rvHomeTopRank.isVisible = !state
+                    ivUpcomingShowError.isVisible = state
+                    tvUpcomingShowError.isVisible = state
+                    rvHomeUpcomingShow.isVisible = !state
                 }
                 isServerErrorGenre.observe(viewLifecycleOwner) { state ->
                     ivGenreError.isVisible = state
@@ -172,7 +172,7 @@ class HomeFragment : Fragment(), PosterClickListener {
     private fun initRecyclerView() {
         with(binding) {
             //HOT 추천 리사이클러뷰
-            rvHomeTopRank.apply {
+            rvHomeUpcomingShow.apply {
                 adapter = topRankAdapter
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             }

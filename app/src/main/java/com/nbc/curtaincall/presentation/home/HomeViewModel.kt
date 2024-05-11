@@ -56,7 +56,7 @@ class HomeViewModel(
                     stdate = Converter.nowDateFormat(),
                     eddate = Converter.oneMonthFromNow(),
                     prfstate = "01",
-                    openrun = "Y"
+                    openrun = "N"
                 ).showList
             }.onFailure {
                 _isServerErrorViewPager.value = true
