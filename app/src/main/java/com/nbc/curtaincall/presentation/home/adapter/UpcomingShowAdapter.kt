@@ -26,18 +26,18 @@ class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
             with(binding) {
-                Glide.with(itemView).load(item.poster).into(ivHomeUpcomingShowPoster)
-                tvPerformanceName.text = item.prfnm
-                tvPeriod.text = "${item.prfpdfrom} ~ ${item.prfpdto}"
-                tvFacilityName.text = item.fcltynm
-                ivHomeUpcomingShowPoster.setOnClickListener {
+                Glide.with(itemView).load(item.poster).into(ivUpcomingShowPoster)
+                tvPlaceName.text = item.prfnm
+                tvUpcomingShowPeriod.text = "~ ${item.prfpdto}"
+                tvPerformanceName.text = item.fcltynm
+                tvGenre.text = item.genrenm
+                ivUpcomingShowPoster.setOnClickListener {
                     item.mt20id?.let { id -> listener?.posterClicked(id) }
                 }
             }
         }
     }
 
-    override fun getItemCount(): Int = currentList.size * currentList.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingShowViewHolder {
         val inflater =
             parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -46,6 +46,6 @@ class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
     }
 
     override fun onBindViewHolder(holder: UpcomingShowViewHolder, position: Int) {
-        holder.bind(currentList[position % currentList.size])
+        holder.bind(currentList[position])
     }
 }

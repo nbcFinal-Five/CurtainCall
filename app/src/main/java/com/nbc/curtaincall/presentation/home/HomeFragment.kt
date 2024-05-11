@@ -56,7 +56,9 @@ class HomeFragment : Fragment(), PosterClickListener {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
             binding.tvPageIndicator.text =
-                "${(position % upComingShowAdapter.currentList.size) + 1} / ${upComingShowAdapter.currentList.size}"
+                    //"${(position % topRankAdapter.currentList.size) + 1} / ${topRankAdapter.currentList.size}"
+                "${(position % topRankAdapter.currentList.size) + 1} / ${topRankAdapter.currentList.size}"
+
         }
     }
 
@@ -97,7 +99,7 @@ class HomeFragment : Fragment(), PosterClickListener {
 
         //viewpager 연결
         with(binding.viewPager) {
-            adapter = upComingShowAdapter
+            adapter = topRankAdapter
             //ViewPager PageTransformer 세팅
             offscreenPageLimit = 1
             setPageTransformer(SliderTransformer(requireContext()))
@@ -120,13 +122,13 @@ class HomeFragment : Fragment(), PosterClickListener {
         with(viewModel) {
             showList.observe(viewLifecycleOwner) {
                 upComingShowAdapter.submitList(it)
-                //포지션 초기화 
-                if (!isPositionInit) positionInit()
-                //페이징 초기화
-                if (!isPaging) startPaging()
             }
             topRank.observe(viewLifecycleOwner) {
                 topRankAdapter.submitList(it?.take(10))
+                //포지션 초기화
+                if (!isPositionInit) positionInit()
+                //페이징 초기화
+                if (!isPaging) startPaging()
             }
             genre.observe(viewLifecycleOwner) {
                 genreAdapter.submitList(it)
@@ -173,7 +175,7 @@ class HomeFragment : Fragment(), PosterClickListener {
         with(binding) {
             //HOT 추천 리사이클러뷰
             rvHomeUpcomingShow.apply {
-                adapter = topRankAdapter
+                adapter = upComingShowAdapter
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             }
             //장르별 리사이클러뷰
@@ -194,12 +196,12 @@ class HomeFragment : Fragment(), PosterClickListener {
     private fun nextPage() {
         runCatching {
             with(binding) {
-                if (viewPager.currentItem == upComingShowAdapter.itemCount - 1) {
+                if (viewPager.currentItem == topRankAdapter.itemCount - 1) {
                     lifecycleScope.launch {
                         delay(3000)
                     }
                     viewPager.currentItem =
-                        (upComingShowAdapter.itemCount / 2) - (upComingShowAdapter.currentList.size / 2)
+                        (topRankAdapter.itemCount / 2) - (topRankAdapter.currentList.size / 2)
                 } else {
                     viewPager.currentItem++
                 }
@@ -221,8 +223,9 @@ class HomeFragment : Fragment(), PosterClickListener {
     //포지션을 중간위치에 맞추기 위한 코드 / 추가된 리스트의 크기가 짝수/홀수 일때 처리 (인디케이터)
     private fun positionInit() {
         binding.viewPager.currentItem =
-            if (upComingShowAdapter.itemCount % 2 == 0) (upComingShowAdapter.itemCount / 2)
-            else (upComingShowAdapter.itemCount / 2) - (upComingShowAdapter.currentList.size / 2)
+//            if (topRankAdapter.itemCount % 2 == 0) (topRankAdapter.itemCount / 2)
+//            else (topRankAdapter.itemCount / 2) - (topRankAdapter.currentList.size / 2)
+            topRankAdapter.itemCount / 2
         isPositionInit = true
     }
 

@@ -26,12 +26,11 @@ class TopRankAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BoxofResponse) {
             with(binding) {
-                Glide.with(itemView).load("http://www.kopis.or.kr${item.poster}").into(ivHomeHotRecommend)
-                tvHotRecommendGenre.text = item.cate
-                tvHotRecommendPeriod.text = item.prfpd?.substring(10, 21)
-                tvHotRecommendPlaceName.text = item.prfplcnm
-                tvHotRecommendPerformanceName.text = item.prfnm
-                ivHomeHotRecommend.setOnClickListener {
+                Glide.with(itemView).load("http://www.kopis.or.kr${item.poster}").into(ivTopRankPoster)
+                tvPeriod.text = item.prfpd
+                tvFacilityName.text = item.prfplcnm
+                tvPerformanceName.text = item.prfnm
+                ivTopRankPoster.setOnClickListener {
                     item.mt20id?.let { id ->
                         listener?.posterClicked(
                             id
@@ -42,6 +41,7 @@ class TopRankAdapter(private val listener: PosterClickListener? = null) :
         }
     }
 
+    override fun getItemCount(): Int = currentList.size * currentList.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRankViewHolder {
         val inflater =
             parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -50,6 +50,6 @@ class TopRankAdapter(private val listener: PosterClickListener? = null) :
     }
 
     override fun onBindViewHolder(holder: TopRankViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position % currentList.size])
     }
 }

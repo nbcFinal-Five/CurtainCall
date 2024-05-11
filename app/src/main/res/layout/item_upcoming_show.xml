@@ -2,79 +2,79 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp">
 
     <ImageView
-        android:id="@+id/iv_home_upcoming_show_poster"
-        android:layout_width="220dp"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:background="@drawable/shape_searchlist_radius3"
+        android:id="@+id/iv_upcoming_show_poster"
+        style="@style/posterStyle"
         android:clipToOutline="true"
-        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@mipmap/ic_launcher" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/background_gradient"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/bg_home_gradient"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/item_bottom_rank_background_gradient"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_page_indicator_container"
+        app:layout_constraintBottom_toBottomOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintEnd_toEndOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintStart_toStartOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintTop_toTopOf="@id/iv_upcoming_show_poster"
         app:layout_constraintVertical_bias="1" />
 
     <TextView
-        android:id="@+id/tv_performance_state"
+        android:id="@+id/tv_upcoming_show_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/home_top_upcoming_text"
-        android:textColor="#FFFFFF"
+        android:layout_margin="6dp"
+        android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_performance_name"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintEnd_toEndOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintTop_toTopOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintVertical_bias="1"
+        tools:text="~2024.03.31" />
+
+    <TextView
+        android:id="@+id/tv_genre"
+        style="@style/posterTopLabel"
+        android:layout_height="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="대중음악" />
+
+    <TextView
+        android:id="@+id/tv_showing_state"
+        style="@style/posterTopLabel"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:text="공연중"
+        app:layout_constraintBottom_toBottomOf="@id/tv_genre"
+        app:layout_constraintStart_toEndOf="@id/tv_genre"
+        app:layout_constraintTop_toTopOf="@id/tv_genre" />
 
     <TextView
         android:id="@+id/tv_performance_name"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_period"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="현대음악앙상블 소리의 동방신곡 프로젝트 7, 작곡가 지성민: 들을 수 없는 소리" />
-
-    <TextView
-        android:id="@+id/tv_period"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:textColor="#A9A9A9"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_facility_name"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="2024-03-01 ~ 2024-04-01" />
-
-    <TextView
-        android:id="@+id/tv_facility_name"
+        style="@style/HomePosterTitleStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="12dp"
-        android:textColor="#E2E2E2"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="공연장 명" />
+        app:layout_constraintEnd_toEndOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintStart_toStartOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintTop_toBottomOf="@id/iv_upcoming_show_poster"
+        tools:text="IU H. E. R. WORLD TOUR CONCERT [서울]" />
+
+    <TextView
+        android:id="@+id/tv_place_name"
+        style="@style/HomePosterPlaceNameStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintStart_toStartOf="@id/iv_upcoming_show_poster"
+        app:layout_constraintTop_toBottomOf="@id/tv_performance_name"
+        tools:text="올림픽공원 KSPO DOME(체조경기장)" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

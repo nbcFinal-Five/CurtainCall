@@ -2,68 +2,67 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="12dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iv_home_hot_recommend"
-        style="@style/posterStyle"
+        android:id="@+id/iv_top_rank_poster"
+        android:layout_width="220dp"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:background="@drawable/shape_searchlist_radius3"
         android:clipToOutline="true"
-        android:src="@mipmap/ic_launcher"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
 
     <View
-        android:id="@+id/item_bottom_rank_background_gradient"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:background="@drawable/bg_page_indicator_container"
-        app:layout_constraintBottom_toBottomOf="@id/iv_home_hot_recommend"
-        app:layout_constraintEnd_toEndOf="@id/iv_home_hot_recommend"
-        app:layout_constraintStart_toStartOf="@id/iv_home_hot_recommend"
-        app:layout_constraintTop_toTopOf="@id/iv_home_hot_recommend"
+        android:id="@+id/background_gradient"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_home_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1" />
 
     <TextView
-        android:id="@+id/tv_hot_recommend_period"
+        android:id="@+id/tv_performance_name"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_period"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="현대음악앙상블 소리의 동방신곡 프로젝트 7, 작곡가 지성민: 들을 수 없는 소리" />
+
+    <TextView
+        android:id="@+id/tv_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:textColor="@color/white"
+        android:layout_marginStart="12dp"
+        android:textColor="#A9A9A9"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_home_hot_recommend"
-        app:layout_constraintEnd_toEndOf="@id/iv_home_hot_recommend"
-        app:layout_constraintTop_toTopOf="@id/iv_home_hot_recommend"
-        app:layout_constraintVertical_bias="1"
-        tools:text="~2024.03.31" />
+        app:layout_constraintBottom_toTopOf="@id/tv_facility_name"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="2024-03-01 ~ 2024-04-01" />
 
     <TextView
-        android:id="@+id/tv_hot_recommend_genre"
-        style="@style/posterTopLabel"
-        android:layout_height="25dp"
-        app:layout_constraintStart_toStartOf="@id/iv_home_hot_recommend"
-        app:layout_constraintTop_toTopOf="@id/iv_home_hot_recommend"
-        tools:text="무용(서양/한국무용)" />
-
-    <TextView
-        android:id="@+id/tv_hot_recommend_performance_name"
-        style="@style/HomePosterTitleStyle"
+        android:id="@+id/tv_facility_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/iv_home_hot_recommend"
-        app:layout_constraintStart_toStartOf="@id/iv_home_hot_recommend"
-        app:layout_constraintTop_toBottomOf="@id/iv_home_hot_recommend"
-        tools:text="IU H. E. R. WORLD TOUR CONCERT [서울]" />
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="#E2E2E2"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="공연장 명" />
 
-    <TextView
-        android:id="@+id/tv_hot_recommend_place_name"
-        style="@style/HomePosterPlaceNameStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/tv_hot_recommend_performance_name"
-        app:layout_constraintStart_toStartOf="@id/tv_hot_recommend_performance_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_hot_recommend_performance_name"
-        tools:text="올림픽공원 KSPO DOME(체조경기장)" />
 </androidx.constraintlayout.widget.ConstraintLayout>
