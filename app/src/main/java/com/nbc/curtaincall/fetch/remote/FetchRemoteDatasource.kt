@@ -55,6 +55,7 @@ interface FetchRemoteDatasource {
     @GET("pblprfr/{id}")
     suspend fun fetchShowDetail(
         @Path("id") path: String,
+        @Query("newsql") newsql: String = "Y",
     ): DbsResponse
 
     // 공연장 정보

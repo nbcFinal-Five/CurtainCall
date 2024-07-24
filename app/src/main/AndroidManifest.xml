@@ -21,17 +21,9 @@
             android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.detail_activity.er.more.ErActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.detail_activity.DetailActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.more.MoreActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.auth.AuthActivity"
-            android:exported="false" />
+
         <activity
             android:name=".presentation.main.SplashActivity"
             android:exported="true"

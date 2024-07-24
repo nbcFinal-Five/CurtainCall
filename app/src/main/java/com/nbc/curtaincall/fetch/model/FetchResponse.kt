@@ -72,6 +72,9 @@ data class DbResponse @JvmOverloads constructor(
     @field:Element(name = "styurls", required = false)
     var styurls: Styurls? = null,
 
+    @field:Element(name = "relates", required = false)
+    var relates: Relates? = null,
+
     //공연장 정보
     @field:Element(name = "telno", required = false)
     var telno: String? = null,
@@ -81,6 +84,39 @@ data class DbResponse @JvmOverloads constructor(
 
     @field:Element(name = "adres", required = false)
     var adres: String? = null,
+
+    @field:Element(name = "entrpsnmP", required = false)
+    var entpsnmP: String? = null,
+
+    @field:Element(name = "entrpsnmA", required = false)
+    var entpsnmA: String? = null,
+
+    @field:Element(name = "entrpsnmH", required = false)
+    var entpsnmH: String? = null,
+
+    @field:Element(name = "entrpsnmS", required = false)
+    var entpsnmS: String? = null,
+
+    @field:Element(name = "visit", required = false)
+    var visit: String? = null,
+
+    @field:Element(name = "child", required = false)
+    var child: String? = null,
+
+    @field:Element(required = false)
+    var daehakro: String? = null,
+
+    @field:Element(required = false)
+    var festival: String? = null,
+
+    @field:Element(required = false)
+    var musicallicense: String? = null,
+
+    @field:Element(required = false)
+    var musicalcreate: String? = null,
+
+    @field:Element(required = false)
+    var updatedate: String? = null,
 
     @field:Element(name = "la", required = false)
     var la: String? = null,
@@ -102,7 +138,8 @@ data class DbResponse @JvmOverloads constructor(
 
     @field:Element(name = "opende", required = false)
     var opende: String? = null,
-)
+
+    )
 
 @Root(name = "boxofs")
 data class BoxOfsResponse @JvmOverloads constructor(
@@ -148,3 +185,20 @@ data class Styurls @JvmOverloads constructor(
     @field:ElementList(name = "styurl", entry = "styurl", inline = true, required = false)
     var styurlList: List<String>? = null
 )
+
+@Root(name = "relates")
+data class Relates @JvmOverloads constructor(
+    @field:ElementList(name = "relate", entry = "relate", inline = true, required = false)
+    var relatesList: List<Relate>? = null
+)
+
+@Root(name = "relate")
+data class Relate @JvmOverloads constructor(
+    @field:Element(name = "relatenm", required = false)
+    var relatenm: String? = null,
+
+    @field:Element(name = "relateurl", required = false)
+    var relateurl: String? = null
+)
+
+

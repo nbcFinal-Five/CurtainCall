@@ -41,7 +41,7 @@ class FetchRepositoryImpl(private val fetch: FetchRemoteDatasource) : FetchRemot
             fetch.fetchTopRank(catecode = catecode, ststype = ststype, date = date)
         }
 
-    override suspend fun fetchShowDetail(path: String): DbsResponse =
+    override suspend fun fetchShowDetail(path: String,newsql: String): DbsResponse =
         withContext(Dispatchers.IO) {
             fetch.fetchShowDetail(path = path)
         }
