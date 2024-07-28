@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1133666442",
+    "project_id": "shownect",
+    "storage_bucket": "shownect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1133666442:android:5563f19c8ec07c14258d73",
+        "android_client_info": {
+          "package_name": "com.nbc.curtaincall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGO5hTDvG-bbRoT_Me-M1BNYN8YXYoAKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

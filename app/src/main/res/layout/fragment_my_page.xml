@@ -93,48 +93,13 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="2dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_review_count_title">
 
                 <include layout="@layout/skeleton_review_count" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_auth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/tv_my_page_showcase"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_title">
-
-            <TextView
-                android:id="@+id/tv_login_ment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:text="@string/need_login"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_open_auth_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_open_auth_activity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_gradient"
-                    android:text="@string/sign_in"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_my_page_showcase"
@@ -186,6 +151,7 @@
             android:id="@+id/cl_review_skeleton"
             android:layout_width="match_parent"
             android:layout_height="332dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/rv_showcase"
             app:layout_constraintTop_toTopOf="@id/rv_showcase">
 
@@ -301,6 +267,7 @@
             android:id="@+id/cl_bookmark_skeleton"
             android:layout_width="match_parent"
             android:layout_height="332dp"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="@id/rv_bookmarks">
 
             <include layout="@layout/skeleton_my_page" />
