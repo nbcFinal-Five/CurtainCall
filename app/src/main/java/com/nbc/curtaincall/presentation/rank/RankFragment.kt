@@ -14,32 +14,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentRankBinding
-import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
-import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.presentation.rank.adpter.RankAdapter
 import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 import com.nbc.curtaincall.ui.main.MainViewModel
-import com.nbc.curtaincall.ui.main.MainViewModelFactory
 import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
 
 class RankFragment : Fragment(), PosterClickListener {
     private var _binding: FragmentRankBinding? = null
     private val binding get() = _binding!!
     private val rankAdapter: RankAdapter by lazy { RankAdapter(this) }
-    private val viewModel: RankViewModel by viewModels {
-        RankViewModelFactory(
-            fetchRemoteRepository = FetchRepositoryImpl(
-                fetch
-            )
-        )
-    }
-    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel> {
-        MainViewModelFactory(
-            fetchRemoteRepository = FetchRepositoryImpl(
-                fetch
-            )
-        )
-    }
+    private val viewModel: RankViewModel by viewModels()
+    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

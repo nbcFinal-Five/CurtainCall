@@ -16,12 +16,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SimpleInfoBottomsheetDialogBinding
-import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
-import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.ui.detail_activity.DetailActivity
 import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
 import com.nbc.curtaincall.ui.main.MainViewModel
-import com.nbc.curtaincall.ui.main.MainViewModelFactory
 import com.nbc.curtaincall.util.Constants
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -30,11 +27,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
 
     private var _binding: SimpleInfoBottomsheetDialogBinding? = null
     private val binding get() = _binding!!
-    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel> {
-        MainViewModelFactory(
-            fetchRemoteRepository = FetchRepositoryImpl(fetch = fetch)
-        )
-    }
+    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
     private var ticketId = ""
     private var facilityId = ""
 

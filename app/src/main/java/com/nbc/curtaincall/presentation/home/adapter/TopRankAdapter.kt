@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nbc.curtaincall.databinding.ItemTopRankBinding
-import com.nbc.curtaincall.fetch.model.BoxofResponse
+import com.nbc.curtaincall.data.model.BoxofResponse
 
 class TopRankAdapter(private val listener: PosterClickListener? = null) :
     ListAdapter<BoxofResponse, TopRankAdapter.TopRankViewHolder>(object :

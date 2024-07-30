@@ -3,18 +3,18 @@ package com.nbc.curtaincall.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.nbc.curtaincall.fetch.model.BoxofResponse
-import com.nbc.curtaincall.fetch.model.DbResponse
-import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
+import com.nbc.curtaincall.data.model.BoxofResponse
+import com.nbc.curtaincall.data.model.DbResponse
+import com.nbc.curtaincall.domain.repository.FetchRepository
 import com.nbc.curtaincall.util.Constants
 import com.nbc.curtaincall.util.Converter
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(
-    private val fetchRemoteRepository: FetchRepositoryImpl,
-) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val fetch: FetchRepository) : ViewModel() {
     private val _showList = MutableLiveData<List<DbResponse>?>()
     val showList: LiveData<List<DbResponse>?> get() = _showList
 
@@ -52,11 +52,11 @@ class HomeViewModel(
     fun fetchUpcoming() {
         viewModelScope.launch {
             runCatching {
-                _showList.value = fetchRemoteRepository.fetchShowList(
-                    stdate = Converter.nowDateFormat(),
-                    eddate = Converter.oneMonthFromNow(),
-                    prfstate = "01",
-                    openrun = "N"
+                _showList.value = fetch.fetchShowList(
+                    showState = "02",
+                    newSQL = "Y",
+                    genreCode = null,
+                    kidState = "N"
                 ).showList
             }.onFailure {
                 _isServerErrorViewPager.value = true
@@ -67,7 +67,13 @@ class HomeViewModel(
     fun fetchTopRank() {
         viewModelScope.launch {
             runCatching {
-                _topRank.value = fetchRemoteRepository.fetchTopRank("week").boxof
+                _topRank.value = fetch.fetchTopRank(
+                    dateCode = "week",
+                    date = Converter.nowDateOneDayAgo(),
+                    genreCode = null,
+                    area = "11",
+                    newSQL = "Y"
+                ).boxof
             }.onSuccess {
                 _isLoadingRecommend.value = false
             }.onFailure {
@@ -81,10 +87,11 @@ class HomeViewModel(
         viewModelScope.launch {
             runCatching {
                 _genre.value =
-                    fetchRemoteRepository.fetchShowList(
-                        stdate = Converter.nowDateFormat(),
-                        eddate = Converter.oneMonthFromNow(),
-                        shcate = getGenreCode(genre),
+                    fetch.fetchShowList(
+                        genreCode = getGenreCode(genre),
+                        kidState = "N",
+                        showState = "01",
+                        newSQL = "Y"
                     ).showList
             }.onSuccess {
                 _isLoadingGenre.value = false
@@ -99,11 +106,11 @@ class HomeViewModel(
     fun fetchKidShow() {
         viewModelScope.launch {
             runCatching {
-                _kidShow.value = fetchRemoteRepository.fetchShowList(
-                    stdate = Converter.nowDateFormat(),
-                    eddate = Converter.oneMonthFromNow(),
-                    kidstate = "Y",
-                    openrun = "Y"
+                _kidShow.value = fetch.fetchShowList(
+                    kidState = "Y",
+                    newSQL = "Y",
+                    genreCode = null,
+                    showState = "01",
                 ).showList
             }.onSuccess {
                 _isLoadingKid.value = false
@@ -128,14 +135,6 @@ class HomeViewModel(
             8 -> Constants.MUSICAL
             else -> Constants.DRAMA
         }
-    }
-}
-
-class HomeViewModelFactory(
-    private val fetchRemoteRepository: FetchRepositoryImpl,
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return HomeViewModel(fetchRemoteRepository) as T
     }
 }
 

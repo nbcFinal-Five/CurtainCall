@@ -6,6 +6,7 @@ plugins {
     id("kotlin-kapt")
     kotlin("plugin.serialization") version "1.9.22"
     id("com.google.gms.google-services")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -122,4 +123,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
+
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 }

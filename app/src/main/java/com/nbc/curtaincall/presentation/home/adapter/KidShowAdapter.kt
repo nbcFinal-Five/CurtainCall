@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nbc.curtaincall.databinding.ItemKidShowBinding
-import com.nbc.curtaincall.fetch.model.DbResponse
+import com.nbc.curtaincall.data.model.DbResponse
 
 class KidShowAdapter(private val listener: PosterClickListener? = null) :
     ListAdapter<DbResponse, KidShowAdapter.KidShowViewHolder>(object :

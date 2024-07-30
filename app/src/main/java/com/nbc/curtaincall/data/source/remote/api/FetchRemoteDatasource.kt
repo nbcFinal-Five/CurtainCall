@@ -1,7 +1,7 @@
-package com.nbc.curtaincall.fetch.remote
+package com.nbc.curtaincall.data.source.remote.api
 
-import com.nbc.curtaincall.fetch.model.BoxOfsResponse
-import com.nbc.curtaincall.fetch.model.DbsResponse
+import com.nbc.curtaincall.data.model.BoxOfsResponse
+import com.nbc.curtaincall.data.model.DbsResponse
 import com.nbc.curtaincall.util.Constants
 import com.nbc.curtaincall.util.Converter
 import retrofit2.http.GET
@@ -30,32 +30,31 @@ interface FetchRemoteDatasource {
     //공연 목록
     @GET("pblprfr")
     suspend fun fetchShowList(
-        @Query("stdate") stdate: String,
-        @Query("eddate") eddate: String,
-        @Query("cpage") cpage: String = Constants.CURRENT_PAGE,
+        @Query("stdate") startDate: String = Converter.nowDateFormat(),
+        @Query("eddate") endDate: String = Converter.oneMonthFromNow(),
+        @Query("cpage") currentPage: String = Constants.CURRENT_PAGE,
         @Query("rows") rows: String = Constants.PAGE_INDEX,
-        @Query("openrun") openrun: String? = null,
-        @Query("newsql") newsql: String? = "Y",
-        @Query("shcate") shcate: String? = null,
-        @Query("kidstate") kidstate: String? = null,
-        @Query("prfstate") prfstate: String? = null,
+        @Query("newsql") newSQL: String? = "Y",
+        @Query("shcate") genreCode: String? = null,
+        @Query("kidstate") kidState: String? = null,
+        @Query("prfstate") showState: String? = null,
     ): DbsResponse
 
     //박스오피스 랭킹순 목록
     @GET("boxoffice")
     suspend fun fetchTopRank(
-        @Query("ststype") ststype: String,
+        @Query("ststype") dateCode: String,
         @Query("date") date: String = Converter.nowDateOneDayAgo(), //현재 날짜 하루 전을 yyyyMMdd 형식 으로 변환
-        @Query("catecode") catecode: String? = null,
+        @Query("catecode") genreCode: String? = null,
         @Query("area") area: String? = null,
-        @Query("newsql") newsql: String? = "Y",
+        @Query("newsql") newSQL: String? = "Y",
     ): BoxOfsResponse
 
     //공연 상세 정보
     @GET("pblprfr/{id}")
     suspend fun fetchShowDetail(
         @Path("id") path: String,
-        @Query("newsql") newsql: String = "Y",
+        @Query("newsql") newSQL: String = "Y",
     ): DbsResponse
 
     // 공연장 정보
@@ -77,4 +76,11 @@ interface FetchRemoteDatasource {
  * @property EEEA 복합
  * @property EEEB 서커스/마술
  * @property GGGA 뮤지컬
+ */
+
+/**
+ * dateCode 필수
+ * @property month (월별)
+ * @property dayWeek (요일별)
+ * @property day (일별)
  */

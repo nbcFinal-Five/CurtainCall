@@ -20,11 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentSearchBinding
-import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
-import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 import com.nbc.curtaincall.ui.main.MainViewModel
-import com.nbc.curtaincall.ui.main.MainViewModelFactory
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchAddrBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchChildrenBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchGenreBottomSheet
@@ -40,13 +37,7 @@ class SearchFragment : Fragment(), PosterClickListener {
     private val binding get() = _binding!!
     private val searchListAdapter by lazy { SearchListAdapter(this) }
     private val searchViewModel  by activityViewModels<SearchViewModel>()
-    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel> {
-        MainViewModelFactory(
-            fetchRemoteRepository = FetchRepositoryImpl(
-                RetrofitClient.fetch
-            )
-        )
-    }
+    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

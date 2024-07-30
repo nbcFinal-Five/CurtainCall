@@ -3,13 +3,15 @@ package com.nbc.curtaincall.presentation.rank
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.nbc.curtaincall.fetch.model.BoxofResponse
-import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
+import com.nbc.curtaincall.data.model.BoxofResponse
+import com.nbc.curtaincall.domain.repository.FetchRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : ViewModel() {
+@HiltViewModel
+class RankViewModel @Inject constructor(private val fetch: FetchRepository) : ViewModel() {
     private val _rankInitList = MutableLiveData<List<BoxofResponse>?>()
     val rankInitList: LiveData<List<BoxofResponse>?> get() = _rankInitList
     private val _isRankLoading = MutableLiveData<Boolean>(true)
@@ -27,8 +29,12 @@ class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : Vi
         viewModelScope.launch {
             runCatching {
                 _isRankLoading.value = true
-                _rankInitList.value = fetchRemoteRepository.fetchTopRank(
-                    ststype = "day",
+                _rankInitList.value = fetch.fetchTopRank(
+                    dateCode = "day",
+                    date = "20240701",
+                    genreCode = "AAAA",
+                    area = "01",
+                    newSQL = "Y"
                 ).boxof
                 _isRankLoading.value = false
             }
@@ -41,9 +47,12 @@ class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : Vi
             runCatching {
                 _isRankLoading.value = true
                 _rankList.value =
-                    fetchRemoteRepository.fetchTopRank(
-                        ststype = getPeriod(selectedPeriod),
-                        catecode = getGenre(selectedGenre)
+                    fetch.fetchTopRank(
+                        dateCode = getPeriod(selectedPeriod),
+                        genreCode = getGenre(selectedGenre),
+                        area = "01",
+                        newSQL = "Y",
+                        date = "20240701"
                     ).boxof
                 _isRankLoading.value = false
             }
@@ -81,12 +90,4 @@ class RankViewModel(private val fetchRemoteRepository: FetchRepositoryImpl) : Vi
         }
     }
 
-}
-
-class RankViewModelFactory(
-    private val fetchRemoteRepository: FetchRepositoryImpl,
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return RankViewModel(fetchRemoteRepository) as T
-    }
 }

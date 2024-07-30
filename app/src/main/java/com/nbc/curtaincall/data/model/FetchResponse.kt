@@ -1,4 +1,4 @@
-package com.nbc.curtaincall.fetch.model
+package com.nbc.curtaincall.data.model
 
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList

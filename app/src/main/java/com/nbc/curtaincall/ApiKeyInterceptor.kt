@@ -1,4 +1,4 @@
-package com.nbc.curtaincall.fetch.network.retrofit
+package com.nbc.curtaincall
 
 import com.nbc.curtaincall.BuildConfig.KOPIS_API_KEY
 import okhttp3.Interceptor

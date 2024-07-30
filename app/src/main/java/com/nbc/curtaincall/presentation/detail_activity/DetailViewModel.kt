@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nbc.curtaincall.fetch.model.DbResponse
-import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
-import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
+import com.nbc.curtaincall.data.model.DbResponse
+import com.nbc.curtaincall.domain.repository.FetchRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailViewModel : ViewModel() {
-    private val fetchRemoteRepository: FetchRepositoryImpl = FetchRepositoryImpl(fetch = fetch)
+@HiltViewModel
+class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : ViewModel() {
     private lateinit var showId: String //공연 id
     private lateinit var facilityId: String //공연장 id
     private val _detailInfoList = MutableLiveData<List<DbResponse>?>()
@@ -42,7 +43,7 @@ class DetailViewModel : ViewModel() {
         viewModelScope.launch {
             runCatching {
                 _detailInfoList.value =
-                    fetchRemoteRepository.fetchShowDetail(path = showId).showList
+                    fetch.fetchShowDetail(path = showId,"Y").showList
             }
         }
     }

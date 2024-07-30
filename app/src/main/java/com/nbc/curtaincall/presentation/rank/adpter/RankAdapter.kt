@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nbc.curtaincall.databinding.ItemRankBinding
-import com.nbc.curtaincall.fetch.model.BoxofResponse
+import com.nbc.curtaincall.data.model.BoxofResponse
 import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 
 class RankAdapter(private val listener: PosterClickListener? = null) :

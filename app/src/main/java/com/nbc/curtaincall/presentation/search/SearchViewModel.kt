@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.chip.Chip
-import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient
+import com.nbc.curtaincall.di.RetrofitClientModule
 import com.nbc.curtaincall.search.model.SearchItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -100,7 +100,7 @@ class SearchViewModel : ViewModel() {
 
     // 필터 조건 기준 , null 가능하게 해야
     suspend fun getSearchResultByFilter(search: String?, genre: String?, addr: String?,  child: String?) = withContext(Dispatchers.IO) {
-        RetrofitClient.search.getSearchFilterShowList(cpage = 1, shprfnm = search, shcate = genre, signgucode = addr, kidstate = child).searchShowList
+        RetrofitClientModule.search.getSearchFilterShowList(cpage = 1, shprfnm = search, shcate = genre, signgucode = addr, kidstate = child).searchShowList
     }
 
     fun loadMoreSearchResult() {
@@ -139,7 +139,7 @@ class SearchViewModel : ViewModel() {
     }
 
     private suspend fun getSearchResultNextPage(nextPage: Int, search: String?, genre: String?, addr: String?,  child: String?) = withContext(Dispatchers.IO) {
-        RetrofitClient.search.getSearchFilterShowList(cpage = nextPage, shprfnm = search, shcate = genre, signgucode = addr, kidstate = child).searchShowList
+        RetrofitClientModule.search.getSearchFilterShowList(cpage = nextPage, shprfnm = search, shcate = genre, signgucode = addr, kidstate = child).searchShowList
     }
 
     // 필터 창에서 선택한 값들을 filterResultList에 담기

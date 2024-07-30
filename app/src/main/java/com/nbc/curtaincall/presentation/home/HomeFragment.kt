@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
-import com.nbc.curtaincall.fetch.network.retrofit.RetrofitClient.fetch
-import com.nbc.curtaincall.fetch.repository.impl.FetchRepositoryImpl
 import com.nbc.curtaincall.presentation.home.HorizontalMarginItemDecoration
 import com.nbc.curtaincall.ui.home.adapter.GenreAdapter
 import com.nbc.curtaincall.ui.home.adapter.KidShowAdapter
@@ -23,27 +21,18 @@ import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 import com.nbc.curtaincall.ui.home.adapter.TopRankAdapter
 import com.nbc.curtaincall.ui.home.adapter.UpcomingShowAdapter
 import com.nbc.curtaincall.ui.main.MainViewModel
-import com.nbc.curtaincall.ui.main.MainViewModelFactory
 import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), PosterClickListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HomeViewModel by viewModels {
-        HomeViewModelFactory(
-            fetchRemoteRepository = FetchRepositoryImpl(fetch),
-        )
-    }
-    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel> {
-        MainViewModelFactory(
-            fetchRemoteRepository = FetchRepositoryImpl(
-                fetch
-            )
-        )
-    }
+    private val viewModel: HomeViewModel by viewModels()
+    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
     private val upComingShowAdapter: UpcomingShowAdapter by lazy { UpcomingShowAdapter(this) }
     private val topRankAdapter: TopRankAdapter by lazy { TopRankAdapter(this) }
     private val genreAdapter: GenreAdapter by lazy { GenreAdapter(this) }
