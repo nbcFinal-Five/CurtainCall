@@ -37,17 +37,17 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
             val firstShowDetail = it?.first()
             if (firstShowDetail != null) {
                 with(binding) {
-                    Glide.with(requireContext()).load(firstShowDetail.poster)
+                    Glide.with(requireContext()).load(firstShowDetail.posterPath)
                         .override(Target.SIZE_ORIGINAL).into(ivDetailPoster)
-                    tvDetailShowTitle.text = firstShowDetail.prfnm
-                    tvDetailGenre.text = firstShowDetail.genrenm
-                    tvDetailAgeSub.text = firstShowDetail.prfage
+                    tvDetailShowTitle.text = firstShowDetail.performanceName
+                    tvDetailGenre.text = firstShowDetail.genreName
+                    tvDetailAgeSub.text = firstShowDetail.prfAge
                     tvDetailPriceSub.text = firstShowDetail.pcseguidance
                     tvDetailShowState.text = firstShowDetail.prfstate
                     tvDetailPlace.text = firstShowDetail.fcltynm
                     tvDetailPeriod.text =
                         "${firstShowDetail.prfpdfrom} ~ ${firstShowDetail.prfpdto}"
-                    tvDetailTimeSub.text = firstShowDetail.dtguidance
+                    tvDetailTimeSub.text = firstShowDetail.prfTime
                     tvDetailCastSub.text =
                         if (firstShowDetail.prfcast.isNullOrBlank()) "미상" else firstShowDetail.prfcast
                     tvDetailProductSub.text =
@@ -59,7 +59,7 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
             val firstShowDetail = it!!.first()
 
-            val id = firstShowDetail.mt20id
+            val id = firstShowDetail.showId
         }
     }
 }

@@ -6,14 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nbc.curtaincall.data.model.BoxofResponse
 import com.nbc.curtaincall.domain.repository.FetchRepository
+import com.nbc.curtaincall.util.Converter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RankViewModel @Inject constructor(private val fetch: FetchRepository) : ViewModel() {
-    private val _rankInitList = MutableLiveData<List<BoxofResponse>?>()
-    val rankInitList: LiveData<List<BoxofResponse>?> get() = _rankInitList
     private val _isRankLoading = MutableLiveData<Boolean>(true)
     val isRankLoading: LiveData<Boolean> get() = _isRankLoading
 
@@ -24,36 +23,42 @@ class RankViewModel @Inject constructor(private val fetch: FetchRepository) : Vi
     private val _initState = MutableLiveData<Boolean>(false)
     val initState: LiveData<Boolean> get() = _initState
 
-    //초기 화면 세팅
-    fun fetchInitRank() {
+    init {
         viewModelScope.launch {
+            _isRankLoading.value = true
             runCatching {
-                _isRankLoading.value = true
-                _rankInitList.value = fetch.fetchTopRank(
+                fetch.fetchTopRank(
                     dateCode = "day",
-                    date = "20240701",
-                    genreCode = "AAAA",
-                    area = "01",
-                    newSQL = "Y"
-                ).boxof
-                _isRankLoading.value = false
+                    date = Converter.nowDateOneDayAgo(),
+                    genreCode = getGenre(""),
+                )
+            }.onSuccess { result ->
+                _rankList.value = result
+            }.onFailure {
+                _rankList.value = emptyList()
             }
+                .also {
+                    _isRankLoading.value = false
+                }
         }
     }
 
     //장르 선택시
     fun fetchRank(selectedPeriod: String, selectedGenre: String) {
         viewModelScope.launch {
+            _isRankLoading.value = true
             runCatching {
-                _isRankLoading.value = true
+                fetch.fetchTopRank(
+                    dateCode = getPeriod(selectedPeriod),
+                    genreCode = getGenre(selectedGenre),
+                    date = Converter.nowDateOneDayAgo()
+                )
+            }.onSuccess { result ->
                 _rankList.value =
-                    fetch.fetchTopRank(
-                        dateCode = getPeriod(selectedPeriod),
-                        genreCode = getGenre(selectedGenre),
-                        area = "01",
-                        newSQL = "Y",
-                        date = "20240701"
-                    ).boxof
+                    result
+            }.onFailure {
+                _rankList.value = emptyList()
+            }.also {
                 _isRankLoading.value = false
             }
         }

@@ -14,7 +14,7 @@ class KidShowAdapter(private val listener: PosterClickListener? = null) :
     ListAdapter<DbResponse, KidShowAdapter.KidShowViewHolder>(object :
         DiffUtil.ItemCallback<DbResponse>() {
         override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
-            return oldItem.mt20id == newItem.mt20id
+            return oldItem.showId == newItem.showId
         }
 
         override fun areContentsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
@@ -25,13 +25,13 @@ class KidShowAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
             with(binding) {
-                Glide.with(itemView).load(item.poster).into(ivKidShow)
+                Glide.with(itemView).load(item.posterPath).into(ivKidShow)
                 tvKidPeriod.text = "~ ${item.prfpdto}"
-                tvKidGenre.text = item.genrenm
+                tvKidGenre.text = item.genreName
                 tvKidShowingState.text = item.prfstate
-                tvKidPerformanceTitle.text = item.prfnm
+                tvKidPerformanceTitle.text = item.performanceName
                 tvKidShowPlaceName.text = item.fcltynm
-                ivKidShow.setOnClickListener { item.mt20id?.let { id -> listener?.posterClicked(id) } }
+                ivKidShow.setOnClickListener { item.showId?.let { id -> listener?.posterClicked(id) } }
             }
         }
     }

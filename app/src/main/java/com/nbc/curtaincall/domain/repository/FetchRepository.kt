@@ -1,24 +1,21 @@
 package com.nbc.curtaincall.domain.repository
 
-import com.nbc.curtaincall.data.model.BoxOfsResponse
-import com.nbc.curtaincall.data.model.DbsResponse
+import com.nbc.curtaincall.data.model.BoxofResponse
+import com.nbc.curtaincall.data.model.DbResponse
 
 interface FetchRepository {
     suspend fun fetchShowList(
-        newSQL: String?,
         genreCode: String?,
         kidState: String?,
         showState: String?
-    ): DbsResponse
+    ): List<DbResponse>
 
     suspend fun fetchTopRank(
         dateCode: String,
         date: String,
         genreCode: String?,
-        area: String?,
-        newSQL: String
-    ): BoxOfsResponse
+    ): List<BoxofResponse>
 
-    suspend fun fetchShowDetail(path: String, newSQL: String): DbsResponse
-    suspend fun getLocationList(path: String): DbsResponse
+    suspend fun fetchShowDetail(path: String): List<DbResponse>
+    suspend fun getLocationList(path: String): List<DbResponse>
 }

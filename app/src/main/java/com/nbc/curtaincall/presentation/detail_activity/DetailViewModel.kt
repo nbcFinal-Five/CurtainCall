@@ -43,7 +43,7 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
         viewModelScope.launch {
             runCatching {
                 _detailInfoList.value =
-                    fetch.fetchShowDetail(path = showId,"Y").showList
+                    fetch.fetchShowDetail(path = showId)
             }
         }
     }
@@ -51,7 +51,7 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
     fun fetchDetailLocation() {
         viewModelScope.launch {
             runCatching {
-                _locationList.value = fetch.getLocationList(path = facilityId).showList!!
+                _locationList.value = fetch.getLocationList(path = facilityId)
                 Log.d("ViewModel", "fetchDetailLocation: ${locationList}")
             }.onFailure {
                 Log.e("DetailViewModel", "fetchDetailLocation: ${it.message}")

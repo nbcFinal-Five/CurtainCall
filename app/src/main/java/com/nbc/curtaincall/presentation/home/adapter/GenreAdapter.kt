@@ -14,7 +14,7 @@ class GenreAdapter(private val listener: PosterClickListener? = null) :
     ListAdapter<DbResponse, GenreAdapter.GenreViewHolder>(object :
         DiffUtil.ItemCallback<DbResponse>() {
         override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
-            return oldItem.mt20id == newItem.mt20id
+            return oldItem.showId == newItem.showId
         }
 
         override fun areContentsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
@@ -25,15 +25,15 @@ class GenreAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DbResponse) {
             with(binding) {
-                Glide.with(itemView).load(item.poster).into(ivHomeGenrePoster)
-                tvGenre.text = item.genrenm
+                Glide.with(itemView).load(item.posterPath).into(ivHomeGenrePoster)
+                tvGenre.text = item.genreName
                 tvShowingState.text = item.prfstate
-                tvGenre.text = item.genrenm
+                tvGenre.text = item.genreName
                 tvGenrePeriod.text = "~ ${item.prfpdto}"
                 tvPlaceName.text = item.fcltynm
-                tvPerformanceName.text = item.prfnm
+                tvPerformanceName.text = item.performanceName
                 ivHomeGenrePoster.setOnClickListener {
-                    item.mt20id?.let { id -> listener?.posterClicked(id) }
+                    item.showId?.let { id -> listener?.posterClicked(id) }
                 }
             }
         }

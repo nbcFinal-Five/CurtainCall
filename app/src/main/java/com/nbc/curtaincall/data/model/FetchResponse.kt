@@ -19,22 +19,22 @@ data class DbResponse @JvmOverloads constructor(
     var fcltynm: String? = null,
 
     @field:Element(name = "genrenm", required = false)
-    var genrenm: String? = null,
+    var genreName: String? = null,
 
     @field:Element(name = "mt20id", required = false)
-    var mt20id: String? = null,
+    var showId: String? = null,
 
     @field:Element(name = "openrun", required = false)
-    var openrun: String? = null,
+    var openRun: String? = null,
 
     @field:Element(name = "poster", required = false)
-    var poster: String? = null,
+    var posterPath: String? = null,
 
     @field:Element(name = "sty", required = false)
     var sty: String? = null,
 
     @field:Element(name = "prfnm", required = false)
-    var prfnm: String? = null,
+    var performanceName: String? = null,
 
     @field:Element(name = "prfpdfrom", required = false)
     var prfpdfrom: String? = null,
@@ -58,16 +58,16 @@ data class DbResponse @JvmOverloads constructor(
     var pcseguidance: String? = null,
 
     @field:Element(name = "dtguidance", required = false)
-    var dtguidance: String? = null,
+    var prfTime: String? = null,
 
     @field:Element(name = "prfage", required = false)
-    var prfage: String? = null,
+    var prfAge: String? = null,
 
     @field:Element(name = "entrpsnm", required = false)
     var entrpsnm: String? = null,
 
     @field:Element(name = "mt10id", required = false)
-    var mt10id: String? = null,
+    var prfFacility: String? = null,
 
     @field:Element(name = "styurls", required = false)
     var styurls: Styurls? = null,

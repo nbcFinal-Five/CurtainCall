@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(private val fetch: FetchRepository) : Vi
     //공연 상세 정보를 받아옴
     fun fetchShowDetail(id: String) {
         viewModelScope.launch {
-            _showDetailInfo.value = fetch.fetchShowDetail(path = id, newSQL = "Y").showList
+            _showDetailInfo.value = fetch.fetchShowDetail(path = id)
         }
     }
 }

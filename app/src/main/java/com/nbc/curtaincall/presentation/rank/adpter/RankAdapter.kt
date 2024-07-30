@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nbc.curtaincall.databinding.ItemRankBinding
 import com.nbc.curtaincall.data.model.BoxofResponse
+import com.nbc.curtaincall.databinding.ItemRankBinding
 import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 
 class RankAdapter(private val listener: PosterClickListener? = null) :
     androidx.recyclerview.widget.ListAdapter<BoxofResponse, RankAdapter.RankViewHolder>(object :
         DiffUtil.ItemCallback<BoxofResponse>() {
         override fun areItemsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
-            return oldItem.mt20id == newItem.mt20id
+            return oldItem.rnum == newItem.rnum
         }
 
         override fun areContentsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
@@ -49,6 +49,6 @@ class RankAdapter(private val listener: PosterClickListener? = null) :
     }
 
     override fun onBindViewHolder(holder: RankViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(getItem(position))
     }
 }

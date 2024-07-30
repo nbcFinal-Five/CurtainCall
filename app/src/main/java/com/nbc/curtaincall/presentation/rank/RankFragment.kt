@@ -18,7 +18,9 @@ import com.nbc.curtaincall.presentation.rank.adpter.RankAdapter
 import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 import com.nbc.curtaincall.ui.main.MainViewModel
 import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RankFragment : Fragment(), PosterClickListener {
     private var _binding: FragmentRankBinding? = null
     private val binding get() = _binding!!
@@ -32,7 +34,6 @@ class RankFragment : Fragment(), PosterClickListener {
     ): View {
         _binding = FragmentRankBinding.inflate(inflater, container, false)
         initRecyclerView()
-        setUpObserve()
         return binding.root
     }
 
@@ -40,7 +41,7 @@ class RankFragment : Fragment(), PosterClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpClickListener()
-
+        setUpObserve()
     }
 
     private fun initRecyclerView() {
@@ -55,11 +56,6 @@ class RankFragment : Fragment(), PosterClickListener {
     private fun setUpObserve() {
         //초기 아이템 설정
         with(viewModel) {
-            rankInitList.observe(viewLifecycleOwner) {
-                rankAdapter.submitList(it) {
-                    binding.rvRank.smoothScrollToPosition(0)
-                }
-            }
             //로딩 처리
             isRankLoading.observe(viewLifecycleOwner) {
                 with(binding) {
@@ -79,7 +75,6 @@ class RankFragment : Fragment(), PosterClickListener {
                         chipDay.isChecked = true
                         chipRankAll.isChecked = true
                     }
-                    fetchInitRank()
                     initState(true)
                 }
             }
@@ -170,9 +165,9 @@ class RankFragment : Fragment(), PosterClickListener {
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
-        super.onDestroy()
     }
 
     //포스터 클릭 리스너

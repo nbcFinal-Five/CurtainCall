@@ -26,7 +26,6 @@ import com.nbc.curtaincall.ui.search.bottomsheet.SearchAddrBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchChildrenBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchGenreBottomSheet
 import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
-import com.nbc.curtaincall.util.sharedpreferences.App
 
 class SearchFragment : Fragment(), PosterClickListener {
 
@@ -97,7 +96,7 @@ class SearchFragment : Fragment(), PosterClickListener {
 
             ivSearch.setOnClickListener {// 제목 기준으로 검색하기
                 hideKeyboard()
-                App.prefs.saveSearchWord(etSearch.text?.toString()?.trim() ?:"")
+                //App.prefs.saveSearchWord(etSearch.text?.toString()?.trim() ?:"")
                 searchViewModel.getSearchWord(etSearch.text?.toString()?.trim() ?:"")
                 searchViewModel.fetchSearchFilterResult()
             }
@@ -274,7 +273,7 @@ class SearchFragment : Fragment(), PosterClickListener {
                     Toast.makeText(requireActivity(),R.string.search_result_reset,Toast.LENGTH_SHORT).show()
                     // 검색어 초기화
                     etSearch.setText("")
-                    App.prefs.saveSearchWord("")
+                    //App.prefs.saveSearchWord("")
                     //플로팅 버튼 안보이게
                     ftbScrollUp.visibility = View.INVISIBLE
                     rvSearch.scrollToPosition(0)
@@ -302,7 +301,7 @@ class SearchFragment : Fragment(), PosterClickListener {
     override fun onResume() {
         super.onResume()
         // 검색했던 검색어 검색창에 불러오기
-        binding.etSearch.setText(App.prefs.loadSearchWord())
+        //binding.etSearch.setText(App.prefs.loadSearchWord())
     }
 
     override fun onPause() {

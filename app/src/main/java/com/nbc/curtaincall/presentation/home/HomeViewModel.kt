@@ -18,13 +18,11 @@ class HomeViewModel @Inject constructor(private val fetch: FetchRepository) : Vi
     private val _showList = MutableLiveData<List<DbResponse>?>()
     val showList: LiveData<List<DbResponse>?> get() = _showList
 
-
     private val _topRank = MutableLiveData<List<BoxofResponse>?>()
     val topRank: LiveData<List<BoxofResponse>?> get() = _topRank
 
     private val _genre = MutableLiveData<List<DbResponse>?>()
     val genre: LiveData<List<DbResponse>?> get() = _genre
-
 
     private val _kidShow = MutableLiveData<List<DbResponse>?>()
     val kidShow: LiveData<List<DbResponse>?> get() = _kidShow
@@ -52,12 +50,13 @@ class HomeViewModel @Inject constructor(private val fetch: FetchRepository) : Vi
     fun fetchUpcoming() {
         viewModelScope.launch {
             runCatching {
-                _showList.value = fetch.fetchShowList(
-                    showState = "02",
-                    newSQL = "Y",
+                fetch.fetchShowList(
+                    showState = "01",
                     genreCode = null,
                     kidState = "N"
-                ).showList
+                )
+            }.onSuccess { result ->
+                _showList.value = result
             }.onFailure {
                 _isServerErrorViewPager.value = true
             }
@@ -67,14 +66,13 @@ class HomeViewModel @Inject constructor(private val fetch: FetchRepository) : Vi
     fun fetchTopRank() {
         viewModelScope.launch {
             runCatching {
-                _topRank.value = fetch.fetchTopRank(
+                fetch.fetchTopRank(
                     dateCode = "week",
                     date = Converter.nowDateOneDayAgo(),
                     genreCode = null,
-                    area = "11",
-                    newSQL = "Y"
-                ).boxof
-            }.onSuccess {
+                )
+            }.onSuccess { result ->
+                _topRank.value = result
                 _isLoadingRecommend.value = false
             }.onFailure {
                 _isServerErrorTopRank.value = true
@@ -86,14 +84,14 @@ class HomeViewModel @Inject constructor(private val fetch: FetchRepository) : Vi
     fun fetchGenre(genre: Int) {
         viewModelScope.launch {
             runCatching {
-                _genre.value =
-                    fetch.fetchShowList(
-                        genreCode = getGenreCode(genre),
-                        kidState = "N",
-                        showState = "01",
-                        newSQL = "Y"
-                    ).showList
-            }.onSuccess {
+
+                fetch.fetchShowList(
+                    genreCode = getGenreCode(genre),
+                    kidState = "N",
+                    showState = "01",
+                )
+            }.onSuccess { result ->
+                _genre.value = result
                 _isLoadingGenre.value = false
                 _isServerErrorGenre.value = false
             }.onFailure {
@@ -106,13 +104,13 @@ class HomeViewModel @Inject constructor(private val fetch: FetchRepository) : Vi
     fun fetchKidShow() {
         viewModelScope.launch {
             runCatching {
-                _kidShow.value = fetch.fetchShowList(
+                fetch.fetchShowList(
                     kidState = "Y",
-                    newSQL = "Y",
                     genreCode = null,
                     showState = "01",
-                ).showList
-            }.onSuccess {
+                )
+            }.onSuccess { result ->
+                _kidShow.value = result
                 _isLoadingKid.value = false
             }.onFailure {
                 _isServerErrorKid.value = true
