@@ -3,35 +3,28 @@ package com.nbc.curtaincall.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nbc.curtaincall.databinding.ItemTopRankBinding
-import com.nbc.curtaincall.data.model.BoxofResponse
+import com.nbc.curtaincall.presentation.home.adapter.DiffCallback
+import com.nbc.curtaincall.presentation.model.ShowItem
 
 class TopRankAdapter(private val listener: PosterClickListener? = null) :
-    ListAdapter<BoxofResponse, TopRankAdapter.TopRankViewHolder>(object :
-        DiffUtil.ItemCallback<BoxofResponse>() {
-        override fun areItemsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
-            return oldItem.mt20id == newItem.mt20id
-        }
-
-        override fun areContentsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
-            return oldItem == newItem
-        }
-    }) {
+    ListAdapter<ShowItem, TopRankAdapter.TopRankViewHolder>(DiffCallback()) {
 
     inner class TopRankViewHolder(private val binding: ItemTopRankBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: BoxofResponse) {
+        fun bind(item: ShowItem) {
+            item as ShowItem.TopRankItem
             with(binding) {
-                Glide.with(itemView).load("http://www.kopis.or.kr${item.poster}").into(ivTopRankPoster)
-                tvPeriod.text = item.prfpd
-                tvFacilityName.text = item.prfplcnm
-                tvPerformanceName.text = item.prfnm
+                Glide.with(itemView).load("http://www.kopis.or.kr${item.posterPath}")
+                    .into(ivTopRankPoster)
+                tvPeriod.text = item.period
+                tvFacilityName.text = item.placeName
+                tvPerformanceName.text = item.title
                 ivTopRankPoster.setOnClickListener {
-                    item.mt20id?.let { id ->
+                    item.showId?.let { id ->
                         listener?.posterClicked(
                             id
                         )

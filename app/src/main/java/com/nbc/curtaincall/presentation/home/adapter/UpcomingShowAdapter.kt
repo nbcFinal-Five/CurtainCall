@@ -3,35 +3,27 @@ package com.nbc.curtaincall.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nbc.curtaincall.data.model.DbResponse
 import com.nbc.curtaincall.databinding.ItemUpcomingShowBinding
+import com.nbc.curtaincall.presentation.home.adapter.DiffCallback
+import com.nbc.curtaincall.presentation.model.ShowItem
 
 
 class UpcomingShowAdapter(private val listener: PosterClickListener? = null) :
-    ListAdapter<DbResponse, UpcomingShowAdapter.UpcomingShowViewHolder>(object :
-        DiffUtil.ItemCallback<DbResponse>() {
-        override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
-            return oldItem.showId == newItem.showId
-        }
-
-        override fun areContentsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
-            return oldItem == newItem
-        }
-    }) {
+    ListAdapter<ShowItem, UpcomingShowAdapter.UpcomingShowViewHolder>(DiffCallback()) {
     inner class UpcomingShowViewHolder(private val binding: ItemUpcomingShowBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DbResponse) {
+        fun bind(item: ShowItem) {
+            item as ShowItem.UpcomingShowItem
             with(binding) {
                 Glide.with(itemView).load(item.posterPath).into(ivUpcomingShowPoster)
-                tvPlaceName.text = item.performanceName
-                tvUpcomingShowPeriod.text = "~ ${item.prfpdto}"
-                tvPerformanceName.text = item.fcltynm
-                tvShowingState.text = item.prfstate
-                tvGenre.text = item.genreName
+                tvPlaceName.text = item.placeName
+                tvUpcomingShowPeriod.text = "~ ${item.periodTo}"
+                tvPerformanceName.text = item.title
+                tvShowingState.text = item.showingState
+                tvGenre.text = item.genre
                 ivUpcomingShowPoster.setOnClickListener {
                     item.showId?.let { id -> listener?.posterClicked(id) }
                 }

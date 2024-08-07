@@ -25,8 +25,8 @@ class IntroImageFragment : Fragment() {
     ): View {
         _binding = FramgentDetailIntroImageBinding.inflate(inflater, container, false)
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it!!.first()
-            firstShowDetail.styurls?.styurlList?.forEach { url ->
+            val firstShowDetail = it!!.showList?.first()
+            firstShowDetail?.styurls?.styUrlList?.forEach { url ->
                 binding.linearLayout.addView(createImageView(url))
             }
         }

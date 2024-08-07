@@ -10,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentRankBinding
@@ -45,12 +44,7 @@ class RankFragment : Fragment(), PosterClickListener {
     }
 
     private fun initRecyclerView() {
-        with(binding) {
-            rvRank.apply {
-                adapter = rankAdapter
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            }
-        }
+        binding.rvRank.adapter = rankAdapter
     }
 
     private fun setUpObserve() {
@@ -66,18 +60,8 @@ class RankFragment : Fragment(), PosterClickListener {
             //칩 선택시 아이템 리스트 변경
             rankList.observe(viewLifecycleOwner) {
                 rankAdapter.submitList(it)
-                binding.rvRank.smoothScrollToPosition(0)
             }
-            //초기 화면 한 번만 초기화 되도록 설정
-            initState.observe(viewLifecycleOwner) {
-                if (!it) {
-                    with(binding) {
-                        chipDay.isChecked = true
-                        chipRankAll.isChecked = true
-                    }
-                    initState(true)
-                }
-            }
+
         }
     }
 

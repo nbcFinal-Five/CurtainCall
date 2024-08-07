@@ -62,18 +62,18 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
     private fun setUpObserve() {
         viewModel.locationList.observe(viewLifecycleOwner) {
             with(binding) {
-                val firstShowDetail = it.first()
-                tvConcertHallContents.setText(firstShowDetail.fcltynm)
-                tvConcertHallLocationContents.setText(firstShowDetail.adres)
-                tvHallCallNumberContents.setText(if(firstShowDetail.telno.isNullOrBlank()) "N/A" else firstShowDetail.telno)
-                tvHallHomepageContents.setText(if(firstShowDetail.relateurl.isNullOrBlank()) "N/A" else firstShowDetail.relateurl)
+                val firstShowDetail = it.showList?.first()
+                tvConcertHallContents.setText(firstShowDetail?.facilityName)
+                tvConcertHallLocationContents.setText(firstShowDetail?.adres)
+                tvHallCallNumberContents.setText(if(firstShowDetail?.telno.isNullOrBlank()) "N/A" else firstShowDetail?.telno)
+                tvHallHomepageContents.setText(if(firstShowDetail?.relateurl.isNullOrBlank()) "N/A" else firstShowDetail?.relateurl)
             }
         }
     }
 
     override fun onMapReady(naverMap: NaverMap) {
         viewModel.locationList.observe(viewLifecycleOwner) { locations ->
-            locations?.forEach { location ->
+            locations?.showList?.forEach { location ->
                 val latitude = location.la // 위도
                 val longitude = location.lo // 경도
 
@@ -100,7 +100,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun moveToMarkerPosition() {
-        val firstLocation = viewModel.locationList.value?.firstOrNull()
+        val firstLocation = viewModel.locationList.value?.showList?.firstOrNull()
         firstLocation?.let { location ->
             val latitude = location.la?.toDouble() ?: 0.0
             val longitude = location.lo?.toDouble() ?: 0.0

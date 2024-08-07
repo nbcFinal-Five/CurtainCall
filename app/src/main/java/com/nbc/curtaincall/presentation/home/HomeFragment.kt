@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
@@ -33,6 +32,7 @@ class HomeFragment : Fragment(), PosterClickListener {
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
+
     private val upComingShowAdapter: UpcomingShowAdapter by lazy { UpcomingShowAdapter(this) }
     private val topRankAdapter: TopRankAdapter by lazy { TopRankAdapter(this) }
     private val genreAdapter: GenreAdapter by lazy { GenreAdapter(this) }
@@ -46,8 +46,8 @@ class HomeFragment : Fragment(), PosterClickListener {
             super.onPageSelected(position)
             binding.tvPageIndicator.text =
                     //"${(position % topRankAdapter.currentList.size) + 1} / ${topRankAdapter.currentList.size}"
-                "${(position % topRankAdapter.currentList.size) + 1} / ${topRankAdapter.currentList.size}"
 
+                "${(position % topRankAdapter.currentList.size) + 1} / ${topRankAdapter.currentList.size}"
         }
     }
 
@@ -65,30 +65,20 @@ class HomeFragment : Fragment(), PosterClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewModel) {
-            //공연 예정작
-            fetchUpcoming()
-            //TOP 10 공연
-            fetchTopRank()
             //장르 스피너 선택
             binding.spinnerHomeGenre.setOnSpinnerItemSelectedListener<String> { _, _, newIndex, _ ->
                 fetchGenre(newIndex)
             }
-            //어린이 관람 가능 공연 목록
-            fetchKidShow()
         }
     }
 
     //화면 초기 설정
     private fun initViews() {
-        //어뎁터 초기화
-        upComingShowAdapter
-        topRankAdapter
-        kidShowAdapter
         initRecyclerView()
 
         //viewpager 연결
         with(binding.viewPager) {
-            adapter = topRankAdapter
+            binding.viewPager.adapter = topRankAdapter
             //ViewPager PageTransformer 세팅
             offscreenPageLimit = 1
             setPageTransformer(SliderTransformer(requireContext()))
@@ -102,8 +92,6 @@ class HomeFragment : Fragment(), PosterClickListener {
             registerOnPageChangeCallback(onPageChangeCallback)
 
         }
-        //장르 연극 초기화
-        viewModel.fetchGenre(0)
     }
 
     //옵저브 세팅
@@ -162,22 +150,12 @@ class HomeFragment : Fragment(), PosterClickListener {
     //리사이클러뷰 초기화
     private fun initRecyclerView() {
         with(binding) {
-            //HOT 추천 리사이클러뷰
-            rvHomeUpcomingShow.apply {
-                adapter = upComingShowAdapter
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            }
-            //장르별 리사이클러뷰
-            rvHomeGenre.apply {
-                adapter = genreAdapter
-                layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            }
-            //어린이 공연 리사이클러뷰
-            rvHomeKidShow.apply {
-                adapter = kidShowAdapter
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            }
+            //장르별 공연
+            rvHomeGenre.adapter = genreAdapter
+            //HOT 공연 예정
+            rvHomeUpcomingShow.adapter = upComingShowAdapter
+            //어린이 공연
+            rvHomeKidShow.adapter = kidShowAdapter
         }
     }
 
@@ -212,9 +190,9 @@ class HomeFragment : Fragment(), PosterClickListener {
     //포지션을 중간위치에 맞추기 위한 코드 / 추가된 리스트의 크기가 짝수/홀수 일때 처리 (인디케이터)
     private fun positionInit() {
         binding.viewPager.currentItem =
-//            if (topRankAdapter.itemCount % 2 == 0) (topRankAdapter.itemCount / 2)
-//            else (topRankAdapter.itemCount / 2) - (topRankAdapter.currentList.size / 2)
-            topRankAdapter.itemCount / 2
+            if (topRankAdapter.itemCount % 2 == 0) (topRankAdapter.itemCount / 2)
+            else (topRankAdapter.itemCount / 2) - (topRankAdapter.currentList.size / 2)
+        topRankAdapter.itemCount / 2
         isPositionInit = true
     }
 

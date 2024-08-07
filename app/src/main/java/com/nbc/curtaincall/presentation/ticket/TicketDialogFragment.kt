@@ -23,13 +23,10 @@ import com.nbc.curtaincall.util.Constants
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class TicketDialogFragment : BottomSheetDialogFragment() {
-    private val detailViewModel: DetailViewModel by activityViewModels<DetailViewModel>()
 
     private var _binding: SimpleInfoBottomsheetDialogBinding? = null
     private val binding get() = _binding!!
     private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
-    private var ticketId = ""
-    private var facilityId = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,16 +46,14 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
             //HomeFragment에서 id를 보내주면 fetchShowDetail() 호출
             showId.observe(viewLifecycleOwner) { id ->
                 sharedViewModel.fetchShowDetail(id)
-                ticketId = id
             }
 
             showDetailInfo.observe(viewLifecycleOwner) {
-                val showDetail = it?.first()
-                if (showDetail != null) {
+                it?.showList?.first()?.let { showDetail ->
                     with(binding) {
                         tvSimpleShowTitle.text = showDetail.performanceName
                         tvSimpleAge.text = showDetail.prfAge
-                        tvSimplePlace.text = showDetail.fcltynm
+                        tvSimplePlace.text = showDetail.facilityName
                         tvSimpleGenre.text = showDetail.genreName
                         tvSimpleShowState.text = showDetail.prfstate
                         tvSimpleCastSub.text =
@@ -72,8 +67,6 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                                 )
                             ).into(ivSimplePosterBlur)
                     }
-                    facilityId = showDetail.prfFacility.toString()
-                    Log.d("TAG", "onViewCreated: ${showDetail.relates?.relatesList}")
                 }
             }
         }
@@ -84,21 +77,13 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
             override fun onSwipeTop() {
                 super.onSwipeTop()
                 val intent = Intent(context, DetailActivity::class.java).apply {
-                    putExtra(Constants.SHOW_ID, ticketId)
-                    putExtra(Constants.FACILITY_ID, facilityId)
+                    //putExtra(Constants.SHOW_ID, ticketId)
+                    //putExtra(Constants.FACILITY_ID, facilityId)
                 }
                 activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
             }
         })
 
-        binding.tvSimpleExpectationsNum.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java).apply {
-                putExtra(Constants.SHOW_ID, ticketId)
-                putExtra(Constants.FACILITY_ID, facilityId)
-                putExtra(Constants.IS_DIRECT, true)
-            }
-            activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
-        }
     }
 
     override fun onStart() {
@@ -124,22 +109,20 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
         //  HomeFragment에서 id를 보내주면 fetchShowDetail() 호출
         sharedViewModel.showId.observe(viewLifecycleOwner) { id ->
             sharedViewModel.fetchShowDetail(id)
-            ticketId = id
         }
 
         sharedViewModel.showDetailInfo.observe(viewLifecycleOwner) {
-            val showDetail = it?.first()
+            val showDetail = it?.showList?.first()
             if (showDetail != null) {
                 with(binding) {
                     tvSimpleShowTitle.text = showDetail.performanceName
                     tvSimpleAge.text = showDetail.prfAge
-                    tvSimplePlace.text = showDetail.fcltynm
+                    tvSimplePlace.text = showDetail.facilityName
                     tvSimpleGenre.text = showDetail.genreName
                     tvSimpleShowState.text = showDetail.prfstate
                     tvSimpleCastSub.text =
                         if (showDetail.prfcast.isNullOrBlank()) "미상" else showDetail.prfcast
                 }
-                facilityId = showDetail.prfFacility.toString()
             }
         }
     }

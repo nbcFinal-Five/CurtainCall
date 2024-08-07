@@ -6,36 +6,36 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nbc.curtaincall.data.model.BoxofResponse
 import com.nbc.curtaincall.databinding.ItemRankBinding
+import com.nbc.curtaincall.presentation.model.ShowItem
 import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 
 class RankAdapter(private val listener: PosterClickListener? = null) :
-    androidx.recyclerview.widget.ListAdapter<BoxofResponse, RankAdapter.RankViewHolder>(object :
-        DiffUtil.ItemCallback<BoxofResponse>() {
-        override fun areItemsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
-            return oldItem.rnum == newItem.rnum
+    androidx.recyclerview.widget.ListAdapter<ShowItem.TopRankItem, RankAdapter.RankViewHolder>(object :
+        DiffUtil.ItemCallback<ShowItem.TopRankItem>() {
+        override fun areItemsTheSame(oldItem: ShowItem.TopRankItem, newItem: ShowItem.TopRankItem): Boolean {
+            return oldItem.rankNum == newItem.rankNum
         }
 
-        override fun areContentsTheSame(oldItem: BoxofResponse, newItem: BoxofResponse): Boolean {
+        override fun areContentsTheSame(oldItem: ShowItem.TopRankItem, newItem: ShowItem.TopRankItem): Boolean {
             return oldItem == newItem
         }
 
     }) {
     inner class RankViewHolder(private val binding: ItemRankBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: BoxofResponse) {
+        fun bind(item: ShowItem.TopRankItem) {
             with(binding) {
-                Glide.with(itemView).load("http://www.kopis.or.kr${item.poster}").into(ivRankPoster)
-                tvRank.text = item.rnum.toString()
-                tvTitle.text = item.prfnm
-                tvPlace.text = item.prfplcnm
-                tvPeriod.text = item.prfpd
+                Glide.with(itemView).load("http://www.kopis.or.kr${item.posterPath}").into(ivRankPoster)
+                tvRank.text = item.rankNum.toString()
+                tvTitle.text = item.title
+                tvPlace.text = item.placeName
+                tvPeriod.text = item.period
                 ivRankPoster.setOnClickListener {
-                    listener?.posterClicked(item.mt20id.toString())
+                    listener?.posterClicked(item.showId.toString())
                 }
                 tvTitle.setOnClickListener {
-                    listener?.posterClicked(item.mt20id.toString())
+                    listener?.posterClicked(item.showId.toString())
                 }
             }
         }

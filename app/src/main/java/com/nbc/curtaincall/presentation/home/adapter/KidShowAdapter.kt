@@ -3,34 +3,27 @@ package com.nbc.curtaincall.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nbc.curtaincall.databinding.ItemKidShowBinding
-import com.nbc.curtaincall.data.model.DbResponse
+import com.nbc.curtaincall.presentation.home.adapter.DiffCallback
+import com.nbc.curtaincall.presentation.model.ShowItem
 
 class KidShowAdapter(private val listener: PosterClickListener? = null) :
-    ListAdapter<DbResponse, KidShowAdapter.KidShowViewHolder>(object :
-        DiffUtil.ItemCallback<DbResponse>() {
-        override fun areItemsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
-            return oldItem.showId == newItem.showId
-        }
+    ListAdapter<ShowItem, KidShowAdapter.KidShowViewHolder>(DiffCallback()) {
 
-        override fun areContentsTheSame(oldItem: DbResponse, newItem: DbResponse): Boolean {
-            return oldItem == newItem
-        }
-    }) {
     inner class KidShowViewHolder(private val binding: ItemKidShowBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DbResponse) {
+        fun bind(item: ShowItem) {
             with(binding) {
+                item as ShowItem.KidShowItem
                 Glide.with(itemView).load(item.posterPath).into(ivKidShow)
-                tvKidPeriod.text = "~ ${item.prfpdto}"
-                tvKidGenre.text = item.genreName
-                tvKidShowingState.text = item.prfstate
-                tvKidPerformanceTitle.text = item.performanceName
-                tvKidShowPlaceName.text = item.fcltynm
+                tvKidPeriod.text = "~ ${item.periodTo}"
+                tvKidGenre.text = item.genre
+                tvKidShowingState.text = item.showingState
+                tvKidPerformanceTitle.text = item.title
+                tvKidShowPlaceName.text = item.placeName
                 ivKidShow.setOnClickListener { item.showId?.let { id -> listener?.posterClicked(id) } }
             }
         }

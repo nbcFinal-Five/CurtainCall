@@ -4,58 +4,36 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nbc.curtaincall.data.model.BoxofResponse
-import com.nbc.curtaincall.domain.repository.FetchRepository
+import com.nbc.curtaincall.domain.model.BoxOfficeListEntity
+import com.nbc.curtaincall.domain.model.BoxOfsEntity
+import com.nbc.curtaincall.domain.usecase.GetTopRankUseCase
+import com.nbc.curtaincall.presentation.model.ShowItem
 import com.nbc.curtaincall.util.Converter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RankViewModel @Inject constructor(private val fetch: FetchRepository) : ViewModel() {
+class RankViewModel @Inject constructor(private val getTopRankUseCase: GetTopRankUseCase) :
+    ViewModel() {
     private val _isRankLoading = MutableLiveData<Boolean>(true)
     val isRankLoading: LiveData<Boolean> get() = _isRankLoading
 
-    private val _rankList = MutableLiveData<List<BoxofResponse>?>()
-    val rankList: MutableLiveData<List<BoxofResponse>?> get() = _rankList
+    private val _rankList = MutableLiveData<List<ShowItem.TopRankItem>>()
+    val rankList: MutableLiveData<List<ShowItem.TopRankItem>> get() = _rankList
 
-    //초기 설정용 상태 값
-    private val _initState = MutableLiveData<Boolean>(false)
-    val initState: LiveData<Boolean> get() = _initState
 
     init {
         viewModelScope.launch {
             _isRankLoading.value = true
             runCatching {
-                fetch.fetchTopRank(
+                getTopRankUseCase(
                     dateCode = "day",
                     date = Converter.nowDateOneDayAgo(),
                     genreCode = getGenre(""),
                 )
             }.onSuccess { result ->
-                _rankList.value = result
-            }.onFailure {
-                _rankList.value = emptyList()
-            }
-                .also {
-                    _isRankLoading.value = false
-                }
-        }
-    }
-
-    //장르 선택시
-    fun fetchRank(selectedPeriod: String, selectedGenre: String) {
-        viewModelScope.launch {
-            _isRankLoading.value = true
-            runCatching {
-                fetch.fetchTopRank(
-                    dateCode = getPeriod(selectedPeriod),
-                    genreCode = getGenre(selectedGenre),
-                    date = Converter.nowDateOneDayAgo()
-                )
-            }.onSuccess { result ->
-                _rankList.value =
-                    result
+                _rankList.value = createRankItems(result)
             }.onFailure {
                 _rankList.value = emptyList()
             }.also {
@@ -64,9 +42,39 @@ class RankViewModel @Inject constructor(private val fetch: FetchRepository) : Vi
         }
     }
 
-    //초기 화면 세팅용 함수
-    fun initState(initState: Boolean) {
-        _initState.value = initState
+    private fun createRankItems(
+        rank: BoxOfsEntity<BoxOfficeListEntity>
+    ): List<ShowItem.TopRankItem> = rank.boxOfficeList?.map { items ->
+        ShowItem.TopRankItem(
+            showId = items.showId,
+            rankNum = items.rankNum,
+            title = items.prfName,
+            placeName = items.prfplcnm,
+            genre = items.genre,
+            posterPath = items.poster,
+            period = items.prfPeriod
+        )
+    }.orEmpty()
+
+    //장르 선택시
+    fun fetchRank(selectedPeriod: String, selectedGenre: String) {
+        viewModelScope.launch {
+            _isRankLoading.value = true
+            runCatching {
+                getTopRankUseCase(
+                    dateCode = getPeriod(selectedPeriod),
+                    genreCode = getGenre(selectedGenre),
+                    date = Converter.nowDateOneDayAgo()
+                )
+            }.onSuccess { result ->
+                _rankList.value = createRankItems(result)
+
+            }.onFailure {
+                _rankList.value = emptyList()
+            }.also {
+                _isRankLoading.value = false
+            }
+        }
     }
 
     //컨버트 함수

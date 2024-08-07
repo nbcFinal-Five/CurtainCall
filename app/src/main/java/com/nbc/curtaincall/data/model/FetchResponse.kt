@@ -153,10 +153,10 @@ data class BoxofResponse @JvmOverloads constructor(
     var area: String? = null,
 
     @field:Element(name = "cate", required = false)
-    var cate: String? = null,
+    var genre: String? = null,
 
     @field:Element(name = "mt20id", required = false)
-    var mt20id: String? = null,
+    var showId: String? = null,
 
     @field:Element(name = "poster", required = false)
     var poster: String? = null,
@@ -165,16 +165,16 @@ data class BoxofResponse @JvmOverloads constructor(
     var prfdtcnt: Int? = null,
 
     @field:Element(name = "prfnm", required = false)
-    var prfnm: String? = null,
+    var prfName: String? = null,
 
     @field:Element(name = "prfpd", required = false)
-    var prfpd: String? = null,
+    var prfPeriod: String? = null,
 
     @field:Element(name = "prfplcnm", required = false)
     var prfplcnm: String? = null,
 
     @field:Element(name = "rnum", required = false)
-    var rnum: Int? = null,
+    var rankNum: Int? = null,
 
     @field:Element(name = "seatcnt", required = false)
     var seatcnt: Int? = null

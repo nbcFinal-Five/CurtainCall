@@ -34,7 +34,7 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
 
     private fun setUpObserve() {
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it?.first()
+            val firstShowDetail = it?.showList?.first()
             if (firstShowDetail != null) {
                 with(binding) {
                     Glide.with(requireContext()).load(firstShowDetail.posterPath)
@@ -44,7 +44,7 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
                     tvDetailAgeSub.text = firstShowDetail.prfAge
                     tvDetailPriceSub.text = firstShowDetail.pcseguidance
                     tvDetailShowState.text = firstShowDetail.prfstate
-                    tvDetailPlace.text = firstShowDetail.fcltynm
+                    tvDetailPlace.text = firstShowDetail.facilityName
                     tvDetailPeriod.text =
                         "${firstShowDetail.prfpdfrom} ~ ${firstShowDetail.prfpdto}"
                     tvDetailTimeSub.text = firstShowDetail.prfTime
@@ -57,9 +57,9 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
         }
 
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it!!.first()
+            val firstShowDetail = it?.showList?.first()
 
-            val id = firstShowDetail.showId
+            val id = firstShowDetail?.showId
         }
     }
 }

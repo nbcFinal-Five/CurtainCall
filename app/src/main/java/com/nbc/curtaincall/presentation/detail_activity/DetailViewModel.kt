@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nbc.curtaincall.data.model.DbResponse
+import com.nbc.curtaincall.domain.model.DbsEntity
+import com.nbc.curtaincall.domain.model.DbsShowListEntity
 import com.nbc.curtaincall.domain.repository.FetchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,8 +16,8 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : ViewModel() {
     private lateinit var showId: String //공연 id
     private lateinit var facilityId: String //공연장 id
-    private val _detailInfoList = MutableLiveData<List<DbResponse>?>()
-    val detailInfoList: LiveData<List<DbResponse>?> get() = _detailInfoList
+    private val _detailInfoList = MutableLiveData<DbsEntity<DbsShowListEntity>?>()
+    val detailInfoList: LiveData<DbsEntity<DbsShowListEntity>?> get() = _detailInfoList
 
     private var _totalExpectationCount: MutableLiveData<Int> = MutableLiveData(0)
     val totalExpectationCount: LiveData<Int>
@@ -30,8 +31,8 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
     val isBookmark: LiveData<Boolean>
         get() = _isBookmark
 
-    private val _locationList = MutableLiveData<List<DbResponse>>()
-    val locationList: LiveData<List<DbResponse>>
+    private val _locationList = MutableLiveData<DbsEntity<DbsShowListEntity>>()
+    val locationList: LiveData<DbsEntity<DbsShowListEntity>>
         get() = _locationList
 
     fun sharedId(mt20Id: String, mt10Id: String) {
