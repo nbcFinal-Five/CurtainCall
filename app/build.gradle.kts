@@ -104,7 +104,7 @@ dependencies {
     implementation("io.ktor:ktor-client-android:2.3.8")
 
     // Naver Map
-    implementation("com.naver.maps:map-sdk:3.17.0")
+    implementation("com.naver.maps:map-sdk:3.19.1")
 
     // shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
