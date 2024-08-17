@@ -4,6 +4,9 @@ import com.nbc.curtaincall.data.model.BoxOfsResponse
 import com.nbc.curtaincall.data.model.BoxofResponse
 import com.nbc.curtaincall.data.model.DbResponse
 import com.nbc.curtaincall.data.model.DbsResponse
+import com.nbc.curtaincall.data.model.Relate
+import com.nbc.curtaincall.data.model.Relates
+import com.nbc.curtaincall.data.model.Styurls
 
 fun DbsResponse.toDbEntity() = DbsEntity(
     showList = showList?.map { response ->
@@ -13,6 +16,7 @@ fun DbsResponse.toDbEntity() = DbsEntity(
 
 fun DbResponse.toEntity(
 ) = DbsShowListEntity(
+    styurls = styurls?.toEntity(),
     area = area,
     facilityName = fcltynm,
     genreName = genreName,
@@ -67,4 +71,19 @@ fun BoxofResponse.toEntity() = BoxOfficeListEntity(
     prfplcnm = prfplcnm,
     rankNum = rankNum,
     seatcnt = seatcnt
+)
+
+fun Styurls.toEntity() = StyUrlsEntity(
+    styUrlList = styurlList
+)
+
+fun Relates.toRelatesEntity() = RelatesEntity(
+    relatesList = relatesList?.map { relate ->
+        relate.toEntity()
+    }
+)
+
+fun Relate.toEntity() = RelateEntity(
+    relateName = relatenm,
+    relateUrl = relateurl
 )

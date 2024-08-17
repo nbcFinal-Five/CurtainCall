@@ -242,17 +242,52 @@
             app:layout_constraintTop_toBottomOf="@id/line"
             tools:text="김명희, 송정은, 신재성, 최재석, 권민우, 김선화, 이지용 등" />
 
-        <ImageView
-            android:id="@+id/iv_simple_swipe_top"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="24dp"
-            android:src="@drawable/swipe_top"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_reserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/button_reserve"
+            android:text="예매하기"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/btn_detail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_simple_cast_sub" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/button_gradient"
+            android:text="상세보기"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_reserve"
+            app:layout_constraintTop_toBottomOf="@id/tv_simple_cast_sub" />
+
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/iv_simple_swipe_top"-->
+        <!--            android:layout_width="24dp"-->
+        <!--            android:layout_height="24dp"-->
+        <!--            android:layout_marginTop="60dp"-->
+        <!--            android:layout_marginBottom="24dp"-->
+        <!--            android:src="@drawable/swipe_top"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_simple_cast_sub" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

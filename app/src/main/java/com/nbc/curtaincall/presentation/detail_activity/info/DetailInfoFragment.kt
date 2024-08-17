@@ -11,12 +11,13 @@ import com.bumptech.glide.request.target.Target
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentDetailDetailInfoBinding
 import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
     private var _binding: FragmentDetailDetailInfoBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by activityViewModels<DetailViewModel>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,38 +29,29 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun setUpObserve() {
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it?.showList?.first()
+            val firstShowDetail = it?.first()
             if (firstShowDetail != null) {
                 with(binding) {
                     Glide.with(requireContext()).load(firstShowDetail.posterPath)
                         .override(Target.SIZE_ORIGINAL).into(ivDetailPoster)
-                    tvDetailShowTitle.text = firstShowDetail.performanceName
-                    tvDetailGenre.text = firstShowDetail.genreName
-                    tvDetailAgeSub.text = firstShowDetail.prfAge
-                    tvDetailPriceSub.text = firstShowDetail.pcseguidance
-                    tvDetailShowState.text = firstShowDetail.prfstate
-                    tvDetailPlace.text = firstShowDetail.facilityName
+                    tvDetailShowTitle.text = firstShowDetail.title
+                    tvDetailGenre.text = firstShowDetail.genre
+                    tvDetailAgeSub.text = firstShowDetail.age
+                    tvDetailPriceSub.text = firstShowDetail.price
+                    tvDetailShowState.text = firstShowDetail.showState
+                    tvDetailPlace.text = firstShowDetail.placeName
                     tvDetailPeriod.text =
-                        "${firstShowDetail.prfpdfrom} ~ ${firstShowDetail.prfpdto}"
-                    tvDetailTimeSub.text = firstShowDetail.prfTime
+                        "${firstShowDetail.periodFrom} ~ ${firstShowDetail.periodTo}"
+                    tvDetailTimeSub.text = firstShowDetail.time
                     tvDetailCastSub.text =
-                        if (firstShowDetail.prfcast.isNullOrBlank()) "미상" else firstShowDetail.prfcast
+                        if (firstShowDetail.cast.isNullOrBlank()) "미상" else firstShowDetail.cast
                     tvDetailProductSub.text =
-                        if (firstShowDetail.entrpsnm.isNullOrBlank()) "미상" else firstShowDetail.entrpsnm
+                        if (firstShowDetail.productCast.isNullOrBlank()) "미상" else firstShowDetail.productCast
                 }
             }
         }
 
-        viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it?.showList?.first()
-
-            val id = firstShowDetail?.showId
-        }
     }
 }

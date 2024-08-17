@@ -166,7 +166,7 @@ class HomeViewModel @Inject constructor(
             placeName = items.prfplcnm,
             genre = items.genre,
             posterPath = items.poster,
-            period = items.prfPeriod
+            period = items.prfPeriod,
         )
     }.orEmpty()
 
@@ -181,7 +181,8 @@ class HomeViewModel @Inject constructor(
             posterPath = items.posterPath,
             showingState = items.prfstate,
             periodTo = items.prfpdto,
-            periodFrom = items.prfpdfrom
+            periodFrom = items.prfpdfrom,
+            facilityId = items.prfFacility
         )
     }.orEmpty()
 
@@ -196,7 +197,8 @@ class HomeViewModel @Inject constructor(
             posterPath = items.posterPath,
             showingState = items.prfstate,
             periodTo = items.prfpdto,
-            periodFrom = items.prfpdfrom
+            periodFrom = items.prfpdfrom,
+            facilityId = items.prfFacility
         )
     }.orEmpty()
 
@@ -211,7 +213,8 @@ class HomeViewModel @Inject constructor(
             posterPath = items.posterPath,
             showingState = items.prfstate,
             periodTo = items.prfpdto,
-            periodFrom = items.prfpdfrom
+            periodFrom = items.prfpdfrom,
+            facilityId = items.prfFacility
         )
     }.orEmpty()
 

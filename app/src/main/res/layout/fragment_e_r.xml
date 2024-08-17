@@ -1,77 +1,474 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.detail_activity.er.ERFragment"
-             android:background="@color/background_color"
-             android:padding="12dp"
->
-  <ScrollView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-  >
-    >
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-    >
-      <LinearLayout
-              android:id="@+id/ll_comment_buttons"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              android:orientation="horizontal"
-              android:gravity="center"
-      >
-        <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp"
-                android:layout_marginEnd="4dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/primary_color"
-        >
-          <androidx.appcompat.widget.AppCompatButton
-                  android:id="@+id/btn_expectations"
-                  android:layout_width="80dp"
-                  android:layout_height="wrap_content"
-                  android:text="@string/expectations"
-                  android:background="@color/primary_color"
-                  android:textColor="@color/white"
-                  android:textStyle="bold"
-                  android:textSize="16sp"
-          />
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp"
-                android:layout_marginStart="4dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/primary_color">
-          <androidx.appcompat.widget.AppCompatButton
-                  android:id="@+id/btn_reviews"
-                  android:layout_width="80dp"
-                  android:layout_height="wrap_content"
-                  android:text="@string/reviews"
-                  android:background="@color/component_background_color"
-                  android:textColor="@color/component_color"
-                  android:textStyle="bold"
-                  android:textSize="16sp"
-          />
-        </androidx.cardview.widget.CardView>
-      </LinearLayout>
+            android:gravity="center"
+            android:orientation="horizontal">
 
-      <FrameLayout
-              android:id="@+id/fl_comment"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              app:layout_constraintTop_toBottomOf="@id/ll_comment_buttons"
-              android:layout_marginTop="24dp"
-      />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-  </ScrollView>
-</FrameLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                app:cardBackgroundColor="@color/primary_color"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_expectations"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/primary_color"
+                    android:text="@string/expectations"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:cardBackgroundColor="@color/primary_color"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_reviews"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/component_background_color"
+                    android:text="@string/reviews"
+                    android:textColor="@color/component_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+        <!--button layout-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_Expectation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:id="@+id/ll_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/circle_off"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/btn_expect_true"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/curtain_open" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/good"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_true_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0"
+                        android:textColor="@color/good"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:id="@+id/btn_expect_false"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/circle_off"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/curtain_close" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/bad"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_false_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0"
+                        android:textColor="@color/bad"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_expect_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:text="@string/warning_good_bad"
+                android:textColor="@color/primary_color"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_buttons" />
+
+            <TextView
+                android:id="@+id/tv_expectation_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/write_expectation"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_expect_warning" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_expectation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/input_background_color"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@id/cv_submit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_expectation_title">
+
+                <EditText
+                    android:id="@+id/et_expectation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/input_background_color"
+                    android:hint="@string/write_in_30"
+                    android:padding="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/input_text_color"
+                    android:textSize="16sp" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_comment_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:text="@string/warning_expectation"
+                android:textColor="@color/primary_color"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_expectation" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_submit"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_expectation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cv_expectation">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_submit"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/half_dark"
+                    android:gravity="center"
+                    android:text="@string/sakusei"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_expectations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_comment_warning" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_rectangle"
+                android:text="@string/more_expectation_text"
+                android:textColor="@color/primary_color"
+                app:layout_constraintTop_toBottomOf="@id/rv_expectations" />
+
+            <TextView
+                android:id="@+id/tv_empty_expectations"
+                android:layout_width="wrap_content"
+                android:layout_height="240dp"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:lineHeight="30dp"
+                android:text="@string/empty_expectations"
+                android:textColor="@color/bottom_navi_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_comment_warning" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--expectation layout-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/start_point_title"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tv_points">
+
+                <ImageView
+                    android:id="@+id/iv_point_1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/empty_star" />
+
+                <ImageView
+                    android:id="@+id/iv_point_2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/empty_star" />
+
+                <ImageView
+                    android:id="@+id/iv_point_3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/empty_star" />
+
+                <ImageView
+                    android:id="@+id/iv_point_4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/empty_star" />
+
+                <ImageView
+                    android:id="@+id/iv_point_5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/empty_star" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_review_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:text="@string/empty_star_warning"
+                android:textColor="@color/primary_color"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_points" />
+
+            <TextView
+                android:id="@+id/tv_review_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/write_review"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_review_warning" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_review"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="@color/input_background_color"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@id/cv_submit_review"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_review_title">
+
+                <EditText
+                    android:id="@+id/et_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/input_background_color"
+                    android:hint="@string/write_in_30"
+                    android:padding="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/input_text_color"
+                    android:textSize="16sp" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_comment_warning_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:text="@string/warning_expectation"
+                android:textColor="@color/primary_color"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_review" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_submit_review"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_review"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cv_review">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_submit_review"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/half_dark"
+                    android:gravity="center"
+                    android:text="@string/sakusei"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_comment_warning_review" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_more_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_rectangle"
+                android:text="@string/more_review_text"
+                android:textColor="@color/primary_color"
+                app:layout_constraintTop_toBottomOf="@id/rv_reviews" />
+
+            <TextView
+                android:id="@+id/tv_empty_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="240dp"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:lineHeight="30dp"
+                android:text="@string/empty_reviews"
+                android:textColor="@color/bottom_navi_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_comment_warning_review" />
+
+            <LinearLayout
+                android:id="@+id/ll_non_showing"
+                android:layout_width="match_parent"
+                android:layout_height="332dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_mypage_empty_review" />
+
+                <TextView
+                    android:id="@+id/tv_not_showing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="아직 상영전입니다."
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--review layout-->
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

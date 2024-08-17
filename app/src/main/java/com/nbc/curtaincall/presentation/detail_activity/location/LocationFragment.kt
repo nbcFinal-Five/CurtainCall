@@ -20,8 +20,9 @@ import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentDetailLocationBinding
 import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
 import com.nbc.curtaincall.util.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LocationFragment : Fragment(), OnMapReadyCallback {
 
     private var _binding: FragmentDetailLocationBinding? = null
@@ -32,7 +33,8 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //클라이언트 ID 지정
-        NaverMapSdk.getInstance(requireContext()).client = NaverMapSdk.NaverCloudPlatformClient(Constants.MAP_CLIENT_ID)
+        NaverMapSdk.getInstance(requireContext()).client =
+            NaverMapSdk.NaverCloudPlatformClient(Constants.MAP_CLIENT_ID)
     }
 
     override fun onCreateView(
@@ -40,7 +42,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDetailLocationBinding.inflate(inflater,container,false)
+        _binding = FragmentDetailLocationBinding.inflate(inflater, container, false)
         setUpObserve()
         mapView = binding.fvHallNaverMap
         return binding.root
@@ -62,36 +64,38 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
     private fun setUpObserve() {
         viewModel.locationList.observe(viewLifecycleOwner) {
             with(binding) {
-                val firstShowDetail = it.showList?.first()
-                tvConcertHallContents.setText(firstShowDetail?.facilityName)
-                tvConcertHallLocationContents.setText(firstShowDetail?.adres)
-                tvHallCallNumberContents.setText(if(firstShowDetail?.telno.isNullOrBlank()) "N/A" else firstShowDetail?.telno)
-                tvHallHomepageContents.setText(if(firstShowDetail?.relateurl.isNullOrBlank()) "N/A" else firstShowDetail?.relateurl)
+                val firstShowDetail = it.first()
+                tvConcertHallContents.setText(firstShowDetail.facilityName)
+                tvConcertHallLocationContents.setText(firstShowDetail.address)
+                tvHallCallNumberContents.setText(if (firstShowDetail.telno.isNullOrBlank()) "N/A" else firstShowDetail?.telno)
+                tvHallHomepageContents.setText(if (firstShowDetail.relateUrl.isNullOrBlank()) "N/A" else firstShowDetail?.relateUrl)
             }
         }
     }
 
     override fun onMapReady(naverMap: NaverMap) {
         viewModel.locationList.observe(viewLifecycleOwner) { locations ->
-            locations?.showList?.forEach { location ->
-                val latitude = location.la // 위도
-                val longitude = location.lo // 경도
+            locations?.forEach { location ->
+                val latitude = location.latitude // 위도
+                val longitude = location.longitude // 경도
 
                 // 위도와 경도를 사용하여 마커를 생성
                 val marker = Marker()
-                marker.position = LatLng(latitude?.toDouble() ?:0.0, longitude?.toDouble() ?:0.0) // 마커의 위치 설정
+                marker.position =
+                    LatLng(latitude?.toDouble() ?: 0.0, longitude?.toDouble() ?: 0.0) // 마커의 위치 설정
                 marker.map = naverMap // 마커를 지도에 추가
 
                 // 해당 위치로 지도를 이동
                 val cameraPosition = CameraPosition(
-                    LatLng(latitude?.toDouble() ?:0.0, longitude?.toDouble() ?:0.0), // 지도의 중심점 위치
+                    LatLng(latitude?.toDouble() ?: 0.0, longitude?.toDouble() ?: 0.0), // 지도의 중심점 위치
                     16.0 // 줌 레벨
                 )
                 naverMap.cameraPosition = cameraPosition
 
                 // 지도 범위 제한 (대한민국)
                 naverMap.minZoom = 6.0
-                naverMap.extent = LatLngBounds(LatLng(32.973077, 124.270981), LatLng(38.856197,130.051725 ))
+                naverMap.extent =
+                    LatLngBounds(LatLng(32.973077, 124.270981), LatLng(38.856197, 130.051725))
 
                 // 줌인 했을 때 내부 지도 있을 경우 띄우기
                 naverMap.isIndoorEnabled = true
@@ -100,10 +104,10 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun moveToMarkerPosition() {
-        val firstLocation = viewModel.locationList.value?.showList?.firstOrNull()
+        val firstLocation = viewModel.locationList.value?.firstOrNull()
         firstLocation?.let { location ->
-            val latitude = location.la?.toDouble() ?: 0.0
-            val longitude = location.lo?.toDouble() ?: 0.0
+            val latitude = location.latitude?.toDouble() ?: 0.0
+            val longitude = location.longitude?.toDouble() ?: 0.0
 
             val cameraPosition = CameraPosition(
                 LatLng(latitude, longitude),

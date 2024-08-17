@@ -1,10 +1,8 @@
 package com.nbc.curtaincall.ui.ticket
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SimpleInfoBottomsheetDialogBinding
 import com.nbc.curtaincall.ui.detail_activity.DetailActivity
-import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
 import com.nbc.curtaincall.ui.main.MainViewModel
 import com.nbc.curtaincall.util.Constants
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -27,7 +24,8 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
     private var _binding: SimpleInfoBottomsheetDialogBinding? = null
     private val binding get() = _binding!!
     private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
-
+    private lateinit var mt20Id: String
+    private lateinit var mt10Id: String
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +36,6 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
@@ -67,22 +64,33 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                                 )
                             ).into(ivSimplePosterBlur)
                     }
+                    mt10Id = showDetail.showId.toString()
+                    mt20Id = showDetail.prfFacility.toString()
                 }
+            }
+            binding.btnDetail.setOnClickListener {
+                val intent = Intent(context,DetailActivity::class.java)
+                intent.apply {
+                    putExtra(Constants.SHOW_ID,mt10Id)
+                    putExtra(Constants.FACILITY_ID,mt20Id)
+                }
+                startActivity(intent)
+                activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
             }
         }
 
         //Swipe Gesture
-        binding.layoutSimpleScrollview.setOnTouchListener(object :
-            OnSwipeTouchListener(requireContext()) {
-            override fun onSwipeTop() {
-                super.onSwipeTop()
-                val intent = Intent(context, DetailActivity::class.java).apply {
-                    //putExtra(Constants.SHOW_ID, ticketId)
-                    //putExtra(Constants.FACILITY_ID, facilityId)
-                }
-                activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
-            }
-        })
+//        binding.layoutSimpleScrollview.setOnTouchListener(object :
+//            OnSwipeTouchListener(requireContext()) {
+//            override fun onSwipeTop() {
+//                super.onSwipeTop()
+//                val intent = Intent(context, DetailActivity::class.java).apply {
+//                    //putExtra(Constants.SHOW_ID, ticketId)
+//                    //putExtra(Constants.FACILITY_ID, facilityId)
+//                }
+//                activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
+//            }
+//        })
 
     }
 

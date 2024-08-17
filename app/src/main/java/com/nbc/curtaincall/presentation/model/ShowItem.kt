@@ -26,7 +26,8 @@ sealed interface ShowItem {
         val periodTo: String?,
         val periodFrom: String?,
         override val showId: String?,
-        ) : ShowItem
+        val facilityId: String?,
+    ) : ShowItem
 
     data class UpcomingShowItem(
         override val title: String?,
@@ -37,6 +38,7 @@ sealed interface ShowItem {
         val periodTo: String?,
         val periodFrom: String?,
         override val showId: String?,
+        val facilityId: String?,
     ) : ShowItem
 
     data class KidShowItem(
@@ -48,6 +50,53 @@ sealed interface ShowItem {
         val periodTo: String?,
         val periodFrom: String?,
         override val showId: String?,
+        val facilityId: String?,
     ) : ShowItem
+
+    data class DetailShowItem(
+        override val showId: String?,
+        val facilityId: String?,
+        override val title: String?,
+        override val placeName: String?,
+        override val genre: String?,
+        override val posterPath: String?,
+        val age: String?,
+        val price: String?,
+        val showState: String?,
+        val periodFrom: String?,
+        val periodTo: String?,
+        val time: String?,
+        val cast: String?,
+        val productCast: String?,
+        val styUrl: StyUrls?,
+        val relateList: List<Relate>
+    ) : ShowItem
+
+    data class LocationItem(
+        val facilityName: String?,
+        val address: String?,
+        val telno: String?,
+        val relateUrl: String?,
+        val latitude: String?,
+        val longitude: String?,
+        override val showId: String?,
+        override val title: String?,
+        override val placeName: String?,
+        override val genre: String?,
+        override val posterPath: String?,
+    ) : ShowItem
+
+    data class StyUrls(
+        val styUrlList: List<String>?,
+    )
+
+    data class Relates(
+        val relateList: List<Relate>?,
+    )
+
+    data class Relate(
+        val relateName: String?,
+        val relateUrl: String?,
+    )
 
 }

@@ -9,14 +9,14 @@ data class BoxOfsEntity<T>(
 )
 
 data class RelatesEntity(
-    val relatesList: List<Relates>?
+    val relatesList: List<RelateEntity>?
 )
 
 data class StyUrlsEntity(
     val styUrlList: List<String>?
 )
 
-data class Relates(
+data class RelateEntity(
     val relateName: String?,
     val relateUrl: String?
 )

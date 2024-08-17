@@ -11,8 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
 import com.nbc.curtaincall.databinding.FramgentDetailIntroImageBinding
 import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class IntroImageFragment : Fragment() {
     private var _binding: FramgentDetailIntroImageBinding? = null
     private val binding get() = _binding!!
@@ -25,10 +26,14 @@ class IntroImageFragment : Fragment() {
     ): View {
         _binding = FramgentDetailIntroImageBinding.inflate(inflater, container, false)
         viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it!!.showList?.first()
-            firstShowDetail?.styurls?.styUrlList?.forEach { url ->
+            //val firstShowDetail = it?.first()
+            it.first().styUrl?.styUrlList?.forEach {
+                    url ->
                 binding.linearLayout.addView(createImageView(url))
             }
+//            firstShowDetail?.styurls?.styUrlList?.forEach { url ->
+//                binding.linearLayout.addView(createImageView(url))
+//            }
         }
         return binding.root
     }

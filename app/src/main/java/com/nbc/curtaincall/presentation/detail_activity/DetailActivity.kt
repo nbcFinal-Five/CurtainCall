@@ -9,7 +9,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.nbc.curtaincall.databinding.ActivityDetailBinding
 import com.nbc.curtaincall.ui.detail_activity.adapter.DetailPagerAdapter
 import com.nbc.curtaincall.util.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityDetailBinding
 	private val detailViewModel by lazy { ViewModelProvider(this)[DetailViewModel::class.java] }
