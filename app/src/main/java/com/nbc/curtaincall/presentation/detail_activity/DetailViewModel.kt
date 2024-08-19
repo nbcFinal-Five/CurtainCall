@@ -20,18 +20,6 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
     private val _detailInfoList = MutableLiveData<List<ShowItem.DetailShowItem>>()
     val detailInfoList: LiveData<List<ShowItem.DetailShowItem>> get() = _detailInfoList
 
-    private var _totalExpectationCount: MutableLiveData<Int> = MutableLiveData(0)
-    val totalExpectationCount: LiveData<Int>
-        get() = _totalExpectationCount
-
-    private var _point: MutableLiveData<Double> = MutableLiveData(0.0)
-    val point: LiveData<Double>
-        get() = _point
-
-    private var _isBookmark: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isBookmark: LiveData<Boolean>
-        get() = _isBookmark
-
     private val _locationList = MutableLiveData<List<ShowItem.LocationItem>>()
     val locationList: LiveData<List<ShowItem.LocationItem>>
         get() = _locationList
@@ -81,7 +69,8 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
     private fun createLocationItem(location: DbsEntity<DbsShowListEntity>): List<ShowItem.LocationItem> =
         location.showList?.map { items ->
             ShowItem.LocationItem(
-                facilityName = items.prfFacility,
+                facilityId = items.prfFacility,
+                facilityName = items.facilityName,
                 address = items.adres,
                 telno = items.telno,
                 relateUrl = items.relateurl,

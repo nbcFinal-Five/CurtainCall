@@ -3,10 +3,13 @@ package com.nbc.curtaincall.ui.ticket
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -14,6 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.SimpleInfoBottomsheetDialogBinding
+import com.nbc.curtaincall.presentation.model.ShowItem
+import com.nbc.curtaincall.presentation.ticket.ReserveFragment
 import com.nbc.curtaincall.ui.detail_activity.DetailActivity
 import com.nbc.curtaincall.ui.main.MainViewModel
 import com.nbc.curtaincall.util.Constants
@@ -26,6 +31,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
     private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
     private lateinit var mt20Id: String
     private lateinit var mt10Id: String
+    private lateinit var reserveInfo: List<ShowItem.Relate>
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,15 +52,15 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
             }
 
             showDetailInfo.observe(viewLifecycleOwner) {
-                it?.showList?.first()?.let { showDetail ->
+                it?.first()?.let { showDetail ->
                     with(binding) {
-                        tvSimpleShowTitle.text = showDetail.performanceName
-                        tvSimpleAge.text = showDetail.prfAge
-                        tvSimplePlace.text = showDetail.facilityName
-                        tvSimpleGenre.text = showDetail.genreName
-                        tvSimpleShowState.text = showDetail.prfstate
+                        tvSimpleShowTitle.text = showDetail.title
+                        tvSimpleAge.text = showDetail.age
+                        tvSimplePlace.text = showDetail.placeName
+                        tvSimpleGenre.text = showDetail.genre
+                        tvSimpleShowState.text = showDetail.showState
                         tvSimpleCastSub.text =
-                            if (showDetail.prfcast.isNullOrBlank()) "미상" else showDetail.prfcast
+                            if (showDetail.cast.isNullOrBlank()) "미상" else showDetail.cast
                         Glide.with(requireContext()).load(showDetail.posterPath)
                             .into(ivSimplePosterImage)
                         Glide.with(requireContext()).load(showDetail.posterPath)
@@ -65,32 +71,36 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                             ).into(ivSimplePosterBlur)
                     }
                     mt10Id = showDetail.showId.toString()
-                    mt20Id = showDetail.prfFacility.toString()
+                    mt20Id = showDetail.facilityId.toString()
+                    reserveInfo = showDetail.relateList
+
                 }
             }
-            binding.btnDetail.setOnClickListener {
-                val intent = Intent(context,DetailActivity::class.java)
-                intent.apply {
-                    putExtra(Constants.SHOW_ID,mt10Id)
-                    putExtra(Constants.FACILITY_ID,mt20Id)
+            with(binding) {
+
+                btnDetail.setOnClickListener {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.apply {
+                        putExtra(Constants.SHOW_ID, mt10Id)
+                        putExtra(Constants.FACILITY_ID, mt20Id)
+                    }
+                    startActivity(intent)
+                    activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
                 }
-                startActivity(intent)
-                activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
+                btnReserve.setOnClickListener {
+                    val reserveDialog = ReserveFragment()
+                    reserveDialog.setStyle(
+                        DialogFragment.STYLE_NORMAL,
+                        R.style.RoundedBottomSheetDialog
+                    )
+
+                    sharedViewModel.shareReserveInfo(reserveInfo)
+
+                    reserveDialog.show(childFragmentManager, reserveDialog.tag)
+                }
             }
         }
 
-        //Swipe Gesture
-//        binding.layoutSimpleScrollview.setOnTouchListener(object :
-//            OnSwipeTouchListener(requireContext()) {
-//            override fun onSwipeTop() {
-//                super.onSwipeTop()
-//                val intent = Intent(context, DetailActivity::class.java).apply {
-//                    //putExtra(Constants.SHOW_ID, ticketId)
-//                    //putExtra(Constants.FACILITY_ID, facilityId)
-//                }
-//                activity?.overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
-//            }
-//        })
 
     }
 
@@ -120,16 +130,16 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
         }
 
         sharedViewModel.showDetailInfo.observe(viewLifecycleOwner) {
-            val showDetail = it?.showList?.first()
+            val showDetail = it?.first()
             if (showDetail != null) {
                 with(binding) {
-                    tvSimpleShowTitle.text = showDetail.performanceName
-                    tvSimpleAge.text = showDetail.prfAge
-                    tvSimplePlace.text = showDetail.facilityName
-                    tvSimpleGenre.text = showDetail.genreName
-                    tvSimpleShowState.text = showDetail.prfstate
+                    tvSimpleShowTitle.text = showDetail.title
+                    tvSimpleAge.text = showDetail.age
+                    tvSimplePlace.text = showDetail.placeName
+                    tvSimpleGenre.text = showDetail.genre
+                    tvSimpleShowState.text = showDetail.showState
                     tvSimpleCastSub.text =
-                        if (showDetail.prfcast.isNullOrBlank()) "미상" else showDetail.prfcast
+                        if (showDetail.cast.isNullOrBlank()) "미상" else showDetail.cast
                 }
             }
         }

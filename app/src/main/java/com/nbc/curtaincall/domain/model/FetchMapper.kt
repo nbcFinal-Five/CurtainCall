@@ -38,6 +38,7 @@ fun DbResponse.toEntity(
     prfFacility = prfFacility,
     telno = telno,
     relateurl = relateurl,
+    relates = relates?.toRelatesEntity(),
     adres = adres,
     entpsnmP = entpsnmP,
     entpsnmA = entpsnmA,

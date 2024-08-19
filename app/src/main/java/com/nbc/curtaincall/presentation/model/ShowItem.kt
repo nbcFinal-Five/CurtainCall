@@ -73,6 +73,7 @@ sealed interface ShowItem {
     ) : ShowItem
 
     data class LocationItem(
+        val facilityId:String?,
         val facilityName: String?,
         val address: String?,
         val telno: String?,
