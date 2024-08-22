@@ -97,9 +97,7 @@ class HomeFragment : Fragment(), PosterClickListener {
     //옵저브 세팅
     private fun setUpObserve() {
         with(viewModel) {
-            showList.observe(viewLifecycleOwner) {
-                upComingShowAdapter.submitList(it)
-            }
+
             topRank.observe(viewLifecycleOwner) {
                 topRankAdapter.submitList(it?.take(10))
                 //포지션 초기화
@@ -110,6 +108,9 @@ class HomeFragment : Fragment(), PosterClickListener {
             genre.observe(viewLifecycleOwner) {
                 genreAdapter.submitList(it)
             }
+            showList.observe(viewLifecycleOwner) {
+                upComingShowAdapter.submitList(it)
+            }
             kidShow.observe(viewLifecycleOwner) {
                 kidShowAdapter.submitList(it)
             }
@@ -118,31 +119,34 @@ class HomeFragment : Fragment(), PosterClickListener {
                 isLoadingGenre.observe(viewLifecycleOwner) { state ->
                     skeletonGenreLoading.isVisible = state
                 }
-                isLoadingRecommend.observe(viewLifecycleOwner) { state ->
+                isLoadingUpcomingShow.observe(viewLifecycleOwner) { state ->
                     skeletonUpcomingShowLoading.isVisible = state
                 }
                 isLoadingKid.observe(viewLifecycleOwner) { state ->
                     skeletonKidLoading.isVisible = state
                 }
+
                 isServerErrorViewPager.observe(viewLifecycleOwner) { state ->
                     ivViewpagerError.isVisible = state
                     tvViewpagerError.isVisible = state
-                }
-                isServerErrorTopRank.observe(viewLifecycleOwner) { state ->
-                    ivUpcomingShowError.isVisible = state
-                    tvUpcomingShowError.isVisible = state
-                    rvHomeUpcomingShow.isVisible = !state
                 }
                 isServerErrorGenre.observe(viewLifecycleOwner) { state ->
                     ivGenreError.isVisible = state
                     tvGenreError.isVisible = state
                     rvHomeGenre.isVisible = !state
                 }
+                isServerErrorUpcomingShow.observe(viewLifecycleOwner) { state ->
+                    ivUpcomingShowError.isVisible = state
+                    tvUpcomingShowError.isVisible = state
+                    rvHomeUpcomingShow.isVisible = !state
+                }
+
                 isServerErrorKid.observe(viewLifecycleOwner) { state ->
                     ivKidError.isVisible = state
                     tvKidError.isVisible = state
                     rvHomeKidShow.isVisible = !state
                 }
+
             }
         }
     }
@@ -152,7 +156,7 @@ class HomeFragment : Fragment(), PosterClickListener {
         with(binding) {
             //장르별 공연
             rvHomeGenre.adapter = genreAdapter
-            //HOT 공연 예정
+            //공연 예정
             rvHomeUpcomingShow.adapter = upComingShowAdapter
             //어린이 공연
             rvHomeKidShow.adapter = kidShowAdapter

@@ -42,6 +42,8 @@ sealed interface ShowItem {
     ) : ShowItem
 
     data class KidShowItem(
+        override val showId: String?,
+        val facilityId: String?,
         override val title: String?,
         override val placeName: String?,
         override val genre: String?,
@@ -49,8 +51,6 @@ sealed interface ShowItem {
         val showingState: String?,
         val periodTo: String?,
         val periodFrom: String?,
-        override val showId: String?,
-        val facilityId: String?,
     ) : ShowItem
 
     data class DetailShowItem(
@@ -73,7 +73,7 @@ sealed interface ShowItem {
     ) : ShowItem
 
     data class LocationItem(
-        val facilityId:String?,
+        val facilityId: String?,
         val facilityName: String?,
         val address: String?,
         val telno: String?,

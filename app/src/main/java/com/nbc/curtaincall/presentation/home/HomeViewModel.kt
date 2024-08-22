@@ -24,7 +24,7 @@ class HomeViewModel @Inject constructor(
     private val getTopRankUseCase: GetTopRankUseCase,
     private val getGenreUseCase: GetGenreUseCase,
     private val getUpComingUseCase: GetUpComingUseCase,
-    private val getKidShowUseCase: GetKidShowUseCase
+    private val getKidShowUseCase: GetKidShowUseCase,
 ) :
     ViewModel() {
     private val _topRank = MutableLiveData<List<ShowItem>>()
@@ -39,8 +39,8 @@ class HomeViewModel @Inject constructor(
     private val _kidShow = MutableLiveData<List<ShowItem>>()
     val kidShow: LiveData<List<ShowItem>> get() = _kidShow
 
-    private val _isLoadingRecommend = MutableLiveData<Boolean>(true)
-    val isLoadingRecommend: LiveData<Boolean> get() = _isLoadingRecommend
+    private val _isLoadingUpcomingShow = MutableLiveData<Boolean>(true)
+    val isLoadingUpcomingShow: LiveData<Boolean> get() = _isLoadingUpcomingShow
 
     private val _isLoadingGenre = MutableLiveData<Boolean>(true)
     val isLoadingGenre: LiveData<Boolean> get() = _isLoadingGenre
@@ -51,8 +51,8 @@ class HomeViewModel @Inject constructor(
     private val _isServerErrorViewPager = MutableLiveData<Boolean>(false)
     val isServerErrorViewPager: LiveData<Boolean> get() = _isServerErrorViewPager
 
-    private val _isServerErrorTopRank = MutableLiveData<Boolean>(false)
-    val isServerErrorTopRank: LiveData<Boolean> get() = _isServerErrorTopRank
+    private val _isServerErrorUpcomingShow = MutableLiveData<Boolean>(false)
+    val isServerErrorUpcomingShow: LiveData<Boolean> get() = _isServerErrorUpcomingShow
 
     private val _isServerErrorGenre = MutableLiveData<Boolean>(false)
     val isServerErrorGenre: LiveData<Boolean> get() = _isServerErrorGenre
@@ -61,32 +61,18 @@ class HomeViewModel @Inject constructor(
     val isServerErrorKid: LiveData<Boolean> get() = _isServerErrorKid
 
 
+
     init {
-        viewModelScope.launch {
-            runCatching {
-                _isLoadingGenre.value = true
-                _isLoadingGenre.value = true
-                _isLoadingKid.value = true
-                fetchTopRank()
-                fetchGenre(0)
-                fetchUpcoming()
-                fetchKidShow()
-            }.onFailure {
-                _topRank.value = emptyList()
-                _genre.value = emptyList()
-                _showList.value = emptyList()
-                _kidShow.value = emptyList()
-            }.also {
-                _isLoadingGenre.value = false
-                _isLoadingGenre.value = false
-                _isLoadingKid.value = false
-            }
-        }
+        fetchTopRank()
+        fetchGenre(0)
+        fetchUpcoming()
+        fetchKidShow()
     }
 
     private fun fetchTopRank() {
         viewModelScope.launch {
             runCatching {
+                _isLoadingUpcomingShow.value = true
                 getTopRankUseCase(
                     dateCode = "week",
                     date = Converter.nowDateOneDayAgo(),
@@ -94,10 +80,8 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess { result ->
                 _topRank.value = createTopRankItems(result)
-                _isLoadingRecommend.value = false
             }.onFailure {
-                _isServerErrorTopRank.value = true
-                _isLoadingRecommend.value = false
+                _isServerErrorViewPager.value = true
             }
         }
     }
@@ -105,6 +89,7 @@ class HomeViewModel @Inject constructor(
     fun fetchGenre(genre: Int) {
         viewModelScope.launch {
             runCatching {
+                _isLoadingGenre.value = true
                 getGenreUseCase(
                     genreCode = getGenreCode(genre),
                     kidState = null,
@@ -112,10 +97,10 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess { result ->
                 _genre.value = createGenreItems(result)
-                _isLoadingGenre.value = false
                 _isServerErrorGenre.value = false
             }.onFailure {
                 _isServerErrorGenre.value = true
+            }.also {
                 _isLoadingGenre.value = false
             }
         }
@@ -124,23 +109,26 @@ class HomeViewModel @Inject constructor(
     private fun fetchUpcoming() {
         viewModelScope.launch {
             runCatching {
+                _isLoadingUpcomingShow.value = true
                 getUpComingUseCase(
                     showState = "01",
                     genreCode = null,
-                    kidState = "N"
+                    kidState = "N",
                 )
             }.onSuccess { result ->
                 _showList.value = createUpcomingShowItems(result)
             }.onFailure {
-                _isServerErrorViewPager.value = true
+                _isServerErrorUpcomingShow.value = true
+            }.also {
+                _isLoadingUpcomingShow.value = false
             }
         }
     }
 
-
     private fun fetchKidShow() {
         viewModelScope.launch {
             runCatching {
+                _isLoadingKid.value = true
                 getKidShowUseCase(
                     kidState = "Y",
                     genreCode = null,
@@ -148,9 +136,9 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess { result ->
                 _kidShow.value = createKidShowItems(result)
-                _isLoadingKid.value = false
             }.onFailure {
                 _isServerErrorKid.value = true
+            }.also {
                 _isLoadingKid.value = false
             }
         }
