@@ -3,13 +3,11 @@ package com.nbc.curtaincall.ui.ticket
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -69,10 +67,11 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                                     BlurTransformation(20, 5)
                                 )
                             ).into(ivSimplePosterBlur)
+                        tvSimpleArea.text = showDetail.area
                     }
                     mt10Id = showDetail.showId.toString()
                     mt20Id = showDetail.facilityId.toString()
-                    reserveInfo = showDetail.relateList
+                    reserveInfo = showDetail.relateList ?: emptyList()
 
                 }
             }

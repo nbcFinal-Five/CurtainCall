@@ -62,7 +62,9 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
                         relateName = relate.relateName,
                         relateUrl = relate.relateUrl
                     )
-                } ?: emptyList()
+                } ?: emptyList(),
+                area = items.area,
+                runTime = items.prfruntime,
             )
         }.orEmpty()
 

@@ -61,6 +61,8 @@ class MainViewModel @Inject constructor(private val getShowDetailUseCase: GetSho
                 relateList = items.relates?.relatesList?.map { relate ->
                     ShowItem.Relate(relateName = relate.relateName, relateUrl = relate.relateUrl)
                 } ?: emptyList(),
+                area = items.area,
+                runTime = items.prfruntime,
             )
         }.orEmpty()
 

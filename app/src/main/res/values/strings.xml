@@ -180,4 +180,6 @@
     <string name="stats_my_review_genre">장르별 리뷰 분포</string>
     <string name="my_stats">공연 지수</string>
     <string name="stats_genre">장르별(%)</string>
+    <string name="ticket_area">공연 지역</string>
+    <string name="detail_title_runtime">런타임</string>
 </resources>

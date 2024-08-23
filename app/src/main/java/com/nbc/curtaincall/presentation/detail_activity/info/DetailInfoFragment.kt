@@ -42,6 +42,8 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
                     tvDetailPriceSub.text = firstShowDetail.price
                     tvDetailShowState.text = firstShowDetail.showState
                     tvDetailPlace.text = firstShowDetail.placeName
+                    tvDetailAreaSub.text = firstShowDetail.area
+                    tvDetailRuntimeSub.text = firstShowDetail.runTime
                     tvDetailPeriod.text =
                         "${firstShowDetail.periodFrom} ~ ${firstShowDetail.periodTo}"
                     tvDetailTimeSub.text = firstShowDetail.time

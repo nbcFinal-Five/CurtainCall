@@ -54,6 +54,7 @@ sealed interface ShowItem {
     ) : ShowItem
 
     data class DetailShowItem(
+        val runTime: String?,
         override val showId: String?,
         val facilityId: String?,
         override val title: String?,
@@ -69,7 +70,8 @@ sealed interface ShowItem {
         val cast: String?,
         val productCast: String?,
         val styUrl: StyUrls?,
-        val relateList: List<Relate>
+        val relateList: List<Relate>?,
+        val area: String?,
     ) : ShowItem
 
     data class LocationItem(
