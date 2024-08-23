@@ -17,13 +17,11 @@ android {
         applicationId = "com.nbc.curtaincall"
         minSdk = 26
         targetSdk = 34
-        versionCode = 8
-        versionName = "1.3"
+        versionCode = 9
+        versionName = "1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "KOPIS_API_KEY", getAuthKey("KOPIS_API_KEY"))
-        buildConfigField("String", "SUPABASE_KEY", getAuthKey("SUPABASE_KEY"))
-        buildConfigField("String", "SUPABASE_SERVICE_ROLE", getAuthKey("SUPABASE_SERVICE_ROLE"))
         buildConfigField("String", "MAP_CLIENT_ID", getAuthKey("MAP_CLIENT_ID"))
     }
 
