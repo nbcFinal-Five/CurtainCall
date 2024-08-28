@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
 import com.nbc.curtaincall.presentation.auth.SignUpActivity
 
@@ -62,6 +64,12 @@ class MyPageFragment : Fragment() {
             }
             tvRegister.setOnClickListener {
                 startActivity(Intent(context, SignUpActivity::class.java))
+            }
+            tvShowcaseMore.setOnClickListener {
+                findNavController().navigate(R.id.action_mypage_to_showcase)
+            }
+            tvInterestListMore.setOnClickListener {
+                findNavController().navigate(R.id.action_mypage_to_interest)
             }
         }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color">
@@ -221,12 +222,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="2dp"
-                    android:text="0회"
                     android:textColor="@color/text_color"
                     android:textSize="16sp"
                     android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_review_count_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_review_count_title"
+                    tools:text="0회" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_count_skeleton"
@@ -265,6 +266,7 @@
                 app:layout_constraintTop_toTopOf="@id/tv_my_page_showcase">
 
                 <TextView
+                    android:id="@+id/tv_showcase_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/show_more"
@@ -353,8 +355,9 @@
                 app:layout_constraintTop_toTopOf="@id/tv_like">
 
                 <TextView
+                    android:id="@+id/tv_interestList_more"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/show_more"
                     android:textColor="@color/bottom_navi_color" />
 

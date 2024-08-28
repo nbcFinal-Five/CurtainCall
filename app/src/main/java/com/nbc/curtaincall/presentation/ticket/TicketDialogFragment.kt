@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -20,7 +18,8 @@ import com.nbc.curtaincall.presentation.ticket.ReserveFragment
 import com.nbc.curtaincall.ui.detail_activity.DetailActivity
 import com.nbc.curtaincall.ui.main.MainViewModel
 import com.nbc.curtaincall.util.Constants
-import jp.wasabeef.glide.transformations.BlurTransformation
+import com.nbc.curtaincall.util.ViewUtil.setBackGround
+import com.nbc.curtaincall.util.ViewUtil.setPoster
 
 class TicketDialogFragment : BottomSheetDialogFragment() {
 
@@ -44,10 +43,6 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
         with(sharedViewModel) {
-            //HomeFragment에서 id를 보내주면 fetchShowDetail() 호출
-            showId.observe(viewLifecycleOwner) { id ->
-                sharedViewModel.fetchShowDetail(id)
-            }
 
             showDetailInfo.observe(viewLifecycleOwner) {
                 it?.first()?.let { showDetail ->
@@ -59,14 +54,8 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                         tvSimpleShowState.text = showDetail.showState
                         tvSimpleCastSub.text =
                             if (showDetail.cast.isNullOrBlank()) "미상" else showDetail.cast
-                        Glide.with(requireContext()).load(showDetail.posterPath)
-                            .into(ivSimplePosterImage)
-                        Glide.with(requireContext()).load(showDetail.posterPath)
-                            .apply(
-                                RequestOptions.bitmapTransform(
-                                    BlurTransformation(20, 5)
-                                )
-                            ).into(ivSimplePosterBlur)
+                        ivSimplePosterImage.setPoster(ivSimplePosterImage, showDetail.posterPath)
+                        ivSimplePosterBlur.setBackGround(requireContext(), showDetail.posterPath)
                         tvSimpleArea.text = showDetail.area
                     }
                     mt10Id = showDetail.showId.toString()
@@ -92,9 +81,7 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                         DialogFragment.STYLE_NORMAL,
                         R.style.RoundedBottomSheetDialog
                     )
-
                     sharedViewModel.shareReserveInfo(reserveInfo)
-
                     reserveDialog.show(childFragmentManager, reserveDialog.tag)
                 }
             }
@@ -123,11 +110,6 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
 
 
     private fun initViewModel() {
-        //  HomeFragment에서 id를 보내주면 fetchShowDetail() 호출
-        sharedViewModel.showId.observe(viewLifecycleOwner) { id ->
-            sharedViewModel.fetchShowDetail(id)
-        }
-
         sharedViewModel.showDetailInfo.observe(viewLifecycleOwner) {
             val showDetail = it?.first()
             if (showDetail != null) {

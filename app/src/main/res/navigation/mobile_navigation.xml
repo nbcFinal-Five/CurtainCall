@@ -26,6 +26,29 @@
     <fragment
         android:id="@+id/navigation_my_page"
         android:name="com.nbc.curtaincall.presentation.mypage.MyPageFragment"
-        android:label="내 정보"
-        tools:layout="@layout/fragment_my_page" />
+        android:label="@string/title_mypage"
+        tools:layout="@layout/fragment_my_page">
+        <action
+            android:id="@+id/action_mypage_to_showcase"
+            app:destination="@id/navigation_mypage_showcase"
+            app:popUpTo="@id/navigation_my_page"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mypage_to_interest"
+            app:destination="@id/navigation_mypage_interest"
+            app:popUpTo="@id/navigation_my_page"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_mypage_showcase"
+        android:name="com.nbc.curtaincall.presentation.mypage.ShowCaseFragment"
+        android:label="@string/mypage_showcase"
+        tools:layout="@layout/fragment_my_page_showcase" />
+    <fragment
+        android:id="@+id/navigation_mypage_interest"
+        android:name="com.nbc.curtaincall.presentation.mypage.InterestFragment"
+        android:label="@string/mypage_interest"
+        tools:layout="@layout/fragment_my_page_interest" />
 </navigation>

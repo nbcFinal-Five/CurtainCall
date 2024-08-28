@@ -182,4 +182,7 @@
     <string name="stats_genre">장르별(%)</string>
     <string name="ticket_area">공연 지역</string>
     <string name="detail_title_runtime">런타임</string>
+    <string name="title_mypage">내 정보</string>
+    <string name="mypage_showcase">쇼케이스</string>
+    <string name="mypage_interest">관심목록</string>
 </resources>

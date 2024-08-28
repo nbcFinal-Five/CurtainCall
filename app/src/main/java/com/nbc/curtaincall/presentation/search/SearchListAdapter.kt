@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nbc.curtaincall.databinding.ConstraintLayoutSearchRvBinding
 import com.nbc.curtaincall.search.model.SearchItem
-import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 
-class SearchListAdapter(private val listener: PosterClickListener? = null) :
+class SearchListAdapter(private val onClick: (String) -> Unit) :
     ListAdapter<SearchItem, SearchListAdapter.SearchShowViewHolder>(searchCallback) {
 
     companion object {
@@ -44,12 +43,12 @@ class SearchListAdapter(private val listener: PosterClickListener? = null) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchItem) {
             with(binding) {
-                Glide.with(itemView).load(item.poster).override(240,320).into(ivSearchResult)
+                Glide.with(itemView).load(item.poster).override(240, 320).into(ivSearchResult)
                 tvSearchitemGenre.setText(item.genrenm)
                 tvSearchitemPrfstate.setText(item.prfstate)
                 ivSearchResult.setOnClickListener {
                     item.mt20id?.let { id ->
-                        listener?.posterClicked(id) // 클릭시 해당 id 전달하여 간단화면 띄우기
+                        onClick(id) // 클릭시 해당 id 전달하여 간단화면 띄우기
                     }
                 }
             }

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,27 +15,46 @@ import com.nbc.curtaincall.databinding.FragmentHomeBinding
 import com.nbc.curtaincall.presentation.home.HorizontalMarginItemDecoration
 import com.nbc.curtaincall.ui.home.adapter.GenreAdapter
 import com.nbc.curtaincall.ui.home.adapter.KidShowAdapter
-import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 import com.nbc.curtaincall.ui.home.adapter.TopRankAdapter
 import com.nbc.curtaincall.ui.home.adapter.UpcomingShowAdapter
 import com.nbc.curtaincall.ui.main.MainViewModel
-import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), PosterClickListener {
+class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
-
-    private val upComingShowAdapter: UpcomingShowAdapter by lazy { UpcomingShowAdapter(this) }
-    private val topRankAdapter: TopRankAdapter by lazy { TopRankAdapter(this) }
-    private val genreAdapter: GenreAdapter by lazy { GenreAdapter(this) }
-    private val kidShowAdapter: KidShowAdapter by lazy { KidShowAdapter(this) }
+    private val upComingShowAdapter: UpcomingShowAdapter by lazy {
+        UpcomingShowAdapter {
+            sharedViewModel.posterClick(it,childFragmentManager)
+        }
+    }
+    private val topRankAdapter: TopRankAdapter by lazy {
+        TopRankAdapter {
+            sharedViewModel.posterClick(it, childFragmentManager)
+        }
+    }
+    private val genreAdapter: GenreAdapter by lazy {
+        GenreAdapter {
+            sharedViewModel.posterClick(
+                it,
+                childFragmentManager
+            )
+        }
+    }
+    private val kidShowAdapter: KidShowAdapter by lazy {
+        KidShowAdapter {
+            sharedViewModel.posterClick(
+                it,
+                childFragmentManager
+            )
+        }
+    }
     private var isPaging = false
     private var pagingJob: Job? = null
     private var isPositionInit = false
@@ -209,15 +227,17 @@ class HomeFragment : Fragment(), PosterClickListener {
     }
 
     //포스터 클릭 시 티켓
-    override fun posterClicked(id: String) {
-        val ticketDialog = TicketDialogFragment()
-        sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
-        ticketDialog.setStyle(
-            DialogFragment.STYLE_NORMAL,
-            R.style.RoundCornerBottomSheetDialogTheme
-        )
-        ticketDialog.show(childFragmentManager, ticketDialog.tag)
-    }
+//    fun posterClick(id: String?) {
+//        val ticketDialog = TicketDialogFragment()
+//        id?.let {
+//            sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
+//            ticketDialog.setStyle(
+//                DialogFragment.STYLE_NORMAL,
+//                R.style.RoundCornerBottomSheetDialogTheme
+//            )
+//            ticketDialog.show(childFragmentManager, ticketDialog.tag)
+//        }
+//    }
 }
 
 

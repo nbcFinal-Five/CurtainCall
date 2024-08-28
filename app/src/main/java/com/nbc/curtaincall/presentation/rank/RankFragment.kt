@@ -6,24 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
-import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentRankBinding
 import com.nbc.curtaincall.presentation.rank.adpter.RankAdapter
-import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 import com.nbc.curtaincall.ui.main.MainViewModel
-import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RankFragment : Fragment(), PosterClickListener {
+class RankFragment : Fragment() {
     private var _binding: FragmentRankBinding? = null
     private val binding get() = _binding!!
-    private val rankAdapter: RankAdapter by lazy { RankAdapter(this) }
+    private val rankAdapter: RankAdapter by lazy {
+        RankAdapter {
+            sharedViewModel.posterClick(
+                it,
+                childFragmentManager
+            )
+        }
+    }
     private val viewModel: RankViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
 
@@ -68,6 +71,8 @@ class RankFragment : Fragment(), PosterClickListener {
     private fun setUpClickListener() {
         with(binding) {
             //기간별 칩
+            chipDay.isChecked = true
+            chipRankAll.isChecked = true
             chipDay.setOnClickListener {
                 val checkedGenre =
                     chipGroupGenre.children.firstOrNull { (it as Chip).isChecked } as? Chip
@@ -154,15 +159,5 @@ class RankFragment : Fragment(), PosterClickListener {
         _binding = null
     }
 
-    //포스터 클릭 리스너
-    override fun posterClicked(id: String) {
-        val ticketDialog = TicketDialogFragment()
-        sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
-        ticketDialog.setStyle(
-            DialogFragment.STYLE_NORMAL,
-            R.style.RoundCornerBottomSheetDialogTheme
-        )
-        ticketDialog.show(childFragmentManager, ticketDialog.tag)
-    }
 }
 

@@ -20,22 +20,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentSearchBinding
-import com.nbc.curtaincall.ui.home.adapter.PosterClickListener
 import com.nbc.curtaincall.ui.main.MainViewModel
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchAddrBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchChildrenBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchGenreBottomSheet
-import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
 
-class SearchFragment : Fragment(), PosterClickListener {
+class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-    private val searchListAdapter by lazy { SearchListAdapter(this) }
-    private val searchViewModel  by activityViewModels<SearchViewModel>()
+    private val searchListAdapter by lazy {
+        SearchListAdapter { sharedViewModel.posterClick(it, childFragmentManager) }
+    }
+    private val searchViewModel by activityViewModels<SearchViewModel>()
     private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(
@@ -68,19 +65,28 @@ class SearchFragment : Fragment(), PosterClickListener {
             tvSearchfilterGenre.setOnClickListener {
                 val genreBottomSheet = SearchGenreBottomSheet()
                 genreBottomSheet.show(childFragmentManager, genreBottomSheet.tag)
-                genreBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
+                genreBottomSheet.setStyle(
+                    DialogFragment.STYLE_NORMAL,
+                    R.style.RoundCornerBottomSheetDialogTheme
+                )
             }
 
             tvSearchfilterAddr.setOnClickListener {
                 val addrBottomSheet = SearchAddrBottomSheet()
                 addrBottomSheet.show(childFragmentManager, addrBottomSheet.tag)
-                addrBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
+                addrBottomSheet.setStyle(
+                    DialogFragment.STYLE_NORMAL,
+                    R.style.RoundCornerBottomSheetDialogTheme
+                )
             }
 
             tvSearchfilterChild.setOnClickListener {
                 val chilrenBottomSheet = SearchChildrenBottomSheet()
                 chilrenBottomSheet.show(childFragmentManager, chilrenBottomSheet.tag)
-                chilrenBottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
+                chilrenBottomSheet.setStyle(
+                    DialogFragment.STYLE_NORMAL,
+                    R.style.RoundCornerBottomSheetDialogTheme
+                )
             }
         }
     }
@@ -88,7 +94,7 @@ class SearchFragment : Fragment(), PosterClickListener {
     private fun showSearchList() { // 검색어 입력시 결과 확인
         with(binding) {
             etSearch.setOnKeyListener { v, keyCode, event ->
-                when(keyCode){
+                when (keyCode) {
                     KeyEvent.KEYCODE_ENTER -> ivSearch.callOnClick()
                     else -> ivSearch.canScrollVertically(0)
                 }
@@ -97,7 +103,7 @@ class SearchFragment : Fragment(), PosterClickListener {
             ivSearch.setOnClickListener {// 제목 기준으로 검색하기
                 hideKeyboard()
                 //App.prefs.saveSearchWord(etSearch.text?.toString()?.trim() ?:"")
-                searchViewModel.getSearchWord(etSearch.text?.toString()?.trim() ?:"")
+                searchViewModel.getSearchWord(etSearch.text?.toString()?.trim() ?: "")
                 searchViewModel.fetchSearchFilterResult()
             }
 
@@ -118,7 +124,7 @@ class SearchFragment : Fragment(), PosterClickListener {
             // 검색 리스트 구독하여 변경점 생기면, listadapter가 확인하여 리사이클러뷰 업데이트 , 검색결과 안내 text visible 유무
             searchViewModel.searchResultList.observe(viewLifecycleOwner) { result ->
                 searchListAdapter.submitList(result)
-                if(result == null) {
+                if (result == null) {
                     tvSearchNoresult.visibility = View.VISIBLE
                     ivSearchNoresult.visibility = View.VISIBLE
                 } else {
@@ -128,8 +134,8 @@ class SearchFragment : Fragment(), PosterClickListener {
             }
 
             // 서버 통신 문제시
-            searchViewModel.failureMessage.observe(viewLifecycleOwner) {message ->
-                Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+            searchViewModel.failureMessage.observe(viewLifecycleOwner) { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -139,21 +145,22 @@ class SearchFragment : Fragment(), PosterClickListener {
         with(binding) {
             with(rvSearch) {
                 adapter = searchListAdapter
-                layoutManager = GridLayoutManager(requireActivity(),3)
+                layoutManager = GridLayoutManager(requireActivity(), 3)
                 setHasFixedSize(true)
 
-                val fadeIn = AlphaAnimation(0f,1f).apply { duration = 200 } // 서서히 나오기 , f는 투명도
-                val fadeOut = AlphaAnimation(1f,0f).apply { duration = 200 } // 서서히 사라지기, f는 투명도
+                val fadeIn = AlphaAnimation(0f, 1f).apply { duration = 200 } // 서서히 나오기 , f는 투명도
+                val fadeOut = AlphaAnimation(1f, 0f).apply { duration = 200 } // 서서히 사라지기, f는 투명도
 
                 // 무한 스크롤 및 플로팅버튼을 위한 리사이클러뷰 위치 감지
-                addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
                     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                         super.onScrollStateChanged(recyclerView, newState)
 
                         val visibleThreshold = 1
                         val layoutManager = layoutManager as GridLayoutManager
                         val totalItemCount = layoutManager.itemCount // rv의 총 항목의 갯수
-                        val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition() // RecyclerView에서 마지막으로 보이는 항목의 인덱스
+                        val lastVisibleItemPosition =
+                            layoutManager.findLastVisibleItemPosition() // RecyclerView에서 마지막으로 보이는 항목의 인덱스
 
                         // 리스트의 마지막에 도달할 때 추가 검색 데이터 요청
                         if (searchViewModel.searchResultList.value != null && !searchViewModel.isNextLoading.value!! &&
@@ -162,11 +169,11 @@ class SearchFragment : Fragment(), PosterClickListener {
                             searchViewModel.loadMoreSearchResult()
                         }
 
-                        if(!rvSearch.canScrollVertically(-1)&& newState==RecyclerView.SCROLL_STATE_IDLE){
+                        if (!rvSearch.canScrollVertically(-1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
                             // 스크롤이 최상단인 상태면서 스크롤을 하지 않은 상태일때
                             ftbScrollUp.startAnimation(fadeOut)
                             ftbScrollUp.visibility = View.GONE
-                        } else if(ftbScrollUp.visibility != View.VISIBLE) {
+                        } else if (ftbScrollUp.visibility != View.VISIBLE) {
                             ftbScrollUp.visibility = View.VISIBLE
                             ftbScrollUp.startAnimation(fadeIn)
                         }
@@ -179,16 +186,20 @@ class SearchFragment : Fragment(), PosterClickListener {
                 })
 
                 // 더이상 데이터를 받아 올 수 없을 때 안내창
-                searchViewModel.nextResultState.observe(viewLifecycleOwner) {hasData ->
-                    if(!hasData) {
-                        Toast.makeText(requireContext(), getString(R.string.search_nextresult_not), Toast.LENGTH_SHORT).show()
+                searchViewModel.nextResultState.observe(viewLifecycleOwner) { hasData ->
+                    if (!hasData) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.search_nextresult_not),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         searchViewModel.setCanLoadMore(false)
                     }
                 }
 
                 // 무한스크롤로 인한 추가 데이터 요청시 로딩바 제공
-                searchViewModel.isNextLoading.observe(viewLifecycleOwner) {isloading ->
-                    if(isloading) {
+                searchViewModel.isNextLoading.observe(viewLifecycleOwner) { isloading ->
+                    if (isloading) {
                         pbNextresultLoading.visibility = View.VISIBLE
                     } else {
                         pbNextresultLoading.visibility = View.GONE
@@ -206,7 +217,12 @@ class SearchFragment : Fragment(), PosterClickListener {
                 with(binding) {
                     tvSearchfilterGenre.setText(getString(R.string.filter_genre) + " : ${selectedGenreCount}")
                     tvSearchfilterGenre.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
-                    tvSearchfilterGenre.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                    tvSearchfilterGenre.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.text_color
+                        )
+                    )
                     tvSearchfilterGenre.setTypeface(null, Typeface.BOLD)
                     ivGenreArrow.visibility = View.GONE
                 }
@@ -226,7 +242,12 @@ class SearchFragment : Fragment(), PosterClickListener {
                 with(binding) {
                     tvSearchfilterAddr.setText(getString(R.string.filter_addr) + " : ${selectedAddrCount}")
                     tvSearchfilterAddr.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
-                    tvSearchfilterAddr.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                    tvSearchfilterAddr.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.text_color
+                        )
+                    )
                     tvSearchfilterAddr.setTypeface(null, Typeface.BOLD)
                     ivAddrArrow.visibility = View.GONE
                 }
@@ -246,7 +267,12 @@ class SearchFragment : Fragment(), PosterClickListener {
                 with(binding) {
                     tvSearchfilterChild.setText(getString(R.string.filter_children) + " : ${selectedChildCount}")
                     tvSearchfilterChild.setBackgroundResource(R.drawable.shape_searchfilter_selected_radius)
-                    tvSearchfilterChild.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
+                    tvSearchfilterChild.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.text_color
+                        )
+                    )
                     tvSearchfilterChild.setTypeface(null, Typeface.BOLD)
                     ivAddrArrow.visibility = View.GONE
                 }
@@ -261,16 +287,20 @@ class SearchFragment : Fragment(), PosterClickListener {
         }
     }
 
-    private fun filterReset(){
+    private fun filterReset() {
         with(binding) {
             llSearchFilterReset.setOnClickListener {
-                if(!searchViewModel.isLoading.value!! && !searchViewModel.isNextLoading.value!!) {
+                if (!searchViewModel.isLoading.value!! && !searchViewModel.isNextLoading.value!!) {
                     // 검색결과 리스트 초기화
                     searchViewModel.resetData()
                     searchListAdapter.submitList(null)
                     tvSearchNoresult.visibility = View.VISIBLE
                     ivSearchNoresult.visibility = View.VISIBLE
-                    Toast.makeText(requireActivity(),R.string.search_result_reset,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        R.string.search_result_reset,
+                        Toast.LENGTH_SHORT
+                    ).show()
                     // 검색어 초기화
                     etSearch.setText("")
                     //App.prefs.saveSearchWord("")
@@ -278,18 +308,15 @@ class SearchFragment : Fragment(), PosterClickListener {
                     ftbScrollUp.visibility = View.INVISIBLE
                     rvSearch.scrollToPosition(0)
                 } else {
-                    Toast.makeText(requireActivity(), R.string.search_reset_impossible, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        R.string.search_reset_impossible,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
 
-    }
-
-    override fun posterClicked(id: String) { // 해당 아이템 클릭시 간단화면 띄우기
-        val ticketDialog = TicketDialogFragment()
-        sharedViewModel.sharedShowId(id) //해당 공연의 id를 MainViewModel로 보내줌
-        ticketDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
-        ticketDialog.show(childFragmentManager, ticketDialog.tag)
     }
 
     private fun hideKeyboard() { // 키보드 숨기기

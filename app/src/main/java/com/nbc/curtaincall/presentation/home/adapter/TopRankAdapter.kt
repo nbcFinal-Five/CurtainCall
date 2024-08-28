@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.nbc.curtaincall.databinding.ItemTopRankBinding
 import com.nbc.curtaincall.presentation.home.adapter.DiffCallback
 import com.nbc.curtaincall.presentation.model.ShowItem
+import com.nbc.curtaincall.util.ViewUtil.setPoster
 
-class TopRankAdapter(private val listener: PosterClickListener? = null) :
+class TopRankAdapter(private val onClick: (String) -> Unit) :
     ListAdapter<ShowItem, TopRankAdapter.TopRankViewHolder>(DiffCallback()) {
 
     inner class TopRankViewHolder(private val binding: ItemTopRankBinding) :
@@ -18,17 +18,12 @@ class TopRankAdapter(private val listener: PosterClickListener? = null) :
         fun bind(item: ShowItem) {
             item as ShowItem.TopRankItem
             with(binding) {
-                Glide.with(itemView).load("http://www.kopis.or.kr${item.posterPath}")
-                    .into(ivTopRankPoster)
+                ivTopRankPoster.setPoster(itemView, "http://www.kopis.or.kr${item.posterPath}")
                 tvPeriod.text = item.period
                 tvFacilityName.text = item.placeName
                 tvPerformanceName.text = item.title
                 ivTopRankPoster.setOnClickListener {
-                    item.showId?.let { id ->
-                        listener?.posterClicked(
-                            id
-                        )
-                    }
+                    item.showId?.let { id -> onClick(id) }
                 }
             }
         }
