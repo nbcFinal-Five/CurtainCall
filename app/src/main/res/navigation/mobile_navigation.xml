@@ -48,7 +48,7 @@
         tools:layout="@layout/fragment_my_page_showcase" />
     <fragment
         android:id="@+id/navigation_mypage_interest"
-        android:name="com.nbc.curtaincall.presentation.mypage.InterestFragment"
+        android:name="com.nbc.curtaincall.presentation.mypage.BookmarkFragment"
         android:label="@string/mypage_interest"
-        tools:layout="@layout/fragment_my_page_interest" />
+        tools:layout="@layout/fragment_my_page_bookmark" />
 </navigation>

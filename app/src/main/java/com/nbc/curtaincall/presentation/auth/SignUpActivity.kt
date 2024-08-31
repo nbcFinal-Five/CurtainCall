@@ -9,6 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nbc.curtaincall.databinding.ActivitySignUpBinding
+import com.nbc.curtaincall.presentation.Key.Companion.DB_USERS
 
 class SignUpActivity : AppCompatActivity() {
     private val binding: ActivitySignUpBinding by lazy {
@@ -27,8 +28,8 @@ class SignUpActivity : AppCompatActivity() {
                 val password = etPassword.text.toString()
                 val passwordConfirm = etPasswordConfirm.text.toString()
                 val nickName = etNickname.text.toString()
-                if (email.isNullOrBlank() || password
-                        .isNullOrBlank() || passwordConfirm.isNullOrBlank() || nickName.isNullOrBlank()
+                if (email.isBlank() || password
+                        .isBlank() || passwordConfirm.isBlank() || nickName.isBlank()
                 ) return@setOnClickListener
                 if (isValid(email, password, passwordConfirm, nickName))
                     Firebase.auth.createUserWithEmailAndPassword(
@@ -41,7 +42,7 @@ class SignUpActivity : AppCompatActivity() {
 
                             userId?.let {
                                 val database = Firebase.firestore
-                                val userRef = database.collection("users").document(it)
+                                val userRef = database.collection(DB_USERS).document(it)
                                 val userData = hashMapOf(
                                     "email" to email,
                                     "nickname" to nickName,

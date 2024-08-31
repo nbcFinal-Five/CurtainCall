@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp">
+
+    <ImageView
+        android:id="@+id/iv_home_genre_poster"
+        style="@style/posterStyle"
+        android:clipToOutline="true"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/item_bottom_rank_background_gradient"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_page_indicator_container"
+        app:layout_constraintBottom_toBottomOf="@id/iv_home_genre_poster"
+        app:layout_constraintEnd_toEndOf="@id/iv_home_genre_poster"
+        app:layout_constraintStart_toStartOf="@id/iv_home_genre_poster"
+        app:layout_constraintTop_toTopOf="@id/iv_home_genre_poster"
+        app:layout_constraintVertical_bias="1" />
+
+    <TextView
+        android:id="@+id/tv_genre_period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_home_genre_poster"
+        app:layout_constraintEnd_toEndOf="@id/iv_home_genre_poster"
+        app:layout_constraintTop_toTopOf="@id/iv_home_genre_poster"
+        app:layout_constraintVertical_bias="1"
+        tools:text="~2024.03.31" />
+
+    <TextView
+        android:id="@+id/tv_genre"
+        style="@style/posterTopLabel"
+        android:layout_height="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="대중음악" />
+
+    <TextView
+        android:id="@+id/tv_showing_state"
+        style="@style/posterTopLabel"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:text="공연중"
+        app:layout_constraintBottom_toBottomOf="@id/tv_genre"
+        app:layout_constraintStart_toEndOf="@id/tv_genre"
+        app:layout_constraintTop_toTopOf="@id/tv_genre" />
+
+    <TextView
+        android:id="@+id/tv_performance_name"
+        style="@style/HomePosterTitleStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/iv_home_genre_poster"
+        app:layout_constraintStart_toStartOf="@id/iv_home_genre_poster"
+        app:layout_constraintTop_toBottomOf="@id/iv_home_genre_poster"
+        tools:text="IU H. E. R. WORLD TOUR CONCERT [서울]" />
+
+    <TextView
+        android:id="@+id/tv_place_name"
+        style="@style/HomePosterPlaceNameStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/iv_home_genre_poster"
+        app:layout_constraintStart_toStartOf="@id/iv_home_genre_poster"
+        app:layout_constraintTop_toBottomOf="@id/tv_performance_name"
+        tools:text="올림픽공원 KSPO DOME(체조경기장)" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

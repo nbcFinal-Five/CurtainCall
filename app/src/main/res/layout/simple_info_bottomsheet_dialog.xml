@@ -141,16 +141,17 @@
             app:layout_constraintTop_toTopOf="@id/tv_simple_expectationsNum" />
 
         <View
+            android:id="@+id/around_bookmark"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_heart_gadient"
-            app:layout_constraintBottom_toBottomOf="@id/iv_simple_wishlist"
-            app:layout_constraintEnd_toEndOf="@id/iv_simple_wishlist"
-            app:layout_constraintStart_toStartOf="@id/iv_simple_wishlist"
-            app:layout_constraintTop_toTopOf="@id/iv_simple_wishlist" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_simple_bookmark"
+            app:layout_constraintEnd_toEndOf="@id/iv_simple_bookmark"
+            app:layout_constraintStart_toStartOf="@id/iv_simple_bookmark"
+            app:layout_constraintTop_toTopOf="@id/iv_simple_bookmark" />
 
         <ImageView
-            android:id="@+id/iv_simple_wishlist"
+            android:id="@+id/iv_simple_bookmark"
             android:layout_width="22dp"
             android:layout_height="20dp"
             android:layout_margin="20dp"

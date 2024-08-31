@@ -405,7 +405,9 @@
                 android:layout_height="332dp"
                 android:layout_marginVertical="32dp"
                 android:overScrollMode="never"
-                app:layout_constraintTop_toBottomOf="@id/tv_like" />
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_like"
+                app:spanCount="3" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_bookmark_skeleton"
@@ -416,21 +418,6 @@
 
                 <include layout="@layout/skeleton_my_page" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/tv_dattai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="20dp"
-                android:text="@string/dattai"
-                android:textColor="@color/component_color"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_bookmarks" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
