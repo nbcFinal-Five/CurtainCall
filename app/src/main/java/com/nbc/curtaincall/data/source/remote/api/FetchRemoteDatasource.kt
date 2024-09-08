@@ -34,7 +34,6 @@ interface FetchRemoteDatasource {
         @Query("eddate") endDate: String = Converter.oneMonthFromNow(),
         @Query("cpage") currentPage: String = Constants.CURRENT_PAGE,
         @Query("rows") rows: String = Constants.PAGE_INDEX,
-        @Query("newsql") newSQL: String? = "Y",
         @Query("shcate") genreCode: String? = null,
         @Query("kidstate") kidState: String? = null,
         @Query("prfstate") showState: String? = null,
@@ -47,14 +46,12 @@ interface FetchRemoteDatasource {
         @Query("date") date: String = Converter.nowDateOneDayAgo(), //현재 날짜 하루 전을 yyyyMMdd 형식 으로 변환
         @Query("catecode") genreCode: String? = null,
         @Query("area") area: String? = null,
-        @Query("newsql") newSQL: String? = "Y",
     ): BoxOfsResponse
 
     //공연 상세 정보
     @GET("pblprfr/{id}")
     suspend fun fetchShowDetail(
         @Path("id") path: String,
-        @Query("newsql") newSQL: String = "Y",
     ): DbsResponse
 
     // 공연장 정보

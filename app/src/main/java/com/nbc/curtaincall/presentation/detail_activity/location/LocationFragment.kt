@@ -64,11 +64,13 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
     private fun setUpObserve() {
         viewModel.locationList.observe(viewLifecycleOwner) {
             with(binding) {
-                val firstShowDetail = it.first()
-                tvConcertHallContents.setText(firstShowDetail.facilityName)
-                tvConcertHallLocationContents.setText(firstShowDetail.address)
-                tvHallCallNumberContents.setText(if (firstShowDetail.telno.isNullOrBlank()) "N/A" else firstShowDetail?.telno)
-                tvHallHomepageContents.setText(if (firstShowDetail.relateUrl.isNullOrBlank()) "N/A" else firstShowDetail?.relateUrl)
+                val firstShowDetail = it.firstOrNull()
+                if (firstShowDetail != null) {
+                    tvConcertHallContents.setText(firstShowDetail.facilityName)
+                    tvConcertHallLocationContents.setText(firstShowDetail.address)
+                    tvHallCallNumberContents.setText(if (firstShowDetail.telno.isNullOrBlank()) "N/A" else firstShowDetail?.telno)
+                    tvHallHomepageContents.setText(if (firstShowDetail.relateUrl.isNullOrBlank()) "N/A" else firstShowDetail?.relateUrl)
+                }
             }
         }
     }
