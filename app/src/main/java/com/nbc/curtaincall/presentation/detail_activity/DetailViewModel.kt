@@ -7,18 +7,31 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nbc.curtaincall.domain.model.DbsEntity
 import com.nbc.curtaincall.domain.model.DbsShowListEntity
-import com.nbc.curtaincall.domain.repository.FetchRepository
+import com.nbc.curtaincall.domain.usecase.AddBookmarkUseCase
+import com.nbc.curtaincall.domain.usecase.CheckBookmarkUseCase
+import com.nbc.curtaincall.domain.usecase.GetShowDetailUseCase
+import com.nbc.curtaincall.domain.usecase.RemoveBookmarkUseCase
 import com.nbc.curtaincall.presentation.model.ShowItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : ViewModel() {
+class DetailViewModel @Inject constructor(
+    private val getShowDetailUseCase: GetShowDetailUseCase,
+    private val addBookmarkUseCase: AddBookmarkUseCase,
+    private val removeBookmarkUseCase: RemoveBookmarkUseCase,
+    private val checkBookmarkUseCase: CheckBookmarkUseCase,
+) :
+    ViewModel() {
     private lateinit var showId: String //공연 id
     private lateinit var facilityId: String //공연장 id
+
     private val _detailInfoList = MutableLiveData<List<ShowItem.DetailShowItem>>()
     val detailInfoList: LiveData<List<ShowItem.DetailShowItem>> get() = _detailInfoList
+
+    private val _showDetail = MutableLiveData<ShowItem.DetailShowItem>()
+    val showDetail get() = _showDetail
 
     private val _locationList = MutableLiveData<List<ShowItem.LocationItem>>()
     val locationList: LiveData<List<ShowItem.LocationItem>>
@@ -32,14 +45,18 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
     fun fetchDetailInfo() {
         viewModelScope.launch {
             runCatching {
-                createItem(fetch.fetchShowDetail(path = showId))
+                val isBookmarked = checkBookmarkUseCase(showId)
+                createItem(getShowDetailUseCase(path = showId), isBookmarked)
             }.onSuccess { result ->
                 _detailInfoList.value = result
             }.onFailure { _detailInfoList.value = emptyList() }
         }
     }
 
-    private fun createItem(showItem: DbsEntity<DbsShowListEntity>): List<ShowItem.DetailShowItem> =
+    private fun createItem(
+        showItem: DbsEntity<DbsShowListEntity>,
+        isBookmarked: Boolean
+    ): List<ShowItem.DetailShowItem> =
         showItem.showList?.map { items ->
             ShowItem.DetailShowItem(
                 showId = items.showId,
@@ -65,6 +82,7 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
                 } ?: emptyList(),
                 area = items.area,
                 runTime = items.prfruntime,
+                isBookmarked = isBookmarked
             )
         }.orEmpty()
 
@@ -86,12 +104,13 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
             )
         }.orEmpty()
 
+    //현재 파싱 라이브러리 문제로 기능 정지
     fun fetchDetailLocation() {
         viewModelScope.launch {
             runCatching {
-                createLocationItem(fetch.getLocationList(path = facilityId))
+                //createLocationItem(get.getLocationList(path = facilityId))
             }.onSuccess { result ->
-                _locationList.value = result
+                //_locationList.value = result
             }.onFailure {
                 Log.e("DetailViewModel", "fetchDetailLocation: ${it.message}")
                 _locationList.value = emptyList()
@@ -99,4 +118,26 @@ class DetailViewModel @Inject constructor(private val fetch: FetchRepository) : 
         }
     }
 
+    fun bookmark(showId: String) {
+        viewModelScope.launch {
+            val showItem =
+                _detailInfoList.value?.firstOrNull { it.showId == showId } ?: return@launch
+            toggleBookmark(showItem)
+            if (showItem.isBookmarked) {
+                removeBookmarkUseCase(showId)
+            } else {
+                addBookmarkUseCase(showItem)
+            }
+        }
+    }
+
+    private fun toggleBookmark(item: ShowItem) {
+        _detailInfoList.value = _detailInfoList.value?.map {
+            if (it == item) {
+                it.copy(isBookmarked = !it.isBookmarked)
+            } else {
+                it
+            }
+        }
+    }
 }

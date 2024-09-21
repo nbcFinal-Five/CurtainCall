@@ -20,4 +20,5 @@ interface FetchRepository {
 
     suspend fun fetchShowDetail(path: String): DbsEntity<DbsShowListEntity>
     suspend fun getLocationList(path: String): DbsEntity<DbsShowListEntity>
+
 }

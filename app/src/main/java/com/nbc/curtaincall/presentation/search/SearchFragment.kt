@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentSearchBinding
-import com.nbc.curtaincall.ui.main.MainViewModel
+import com.nbc.curtaincall.presentation.TicketViewModel
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchAddrBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchChildrenBottomSheet
 import com.nbc.curtaincall.ui.search.bottomsheet.SearchGenreBottomSheet
@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
         SearchListAdapter { sharedViewModel.posterClick(it, childFragmentManager) }
     }
     private val searchViewModel by activityViewModels<SearchViewModel>()
-    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
+    private val sharedViewModel: TicketViewModel by activityViewModels<TicketViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -15,8 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.databinding.FragmentMyPageBinding
+import com.nbc.curtaincall.presentation.TicketViewModel
 import com.nbc.curtaincall.presentation.auth.SignUpActivity
-import com.nbc.curtaincall.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,10 +25,10 @@ class MyPageFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
-    private val sharedViewModel by activityViewModels<MainViewModel>()
+    private val ticketViewModel by activityViewModels<TicketViewModel>()
     private val interestAdapter by lazy {
         BookmarkAdapter {
-            sharedViewModel.posterClick(it, childFragmentManager)
+            ticketViewModel.posterClick(it, childFragmentManager)
         }
     }
 
@@ -39,7 +39,7 @@ class MyPageFragment : Fragment() {
     ): View {
         _binding = FragmentMyPageBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
-        sharedViewModel.myPageInterestList.observe(viewLifecycleOwner) {
+        ticketViewModel.myPageInterestList.observe(viewLifecycleOwner) {
             interestAdapter.submitList(it)
         }
         binding.rvBookmarks.adapter = interestAdapter
@@ -94,10 +94,16 @@ class MyPageFragment : Fragment() {
         with(binding) {
             layoutMyPage.isVisible = isLoggedIn
             layoutSignIn.isVisible = !isLoggedIn
-            sharedViewModel.isBookmarkItemExist.observe(viewLifecycleOwner) {
-                tvLikeDetail.isVisible = !it
-                ivLikeDetail.isVisible = !it
-                rvBookmarks.isVisible = it
+            ticketViewModel.myPageInterestList.observe(viewLifecycleOwner) {
+                if (it.isEmpty()) {
+                    tvLikeDetail.isVisible = true
+                    ivLikeDetail.isVisible = true
+                    rvBookmarks.isVisible = false
+                } else {
+                    tvLikeDetail.isVisible = false
+                    ivLikeDetail.isVisible = false
+                    rvBookmarks.isVisible = true
+                }
             }
         }
     }
@@ -107,5 +113,4 @@ class MyPageFragment : Fragment() {
         auth.removeAuthStateListener(authStateListener)
         _binding = null
     }
-
 }

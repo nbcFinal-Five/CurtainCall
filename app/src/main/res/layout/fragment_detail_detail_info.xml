@@ -74,16 +74,17 @@
             app:layout_constraintTop_toBottomOf="@id/tv_detail_place" />
 
         <View
+            android:id="@+id/bookmark_container"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_heart_gadient"
-            app:layout_constraintBottom_toBottomOf="@id/iv_detail_wishlist"
-            app:layout_constraintEnd_toEndOf="@id/iv_detail_wishlist"
-            app:layout_constraintStart_toStartOf="@id/iv_detail_wishlist"
-            app:layout_constraintTop_toTopOf="@id/iv_detail_wishlist" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_detail_bookmark"
+            app:layout_constraintEnd_toEndOf="@id/iv_detail_bookmark"
+            app:layout_constraintStart_toStartOf="@id/iv_detail_bookmark"
+            app:layout_constraintTop_toTopOf="@id/iv_detail_bookmark" />
 
         <ImageView
-            android:id="@+id/iv_detail_wishlist"
+            android:id="@+id/iv_detail_bookmark"
             android:layout_width="22dp"
             android:layout_height="20dp"
             android:layout_margin="20dp"

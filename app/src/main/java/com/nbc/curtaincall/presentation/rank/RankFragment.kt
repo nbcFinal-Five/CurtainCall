@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import com.nbc.curtaincall.databinding.FragmentRankBinding
 import com.nbc.curtaincall.presentation.rank.adpter.RankAdapter
-import com.nbc.curtaincall.ui.main.MainViewModel
+import com.nbc.curtaincall.presentation.TicketViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +28,7 @@ class RankFragment : Fragment() {
         }
     }
     private val viewModel: RankViewModel by viewModels()
-    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
+    private val sharedViewModel: TicketViewModel by activityViewModels<TicketViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

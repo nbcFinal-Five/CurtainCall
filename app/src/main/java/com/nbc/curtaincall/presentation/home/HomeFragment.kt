@@ -17,7 +17,7 @@ import com.nbc.curtaincall.ui.home.adapter.GenreAdapter
 import com.nbc.curtaincall.ui.home.adapter.KidShowAdapter
 import com.nbc.curtaincall.ui.home.adapter.TopRankAdapter
 import com.nbc.curtaincall.ui.home.adapter.UpcomingShowAdapter
-import com.nbc.curtaincall.ui.main.MainViewModel
+import com.nbc.curtaincall.presentation.TicketViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
-    private val sharedViewModel: MainViewModel by activityViewModels<MainViewModel>()
+    private val sharedViewModel: TicketViewModel by activityViewModels<TicketViewModel>()
     private val upComingShowAdapter: UpcomingShowAdapter by lazy {
         UpcomingShowAdapter {
             sharedViewModel.posterClick(it,childFragmentManager)

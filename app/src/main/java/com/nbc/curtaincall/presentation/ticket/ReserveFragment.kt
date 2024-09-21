@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nbc.curtaincall.databinding.ReserveBottomsheetDialogBinding
-import com.nbc.curtaincall.ui.main.MainViewModel
+import com.nbc.curtaincall.presentation.TicketViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ReserveFragment : BottomSheetDialogFragment() {
     private var _binding: ReserveBottomsheetDialogBinding? = null
     private val binding get() = _binding!!
-    private val sharedViewModel by activityViewModels<MainViewModel>()
+    private val sharedViewModel by activityViewModels<TicketViewModel>()
     private val adapter by lazy { ListAdapter() }
     override fun onCreateView(
         inflater: LayoutInflater,

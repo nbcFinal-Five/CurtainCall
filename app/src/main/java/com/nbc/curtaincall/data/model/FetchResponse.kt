@@ -127,7 +127,7 @@ data class DbResponse @JvmOverloads constructor(
     @field:Element(name = "parkinglot", required = false)
     var parkinglot: String? = null,
 
-    @field:Element(name = "seatscale", required = false)
+    @field:Element(name= "seatscale",required = false)
     var seatscale: String? = null,
 
     @field:Element(name = "mt13cnt", required = false)
@@ -138,6 +138,45 @@ data class DbResponse @JvmOverloads constructor(
 
     @field:Element(name = "opende", required = false)
     var opende: String? = null,
+
+    @field:Element(required = false)
+    var restaurant: String? = null,
+
+    @field:Element(required = false)
+    var cafe: String? = null,
+
+    @field:Element(required = false)
+    var nolibang: String? = null,
+
+    @field:Element(required = false)
+    var suyu: String? = null,
+
+    @field:Element(required = false)
+    var parkbarrier: String? = null,
+
+    @field:Element(required = false)
+    var restbarrier: String? = null,
+
+    @field:Element(required = false)
+    var runwbarrier: String? = null,
+
+    @field:Element(required = false)
+    var elevbarrier: String? = null,
+
+    @field:Element(required = false)
+    var store: String? = null,
+
+    @field:Element(required = false)
+    var mt13s: String? = null,
+
+    @field:Element(required = false)
+    var mt13: String? = null,
+
+    @field:Element(required = false)
+    var prfplcnm: String? = null,
+
+    @field:Element(required = false)
+    var mt13id: String? = null,
 
     )
 

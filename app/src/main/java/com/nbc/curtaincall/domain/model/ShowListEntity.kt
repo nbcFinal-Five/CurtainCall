@@ -63,7 +63,7 @@ data class DbsShowListEntity(
     val la: String? = null,
     val lo: String? = null,
     val parkinglot: String? = null,
-    val seatscale: String? = null,
+    //val seatscale: String? = null,
     val mt13cnt: String? = null,
     val fcltychartr: String? = null,
     val opende: String? = null,

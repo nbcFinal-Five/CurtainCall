@@ -54,24 +54,25 @@ sealed interface ShowItem {
     ) : ShowItem
 
     data class DetailShowItem(
-        val runTime: String?,
-        override val showId: String?,
-        val facilityId: String?,
-        override val title: String?,
-        override val placeName: String?,
-        override val genre: String?,
-        override val posterPath: String?,
-        val age: String?,
-        val price: String?,
-        val showState: String?,
-        val periodFrom: String?,
-        val periodTo: String?,
-        val time: String?,
-        val cast: String?,
-        val productCast: String?,
-        val styUrl: StyUrls?,
-        val relateList: List<Relate>?,
-        val area: String?,
+        val runTime: String? = null,
+        override val showId: String? = null,
+        val facilityId: String? = null,
+        override val title: String? = null,
+        override val placeName: String? = null,
+        override val genre: String? = null,
+        override val posterPath: String? = null,
+        val age: String? = null,
+        val price: String? = null,
+        val showState: String? = null,
+        val periodFrom: String? = null,
+        val periodTo: String? = null,
+        val time: String? = null,
+        val cast: String? = null,
+        val productCast: String? = null,
+        val styUrl: StyUrls? = null,
+        val relateList: List<Relate>? = null,
+        val area: String? = null,
+        val isBookmarked: Boolean = false
     ) : ShowItem
 
     data class LocationItem(
@@ -90,7 +91,7 @@ sealed interface ShowItem {
     ) : ShowItem
 
     data class StyUrls(
-        val styUrlList: List<String>?,
+        val styUrlList: List<String>? = null,
     )
 
     data class Relates(
@@ -98,8 +99,7 @@ sealed interface ShowItem {
     )
 
     data class Relate(
-        val relateName: String?,
-        val relateUrl: String?,
+        val relateName: String? = null,
+        val relateUrl: String? = null,
     )
-
 }

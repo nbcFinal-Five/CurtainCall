@@ -14,11 +14,12 @@ import com.nbc.curtaincall.ui.detail_activity.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
+class DetailInfoFragment :
+    Fragment(R.layout.fragment_detail_detail_info) {
     private var _binding: FragmentDetailDetailInfoBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: DetailViewModel by activityViewModels<DetailViewModel>()
-
+    private lateinit var showId: String
+    private val detailViewModel by activityViewModels<DetailViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,31 +30,44 @@ class DetailInfoFragment : Fragment(R.layout.fragment_detail_detail_info) {
         return binding.root
     }
 
+    private fun setUpClickListener() = with(binding) {
+        bookmarkContainer.setOnClickListener {
+            detailViewModel.bookmark(showId)
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpClickListener()
+        detailViewModel.fetchDetailInfo()
+    }
+
     private fun setUpObserve() {
-        viewModel.detailInfoList.observe(viewLifecycleOwner) {
-            val firstShowDetail = it?.first()
-            if (firstShowDetail != null) {
-                with(binding) {
-                    Glide.with(requireContext()).load(firstShowDetail.posterPath)
+        detailViewModel.detailInfoList.observe(viewLifecycleOwner) {
+            val detailInfo = it.firstOrNull()
+            with(binding) {
+                detailInfo?.let { detailInfo ->
+                    Glide.with(requireContext()).load(detailInfo.posterPath)
                         .override(Target.SIZE_ORIGINAL).into(ivDetailPoster)
-                    tvDetailShowTitle.text = firstShowDetail.title
-                    tvDetailGenre.text = firstShowDetail.genre
-                    tvDetailAgeSub.text = firstShowDetail.age
-                    tvDetailPriceSub.text = firstShowDetail.price
-                    tvDetailShowState.text = firstShowDetail.showState
-                    tvDetailPlace.text = firstShowDetail.placeName
-                    tvDetailAreaSub.text = firstShowDetail.area
-                    tvDetailRuntimeSub.text = firstShowDetail.runTime
+                    tvDetailShowTitle.text = detailInfo.title
+                    tvDetailGenre.text = detailInfo.genre
+                    tvDetailAgeSub.text = detailInfo.age
+                    tvDetailPriceSub.text = detailInfo.price
+                    tvDetailShowState.text = detailInfo.showState
+                    tvDetailPlace.text = detailInfo.placeName
+                    tvDetailAreaSub.text = detailInfo.area
+                    tvDetailRuntimeSub.text = detailInfo.runTime
                     tvDetailPeriod.text =
-                        "${firstShowDetail.periodFrom} ~ ${firstShowDetail.periodTo}"
-                    tvDetailTimeSub.text = firstShowDetail.time
+                        "${detailInfo.periodFrom} ~ ${detailInfo.periodTo}"
+                    tvDetailTimeSub.text = detailInfo.time
                     tvDetailCastSub.text =
-                        if (firstShowDetail.cast.isNullOrBlank()) "미상" else firstShowDetail.cast
+                        if (detailInfo.cast.isNullOrBlank()) "미상" else detailInfo.cast
                     tvDetailProductSub.text =
-                        if (firstShowDetail.productCast.isNullOrBlank()) "미상" else firstShowDetail.productCast
+                        if (detailInfo.productCast.isNullOrBlank()) "미상" else detailInfo.productCast
+                    showId = detailInfo.showId.toString()
+                    ivDetailBookmark.setImageResource(if (detailInfo.isBookmarked) R.drawable.ic_heart_full_24dp else R.drawable.ic_heart_empty_24dp)
                 }
             }
         }
-
     }
 }

@@ -3,6 +3,7 @@ package com.nbc.curtaincall.util
 import com.nbc.curtaincall.BuildConfig
 
 object Constants {
+	const val SHOW_DETAIL = "showDetail"
 	const val DRAMA = "AAAA" //연극
 	const val DANCE = "BBBC" //무용 (서양/한국무용)
 	const val POPULAR_DANCE = "BBBE" //대중무용

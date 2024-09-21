@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.nbc.curtaincall.databinding.FragmentMyPageBookmarkBinding
-import com.nbc.curtaincall.ui.main.MainViewModel
+import com.nbc.curtaincall.presentation.TicketViewModel
 
 class BookmarkFragment : Fragment() {
     private var _binding: FragmentMyPageBookmarkBinding? = null
     private val binding get() = _binding!!
-    private val sharedViewModel by activityViewModels<MainViewModel>()
+    private val sharedViewModel by activityViewModels<TicketViewModel>()
     private val adapter by lazy {
         BookmarkAdapter {
             sharedViewModel.posterClick(it, childFragmentManager)

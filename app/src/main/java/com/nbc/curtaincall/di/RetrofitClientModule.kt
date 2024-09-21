@@ -54,7 +54,7 @@ object RetrofitClientModule {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttp)
-            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .addConverterFactory(SimpleXmlConverterFactory.createNonStrict())
             .build()
     }
     private val okHttp: OkHttpClient by lazy {
