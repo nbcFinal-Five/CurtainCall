@@ -56,23 +56,12 @@ class TicketViewModel @Inject constructor(
     }
 
     fun posterClick(id: String, fragmentManager: FragmentManager) {
-        if (Firebase.auth.currentUser != null) {
-            viewModelScope.launch {
-                runCatching {
-                    val isBookmarked = checkBookmarkUseCase(id)
-                    createDetailItem(getShowDetailUseCase(path = id), isBookmarked)
-                }
-                    .onSuccess { result -> _showDetailInfo.value = result }
-                    .onFailure { _showDetailInfo.value = emptyList() }
-            }
-        } else {
-            viewModelScope.launch {
-                runCatching {
-                    createDetailItem(getShowDetailUseCase(path = id), false)
-                }
-                    .onSuccess { result -> _showDetailInfo.value = result }
-                    .onFailure { _showDetailInfo.value = emptyList() }
-            }
+        viewModelScope.launch {
+            runCatching {
+                val isBookmarked = checkBookmarkUseCase(id)
+                createDetailItem(getShowDetailUseCase(path = id), isBookmarked)
+            }.onSuccess { result -> _showDetailInfo.value = result }
+                .onFailure { _showDetailInfo.value = emptyList() }
         }
         val ticketDialog = TicketDialogFragment()
         ticketDialog.setStyle(
