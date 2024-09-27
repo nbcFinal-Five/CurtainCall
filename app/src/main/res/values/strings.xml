@@ -185,4 +185,5 @@
     <string name="title_mypage">내 정보</string>
     <string name="mypage_showcase">쇼케이스</string>
     <string name="mypage_interest">관심목록</string>
+    <string name="login_dialog_message">로그인이 필요한 서비스입니다.\n 로그인하시겠습니까?</string>
 </resources>

@@ -17,6 +17,7 @@ import com.nbc.curtaincall.presentation.TicketViewModel
 import com.nbc.curtaincall.presentation.model.ShowItem
 import com.nbc.curtaincall.ui.detail_activity.DetailActivity
 import com.nbc.curtaincall.util.Constants
+import com.nbc.curtaincall.util.LoginDialogFragment
 import com.nbc.curtaincall.util.ViewUtil.setBackGround
 import com.nbc.curtaincall.util.ViewUtil.setPoster
 import kotlinx.coroutines.launch
@@ -59,7 +60,18 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                 ticketViewModel.shareReserveInfo(reserveInfo, childFragmentManager)
             }
             aroundBookmark.setOnClickListener {
-                ticketViewModel.bookMark(mt10Id)
+                lifecycleScope.launch {
+                    ticketViewModel.isLogin.collect { state ->
+                        if (state) {
+                            ticketViewModel.bookMark(mt10Id)
+                        } else {
+                            LoginDialogFragment().show(
+                                requireActivity().supportFragmentManager,
+                                "loginDialog"
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -105,7 +117,6 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
                         )
                         tvSimpleArea.text = showDetail.area
                         ivSimpleBookmark.setImageResource(if (showDetail.isBookmarked) R.drawable.ic_heart_full_24dp else R.drawable.ic_heart_empty_24dp)
-
                     }
                     mt10Id = showDetail.showId.toString()
                     mt20Id = showDetail.facilityId.toString()
@@ -119,8 +130,13 @@ class TicketDialogFragment : BottomSheetDialogFragment() {
         super.onResume()
         if (::mt10Id.isInitialized) {
             lifecycleScope.launch {
-                val isBookmarked = ticketViewModel.checkBookmark(mt10Id)
-                binding.ivSimpleBookmark.setImageResource(if (isBookmarked) R.drawable.ic_heart_full_24dp else R.drawable.ic_heart_empty_24dp)
+                ticketViewModel.isLogin.collect { state ->
+                    if (state) {
+                        val isBookmarked = ticketViewModel.checkBookmark(mt10Id)
+                        binding.ivSimpleBookmark.setImageResource(if (isBookmarked) R.drawable.ic_heart_full_24dp else R.drawable.ic_heart_empty_24dp)
+                    } else {
+                    }
+                }
             }
         }
     }

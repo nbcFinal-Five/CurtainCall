@@ -9,6 +9,7 @@ import com.nbc.curtaincall.domain.model.DbsEntity
 import com.nbc.curtaincall.domain.model.DbsShowListEntity
 import com.nbc.curtaincall.domain.usecase.AddBookmarkUseCase
 import com.nbc.curtaincall.domain.usecase.CheckBookmarkUseCase
+import com.nbc.curtaincall.domain.usecase.GetLocationUseCase
 import com.nbc.curtaincall.domain.usecase.GetShowDetailUseCase
 import com.nbc.curtaincall.domain.usecase.RemoveBookmarkUseCase
 import com.nbc.curtaincall.presentation.model.ShowItem
@@ -22,6 +23,7 @@ class DetailViewModel @Inject constructor(
     private val addBookmarkUseCase: AddBookmarkUseCase,
     private val removeBookmarkUseCase: RemoveBookmarkUseCase,
     private val checkBookmarkUseCase: CheckBookmarkUseCase,
+    private val getLocationUseCase: GetLocationUseCase
 ) :
     ViewModel() {
     private lateinit var showId: String //공연 id
@@ -29,9 +31,6 @@ class DetailViewModel @Inject constructor(
 
     private val _detailInfoList = MutableLiveData<List<ShowItem.DetailShowItem>>()
     val detailInfoList: LiveData<List<ShowItem.DetailShowItem>> get() = _detailInfoList
-
-    private val _showDetail = MutableLiveData<ShowItem.DetailShowItem>()
-    val showDetail get() = _showDetail
 
     private val _locationList = MutableLiveData<List<ShowItem.LocationItem>>()
     val locationList: LiveData<List<ShowItem.LocationItem>>
@@ -100,7 +99,8 @@ class DetailViewModel @Inject constructor(
                 title = items.performanceName,
                 placeName = items.facilityName,
                 genre = items.genreName,
-                posterPath = items.posterPath
+                posterPath = items.posterPath,
+                seatscale = items.seatscale
             )
         }.orEmpty()
 
@@ -108,9 +108,9 @@ class DetailViewModel @Inject constructor(
     fun fetchDetailLocation() {
         viewModelScope.launch {
             runCatching {
-                //createLocationItem(get.getLocationList(path = facilityId))
+                createLocationItem(getLocationUseCase(path = facilityId))
             }.onSuccess { result ->
-                //_locationList.value = result
+                _locationList.value = result
             }.onFailure {
                 Log.e("DetailViewModel", "fetchDetailLocation: ${it.message}")
                 _locationList.value = emptyList()

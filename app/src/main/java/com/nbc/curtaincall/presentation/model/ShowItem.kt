@@ -88,6 +88,7 @@ sealed interface ShowItem {
         override val placeName: String?,
         override val genre: String?,
         override val posterPath: String?,
+        val seatscale: String? = null,
     ) : ShowItem
 
     data class StyUrls(

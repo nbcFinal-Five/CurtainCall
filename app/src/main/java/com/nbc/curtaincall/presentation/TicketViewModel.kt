@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.nbc.curtaincall.R
 import com.nbc.curtaincall.domain.model.DbsEntity
 import com.nbc.curtaincall.domain.model.DbsShowListEntity
@@ -18,6 +20,8 @@ import com.nbc.curtaincall.presentation.model.ShowItem
 import com.nbc.curtaincall.presentation.ticket.ReserveFragment
 import com.nbc.curtaincall.ui.ticket.TicketDialogFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,7 +43,11 @@ class TicketViewModel @Inject constructor(
     private val _myPageInterestList = MutableLiveData<List<ShowItem.DetailShowItem>>()
     val myPageInterestList get() = _myPageInterestList
 
-    init {
+    private val _isLogin = MutableStateFlow<Boolean>(false)
+    val isLogin get() = _isLogin.asStateFlow()
+
+
+    fun getBookmarks() {
         viewModelScope.launch {
             getBookmarksUseCase().collect { bookmarks ->
                 _myPageInterestList.value = bookmarks
@@ -48,13 +56,23 @@ class TicketViewModel @Inject constructor(
     }
 
     fun posterClick(id: String, fragmentManager: FragmentManager) {
-        viewModelScope.launch {
-            runCatching {
-                val isBookmarked = checkBookmarkUseCase(id)
-                createDetailItem(getShowDetailUseCase(path = id), isBookmarked)
+        if (Firebase.auth.currentUser != null) {
+            viewModelScope.launch {
+                runCatching {
+                    val isBookmarked = checkBookmarkUseCase(id)
+                    createDetailItem(getShowDetailUseCase(path = id), isBookmarked)
+                }
+                    .onSuccess { result -> _showDetailInfo.value = result }
+                    .onFailure { _showDetailInfo.value = emptyList() }
             }
-                .onSuccess { result -> _showDetailInfo.value = result }
-                .onFailure { _showDetailInfo.value = emptyList() }
+        } else {
+            viewModelScope.launch {
+                runCatching {
+                    createDetailItem(getShowDetailUseCase(path = id), false)
+                }
+                    .onSuccess { result -> _showDetailInfo.value = result }
+                    .onFailure { _showDetailInfo.value = emptyList() }
+            }
         }
         val ticketDialog = TicketDialogFragment()
         ticketDialog.setStyle(
@@ -106,27 +124,33 @@ class TicketViewModel @Inject constructor(
 
 
     fun bookMark(showId: String) {
-        viewModelScope.launch {
-            val showItem =
-                showDetailInfo.value?.firstOrNull { it.showId == showId } ?: return@launch
-            toggleBookmark(showItem)
-            if (showItem.isBookmarked) {
-                removeBookmarkUseCase(showId)
-            } else {
-                addBookmarkUseCase(showItem)
+        if (Firebase.auth.currentUser != null) {
+            viewModelScope.launch {
+                val showItem =
+                    showDetailInfo.value?.firstOrNull { it.showId == showId } ?: return@launch
+                toggleBookmark(showItem)
+                if (showItem.isBookmarked) {
+                    removeBookmarkUseCase(showId)
+                } else {
+                    addBookmarkUseCase(showItem)
+                }
             }
+        } else {
         }
     }
 
     private fun toggleBookmark(item: ShowItem) {
-        _showDetailInfo.value = _showDetailInfo.value?.map {
-            if (it == item) {
-                it.copy(isBookmarked = !it.isBookmarked)
-            } else {
-                it
-            }
+        val updatedList = _showDetailInfo.value?.toMutableList() ?: mutableListOf()
+        val index = updatedList.indexOf(item)
+        if (index != -1 && item is ShowItem.DetailShowItem) {
+            updatedList[index] = updatedList[index].copy(isBookmarked = !item.isBookmarked)
+            _showDetailInfo.value = updatedList
         }
     }
 
     suspend fun checkBookmark(showId: String): Boolean = checkBookmarkUseCase(showId)
+
+    fun putLoginState(state: Boolean) {
+        _isLogin.value = state
+    }
 }

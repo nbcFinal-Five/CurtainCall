@@ -64,8 +64,10 @@ class MyPageFragment : Fragment() {
                     if (task.isSuccessful) {
                         layoutMyPage.isVisible = true
                         layoutSignIn.isVisible = false
+                        ticketViewModel.putLoginState(true)
                     } else {
                         tvFailSignIn.isVisible = true
+                        ticketViewModel.putLoginState(false)
                     }
                 }
             }
@@ -108,9 +110,15 @@ class MyPageFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        ticketViewModel.getBookmarks()
+    }
+
     override fun onDestroyView() {
-        super.onDestroyView()
         auth.removeAuthStateListener(authStateListener)
         _binding = null
+        super.onDestroyView()
     }
+
 }

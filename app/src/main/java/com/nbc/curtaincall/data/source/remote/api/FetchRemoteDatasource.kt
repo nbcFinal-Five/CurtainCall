@@ -43,7 +43,7 @@ interface FetchRemoteDatasource {
     @GET("boxoffice")
     suspend fun fetchTopRank(
         @Query("ststype") dateCode: String,
-        @Query("date") date: String = Converter.nowDateOneDayAgo(), //현재 날짜 하루 전을 yyyyMMdd 형식 으로 변환
+        @Query("date") date: String,
         @Query("catecode") genreCode: String? = null,
         @Query("area") area: String? = null,
     ): BoxOfsResponse

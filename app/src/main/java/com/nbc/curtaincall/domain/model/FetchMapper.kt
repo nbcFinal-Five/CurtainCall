@@ -53,6 +53,7 @@ fun DbResponse.toEntity(
     updatedate = updatedate,
     la = la,
     lo = lo,
+    seatscale = seatscale
 )
 
 fun BoxOfsResponse.toBoxOfEntity() = BoxOfsEntity(

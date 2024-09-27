@@ -75,7 +75,7 @@ data class DbResponse @JvmOverloads constructor(
     @field:Element(name = "relates", required = false)
     var relates: Relates? = null,
 
-    //공연장 정보
+
     @field:Element(name = "telno", required = false)
     var telno: String? = null,
 
@@ -127,7 +127,7 @@ data class DbResponse @JvmOverloads constructor(
     @field:Element(name = "parkinglot", required = false)
     var parkinglot: String? = null,
 
-    @field:Element(name= "seatscale",required = false)
+    @field:Element(name = "seatscale", required = false)
     var seatscale: String? = null,
 
     @field:Element(name = "mt13cnt", required = false)
@@ -177,13 +177,15 @@ data class DbResponse @JvmOverloads constructor(
 
     @field:Element(required = false)
     var mt13id: String? = null,
-
-    )
+)
 
 @Root(name = "boxofs")
 data class BoxOfsResponse @JvmOverloads constructor(
     @field:ElementList(name = "boxof", inline = true, required = false)
-    var boxof: List<BoxofResponse>? = null
+    var boxof: List<BoxofResponse>? = null,
+
+    @field:Element(name = "basedate", required = false)
+    var baseDate: String? = null,
 )
 
 @Root(name = "boxof")

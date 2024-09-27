@@ -18,8 +18,14 @@ import kotlin.coroutines.suspendCoroutine
 class BookmarkRepositoryImpl @Inject constructor(private val firestore: FirebaseFirestore) :
     BookmarkRepository {
     private val uid by lazy { Firebase.auth.currentUser?.uid ?: "" }
+
     override fun getBookmarks(): Flow<List<ShowItem.DetailShowItem>> =
         callbackFlow {
+            if (uid.isBlank()) {
+                trySend(emptyList())
+                close()
+                return@callbackFlow
+            }
             val showRef = firestore.collection(DB_USERS)
                 .document(uid)
                 .collection(DB_BOOKMARKS)
@@ -77,14 +83,18 @@ class BookmarkRepositoryImpl @Inject constructor(private val firestore: Firebase
     }
 
     override suspend fun checkBookmark(showId: String): Boolean {
-        val showRef = firestore.collection(DB_USERS)
-            .document(uid)
-            .collection(DB_BOOKMARKS)
-            .document(showId)
-        return suspendCoroutine { continuation ->
-            showRef.get().addOnSuccessListener {
-                continuation.resume(it.exists())
-            }.addOnFailureListener { continuation.resume(false) }
+        return if (Firebase.auth.currentUser != null) {
+            val showRef = firestore.collection(DB_USERS)
+                .document(uid)
+                .collection(DB_BOOKMARKS)
+                .document(showId)
+            suspendCoroutine { continuation ->
+                showRef.get().addOnSuccessListener {
+                    continuation.resume(it.exists())
+                }.addOnFailureListener { continuation.resume(false) }
+            }
+        } else {
+            false
         }
     }
 }
