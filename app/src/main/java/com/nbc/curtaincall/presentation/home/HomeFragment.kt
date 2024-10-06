@@ -8,19 +8,23 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.nbc.curtaincall.FetchUiState
 import com.nbc.curtaincall.R
+import com.nbc.curtaincall.ViewType
 import com.nbc.curtaincall.databinding.FragmentHomeBinding
+import com.nbc.curtaincall.presentation.TicketViewModel
 import com.nbc.curtaincall.presentation.home.HorizontalMarginItemDecoration
 import com.nbc.curtaincall.ui.home.adapter.GenreAdapter
 import com.nbc.curtaincall.ui.home.adapter.KidShowAdapter
 import com.nbc.curtaincall.ui.home.adapter.TopRankAdapter
 import com.nbc.curtaincall.ui.home.adapter.UpcomingShowAdapter
-import com.nbc.curtaincall.presentation.TicketViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -31,7 +35,7 @@ class HomeFragment : Fragment() {
     private val sharedViewModel: TicketViewModel by activityViewModels<TicketViewModel>()
     private val upComingShowAdapter: UpcomingShowAdapter by lazy {
         UpcomingShowAdapter {
-            sharedViewModel.posterClick(it,childFragmentManager)
+            sharedViewModel.posterClick(it, childFragmentManager)
         }
     }
     private val topRankAdapter: TopRankAdapter by lazy {
@@ -96,7 +100,6 @@ class HomeFragment : Fragment() {
 
         //viewpager 연결
         with(binding.viewPager) {
-            binding.viewPager.adapter = topRankAdapter
             //ViewPager PageTransformer 세팅
             offscreenPageLimit = 1
             setPageTransformer(SliderTransformer(requireContext()))
@@ -115,63 +118,67 @@ class HomeFragment : Fragment() {
     //옵저브 세팅
     private fun setUpObserve() {
         with(viewModel) {
-
-            topRank.observe(viewLifecycleOwner) {
-                topRankAdapter.submitList(it?.take(10))
-                //포지션 초기화
-                if (!isPositionInit) positionInit()
-                //페이징 초기화
-                if (!isPaging) startPaging()
+            lifecycleScope.launch {
+                topRankUiState.flowWithLifecycle(lifecycle).collectLatest { state ->
+                    onBind(state)
+                }
             }
-            genre.observe(viewLifecycleOwner) {
-                genreAdapter.submitList(it)
+            lifecycleScope.launch {
+                genreUiState.flowWithLifecycle(lifecycle).collectLatest { state ->
+                    onBind(state)
+                }
             }
-            showList.observe(viewLifecycleOwner) {
-                upComingShowAdapter.submitList(it)
+            lifecycleScope.launch {
+                upComingShowUiState.flowWithLifecycle(lifecycle).collectLatest { state ->
+                    onBind(state)
+                }
             }
-            kidShow.observe(viewLifecycleOwner) {
-                kidShowAdapter.submitList(it)
-            }
-            with(binding) {
-                //로딩 화면 처리
-                isLoadingGenre.observe(viewLifecycleOwner) { state ->
-                    skeletonGenreLoading.isVisible = state
+            lifecycleScope.launch {
+                kidShowUiState.flowWithLifecycle(lifecycle).collectLatest { state ->
+                    onBind(state)
                 }
-                isLoadingUpcomingShow.observe(viewLifecycleOwner) { state ->
-                    skeletonUpcomingShowLoading.isVisible = state
-                }
-                isLoadingKid.observe(viewLifecycleOwner) { state ->
-                    skeletonKidLoading.isVisible = state
-                }
-
-                isServerErrorViewPager.observe(viewLifecycleOwner) { state ->
-                    ivViewpagerError.isVisible = state
-                    tvViewpagerError.isVisible = state
-                }
-                isServerErrorGenre.observe(viewLifecycleOwner) { state ->
-                    ivGenreError.isVisible = state
-                    tvGenreError.isVisible = state
-                    rvHomeGenre.isVisible = !state
-                }
-                isServerErrorUpcomingShow.observe(viewLifecycleOwner) { state ->
-                    ivUpcomingShowError.isVisible = state
-                    tvUpcomingShowError.isVisible = state
-                    rvHomeUpcomingShow.isVisible = !state
-                }
-
-                isServerErrorKid.observe(viewLifecycleOwner) { state ->
-                    ivKidError.isVisible = state
-                    tvKidError.isVisible = state
-                    rvHomeKidShow.isVisible = !state
-                }
-
             }
         }
+    }
+
+    private fun onBind(state: FetchUiState) = with(binding) {
+        when (state.viewType) {
+            ViewType.TOP_RANK -> {
+                topRankAdapter.submitList(state.list.take(10))
+                skeletonKidLoading.isVisible = state.isLoading
+                tvViewpagerError.isVisible = state.list.isEmpty()
+                if (!isPositionInit) positionInit()
+                if (!isPaging) startPaging()
+            }
+
+            ViewType.GENRE -> {
+                genreAdapter.submitList(state.list)
+                skeletonGenreLoading.isVisible = state.isLoading
+                tvGenreError.isVisible = state.list.isEmpty()
+            }
+
+            ViewType.UPCOMING_SHOW -> {
+                upComingShowAdapter.submitList(state.list)
+                skeletonUpcomingShowLoading.isVisible = state.isLoading
+                tvUpcomingShowError.isVisible = state.list.isEmpty()
+            }
+
+            ViewType.KID_SHOW -> {
+                kidShowAdapter.submitList(state.list)
+                skeletonKidLoading.isVisible = state.isLoading
+                tvKidError.isVisible = state.list.isEmpty()
+            }
+
+            ViewType.UNKNOWN -> {}
+        }
+
+
     }
 
     //리사이클러뷰 초기화
     private fun initRecyclerView() {
         with(binding) {
+            viewPager.adapter = topRankAdapter
             //장르별 공연
             rvHomeGenre.adapter = genreAdapter
             //공연 예정
